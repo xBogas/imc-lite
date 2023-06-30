@@ -12,7 +12,7 @@ uint8_t packetBuffer[100];  //buffer to hold incoming packet,
 
 IMC::SetPWM* imc;
 
-void parser(const uint8_t* data, void* _struct);
+void parserHeader(IMC::Header& hdr, const uint8_t* msg);
 
 void setup() {
 
@@ -55,48 +55,37 @@ void loop()
     memset(packetBuffer, 0, packetSize);
     sock.read(packetBuffer, packetSize);
 
-    parser(packetBuffer, imc);
+    IMC::Header head;
+    parserHeader(head, packetBuffer);
 
   }
   delay(100);
 }
 
-void copy(uint8_t* dest, const uint8_t* src, int n)
+void parserHeader(IMC::Header& hdr, const uint8_t* msg)
 {
-  for(int i = 0; i < n; i++)
-  {
-    dest[i] = src[i];
-  }
-}
+  memcpy(&hdr.sync, msg, 2);
+  Serial.printf("Sync is %d\n", hdr.sync);
 
+  memcpy(&hdr.msgid, msg+2, 2);
+  Serial.printf("Msg id is %d\n", hdr.msgid);
 
-void parser(const uint8_t* msg, void* _struct)
-{
-  IMC::Header data;
+  memcpy(&hdr.size, msg+4, 2);
+  Serial.printf("Size is %d\n", hdr.size);
 
-  memcpy(&data.sync, msg, 2);
-  Serial.printf("Sync is %d\n", data.sync);
+  memcpy(&hdr.timestamp, msg+6, 8);
+  Serial.printf("timestamp is %f\n", hdr.timestamp);
 
-  memcpy(&data.msgid, msg+2, 2);
-  Serial.printf("Msg id is %d\n", data.msgid);
-
-  memcpy(&data.size, msg+4, 2);
-  Serial.printf("Size is %d\n", data.size);
-
-  //dont know why it should have 2 padding bytes
-  memcpy(&data.timestamp, msg+8, 8);
-  Serial.printf("timestamp is %d\n", data.timestamp);
-
-  memcpy(&data.src, msg+16, 2);
-  Serial.printf("src is %d\n", data.src);
+  memcpy(&hdr.src, msg+14, 2);
+  Serial.printf("src is %d\n", hdr.src);
   
-  memcpy(&data.src_ent, msg+18, 1);
-  Serial.printf("src_ent is %d\n", data.src_ent);
+  memcpy(&hdr.src_ent, msg+16, 1);
+  Serial.printf("src_ent is %d\n", hdr.src_ent);
 
-  memcpy(&data.dst, msg+20, 2);
-  Serial.printf("dst is %d\n", data.dst);
+  memcpy(&hdr.dst, msg+17, 2);
+  Serial.printf("dst is %d\n", hdr.dst);
 
-  memcpy(&data.dst_ent, msg+22, 2);
-  Serial.printf("dst_ent is %d\n", data.dst_ent);
+  memcpy(&hdr.dst_ent, msg+19, 2);
+  Serial.printf("dst_ent is %d\n", hdr.dst_ent);
   
 }
