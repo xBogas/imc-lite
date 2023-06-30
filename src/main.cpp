@@ -2,6 +2,8 @@
 #include <STM32Ethernet.h>
 #include "IMC.h"
 
+#undef double
+
 IPAddress ip(10, 0, 2, 83);
 
 EthernetUDP sock;
@@ -73,7 +75,9 @@ void parserHeader(IMC::Header& hdr, const uint8_t* msg)
   memcpy(&hdr.size, msg+4, 2);
   Serial.printf("Size is %d\n", hdr.size);
 
-  memcpy(&hdr.timestamp, msg+6, 8);
+  uint64_t data;
+  memcpy(&data, msg+6, 8);
+  hdr.timestamp = IMC::fp64_t::toFloat(data);
   Serial.printf("timestamp is %f\n", hdr.timestamp);
 
   memcpy(&hdr.src, msg+14, 2);
