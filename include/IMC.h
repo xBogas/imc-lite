@@ -4,85 +4,53 @@
 #include <inttypes.h>
 #include <math.h>
 
+#define SIG_BITS 0x8000000000000000
+#define EXP_BITS 0x000FFFFFE0000000
+#define FRA_BITS 0x7FF0000000000000
+struct fp64_t
+{
+	u64_t bits;
+
+	union fconv_t
+	{
+		float data;
+		u32_t bits;
+	};
+
+	fp64_t()
+	{
+		bits = 0;
+	}
+
+	static float to_float(u64_t& var)
+	{
+		u32_t sig = (var & SIG_BITS) >> 32;
+		u32_t frac = (var & EXP_BITS) >> 29;
+
+		s16_t _exp = ((var & FRA_BITS) >> 52) - 1023;
+
+		u8_t exp;
+		if(_exp < -127)
+		{
+			exp = 0;
+			frac = 0;
+		}
+		else if (_exp >= 128)
+		{
+			exp = 255;
+			frac = 0;
+		}
+		else
+			exp = _exp + 127;
+
+		fconv_t u = { .bits = (sig|(exp<<23)|frac)};
+		return u.data;
+	}
+};
+
 namespace IMC
 {
 
-	struct fp64_t
-	{
-		uint64_t bits;
-
-		fp64_t()
-		{
-			bits = 0;
-		}
-
-		const char* printable()
-		{
-			uint64_t ones = UINT64_MAX; // MAX long
-			bool signal = false;
-			signal = bits&(0x8000000000000000);
-
-			uint16_t exp = 0;
-			exp = bits&(0x7FF0000000000000);
-
-			uint64_t fraction = 0;
-			fraction = bits&(0x000FFFFFFFFFFFFF);
-
-			if(exp == 2047 && fraction != 0)
-				return "NaN";
-
-			if(exp == 2047 && fraction == 0)
-				return (signal)?"-inf":"+inf";
-
-			//...
-			return "printed";
-		}
-
-		static float toFloat(uint64_t& var) //https://stackoverflow.com/questions/60457069/converting-double-to-float-and-vice-versa-manually
-		{
-			uint64_t ones = UINT64_MAX; // MAX long
-			bool signal = false;
-			signal = var&(0x8000000000000000);
-
-			uint16_t exp = 0;
-			exp = var&(0x7FF0000000000000);
-
-			uint64_t fraction = 0;
-			fraction = var&(0x000FFFFFFFFFFFFF);
-
-			uint8_t exp_float = exp&(0x00F);
-
-			if(exp == 2047)
-			{
-				if(fraction == 0)
-					return INFINITY;
-
-				return NAN;
-			}
-
-			if(exp == 0)
-			{
-				if(fraction == 0)
-					return 0;
-				
-				exp = 1;
-				exp -= 1023;
-			}
-			else
-			{
-				exp -= 1023;
-				fraction += 0x0010000000000000;
-			}
-
-			while (fraction & 0x0010000000000000)
-			{
-				fraction >> 1;
-				exp--;
-			}
-
-
-		}
-	};
 
 	struct Header
 	{
