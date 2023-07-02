@@ -22,7 +22,7 @@ struct fp64_t
 		bits = 0;
 	}
 
-	static float to_float(u64_t& var)
+	static float to_float(const u64_t& var)
 	{
 		u32_t sig = (var & SIG_BITS) >> 32;
 		u32_t frac = (var & EXP_BITS) >> 29;
