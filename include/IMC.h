@@ -1,12 +1,17 @@
 #ifndef IMC_HPP
 #define IMC_HPP
 
+#define DUNE_IMC_CONST_HEADER_SIZE 20
+#define DUNE_IMC_CONST_FOOTER_SIZE 2
+
+
 #include <inttypes.h>
 #include <math.h>
 
 #define SIG_BITS 0x8000000000000000
 #define EXP_BITS 0x000FFFFFE0000000
 #define FRA_BITS 0x7FF0000000000000
+
 struct fp64_t
 {
 	u64_t bits;
@@ -50,24 +55,19 @@ struct fp64_t
 
 namespace IMC
 {
-
-
 	struct Header
 	{
 		uint16_t sync;		// 2 bytes
 		uint16_t msgid;		// 2 bytes
 
 		uint16_t size;		// 2 bytes
-		// 2 bytes padding 
+		uint16_t dst;			// 2 bytes padding 
 		
 		float timestamp;	// 4 bytes
 		
-		uint16_t src;		// 2 bytes
+		uint16_t src;			// 2 bytes
 		uint8_t src_ent;	// 1 bytes
-		// 1 bytes padding
-		
-		uint16_t dst;
-		uint8_t dst_ent;
+		uint8_t dst_ent;	// 1 bytes
 	};
 
 	struct SetPWM : public Header
