@@ -24,7 +24,8 @@ static void parserHeader(IMC::Header& hdr, const uint8_t* msg)
   u64_t data;
   memcpy(&data, msg+6, 8);
   hdr.timestamp = fp64_t::to_float(data);
-  Serial.printf("timestamp is %f\n", hdr.timestamp);
+  Serial.print("timestamp is ");
+  Serial.println(hdr.timestamp);
 
   memcpy(&hdr.src, msg+14, 2);
   Serial.printf("src is %d\n", hdr.src);
@@ -112,12 +113,17 @@ void setup()
   Serial.begin(9600);
   delay(500);
 
+  Ethernet.begin(ip);
+  if(sock.begin(port))
+    Serial.println("sock ready");
+
+  sock.begin(ip);
   Serial.println("Setup completed");
 }
 
 
 void loop() 
 {
-  readSerial();
+  readUDP();
   delay(500);
 }
