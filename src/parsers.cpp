@@ -1,6 +1,7 @@
 #include <unordered_map>
 
 #include "IMC/parsers.h"
+#include "IMC/definitions.h"
 
 static const uint16_t crc16_ibm_table[256] = 
 {
@@ -48,29 +49,6 @@ static uint16_t compute_CRC16(const uint8_t* bfr, uint16_t bfr_len)
 }
 
 
-struct Test1 : public Message
-{
-  Test1()
-  {
-    Serial.println("Created Test1");
-  }
-};
-
-struct Test2 : public Message
-{
-  Test2()
-  {
-    Serial.println("Created Test2");
-  }
-};
-
-struct Test3 : public Message
-{
-  Test3()
-  {
-    Serial.println("Created Test3");
-  }
-};
 
 typedef Message* (*Constructor) (void);
 
@@ -78,7 +56,7 @@ static std::unordered_map<uint16_t, Constructor> constructors_by_id = {
 #define MESSAGE(id, type) \
   {id, []()->Message* { return new type(); }},
 
-#include "Fac.def"
+#include "types.def"
 }; 
 
 Message* produce(uint16_t id)

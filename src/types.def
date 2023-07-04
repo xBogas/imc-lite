@@ -1,0 +1,13 @@
+#ifdef MESSAGE
+
+MESSAGE(1, EntityState)
+MESSAGE(2, QueryEntityState)
+MESSAGE(5, EntityList)
+MESSAGE(8, TransportBindings)
+MESSAGE(9, RestartSystem)
+MESSAGE(16, VehicleOperationalLimits)
+MESSAGE(20, MsgList)
+MESSAGE(50, SimulatedState)
+
+#undef MESSAGE
+#endif

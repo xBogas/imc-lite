@@ -72,12 +72,5 @@ struct Message: public Header
 
 };
 
-struct SetPWM : public Message
-{
-	uint8_t id;
-	uint32_t period;
-	uint32_t duty_cycle;
-};
-
 
 #endif

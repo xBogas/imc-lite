@@ -31,10 +31,9 @@ void readUDP()
 
     Serial.println();
     memset(packetBuffer, 0, packetSize);
-    sock.read(packetBuffer, packetSize);
+    int bfr_len = sock.read(packetBuffer, packetSize);
 
-    Header head;
-    parserHeader(head, packetBuffer);
+    Message* msg = parserIMC(packetBuffer, bfr_len);
   }
 }
 
