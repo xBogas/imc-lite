@@ -67,7 +67,12 @@ struct Header
 	uint8_t dst_ent;	// 1 bytes
 };
 
-struct SetPWM : public Header
+struct Message: public Header
+{
+
+};
+
+struct SetPWM : public Message
 {
 	uint8_t id;
 	uint32_t period;

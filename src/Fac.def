@@ -1,0 +1,5 @@
+MESSAGE(1, Test1)
+MESSAGE(2, Test2)
+MESSAGE(3, Test3)
+
+#undef MESSAGE

@@ -2,7 +2,7 @@
 #include <STM32Ethernet.h>
 
 // local headers
-#include "IMC/Parsers.h"
+#include "IMC/parsers.h"
 
 static const IPAddress ip(10, 0, 2, 83);
 
@@ -75,6 +75,13 @@ void setup()
 
 void loop() 
 {
-  readUDP();
-  delay(100);
+  Message* var = produce(1);
+  delete var;
+  delay(1000);
+  Message* var1 = produce(2);
+  delete var1;
+  delay(1000);
+  Message* var2 = produce(3);
+  delete var2;
+  delay(1000);
 }
