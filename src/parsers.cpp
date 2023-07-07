@@ -1,7 +1,7 @@
 #include <unordered_map>
 
-#include "IMC/parsers.h"
-#include "IMC/definitions.h"
+#include "parsers.h"
+#include "IMC_GENERATED/Definitions.hpp"
 
 static const uint16_t crc16_ibm_table[256] = 
 {

@@ -1,8 +1,9 @@
 #include <Arduino.h>
 #include <STM32Ethernet.h>
 
-// local headers
-#include "IMC/parsers.h"
+// Local headers
+#include "parsers.h"
+#include "IMC_GENERATED/Blob.hpp"
 
 static const IPAddress ip(10, 0, 2, 83);
 
@@ -34,6 +35,12 @@ void readUDP()
     int bfr_len = sock.read(packetBuffer, packetSize);
 
     Message* msg = parserIMC(packetBuffer, bfr_len);
+    if (msg)
+    {
+      Serial.println("Created IMC msg: ");
+      Serial.println(msg->getName());
+      delete msg;
+    }
   }
 }
 
@@ -74,13 +81,5 @@ void setup()
 
 void loop() 
 {
-  Message* var = produce(1);
-  delete var;
-  delay(1000);
-  Message* var1 = produce(2);
-  delete var1;
-  delay(1000);
-  Message* var2 = produce(3);
-  delete var2;
-  delay(1000);
+  readUDP();
 }

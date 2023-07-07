@@ -4,8 +4,8 @@
 // Arduino framework headers
 #include <Arduino.h>
 
-// local headers
-#include "header.h"
+// Local headers
+#include "Header.h"
 
 Message* parserIMC(const uint8_t* bfr, uint16_t bfr_len);
 void parserHeader(Header& hdr, const uint8_t* msg);

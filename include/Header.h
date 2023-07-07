@@ -11,7 +11,7 @@
 #define EXP_BITS 0x000FFFFFE0000000
 #define FRA_BITS 0x7FF0000000000000
 
-struct fp64_t
+struct fp
 {
 	uint64_t bits;
 
@@ -21,7 +21,7 @@ struct fp64_t
 		uint32_t bits;
 	};
 
-	fp64_t()
+	fp()
 	{
 		bits = 0;
 	}
@@ -52,25 +52,34 @@ struct fp64_t
 	}
 };
 
-struct Header
+namespace IMC
 {
-	uint16_t sync;		// 2 bytes
-	uint16_t msgid;		// 2 bytes
+	//! Header format.
+	struct Header
+	{
+		//! Synchronization Number.
+		uint16_t sync;
+		//! Message Identification Number.
+		uint16_t mgid;
+		//! Message size.
+		uint16_t size;
+		//! Source Address.
+		uint16_t src;
+		//! Destination Address.
+		uint16_t dst;
+		//! Source Entity.
+		uint8_t src_ent;
+		//! Destination Entity.
+		uint8_t dst_ent;
+		//! Time stamp.
+		float timestamp;
+	};
 
-	uint16_t size;		// 2 bytes
-	uint16_t dst;			// 2 bytes padding 
-	
-	float timestamp;	// 4 bytes
-	
-	uint16_t src;			// 2 bytes
-	uint8_t src_ent;	// 1 bytes
-	uint8_t dst_ent;	// 1 bytes
-};
-
-struct Message: public Header
-{
-
-};
-
+	class Message: public Header
+	{
+		virtual void 
+		getName() = 0;
+	};
+}
 
 #endif
