@@ -11,9 +11,11 @@ To generate imc files:
 If necessary create new messages in file imc/IMC.xml (This file must be the same that generated DUNE IMC classes)
 
 ```bash
-  cd imc
-  make
-  cd ..
-  mkdir build IMC
+  mkdir build
+  cd build
   cmake ..
+  make imc
 ```
+
+This will generate IMC header files in include/IMC_GENERATED and
+the implementation files in src/IMC_GENERATED
