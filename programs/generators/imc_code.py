@@ -563,10 +563,3 @@ for abbrev in abbrevs:
     Message(root, msg, hpp, cpp, consts)
 hpp.write()
 cpp.write()
-
-################################################################################
-# Factory.def                                                                  #
-################################################################################
-f = File('Factory.def', dest_folder_hpp, md5 = xml_md5)
-f.add_imc_headers()
-f.write()

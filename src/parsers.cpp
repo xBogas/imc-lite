@@ -59,7 +59,7 @@ static std::unordered_map<uint16_t, Constructor> constructors_by_id = {
   {id, []()->Message* { return new type; }},
 
 #include "IMC_GENERATED/Factory.def"
-}; 
+};
 
 Message* produce(uint16_t id)
 {

@@ -34,7 +34,7 @@ namespace IMC
     return 0;
   }
 
-  //! Deserializator for scalar types.
+  //! Deserializer for scalar types.
   //! @param t scalar where to place the unserialized bytes.
   //! @param bfr buffer where to read the serialized bytes.
   //! @param length amount of bytes available to unserialize.
