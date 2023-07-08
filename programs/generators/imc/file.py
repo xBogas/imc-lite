@@ -33,6 +33,15 @@ import os.path
 
 from imc import utils
 
+def check_dir(path):
+    if os.path.isdir(path):
+        print(f"Directory exists {path}")
+    else:
+        print(f"Directory doesn't exist {path}")
+        print("Creating Directory")
+        os.mkdir(path)
+
+
 class File:
     def __init__(self, name, folder, ns = True, stdout = False, md5 = None, skip_md5 = False):
         self.path = os.path.join(folder, name)

@@ -384,6 +384,9 @@ xml_md5 = compute_md5(args.xml)
 dest_folder_hpp = args.dest_folder_hpp
 dest_folder_cpp = args.dest_folder_cpp
 
+check_dir(dest_folder_hpp)
+check_dir(dest_folder_cpp)
+
 # Parse XML specification.
 import xml.etree.ElementTree as ET
 tree = ET.parse(args.xml)
