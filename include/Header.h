@@ -4,53 +4,46 @@
 // C headers
 #include <inttypes.h>
 
-#define DUNE_IMC_CONST_HEADER_SIZE 20
-#define DUNE_IMC_CONST_FOOTER_SIZE 2
+// IMC generated headers
+#include "IMC_GENERATED/Constants.hpp"
 
 #define SIG_BITS 0x8000000000000000
 #define EXP_BITS 0x000FFFFFE0000000
 #define FRA_BITS 0x7FF0000000000000
 
-struct fp
+typedef double 	fp64_t;
+typedef float 	fp32_t;
+
+union fconv_t
 {
-	uint64_t bits;
-
-	union fconv_t
-	{
-		float data;
-		uint32_t bits;
-	};
-
-	fp()
-	{
-		bits = 0;
-	}
-
-	static float to_float(const uint64_t& var)
-	{
-		uint32_t sig = (var & SIG_BITS) >> 32;
-		uint32_t frac = (var & EXP_BITS) >> 29;
-
-		int16_t _exp = ((var & FRA_BITS) >> 52) - 1023;
-
-		uint8_t exp;
-		if(_exp < -127)
-		{
-			exp = 0;
-			frac = 0;
-		}
-		else if (_exp >= 128)
-		{
-			exp = 255;
-			frac = 0;
-		}
-		else
-			exp = _exp + 127;
-
-		fconv_t u = { .bits = (sig|(exp<<23)|frac)};
-		return u.data;
-	}
+	float data;
+	uint32_t bits;
 };
+
+static float to_float(const uint64_t& var)
+{
+	uint32_t sig = (var & SIG_BITS) >> 32;
+	uint32_t frac = (var & EXP_BITS) >> 29;
+
+	int16_t _exp = ((var & FRA_BITS) >> 52) - 1023;
+
+	uint8_t exp;
+	if(_exp < -127)
+	{
+		exp = 0;
+		frac = 0;
+	}
+	else if (_exp >= 128)
+	{
+		exp = 255;
+		frac = 0;
+	}
+	else
+		exp = _exp + 127;
+
+	fconv_t u = { .bits = (sig|(exp<<23)|frac)};
+	return u.data;
+}
 
 namespace IMC
 {
@@ -72,13 +65,7 @@ namespace IMC
 		//! Destination Entity.
 		uint8_t dst_ent;
 		//! Time stamp.
-		float timestamp;
-	};
-
-	class Message: public Header
-	{
-		virtual void 
-		getName() = 0;
+		fp64_t timestamp;
 	};
 }
 

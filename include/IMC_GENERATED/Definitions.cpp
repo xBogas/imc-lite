@@ -41,7 +41,7 @@
 
 // IMC headers.
 #include "IMC_GENERATED/Definitions.hpp"
-#include "IMC_GENERATED/Factory.hpp"
+//#include "IMC_GENERATED/Factory.hpp"
 
 namespace IMC
 {
@@ -103,14 +103,6 @@ namespace IMC
     bfr__ += IMC::deserialize(flags, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(description, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  EntityState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "state", state, nindent__);
-    IMC::toJSON(os__, "flags", flags, nindent__);
-    IMC::toJSON(os__, "description", description, nindent__);
   }
 
   QueryEntityState::QueryEntityState(void)
@@ -234,16 +226,6 @@ namespace IMC
     id = (uint8_t)subid;
   }
 
-  void
-  EntityInfo::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "id", id, nindent__);
-    IMC::toJSON(os__, "label", label, nindent__);
-    IMC::toJSON(os__, "component", component, nindent__);
-    IMC::toJSON(os__, "act_time", act_time, nindent__);
-    IMC::toJSON(os__, "deact_time", deact_time, nindent__);
-  }
-
   QueryEntityInfo::QueryEntityInfo(void)
   {
     m_header.mgid = 4;
@@ -306,12 +288,6 @@ namespace IMC
     id = (uint8_t)subid;
   }
 
-  void
-  QueryEntityInfo::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "id", id, nindent__);
-  }
-
   EntityList::EntityList(void)
   {
     m_header.mgid = 5;
@@ -365,13 +341,6 @@ namespace IMC
     bfr__ += IMC::deserialize(op, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(list, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  EntityList::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "list", list, nindent__);
   }
 
   CpuUsage::CpuUsage(void)
@@ -437,12 +406,6 @@ namespace IMC
     value = static_cast<uint8_t>(val);
   }
 
-  void
-  CpuUsage::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   TransportBindings::TransportBindings(void)
   {
     m_header.mgid = 8;
@@ -498,13 +461,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  TransportBindings::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "consumer", consumer, nindent__);
-    IMC::toJSON(os__, "message_id", message_id, nindent__);
-  }
-
   RestartSystem::RestartSystem(void)
   {
     m_header.mgid = 9;
@@ -555,12 +511,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  RestartSystem::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "type", type, nindent__);
-  }
-
   DevCalibrationControl::DevCalibrationControl(void)
   {
     m_header.mgid = 12;
@@ -609,12 +559,6 @@ namespace IMC
     const uint8_t* start__ = bfr__;
     bfr__ += IMC::deserialize(op, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  DevCalibrationControl::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
   }
 
   DevCalibrationState::DevCalibrationState(void)
@@ -682,15 +626,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  DevCalibrationState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "total_steps", total_steps, nindent__);
-    IMC::toJSON(os__, "step_number", step_number, nindent__);
-    IMC::toJSON(os__, "step", step, nindent__);
-    IMC::toJSON(os__, "flags", flags, nindent__);
-  }
-
   EntityActivationState::EntityActivationState(void)
   {
     m_header.mgid = 14;
@@ -744,13 +679,6 @@ namespace IMC
     bfr__ += IMC::deserialize(state, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(error, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  EntityActivationState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "state", state, nindent__);
-    IMC::toJSON(os__, "error", error, nindent__);
   }
 
   QueryEntityActivationState::QueryEntityActivationState(void)
@@ -942,29 +870,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  VehicleOperationalLimits::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "speed_min", speed_min, nindent__);
-    IMC::toJSON(os__, "speed_max", speed_max, nindent__);
-    IMC::toJSON(os__, "long_accel", long_accel, nindent__);
-    IMC::toJSON(os__, "alt_max_msl", alt_max_msl, nindent__);
-    IMC::toJSON(os__, "dive_fraction_max", dive_fraction_max, nindent__);
-    IMC::toJSON(os__, "climb_fraction_max", climb_fraction_max, nindent__);
-    IMC::toJSON(os__, "bank_max", bank_max, nindent__);
-    IMC::toJSON(os__, "p_max", p_max, nindent__);
-    IMC::toJSON(os__, "pitch_min", pitch_min, nindent__);
-    IMC::toJSON(os__, "pitch_max", pitch_max, nindent__);
-    IMC::toJSON(os__, "q_max", q_max, nindent__);
-    IMC::toJSON(os__, "g_min", g_min, nindent__);
-    IMC::toJSON(os__, "g_max", g_max, nindent__);
-    IMC::toJSON(os__, "g_lat_max", g_lat_max, nindent__);
-    IMC::toJSON(os__, "rpm_min", rpm_min, nindent__);
-    IMC::toJSON(os__, "rpm_max", rpm_max, nindent__);
-    IMC::toJSON(os__, "rpm_rate_max", rpm_rate_max, nindent__);
-  }
-
   MsgList::MsgList(void)
   {
     m_header.mgid = 20;
@@ -1014,12 +919,6 @@ namespace IMC
     const uint8_t* start__ = bfr__;
     bfr__ += msgs.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  MsgList::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    msgs.toJSON(os__, "msgs", nindent__);
   }
 
   void
@@ -1195,29 +1094,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  SimulatedState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "height", height, nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "phi", phi, nindent__);
-    IMC::toJSON(os__, "theta", theta, nindent__);
-    IMC::toJSON(os__, "psi", psi, nindent__);
-    IMC::toJSON(os__, "u", u, nindent__);
-    IMC::toJSON(os__, "v", v, nindent__);
-    IMC::toJSON(os__, "w", w, nindent__);
-    IMC::toJSON(os__, "p", p, nindent__);
-    IMC::toJSON(os__, "q", q, nindent__);
-    IMC::toJSON(os__, "r", r, nindent__);
-    IMC::toJSON(os__, "svx", svx, nindent__);
-    IMC::toJSON(os__, "svy", svy, nindent__);
-    IMC::toJSON(os__, "svz", svz, nindent__);
-  }
-
   LeakSimulation::LeakSimulation(void)
   {
     m_header.mgid = 51;
@@ -1271,13 +1147,6 @@ namespace IMC
     bfr__ += IMC::deserialize(op, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(entities, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  LeakSimulation::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "entities", entities, nindent__);
   }
 
   UASimulation::UASimulation(void)
@@ -1340,14 +1209,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  UASimulation::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "data", data, nindent__);
-  }
-
   DynamicsSimParam::DynamicsSimParam(void)
   {
     m_header.mgid = 53;
@@ -1406,14 +1267,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(tas2acc_pgain, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(bank2p_pgain, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  DynamicsSimParam::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "tas2acc_pgain", tas2acc_pgain, nindent__);
-    IMC::toJSON(os__, "bank2p_pgain", bank2p_pgain, nindent__);
   }
 
   StorageUsage::StorageUsage(void)
@@ -1484,13 +1337,6 @@ namespace IMC
     value = static_cast<uint8_t>(val);
   }
 
-  void
-  StorageUsage::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "available", available, nindent__);
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   CacheControl::CacheControl(void)
   {
     m_header.mgid = 101;
@@ -1550,14 +1396,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(snapshot, bfr__, size__);
     bfr__ += message.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  CacheControl::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "snapshot", snapshot, nindent__);
-    message.toJSON(os__, "message", nindent__);
   }
 
   void
@@ -1660,13 +1498,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  LoggingControl::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "name", name, nindent__);
-  }
-
   LogBookEntry::LogBookEntry(void)
   {
     m_header.mgid = 103;
@@ -1732,15 +1563,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  LogBookEntry::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "htime", htime, nindent__);
-    IMC::toJSON(os__, "context", context, nindent__);
-    IMC::toJSON(os__, "text", text, nindent__);
-  }
-
   LogBookControl::LogBookControl(void)
   {
     m_header.mgid = 104;
@@ -1800,14 +1622,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(htime, bfr__, size__);
     bfr__ += msg.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  LogBookControl::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "command", command, nindent__);
-    IMC::toJSON(os__, "htime", htime, nindent__);
-    msg.toJSON(os__, "msg", nindent__);
   }
 
   void
@@ -1895,13 +1709,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  ReplayControl::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "file", file, nindent__);
-  }
-
   ClockControl::ClockControl(void)
   {
     m_header.mgid = 106;
@@ -1963,14 +1770,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  ClockControl::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "clock", clock, nindent__);
-    IMC::toJSON(os__, "tz", tz, nindent__);
-  }
-
   HistoricCTD::HistoricCTD(void)
   {
     m_header.mgid = 107;
@@ -2029,14 +1828,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(temperature, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(depth, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  HistoricCTD::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "conductivity", conductivity, nindent__);
-    IMC::toJSON(os__, "temperature", temperature, nindent__);
-    IMC::toJSON(os__, "depth", depth, nindent__);
   }
 
   HistoricTelemetry::HistoricTelemetry(void)
@@ -2107,16 +1898,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(yaw, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(speed, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  HistoricTelemetry::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "altitude", altitude, nindent__);
-    IMC::toJSON(os__, "roll", roll, nindent__);
-    IMC::toJSON(os__, "pitch", pitch, nindent__);
-    IMC::toJSON(os__, "yaw", yaw, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
   }
 
   HistoricSonarData::HistoricSonarData(void)
@@ -2199,18 +1980,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  HistoricSonarData::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "altitude", altitude, nindent__);
-    IMC::toJSON(os__, "width", width, nindent__);
-    IMC::toJSON(os__, "length", length, nindent__);
-    IMC::toJSON(os__, "bearing", bearing, nindent__);
-    IMC::toJSON(os__, "pxl", pxl, nindent__);
-    IMC::toJSON(os__, "encoding", encoding, nindent__);
-    IMC::toJSON(os__, "sonar_data", sonar_data, nindent__);
-  }
-
   HistoricEvent::HistoricEvent(void)
   {
     m_header.mgid = 110;
@@ -2266,13 +2035,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  HistoricEvent::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "text", text, nindent__);
-    IMC::toJSON(os__, "type", type, nindent__);
-  }
-
   ProfileSample::ProfileSample(void)
   {
     m_header.mgid = 112;
@@ -2326,13 +2088,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(depth, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(avg, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  ProfileSample::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "depth", depth, nindent__);
-    IMC::toJSON(os__, "avg", avg, nindent__);
   }
 
   VerticalProfile::VerticalProfile(void)
@@ -2404,16 +2159,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(lat, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(lon, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  VerticalProfile::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "parameter", parameter, nindent__);
-    IMC::toJSON(os__, "numsamples", numsamples, nindent__);
-    samples.toJSON(os__, "samples", nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
   }
 
   void
@@ -2567,18 +2312,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  Announce::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "sys_name", sys_name, nindent__);
-    IMC::toJSON(os__, "sys_type", sys_type, nindent__);
-    IMC::toJSON(os__, "owner", owner, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "height", height, nindent__);
-    IMC::toJSON(os__, "services", services, nindent__);
-  }
-
   AnnounceService::AnnounceService(void)
   {
     m_header.mgid = 152;
@@ -2632,13 +2365,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(service, bfr__, size__);
     bfr__ += IMC::deserialize(service_type, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  AnnounceService::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "service", service, nindent__);
-    IMC::toJSON(os__, "service_type", service_type, nindent__);
   }
 
   RSSI::RSSI(void)
@@ -2704,12 +2430,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  RSSI::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   VSWR::VSWR(void)
   {
     m_header.mgid = 154;
@@ -2770,12 +2490,6 @@ namespace IMC
   VSWR::setValueFP(fp64_t val)
   {
     value = static_cast<fp32_t>(val);
-  }
-
-  void
-  VSWR::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   LinkLevel::LinkLevel(void)
@@ -2840,12 +2554,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  LinkLevel::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   Sms::Sms(void)
   {
     m_header.mgid = 156;
@@ -2904,14 +2612,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(timeout, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(contents, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  Sms::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "number", number, nindent__);
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "contents", contents, nindent__);
   }
 
   SmsTx::SmsTx(void)
@@ -2979,15 +2679,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  SmsTx::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "seq", seq, nindent__);
-    IMC::toJSON(os__, "destination", destination, nindent__);
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "data", data, nindent__);
-  }
-
   SmsRx::SmsRx(void)
   {
     m_header.mgid = 158;
@@ -3041,13 +2732,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(source, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(data, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  SmsRx::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "source", source, nindent__);
-    IMC::toJSON(os__, "data", data, nindent__);
   }
 
   SmsState::SmsState(void)
@@ -3110,14 +2794,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  SmsState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "seq", seq, nindent__);
-    IMC::toJSON(os__, "state", state, nindent__);
-    IMC::toJSON(os__, "error", error, nindent__);
-  }
-
   TextMessage::TextMessage(void)
   {
     m_header.mgid = 160;
@@ -3171,13 +2847,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(origin, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(text, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  TextMessage::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "origin", origin, nindent__);
-    IMC::toJSON(os__, "text", text, nindent__);
   }
 
   IridiumMsgRx::IridiumMsgRx(void)
@@ -3250,16 +2919,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  IridiumMsgRx::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "origin", origin, nindent__);
-    IMC::toJSON(os__, "htime", htime, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "data", data, nindent__);
-  }
-
   IridiumMsgTx::IridiumMsgTx(void)
   {
     m_header.mgid = 171;
@@ -3325,15 +2984,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  IridiumMsgTx::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "req_id", req_id, nindent__);
-    IMC::toJSON(os__, "ttl", ttl, nindent__);
-    IMC::toJSON(os__, "destination", destination, nindent__);
-    IMC::toJSON(os__, "data", data, nindent__);
-  }
-
   IridiumTxStatus::IridiumTxStatus(void)
   {
     m_header.mgid = 172;
@@ -3394,14 +3044,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  IridiumTxStatus::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "req_id", req_id, nindent__);
-    IMC::toJSON(os__, "status", status, nindent__);
-    IMC::toJSON(os__, "text", text, nindent__);
-  }
-
   GroupMembershipState::GroupMembershipState(void)
   {
     m_header.mgid = 180;
@@ -3455,13 +3097,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(group_name, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(links, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  GroupMembershipState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "group_name", group_name, nindent__);
-    IMC::toJSON(os__, "links", links, nindent__);
   }
 
   SystemGroup::SystemGroup(void)
@@ -3522,14 +3157,6 @@ namespace IMC
     bfr__ += IMC::deserialize(action, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(grouplist, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  SystemGroup::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "groupname", groupname, nindent__);
-    IMC::toJSON(os__, "action", action, nindent__);
-    IMC::toJSON(os__, "grouplist", grouplist, nindent__);
   }
 
   LinkLatency::LinkLatency(void)
@@ -3600,13 +3227,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  LinkLatency::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-    IMC::toJSON(os__, "sys_src", sys_src, nindent__);
-  }
-
   ExtendedRSSI::ExtendedRSSI(void)
   {
     m_header.mgid = 183;
@@ -3674,13 +3294,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  ExtendedRSSI::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-    IMC::toJSON(os__, "units", units, nindent__);
-  }
-
   HistoricData::HistoricData(void)
   {
     m_header.mgid = 184;
@@ -3745,15 +3358,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(base_time, bfr__, size__);
     bfr__ += data.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  HistoricData::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "base_lat", base_lat, nindent__);
-    IMC::toJSON(os__, "base_lon", base_lon, nindent__);
-    IMC::toJSON(os__, "base_time", base_time, nindent__);
-    data.toJSON(os__, "data", nindent__);
   }
 
   void
@@ -3851,15 +3455,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  CompressedHistory::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "base_lat", base_lat, nindent__);
-    IMC::toJSON(os__, "base_lon", base_lon, nindent__);
-    IMC::toJSON(os__, "base_time", base_time, nindent__);
-    IMC::toJSON(os__, "data", data, nindent__);
-  }
-
   HistoricSample::HistoricSample(void)
   {
     m_header.mgid = 186;
@@ -3939,18 +3534,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(t, bfr__, size__);
     bfr__ += sample.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  HistoricSample::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "sys_id", sys_id, nindent__);
-    IMC::toJSON(os__, "priority", priority, nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "t", t, nindent__);
-    sample.toJSON(os__, "sample", nindent__);
   }
 
   void
@@ -4065,15 +3648,6 @@ namespace IMC
   }
 
   void
-  HistoricDataQuery::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "req_id", req_id, nindent__);
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "max_size", max_size, nindent__);
-    data.toJSON(os__, "data", nindent__);
-  }
-
-  void
   HistoricDataQuery::setTimeStampNested(double value__)
   {
     if (!data.isNull())
@@ -4182,15 +3756,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(timeout, bfr__, size__);
     bfr__ += cmd.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  RemoteCommand::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "original_source", original_source, nindent__);
-    IMC::toJSON(os__, "destination", destination, nindent__);
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    cmd.toJSON(os__, "cmd", nindent__);
   }
 
   void
@@ -4303,15 +3868,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  CommSystemsQuery::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "comm_interface", comm_interface, nindent__);
-    IMC::toJSON(os__, "model", model, nindent__);
-    IMC::toJSON(os__, "list", list, nindent__);
-  }
-
   TelemetryMsg::TelemetryMsg(void)
   {
     m_header.mgid = 190;
@@ -4402,20 +3958,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  TelemetryMsg::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "req_id", req_id, nindent__);
-    IMC::toJSON(os__, "ttl", ttl, nindent__);
-    IMC::toJSON(os__, "code", code, nindent__);
-    IMC::toJSON(os__, "destination", destination, nindent__);
-    IMC::toJSON(os__, "source", source, nindent__);
-    IMC::toJSON(os__, "acknowledge", acknowledge, nindent__);
-    IMC::toJSON(os__, "status", status, nindent__);
-    IMC::toJSON(os__, "data", data, nindent__);
-  }
-
   LblRange::LblRange(void)
   {
     m_header.mgid = 200;
@@ -4481,13 +4023,6 @@ namespace IMC
   LblRange::setSubId(uint16_t subid)
   {
     id = (uint8_t)subid;
-  }
-
-  void
-  LblRange::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "id", id, nindent__);
-    IMC::toJSON(os__, "range", range, nindent__);
   }
 
   LblBeacon::LblBeacon(void)
@@ -4572,18 +4107,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  LblBeacon::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "beacon", beacon, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "depth", depth, nindent__);
-    IMC::toJSON(os__, "query_channel", query_channel, nindent__);
-    IMC::toJSON(os__, "reply_channel", reply_channel, nindent__);
-    IMC::toJSON(os__, "transponder_delay", transponder_delay, nindent__);
-  }
-
   LblConfig::LblConfig(void)
   {
     m_header.mgid = 203;
@@ -4638,13 +4161,6 @@ namespace IMC
     bfr__ += IMC::deserialize(op, bfr__, size__);
     bfr__ += beacons.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  LblConfig::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
-    beacons.toJSON(os__, "beacons", nindent__);
   }
 
   void
@@ -4726,12 +4242,6 @@ namespace IMC
     const uint8_t* start__ = bfr__;
     bfr__ += message.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  AcousticMessage::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    message.toJSON(os__, "message", nindent__);
   }
 
   void
@@ -4879,22 +4389,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  SimAcousticMessage::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "depth", depth, nindent__);
-    IMC::toJSON(os__, "sentence", sentence, nindent__);
-    IMC::toJSON(os__, "txtime", txtime, nindent__);
-    IMC::toJSON(os__, "modem_type", modem_type, nindent__);
-    IMC::toJSON(os__, "sys_src", sys_src, nindent__);
-    IMC::toJSON(os__, "seq", seq, nindent__);
-    IMC::toJSON(os__, "sys_dst", sys_dst, nindent__);
-    IMC::toJSON(os__, "flags", flags, nindent__);
-    IMC::toJSON(os__, "data", data, nindent__);
-  }
-
   AcousticOperation::AcousticOperation(void)
   {
     m_header.mgid = 211;
@@ -4959,15 +4453,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(range, bfr__, size__);
     bfr__ += msg.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  AcousticOperation::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "system", system, nindent__);
-    IMC::toJSON(os__, "range", range, nindent__);
-    msg.toJSON(os__, "msg", nindent__);
   }
 
   void
@@ -5104,12 +4589,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  AcousticSystems::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "list", list, nindent__);
-  }
-
   AcousticLink::AcousticLink(void)
   {
     m_header.mgid = 214;
@@ -5168,14 +4647,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(rssi, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(integrity, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  AcousticLink::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "peer", peer, nindent__);
-    IMC::toJSON(os__, "rssi", rssi, nindent__);
-    IMC::toJSON(os__, "integrity", integrity, nindent__);
   }
 
   AcousticRequest::AcousticRequest(void)
@@ -5252,17 +4723,6 @@ namespace IMC
     bfr__ += IMC::deserialize(type, bfr__, size__);
     bfr__ += msg.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  AcousticRequest::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "req_id", req_id, nindent__);
-    IMC::toJSON(os__, "destination", destination, nindent__);
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "range", range, nindent__);
-    IMC::toJSON(os__, "type", type, nindent__);
-    msg.toJSON(os__, "msg", nindent__);
   }
 
   void
@@ -5380,16 +4840,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  AcousticStatus::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "req_id", req_id, nindent__);
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "status", status, nindent__);
-    IMC::toJSON(os__, "info", info, nindent__);
-    IMC::toJSON(os__, "range", range, nindent__);
-  }
-
   AcousticRelease::AcousticRelease(void)
   {
     m_header.mgid = 217;
@@ -5443,13 +4893,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(system, bfr__, size__);
     bfr__ += IMC::deserialize(op, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  AcousticRelease::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "system", system, nindent__);
-    IMC::toJSON(os__, "op", op, nindent__);
   }
 
   Rpm::Rpm(void)
@@ -5514,12 +4957,6 @@ namespace IMC
     value = static_cast<int16_t>(val);
   }
 
-  void
-  Rpm::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   Voltage::Voltage(void)
   {
     m_header.mgid = 251;
@@ -5582,12 +5019,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  Voltage::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   Current::Current(void)
   {
     m_header.mgid = 252;
@@ -5648,12 +5079,6 @@ namespace IMC
   Current::setValueFP(fp64_t val)
   {
     value = static_cast<fp32_t>(val);
-  }
-
-  void
-  Current::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   GpsFix::GpsFix(void)
@@ -5783,27 +5208,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  GpsFix::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "validity", validity, nindent__);
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "utc_year", utc_year, nindent__);
-    IMC::toJSON(os__, "utc_month", utc_month, nindent__);
-    IMC::toJSON(os__, "utc_day", utc_day, nindent__);
-    IMC::toJSON(os__, "utc_time", utc_time, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "height", height, nindent__);
-    IMC::toJSON(os__, "satellites", satellites, nindent__);
-    IMC::toJSON(os__, "cog", cog, nindent__);
-    IMC::toJSON(os__, "sog", sog, nindent__);
-    IMC::toJSON(os__, "hdop", hdop, nindent__);
-    IMC::toJSON(os__, "vdop", vdop, nindent__);
-    IMC::toJSON(os__, "hacc", hacc, nindent__);
-    IMC::toJSON(os__, "vacc", vacc, nindent__);
-  }
-
   EulerAngles::EulerAngles(void)
   {
     m_header.mgid = 254;
@@ -5878,16 +5282,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  EulerAngles::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "time", time, nindent__);
-    IMC::toJSON(os__, "phi", phi, nindent__);
-    IMC::toJSON(os__, "theta", theta, nindent__);
-    IMC::toJSON(os__, "psi", psi, nindent__);
-    IMC::toJSON(os__, "psi_magnetic", psi_magnetic, nindent__);
-  }
-
   EulerAnglesDelta::EulerAnglesDelta(void)
   {
     m_header.mgid = 255;
@@ -5958,16 +5352,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  EulerAnglesDelta::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "time", time, nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "timestep", timestep, nindent__);
-  }
-
   AngularVelocity::AngularVelocity(void)
   {
     m_header.mgid = 256;
@@ -6031,15 +5415,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(y, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(z, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  AngularVelocity::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "time", time, nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
   }
 
   Acceleration::Acceleration(void)
@@ -6107,15 +5482,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  Acceleration::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "time", time, nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-  }
-
   MagneticField::MagneticField(void)
   {
     m_header.mgid = 258;
@@ -6179,15 +5545,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(y, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(z, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  MagneticField::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "time", time, nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
   }
 
   GroundVelocity::GroundVelocity(void)
@@ -6255,15 +5612,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  GroundVelocity::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "validity", validity, nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-  }
-
   WaterVelocity::WaterVelocity(void)
   {
     m_header.mgid = 260;
@@ -6329,15 +5677,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  WaterVelocity::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "validity", validity, nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-  }
-
   VelocityDelta::VelocityDelta(void)
   {
     m_header.mgid = 261;
@@ -6401,15 +5740,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(y, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(z, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  VelocityDelta::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "time", time, nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
   }
 
   DeviceState::DeviceState(void)
@@ -6487,17 +5817,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  DeviceState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "phi", phi, nindent__);
-    IMC::toJSON(os__, "theta", theta, nindent__);
-    IMC::toJSON(os__, "psi", psi, nindent__);
-  }
-
   BeamConfig::BeamConfig(void)
   {
     m_header.mgid = 283;
@@ -6553,13 +5872,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(beam_width, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(beam_height, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  BeamConfig::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "beam_width", beam_width, nindent__);
-    IMC::toJSON(os__, "beam_height", beam_height, nindent__);
   }
 
   Distance::Distance(void)
@@ -6639,15 +5951,6 @@ namespace IMC
   Distance::setValueFP(fp64_t val)
   {
     value = static_cast<fp32_t>(val);
-  }
-
-  void
-  Distance::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "validity", validity, nindent__);
-    location.toJSON(os__, "location", nindent__);
-    beam_config.toJSON(os__, "beam_config", nindent__);
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   void
@@ -6752,12 +6055,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  Temperature::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   Pressure::Pressure(void)
   {
     m_header.mgid = 264;
@@ -6818,12 +6115,6 @@ namespace IMC
   Pressure::setValueFP(fp64_t val)
   {
     value = static_cast<fp64_t>(val);
-  }
-
-  void
-  Pressure::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   Depth::Depth(void)
@@ -6888,12 +6179,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  Depth::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   DepthOffset::DepthOffset(void)
   {
     m_header.mgid = 266;
@@ -6954,12 +6239,6 @@ namespace IMC
   DepthOffset::setValueFP(fp64_t val)
   {
     value = static_cast<fp32_t>(val);
-  }
-
-  void
-  DepthOffset::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   SoundSpeed::SoundSpeed(void)
@@ -7024,12 +6303,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  SoundSpeed::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   WaterDensity::WaterDensity(void)
   {
     m_header.mgid = 268;
@@ -7090,12 +6363,6 @@ namespace IMC
   WaterDensity::setValueFP(fp64_t val)
   {
     value = static_cast<fp32_t>(val);
-  }
-
-  void
-  WaterDensity::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   Conductivity::Conductivity(void)
@@ -7160,12 +6427,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  Conductivity::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   Salinity::Salinity(void)
   {
     m_header.mgid = 270;
@@ -7228,12 +6489,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  Salinity::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   WindSpeed::WindSpeed(void)
   {
     m_header.mgid = 271;
@@ -7292,14 +6547,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(speed, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(turbulence, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  WindSpeed::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "direction", direction, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "turbulence", turbulence, nindent__);
   }
 
   RelativeHumidity::RelativeHumidity(void)
@@ -7365,12 +6612,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  RelativeHumidity::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   DevDataText::DevDataText(void)
   {
     m_header.mgid = 273;
@@ -7421,12 +6662,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  DevDataText::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   DevDataBinary::DevDataBinary(void)
   {
     m_header.mgid = 274;
@@ -7475,12 +6710,6 @@ namespace IMC
     const uint8_t* start__ = bfr__;
     bfr__ += IMC::reverseDeserialize(value, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  DevDataBinary::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   Force::Force(void)
@@ -7543,12 +6772,6 @@ namespace IMC
   Force::setValueFP(fp64_t val)
   {
     value = static_cast<fp32_t>(val);
-  }
-
-  void
-  Force::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   SonarData::SonarData(void)
@@ -7635,19 +6858,6 @@ namespace IMC
     bfr__ += beam_config.reverseDeserialize(bfr__, size__);
     bfr__ += IMC::reverseDeserialize(data, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  SonarData::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "frequency", frequency, nindent__);
-    IMC::toJSON(os__, "min_range", min_range, nindent__);
-    IMC::toJSON(os__, "max_range", max_range, nindent__);
-    IMC::toJSON(os__, "bits_per_point", bits_per_point, nindent__);
-    IMC::toJSON(os__, "scale_factor", scale_factor, nindent__);
-    beam_config.toJSON(os__, "beam_config", nindent__);
-    IMC::toJSON(os__, "data", data, nindent__);
   }
 
   void
@@ -7769,12 +6979,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  PulseDetectionControl::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
-  }
-
   FuelLevel::FuelLevel(void)
   {
     m_header.mgid = 279;
@@ -7847,14 +7051,6 @@ namespace IMC
   FuelLevel::setValueFP(fp64_t val)
   {
     value = static_cast<fp32_t>(val);
-  }
-
-  void
-  FuelLevel::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-    IMC::toJSON(os__, "confidence", confidence, nindent__);
-    IMC::toJSON(os__, "opmodes", opmodes, nindent__);
   }
 
   GpsNavData::GpsNavData(void)
@@ -7977,26 +7173,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  GpsNavData::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "itow", itow, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "height_ell", height_ell, nindent__);
-    IMC::toJSON(os__, "height_sea", height_sea, nindent__);
-    IMC::toJSON(os__, "hacc", hacc, nindent__);
-    IMC::toJSON(os__, "vacc", vacc, nindent__);
-    IMC::toJSON(os__, "vel_n", vel_n, nindent__);
-    IMC::toJSON(os__, "vel_e", vel_e, nindent__);
-    IMC::toJSON(os__, "vel_d", vel_d, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "gspeed", gspeed, nindent__);
-    IMC::toJSON(os__, "heading", heading, nindent__);
-    IMC::toJSON(os__, "sacc", sacc, nindent__);
-    IMC::toJSON(os__, "cacc", cacc, nindent__);
-  }
-
   ServoPosition::ServoPosition(void)
   {
     m_header.mgid = 281;
@@ -8077,13 +7253,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  ServoPosition::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "id", id, nindent__);
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   DataSanity::DataSanity(void)
   {
     m_header.mgid = 284;
@@ -8132,12 +7301,6 @@ namespace IMC
     const uint8_t* start__ = bfr__;
     bfr__ += IMC::deserialize(sane, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  DataSanity::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "sane", sane, nindent__);
   }
 
   RhodamineDye::RhodamineDye(void)
@@ -8202,12 +7365,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  RhodamineDye::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   CrudeOil::CrudeOil(void)
   {
     m_header.mgid = 286;
@@ -8268,12 +7425,6 @@ namespace IMC
   CrudeOil::setValueFP(fp64_t val)
   {
     value = static_cast<fp32_t>(val);
-  }
-
-  void
-  CrudeOil::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   FineOil::FineOil(void)
@@ -8338,12 +7489,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  FineOil::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   Turbidity::Turbidity(void)
   {
     m_header.mgid = 288;
@@ -8404,12 +7549,6 @@ namespace IMC
   Turbidity::setValueFP(fp64_t val)
   {
     value = static_cast<fp32_t>(val);
-  }
-
-  void
-  Turbidity::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   Chlorophyll::Chlorophyll(void)
@@ -8474,12 +7613,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  Chlorophyll::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   Fluorescein::Fluorescein(void)
   {
     m_header.mgid = 290;
@@ -8540,12 +7673,6 @@ namespace IMC
   Fluorescein::setValueFP(fp64_t val)
   {
     value = static_cast<fp32_t>(val);
-  }
-
-  void
-  Fluorescein::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   Phycocyanin::Phycocyanin(void)
@@ -8610,12 +7737,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  Phycocyanin::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   Phycoerythrin::Phycoerythrin(void)
   {
     m_header.mgid = 292;
@@ -8676,12 +7797,6 @@ namespace IMC
   Phycoerythrin::setValueFP(fp64_t val)
   {
     value = static_cast<fp32_t>(val);
-  }
-
-  void
-  Phycoerythrin::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   GpsFixRtk::GpsFixRtk(void)
@@ -8804,26 +7919,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(iar_hyp, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(iar_ratio, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  GpsFixRtk::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "validity", validity, nindent__);
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "tow", tow, nindent__);
-    IMC::toJSON(os__, "base_lat", base_lat, nindent__);
-    IMC::toJSON(os__, "base_lon", base_lon, nindent__);
-    IMC::toJSON(os__, "base_height", base_height, nindent__);
-    IMC::toJSON(os__, "n", n, nindent__);
-    IMC::toJSON(os__, "e", e, nindent__);
-    IMC::toJSON(os__, "d", d, nindent__);
-    IMC::toJSON(os__, "v_n", v_n, nindent__);
-    IMC::toJSON(os__, "v_e", v_e, nindent__);
-    IMC::toJSON(os__, "v_d", v_d, nindent__);
-    IMC::toJSON(os__, "satellites", satellites, nindent__);
-    IMC::toJSON(os__, "iar_hyp", iar_hyp, nindent__);
-    IMC::toJSON(os__, "iar_ratio", iar_ratio, nindent__);
   }
 
   EstimatedState::EstimatedState(void)
@@ -8979,31 +8074,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  EstimatedState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "height", height, nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "phi", phi, nindent__);
-    IMC::toJSON(os__, "theta", theta, nindent__);
-    IMC::toJSON(os__, "psi", psi, nindent__);
-    IMC::toJSON(os__, "u", u, nindent__);
-    IMC::toJSON(os__, "v", v, nindent__);
-    IMC::toJSON(os__, "w", w, nindent__);
-    IMC::toJSON(os__, "vx", vx, nindent__);
-    IMC::toJSON(os__, "vy", vy, nindent__);
-    IMC::toJSON(os__, "vz", vz, nindent__);
-    IMC::toJSON(os__, "p", p, nindent__);
-    IMC::toJSON(os__, "q", q, nindent__);
-    IMC::toJSON(os__, "r", r, nindent__);
-    IMC::toJSON(os__, "depth", depth, nindent__);
-    IMC::toJSON(os__, "alt", alt, nindent__);
-  }
-
   ExternalNavData::ExternalNavData(void)
   {
     m_header.mgid = 294;
@@ -9058,13 +8128,6 @@ namespace IMC
     bfr__ += state.reverseDeserialize(bfr__, size__);
     bfr__ += IMC::deserialize(type, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  ExternalNavData::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    state.toJSON(os__, "state", nindent__);
-    IMC::toJSON(os__, "type", type, nindent__);
   }
 
   void
@@ -9174,12 +8237,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  DissolvedOxygen::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   AirSaturation::AirSaturation(void)
   {
     m_header.mgid = 296;
@@ -9240,12 +8297,6 @@ namespace IMC
   AirSaturation::setValueFP(fp64_t val)
   {
     value = static_cast<fp32_t>(val);
-  }
-
-  void
-  AirSaturation::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   Throttle::Throttle(void)
@@ -9310,12 +8361,6 @@ namespace IMC
     value = static_cast<fp64_t>(val);
   }
 
-  void
-  Throttle::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   PH::PH(void)
   {
     m_header.mgid = 298;
@@ -9378,12 +8423,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  PH::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   Redox::Redox(void)
   {
     m_header.mgid = 299;
@@ -9444,12 +8483,6 @@ namespace IMC
   Redox::setValueFP(fp64_t val)
   {
     value = static_cast<fp32_t>(val);
-  }
-
-  void
-  Redox::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   CameraZoom::CameraZoom(void)
@@ -9522,14 +8555,6 @@ namespace IMC
   CameraZoom::setSubId(uint16_t subid)
   {
     id = (uint8_t)subid;
-  }
-
-  void
-  CameraZoom::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "id", id, nindent__);
-    IMC::toJSON(os__, "zoom", zoom, nindent__);
-    IMC::toJSON(os__, "action", action, nindent__);
   }
 
   SetThrusterActuation::SetThrusterActuation(void)
@@ -9612,13 +8637,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  SetThrusterActuation::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "id", id, nindent__);
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   SetServoPosition::SetServoPosition(void)
   {
     m_header.mgid = 302;
@@ -9699,13 +8717,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  SetServoPosition::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "id", id, nindent__);
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   SetControlSurfaceDeflection::SetControlSurfaceDeflection(void)
   {
     m_header.mgid = 303;
@@ -9773,13 +8784,6 @@ namespace IMC
     id = (uint8_t)subid;
   }
 
-  void
-  SetControlSurfaceDeflection::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "id", id, nindent__);
-    IMC::toJSON(os__, "angle", angle, nindent__);
-  }
-
   RemoteActionsRequest::RemoteActionsRequest(void)
   {
     m_header.mgid = 304;
@@ -9835,13 +8839,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  RemoteActionsRequest::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "actions", actions, nindent__);
-  }
-
   RemoteActions::RemoteActions(void)
   {
     m_header.mgid = 305;
@@ -9890,12 +8887,6 @@ namespace IMC
     const uint8_t* start__ = bfr__;
     bfr__ += IMC::reverseDeserialize(actions, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  RemoteActions::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "actions", actions, nindent__);
   }
 
   ButtonEvent::ButtonEvent(void)
@@ -9965,13 +8956,6 @@ namespace IMC
     value = static_cast<uint8_t>(val);
   }
 
-  void
-  ButtonEvent::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "button", button, nindent__);
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   LcdControl::LcdControl(void)
   {
     m_header.mgid = 307;
@@ -10025,13 +9009,6 @@ namespace IMC
     bfr__ += IMC::deserialize(op, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(text, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  LcdControl::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "text", text, nindent__);
   }
 
   PowerOperation::PowerOperation(void)
@@ -10094,14 +9071,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  PowerOperation::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "time_remain", time_remain, nindent__);
-    IMC::toJSON(os__, "sched_time", sched_time, nindent__);
-  }
-
   PowerChannelControl::PowerChannelControl(void)
   {
     m_header.mgid = 309;
@@ -10161,14 +9130,6 @@ namespace IMC
     bfr__ += IMC::deserialize(op, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(sched_time, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  PowerChannelControl::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "sched_time", sched_time, nindent__);
   }
 
   QueryPowerChannelState::QueryPowerChannelState(void)
@@ -10265,13 +9226,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  PowerChannelState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
-    IMC::toJSON(os__, "state", state, nindent__);
-  }
-
   LedBrightness::LedBrightness(void)
   {
     m_header.mgid = 312;
@@ -10339,13 +9293,6 @@ namespace IMC
     value = static_cast<uint8_t>(val);
   }
 
-  void
-  LedBrightness::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   QueryLedBrightness::QueryLedBrightness(void)
   {
     m_header.mgid = 313;
@@ -10394,12 +9341,6 @@ namespace IMC
     const uint8_t* start__ = bfr__;
     bfr__ += IMC::reverseDeserialize(name, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  QueryLedBrightness::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
   }
 
   SetLedBrightness::SetLedBrightness(void)
@@ -10467,13 +9408,6 @@ namespace IMC
   SetLedBrightness::setValueFP(fp64_t val)
   {
     value = static_cast<uint8_t>(val);
-  }
-
-  void
-  SetLedBrightness::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   SetPWM::SetPWM(void)
@@ -10548,14 +9482,6 @@ namespace IMC
     id = (uint8_t)subid;
   }
 
-  void
-  SetPWM::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "id", id, nindent__);
-    IMC::toJSON(os__, "period", period, nindent__);
-    IMC::toJSON(os__, "duty_cycle", duty_cycle, nindent__);
-  }
-
   PWM::PWM(void)
   {
     m_header.mgid = 316;
@@ -10628,14 +9554,6 @@ namespace IMC
     id = (uint8_t)subid;
   }
 
-  void
-  PWM::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "id", id, nindent__);
-    IMC::toJSON(os__, "period", period, nindent__);
-    IMC::toJSON(os__, "duty_cycle", duty_cycle, nindent__);
-  }
-
   EstimatedStreamVelocity::EstimatedStreamVelocity(void)
   {
     m_header.mgid = 351;
@@ -10694,14 +9612,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(y, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(z, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  EstimatedStreamVelocity::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
   }
 
   IndicatedSpeed::IndicatedSpeed(void)
@@ -10766,12 +9676,6 @@ namespace IMC
     value = static_cast<fp64_t>(val);
   }
 
-  void
-  IndicatedSpeed::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   TrueSpeed::TrueSpeed(void)
   {
     m_header.mgid = 353;
@@ -10832,12 +9736,6 @@ namespace IMC
   TrueSpeed::setValueFP(fp64_t val)
   {
     value = static_cast<fp64_t>(val);
-  }
-
-  void
-  TrueSpeed::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   NavigationUncertainty::NavigationUncertainty(void)
@@ -10955,25 +9853,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  NavigationUncertainty::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "phi", phi, nindent__);
-    IMC::toJSON(os__, "theta", theta, nindent__);
-    IMC::toJSON(os__, "psi", psi, nindent__);
-    IMC::toJSON(os__, "p", p, nindent__);
-    IMC::toJSON(os__, "q", q, nindent__);
-    IMC::toJSON(os__, "r", r, nindent__);
-    IMC::toJSON(os__, "u", u, nindent__);
-    IMC::toJSON(os__, "v", v, nindent__);
-    IMC::toJSON(os__, "w", w, nindent__);
-    IMC::toJSON(os__, "bias_psi", bias_psi, nindent__);
-    IMC::toJSON(os__, "bias_r", bias_r, nindent__);
-  }
-
   NavigationData::NavigationData(void)
   {
     m_header.mgid = 355;
@@ -11064,20 +9943,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  NavigationData::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "bias_psi", bias_psi, nindent__);
-    IMC::toJSON(os__, "bias_r", bias_r, nindent__);
-    IMC::toJSON(os__, "cog", cog, nindent__);
-    IMC::toJSON(os__, "cyaw", cyaw, nindent__);
-    IMC::toJSON(os__, "lbl_rej_level", lbl_rej_level, nindent__);
-    IMC::toJSON(os__, "gps_rej_level", gps_rej_level, nindent__);
-    IMC::toJSON(os__, "custom_x", custom_x, nindent__);
-    IMC::toJSON(os__, "custom_y", custom_y, nindent__);
-    IMC::toJSON(os__, "custom_z", custom_z, nindent__);
-  }
-
   GpsFixRejection::GpsFixRejection(void)
   {
     m_header.mgid = 356;
@@ -11131,13 +9996,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(utc_time, bfr__, size__);
     bfr__ += IMC::deserialize(reason, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  GpsFixRejection::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "utc_time", utc_time, nindent__);
-    IMC::toJSON(os__, "reason", reason, nindent__);
   }
 
   LblRangeAcceptance::LblRangeAcceptance(void)
@@ -11210,14 +10068,6 @@ namespace IMC
   LblRangeAcceptance::setSubId(uint16_t subid)
   {
     id = (uint8_t)subid;
-  }
-
-  void
-  LblRangeAcceptance::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "id", id, nindent__);
-    IMC::toJSON(os__, "range", range, nindent__);
-    IMC::toJSON(os__, "acceptance", acceptance, nindent__);
   }
 
   DvlRejection::DvlRejection(void)
@@ -11297,15 +10147,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  DvlRejection::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "reason", reason, nindent__);
-    IMC::toJSON(os__, "value", value, nindent__);
-    IMC::toJSON(os__, "timestep", timestep, nindent__);
-  }
-
   LblEstimate::LblEstimate(void)
   {
     m_header.mgid = 360;
@@ -11380,17 +10221,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(var_y, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(distance, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  LblEstimate::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    beacon.toJSON(os__, "beacon", nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "var_x", var_x, nindent__);
-    IMC::toJSON(os__, "var_y", var_y, nindent__);
-    IMC::toJSON(os__, "distance", distance, nindent__);
   }
 
   void
@@ -11488,12 +10318,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  AlignmentState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "state", state, nindent__);
-  }
-
   GroupStreamVelocity::GroupStreamVelocity(void)
   {
     m_header.mgid = 362;
@@ -11552,14 +10376,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(y, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(z, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  GroupStreamVelocity::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
   }
 
   Airflow::Airflow(void)
@@ -11622,14 +10438,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  Airflow::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "va", va, nindent__);
-    IMC::toJSON(os__, "aoa", aoa, nindent__);
-    IMC::toJSON(os__, "ssa", ssa, nindent__);
-  }
-
   DesiredHeading::DesiredHeading(void)
   {
     m_header.mgid = 400;
@@ -11690,12 +10498,6 @@ namespace IMC
   DesiredHeading::setValueFP(fp64_t val)
   {
     value = static_cast<fp64_t>(val);
-  }
-
-  void
-  DesiredHeading::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   DesiredZ::DesiredZ(void)
@@ -11765,13 +10567,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  DesiredZ::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-  }
-
   DesiredSpeed::DesiredSpeed(void)
   {
     m_header.mgid = 402;
@@ -11839,13 +10634,6 @@ namespace IMC
     value = static_cast<fp64_t>(val);
   }
 
-  void
-  DesiredSpeed::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-  }
-
   DesiredRoll::DesiredRoll(void)
   {
     m_header.mgid = 403;
@@ -11906,12 +10694,6 @@ namespace IMC
   DesiredRoll::setValueFP(fp64_t val)
   {
     value = static_cast<fp64_t>(val);
-  }
-
-  void
-  DesiredRoll::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   DesiredPitch::DesiredPitch(void)
@@ -11976,12 +10758,6 @@ namespace IMC
     value = static_cast<fp64_t>(val);
   }
 
-  void
-  DesiredPitch::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   DesiredVerticalRate::DesiredVerticalRate(void)
   {
     m_header.mgid = 405;
@@ -12042,12 +10818,6 @@ namespace IMC
   DesiredVerticalRate::setValueFP(fp64_t val)
   {
     value = static_cast<fp64_t>(val);
-  }
-
-  void
-  DesiredVerticalRate::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   DesiredPath::DesiredPath(void)
@@ -12164,24 +10934,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  DesiredPath::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "path_ref", path_ref, nindent__);
-    IMC::toJSON(os__, "start_lat", start_lat, nindent__);
-    IMC::toJSON(os__, "start_lon", start_lon, nindent__);
-    IMC::toJSON(os__, "start_z", start_z, nindent__);
-    IMC::toJSON(os__, "start_z_units", start_z_units, nindent__);
-    IMC::toJSON(os__, "end_lat", end_lat, nindent__);
-    IMC::toJSON(os__, "end_lon", end_lon, nindent__);
-    IMC::toJSON(os__, "end_z", end_z, nindent__);
-    IMC::toJSON(os__, "end_z_units", end_z_units, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "lradius", lradius, nindent__);
-    IMC::toJSON(os__, "flags", flags, nindent__);
-  }
-
   DesiredControl::DesiredControl(void)
   {
     m_header.mgid = 407;
@@ -12262,18 +11014,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  DesiredControl::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "k", k, nindent__);
-    IMC::toJSON(os__, "m", m, nindent__);
-    IMC::toJSON(os__, "n", n, nindent__);
-    IMC::toJSON(os__, "flags", flags, nindent__);
-  }
-
   DesiredHeadingRate::DesiredHeadingRate(void)
   {
     m_header.mgid = 408;
@@ -12334,12 +11074,6 @@ namespace IMC
   DesiredHeadingRate::setValueFP(fp64_t val)
   {
     value = static_cast<fp64_t>(val);
-  }
-
-  void
-  DesiredHeadingRate::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   DesiredVelocity::DesiredVelocity(void)
@@ -12420,18 +11154,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(r, bfr__, size__);
     bfr__ += IMC::deserialize(flags, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  DesiredVelocity::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "u", u, nindent__);
-    IMC::toJSON(os__, "v", v, nindent__);
-    IMC::toJSON(os__, "w", w, nindent__);
-    IMC::toJSON(os__, "p", p, nindent__);
-    IMC::toJSON(os__, "q", q, nindent__);
-    IMC::toJSON(os__, "r", r, nindent__);
-    IMC::toJSON(os__, "flags", flags, nindent__);
   }
 
   PathControlState::PathControlState(void)
@@ -12578,30 +11300,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  PathControlState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "path_ref", path_ref, nindent__);
-    IMC::toJSON(os__, "start_lat", start_lat, nindent__);
-    IMC::toJSON(os__, "start_lon", start_lon, nindent__);
-    IMC::toJSON(os__, "start_z", start_z, nindent__);
-    IMC::toJSON(os__, "start_z_units", start_z_units, nindent__);
-    IMC::toJSON(os__, "end_lat", end_lat, nindent__);
-    IMC::toJSON(os__, "end_lon", end_lon, nindent__);
-    IMC::toJSON(os__, "end_z", end_z, nindent__);
-    IMC::toJSON(os__, "end_z_units", end_z_units, nindent__);
-    IMC::toJSON(os__, "lradius", lradius, nindent__);
-    IMC::toJSON(os__, "flags", flags, nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "vx", vx, nindent__);
-    IMC::toJSON(os__, "vy", vy, nindent__);
-    IMC::toJSON(os__, "vz", vz, nindent__);
-    IMC::toJSON(os__, "course_error", course_error, nindent__);
-    IMC::toJSON(os__, "eta", eta, nindent__);
-  }
-
   AllocatedControlTorques::AllocatedControlTorques(void)
   {
     m_header.mgid = 411;
@@ -12660,14 +11358,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(m, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(n, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  AllocatedControlTorques::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "k", k, nindent__);
-    IMC::toJSON(os__, "m", m, nindent__);
-    IMC::toJSON(os__, "n", n, nindent__);
   }
 
   ControlParcel::ControlParcel(void)
@@ -12735,15 +11425,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  ControlParcel::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "p", p, nindent__);
-    IMC::toJSON(os__, "i", i, nindent__);
-    IMC::toJSON(os__, "d", d, nindent__);
-    IMC::toJSON(os__, "a", a, nindent__);
-  }
-
   Brake::Brake(void)
   {
     m_header.mgid = 413;
@@ -12792,12 +11473,6 @@ namespace IMC
     const uint8_t* start__ = bfr__;
     bfr__ += IMC::deserialize(op, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  Brake::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
   }
 
   DesiredLinearState::DesiredLinearState(void)
@@ -12895,21 +11570,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  DesiredLinearState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "vx", vx, nindent__);
-    IMC::toJSON(os__, "vy", vy, nindent__);
-    IMC::toJSON(os__, "vz", vz, nindent__);
-    IMC::toJSON(os__, "ax", ax, nindent__);
-    IMC::toJSON(os__, "ay", ay, nindent__);
-    IMC::toJSON(os__, "az", az, nindent__);
-    IMC::toJSON(os__, "flags", flags, nindent__);
-  }
-
   DesiredThrottle::DesiredThrottle(void)
   {
     m_header.mgid = 415;
@@ -12970,12 +11630,6 @@ namespace IMC
   DesiredThrottle::setValueFP(fp64_t val)
   {
     value = static_cast<fp64_t>(val);
-  }
-
-  void
-  DesiredThrottle::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   Goto::Goto(void)
@@ -13083,22 +11737,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  Goto::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "roll", roll, nindent__);
-    IMC::toJSON(os__, "pitch", pitch, nindent__);
-    IMC::toJSON(os__, "yaw", yaw, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
-  }
-
   PopUp::PopUp(void)
   {
     m_header.mgid = 451;
@@ -13202,22 +11840,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  PopUp::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "duration", duration, nindent__);
-    IMC::toJSON(os__, "radius", radius, nindent__);
-    IMC::toJSON(os__, "flags", flags, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
-  }
-
   Teleoperation::Teleoperation(void)
   {
     m_header.mgid = 452;
@@ -13266,12 +11888,6 @@ namespace IMC
     const uint8_t* start__ = bfr__;
     bfr__ += IMC::reverseDeserialize(custom, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  Teleoperation::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "custom", custom, nindent__);
   }
 
   Loiter::Loiter(void)
@@ -13396,25 +12012,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  Loiter::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "duration", duration, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "radius", radius, nindent__);
-    IMC::toJSON(os__, "length", length, nindent__);
-    IMC::toJSON(os__, "bearing", bearing, nindent__);
-    IMC::toJSON(os__, "direction", direction, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
-  }
-
   IdleManeuver::IdleManeuver(void)
   {
     m_header.mgid = 454;
@@ -13468,13 +12065,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(duration, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(custom, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  IdleManeuver::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "duration", duration, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
   }
 
   LowLevelControl::LowLevelControl(void)
@@ -13536,14 +12126,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(duration, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(custom, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  LowLevelControl::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    control.toJSON(os__, "control", nindent__);
-    IMC::toJSON(os__, "duration", duration, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
   }
 
   void
@@ -13724,27 +12306,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  Rows::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "bearing", bearing, nindent__);
-    IMC::toJSON(os__, "cross_angle", cross_angle, nindent__);
-    IMC::toJSON(os__, "width", width, nindent__);
-    IMC::toJSON(os__, "length", length, nindent__);
-    IMC::toJSON(os__, "hstep", hstep, nindent__);
-    IMC::toJSON(os__, "coff", coff, nindent__);
-    IMC::toJSON(os__, "alternation", alternation, nindent__);
-    IMC::toJSON(os__, "flags", flags, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
-  }
-
   PathPoint::PathPoint(void)
   {
     m_header.mgid = 458;
@@ -13803,14 +12364,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(y, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(z, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  PathPoint::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
   }
 
   FollowPath::FollowPath(void)
@@ -13904,20 +12457,6 @@ namespace IMC
     bfr__ += points.reverseDeserialize(bfr__, size__);
     bfr__ += IMC::reverseDeserialize(custom, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  FollowPath::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    points.toJSON(os__, "points", nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
   }
 
   void
@@ -14046,21 +12585,6 @@ namespace IMC
     bfr__ += IMC::deserialize(speed_units, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(custom, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  YoYo::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "amplitude", amplitude, nindent__);
-    IMC::toJSON(os__, "pitch", pitch, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
   }
 
   TeleoperationDone::TeleoperationDone(void)
@@ -14194,20 +12718,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  StationKeeping::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "radius", radius, nindent__);
-    IMC::toJSON(os__, "duration", duration, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
-  }
-
   Elevator::Elevator(void)
   {
     m_header.mgid = 462;
@@ -14316,23 +12826,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  Elevator::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "flags", flags, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "start_z", start_z, nindent__);
-    IMC::toJSON(os__, "start_z_units", start_z_units, nindent__);
-    IMC::toJSON(os__, "end_z", end_z, nindent__);
-    IMC::toJSON(os__, "end_z_units", end_z_units, nindent__);
-    IMC::toJSON(os__, "radius", radius, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
-  }
-
   TrajectoryPoint::TrajectoryPoint(void)
   {
     m_header.mgid = 464;
@@ -14396,15 +12889,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(z, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(t, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  TrajectoryPoint::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "t", t, nindent__);
   }
 
   FollowTrajectory::FollowTrajectory(void)
@@ -14501,20 +12985,6 @@ namespace IMC
   }
 
   void
-  FollowTrajectory::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    points.toJSON(os__, "points", nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
-  }
-
-  void
   FollowTrajectory::setTimeStampNested(double value__)
   {
     points.setTimeStamp(value__);
@@ -14604,14 +13074,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  CustomManeuver::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "name", name, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
-  }
-
   VehicleFormationParticipant::VehicleFormationParticipant(void)
   {
     m_header.mgid = 467;
@@ -14675,15 +13137,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(off_y, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(off_z, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  VehicleFormationParticipant::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "vid", vid, nindent__);
-    IMC::toJSON(os__, "off_x", off_x, nindent__);
-    IMC::toJSON(os__, "off_y", off_y, nindent__);
-    IMC::toJSON(os__, "off_z", off_z, nindent__);
   }
 
   VehicleFormation::VehicleFormation(void)
@@ -14783,21 +13236,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(start_time, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(custom, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  VehicleFormation::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    points.toJSON(os__, "points", nindent__);
-    participants.toJSON(os__, "participants", nindent__);
-    IMC::toJSON(os__, "start_time", start_time, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
   }
 
   void
@@ -14929,12 +13367,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  RegisterManeuver::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "mid", mid, nindent__);
-  }
-
   ManeuverControlState::ManeuverControlState(void)
   {
     m_header.mgid = 470;
@@ -14993,14 +13425,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(eta, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(info, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  ManeuverControlState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "state", state, nindent__);
-    IMC::toJSON(os__, "eta", eta, nindent__);
-    IMC::toJSON(os__, "info", info, nindent__);
   }
 
   FollowSystem::FollowSystem(void)
@@ -15086,19 +13510,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(z, bfr__, size__);
     bfr__ += IMC::deserialize(z_units, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  FollowSystem::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "system", system, nindent__);
-    IMC::toJSON(os__, "duration", duration, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
   }
 
   CommsRelay::CommsRelay(void)
@@ -15188,19 +13599,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  CommsRelay::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "duration", duration, nindent__);
-    IMC::toJSON(os__, "sys_a", sys_a, nindent__);
-    IMC::toJSON(os__, "sys_b", sys_b, nindent__);
-    IMC::toJSON(os__, "move_threshold", move_threshold, nindent__);
-  }
-
   PolygonVertex::PolygonVertex(void)
   {
     m_header.mgid = 474;
@@ -15256,13 +13654,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(lat, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(lon, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  PolygonVertex::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
   }
 
   CoverArea::CoverArea(void)
@@ -15351,19 +13742,6 @@ namespace IMC
     bfr__ += polygon.reverseDeserialize(bfr__, size__);
     bfr__ += IMC::reverseDeserialize(custom, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  CoverArea::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    polygon.toJSON(os__, "polygon", nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
   }
 
   void
@@ -15511,24 +13889,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  CompassCalibration::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "pitch", pitch, nindent__);
-    IMC::toJSON(os__, "amplitude", amplitude, nindent__);
-    IMC::toJSON(os__, "duration", duration, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "radius", radius, nindent__);
-    IMC::toJSON(os__, "direction", direction, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
-  }
-
   FormationParameters::FormationParameters(void)
   {
     m_header.mgid = 476;
@@ -15593,15 +13953,6 @@ namespace IMC
     bfr__ += participants.reverseDeserialize(bfr__, size__);
     bfr__ += IMC::reverseDeserialize(custom, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  FormationParameters::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "formation_name", formation_name, nindent__);
-    IMC::toJSON(os__, "reference_frame", reference_frame, nindent__);
-    participants.toJSON(os__, "participants", nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
   }
 
   void
@@ -15749,25 +14100,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  FormationPlanExecution::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "group_name", group_name, nindent__);
-    IMC::toJSON(os__, "formation_name", formation_name, nindent__);
-    IMC::toJSON(os__, "plan_id", plan_id, nindent__);
-    IMC::toJSON(os__, "description", description, nindent__);
-    IMC::toJSON(os__, "leader_speed", leader_speed, nindent__);
-    IMC::toJSON(os__, "leader_bank_lim", leader_bank_lim, nindent__);
-    IMC::toJSON(os__, "pos_sim_err_lim", pos_sim_err_lim, nindent__);
-    IMC::toJSON(os__, "pos_sim_err_wrn", pos_sim_err_wrn, nindent__);
-    IMC::toJSON(os__, "pos_sim_err_timeout", pos_sim_err_timeout, nindent__);
-    IMC::toJSON(os__, "converg_max", converg_max, nindent__);
-    IMC::toJSON(os__, "converg_timeout", converg_timeout, nindent__);
-    IMC::toJSON(os__, "comms_timeout", comms_timeout, nindent__);
-    IMC::toJSON(os__, "turb_lim", turb_lim, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
-  }
-
   FollowReference::FollowReference(void)
   {
     m_header.mgid = 478;
@@ -15836,16 +14168,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(loiter_radius, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(altitude_interval, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  FollowReference::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "control_src", control_src, nindent__);
-    IMC::toJSON(os__, "control_ent", control_ent, nindent__);
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "loiter_radius", loiter_radius, nindent__);
-    IMC::toJSON(os__, "altitude_interval", altitude_interval, nindent__);
   }
 
   Reference::Reference(void)
@@ -15923,17 +14245,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(lon, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(radius, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  Reference::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "flags", flags, nindent__);
-    speed.toJSON(os__, "speed", nindent__);
-    z.toJSON(os__, "z", nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "radius", radius, nindent__);
   }
 
   void
@@ -16075,16 +14386,6 @@ namespace IMC
     bfr__ += IMC::deserialize(state, bfr__, size__);
     bfr__ += IMC::deserialize(proximity, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  FollowRefState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "control_src", control_src, nindent__);
-    IMC::toJSON(os__, "control_ent", control_ent, nindent__);
-    reference.toJSON(os__, "reference", nindent__);
-    IMC::toJSON(os__, "state", state, nindent__);
-    IMC::toJSON(os__, "proximity", proximity, nindent__);
   }
 
   void
@@ -16287,33 +14588,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  RelativeState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "s_id", s_id, nindent__);
-    IMC::toJSON(os__, "dist", dist, nindent__);
-    IMC::toJSON(os__, "err", err, nindent__);
-    IMC::toJSON(os__, "ctrl_imp", ctrl_imp, nindent__);
-    IMC::toJSON(os__, "rel_dir_x", rel_dir_x, nindent__);
-    IMC::toJSON(os__, "rel_dir_y", rel_dir_y, nindent__);
-    IMC::toJSON(os__, "rel_dir_z", rel_dir_z, nindent__);
-    IMC::toJSON(os__, "err_x", err_x, nindent__);
-    IMC::toJSON(os__, "err_y", err_y, nindent__);
-    IMC::toJSON(os__, "err_z", err_z, nindent__);
-    IMC::toJSON(os__, "rf_err_x", rf_err_x, nindent__);
-    IMC::toJSON(os__, "rf_err_y", rf_err_y, nindent__);
-    IMC::toJSON(os__, "rf_err_z", rf_err_z, nindent__);
-    IMC::toJSON(os__, "rf_err_vx", rf_err_vx, nindent__);
-    IMC::toJSON(os__, "rf_err_vy", rf_err_vy, nindent__);
-    IMC::toJSON(os__, "rf_err_vz", rf_err_vz, nindent__);
-    IMC::toJSON(os__, "ss_x", ss_x, nindent__);
-    IMC::toJSON(os__, "ss_y", ss_y, nindent__);
-    IMC::toJSON(os__, "ss_z", ss_z, nindent__);
-    IMC::toJSON(os__, "virt_err_x", virt_err_x, nindent__);
-    IMC::toJSON(os__, "virt_err_y", virt_err_y, nindent__);
-    IMC::toJSON(os__, "virt_err_z", virt_err_z, nindent__);
-  }
-
   FormationMonitor::FormationMonitor(void)
   {
     m_header.mgid = 481;
@@ -16456,30 +14730,6 @@ namespace IMC
   }
 
   void
-  FormationMonitor::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "ax_cmd", ax_cmd, nindent__);
-    IMC::toJSON(os__, "ay_cmd", ay_cmd, nindent__);
-    IMC::toJSON(os__, "az_cmd", az_cmd, nindent__);
-    IMC::toJSON(os__, "ax_des", ax_des, nindent__);
-    IMC::toJSON(os__, "ay_des", ay_des, nindent__);
-    IMC::toJSON(os__, "az_des", az_des, nindent__);
-    IMC::toJSON(os__, "virt_err_x", virt_err_x, nindent__);
-    IMC::toJSON(os__, "virt_err_y", virt_err_y, nindent__);
-    IMC::toJSON(os__, "virt_err_z", virt_err_z, nindent__);
-    IMC::toJSON(os__, "surf_fdbk_x", surf_fdbk_x, nindent__);
-    IMC::toJSON(os__, "surf_fdbk_y", surf_fdbk_y, nindent__);
-    IMC::toJSON(os__, "surf_fdbk_z", surf_fdbk_z, nindent__);
-    IMC::toJSON(os__, "surf_unkn_x", surf_unkn_x, nindent__);
-    IMC::toJSON(os__, "surf_unkn_y", surf_unkn_y, nindent__);
-    IMC::toJSON(os__, "surf_unkn_z", surf_unkn_z, nindent__);
-    IMC::toJSON(os__, "ss_x", ss_x, nindent__);
-    IMC::toJSON(os__, "ss_y", ss_y, nindent__);
-    IMC::toJSON(os__, "ss_z", ss_z, nindent__);
-    rel_state.toJSON(os__, "rel_state", nindent__);
-  }
-
-  void
   FormationMonitor::setTimeStampNested(double value__)
   {
     rel_state.setTimeStamp(value__);
@@ -16572,15 +14822,6 @@ namespace IMC
     bfr__ += IMC::deserialize(direction, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(custom, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  Dislodge::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "rpm", rpm, nindent__);
-    IMC::toJSON(os__, "direction", direction, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
   }
 
   Formation::Formation(void)
@@ -16735,32 +14976,6 @@ namespace IMC
   }
 
   void
-  Formation::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "formation_name", formation_name, nindent__);
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "group_name", group_name, nindent__);
-    IMC::toJSON(os__, "plan_id", plan_id, nindent__);
-    IMC::toJSON(os__, "description", description, nindent__);
-    IMC::toJSON(os__, "reference_frame", reference_frame, nindent__);
-    participants.toJSON(os__, "participants", nindent__);
-    IMC::toJSON(os__, "leader_bank_lim", leader_bank_lim, nindent__);
-    IMC::toJSON(os__, "leader_speed_min", leader_speed_min, nindent__);
-    IMC::toJSON(os__, "leader_speed_max", leader_speed_max, nindent__);
-    IMC::toJSON(os__, "leader_alt_min", leader_alt_min, nindent__);
-    IMC::toJSON(os__, "leader_alt_max", leader_alt_max, nindent__);
-    IMC::toJSON(os__, "pos_sim_err_lim", pos_sim_err_lim, nindent__);
-    IMC::toJSON(os__, "pos_sim_err_wrn", pos_sim_err_wrn, nindent__);
-    IMC::toJSON(os__, "pos_sim_err_timeout", pos_sim_err_timeout, nindent__);
-    IMC::toJSON(os__, "converg_max", converg_max, nindent__);
-    IMC::toJSON(os__, "converg_timeout", converg_timeout, nindent__);
-    IMC::toJSON(os__, "comms_timeout", comms_timeout, nindent__);
-    IMC::toJSON(os__, "turb_lim", turb_lim, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
-  }
-
-  void
   Formation::setTimeStampNested(double value__)
   {
     participants.setTimeStamp(value__);
@@ -16877,19 +15092,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  Launch::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
-  }
-
   Drop::Drop(void)
   {
     m_header.mgid = 486;
@@ -16977,19 +15179,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  Drop::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
-  }
-
   ScheduledGoto::ScheduledGoto(void)
   {
     m_header.mgid = 487;
@@ -17075,19 +15264,6 @@ namespace IMC
     bfr__ += IMC::deserialize(travel_z_units, bfr__, size__);
     bfr__ += IMC::deserialize(delayed, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  ScheduledGoto::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "arrival_time", arrival_time, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "travel_z", travel_z, nindent__);
-    IMC::toJSON(os__, "travel_z_units", travel_z_units, nindent__);
-    IMC::toJSON(os__, "delayed", delayed, nindent__);
   }
 
   RowsCoverage::RowsCoverage(void)
@@ -17223,27 +15399,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  RowsCoverage::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "bearing", bearing, nindent__);
-    IMC::toJSON(os__, "cross_angle", cross_angle, nindent__);
-    IMC::toJSON(os__, "width", width, nindent__);
-    IMC::toJSON(os__, "length", length, nindent__);
-    IMC::toJSON(os__, "coff", coff, nindent__);
-    IMC::toJSON(os__, "angaperture", angaperture, nindent__);
-    IMC::toJSON(os__, "range", range, nindent__);
-    IMC::toJSON(os__, "overlap", overlap, nindent__);
-    IMC::toJSON(os__, "flags", flags, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
-  }
-
   Sample::Sample(void)
   {
     m_header.mgid = 489;
@@ -17344,22 +15499,6 @@ namespace IMC
     bfr__ += IMC::deserialize(syringe2, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(custom, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  Sample::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "syringe0", syringe0, nindent__);
-    IMC::toJSON(os__, "syringe1", syringe1, nindent__);
-    IMC::toJSON(os__, "syringe2", syringe2, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
   }
 
   ImageTracking::ImageTracking(void)
@@ -17489,19 +15628,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  Takeoff::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "takeoff_pitch", takeoff_pitch, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
-  }
-
   Land::Land(void)
   {
     m_header.mgid = 492;
@@ -17606,22 +15732,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  Land::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "abort_z", abort_z, nindent__);
-    IMC::toJSON(os__, "bearing", bearing, nindent__);
-    IMC::toJSON(os__, "glide_slope", glide_slope, nindent__);
-    IMC::toJSON(os__, "glide_slope_alt", glide_slope_alt, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
-  }
-
   AutonomousSection::AutonomousSection(void)
   {
     m_header.mgid = 493;
@@ -17723,22 +15833,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(controller, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(custom, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  AutonomousSection::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "limits", limits, nindent__);
-    IMC::toJSON(os__, "max_depth", max_depth, nindent__);
-    IMC::toJSON(os__, "min_alt", min_alt, nindent__);
-    IMC::toJSON(os__, "time_limit", time_limit, nindent__);
-    area_limits.toJSON(os__, "area_limits", nindent__);
-    IMC::toJSON(os__, "controller", controller, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
   }
 
   void
@@ -17859,19 +15953,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  FollowPoint::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "target", target, nindent__);
-    IMC::toJSON(os__, "max_speed", max_speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
-  }
-
   Alignment::Alignment(void)
   {
     m_header.mgid = 495;
@@ -17947,17 +16028,6 @@ namespace IMC
     bfr__ += IMC::deserialize(speed_units, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(custom, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  Alignment::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
   }
 
   StationKeepingExtended::StationKeepingExtended(void)
@@ -18065,23 +16135,6 @@ namespace IMC
     bfr__ += IMC::deserialize(flags, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(custom, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  StationKeepingExtended::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "radius", radius, nindent__);
-    IMC::toJSON(os__, "duration", duration, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "popup_period", popup_period, nindent__);
-    IMC::toJSON(os__, "popup_duration", popup_duration, nindent__);
-    IMC::toJSON(os__, "flags", flags, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
   }
 
   ManeuverDone::ManeuverDone(void)
@@ -18228,22 +16281,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  Magnetometer::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "speed_units", speed_units, nindent__);
-    IMC::toJSON(os__, "bearing", bearing, nindent__);
-    IMC::toJSON(os__, "width", width, nindent__);
-    IMC::toJSON(os__, "direction", direction, nindent__);
-    IMC::toJSON(os__, "custom", custom, nindent__);
-  }
-
   VehicleState::VehicleState(void)
   {
     m_header.mgid = 500;
@@ -18339,21 +16376,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  VehicleState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op_mode", op_mode, nindent__);
-    IMC::toJSON(os__, "error_count", error_count, nindent__);
-    IMC::toJSON(os__, "error_ents", error_ents, nindent__);
-    IMC::toJSON(os__, "maneuver_type", maneuver_type, nindent__);
-    IMC::toJSON(os__, "maneuver_stime", maneuver_stime, nindent__);
-    IMC::toJSON(os__, "maneuver_eta", maneuver_eta, nindent__);
-    IMC::toJSON(os__, "control_loops", control_loops, nindent__);
-    IMC::toJSON(os__, "flags", flags, nindent__);
-    IMC::toJSON(os__, "last_error", last_error, nindent__);
-    IMC::toJSON(os__, "last_error_time", last_error_time, nindent__);
-  }
-
   VehicleCommand::VehicleCommand(void)
   {
     m_header.mgid = 501;
@@ -18428,17 +16450,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(calib_time, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(info, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  VehicleCommand::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "request_id", request_id, nindent__);
-    IMC::toJSON(os__, "command", command, nindent__);
-    maneuver.toJSON(os__, "maneuver", nindent__);
-    IMC::toJSON(os__, "calib_time", calib_time, nindent__);
-    IMC::toJSON(os__, "info", info, nindent__);
   }
 
   void
@@ -18541,13 +16552,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  MonitorEntityState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "command", command, nindent__);
-    IMC::toJSON(os__, "entities", entities, nindent__);
-  }
-
   EntityMonitoringState::EntityMonitoringState(void)
   {
     m_header.mgid = 503;
@@ -18631,19 +16635,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(last_error, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(last_error_time, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  EntityMonitoringState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "mcount", mcount, nindent__);
-    IMC::toJSON(os__, "mnames", mnames, nindent__);
-    IMC::toJSON(os__, "ecount", ecount, nindent__);
-    IMC::toJSON(os__, "enames", enames, nindent__);
-    IMC::toJSON(os__, "ccount", ccount, nindent__);
-    IMC::toJSON(os__, "cnames", cnames, nindent__);
-    IMC::toJSON(os__, "last_error", last_error, nindent__);
-    IMC::toJSON(os__, "last_error_time", last_error_time, nindent__);
   }
 
   OperationalLimits::OperationalLimits(void)
@@ -18759,23 +16750,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  OperationalLimits::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "mask", mask, nindent__);
-    IMC::toJSON(os__, "max_depth", max_depth, nindent__);
-    IMC::toJSON(os__, "min_altitude", min_altitude, nindent__);
-    IMC::toJSON(os__, "max_altitude", max_altitude, nindent__);
-    IMC::toJSON(os__, "min_speed", min_speed, nindent__);
-    IMC::toJSON(os__, "max_speed", max_speed, nindent__);
-    IMC::toJSON(os__, "max_vrate", max_vrate, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "orientation", orientation, nindent__);
-    IMC::toJSON(os__, "width", width, nindent__);
-    IMC::toJSON(os__, "length", length, nindent__);
-  }
-
   GetOperationalLimits::GetOperationalLimits(void)
   {
     m_header.mgid = 505;
@@ -18865,12 +16839,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  Calibration::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "duration", duration, nindent__);
-  }
-
   ControlLoops::ControlLoops(void)
   {
     m_header.mgid = 507;
@@ -18931,14 +16899,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  ControlLoops::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "enable", enable, nindent__);
-    IMC::toJSON(os__, "mask", mask, nindent__);
-    IMC::toJSON(os__, "scope_ref", scope_ref, nindent__);
-  }
-
   VehicleMedium::VehicleMedium(void)
   {
     m_header.mgid = 508;
@@ -18987,12 +16947,6 @@ namespace IMC
     const uint8_t* start__ = bfr__;
     bfr__ += IMC::deserialize(medium, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  VehicleMedium::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "medium", medium, nindent__);
   }
 
   Collision::Collision(void)
@@ -19060,13 +17014,6 @@ namespace IMC
   Collision::setValueFP(fp64_t val)
   {
     value = static_cast<fp32_t>(val);
-  }
-
-  void
-  Collision::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-    IMC::toJSON(os__, "type", type, nindent__);
   }
 
   FormState::FormState(void)
@@ -19144,17 +17091,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  FormState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "possimerr", possimerr, nindent__);
-    IMC::toJSON(os__, "converg", converg, nindent__);
-    IMC::toJSON(os__, "turbulence", turbulence, nindent__);
-    IMC::toJSON(os__, "possimmon", possimmon, nindent__);
-    IMC::toJSON(os__, "commmon", commmon, nindent__);
-    IMC::toJSON(os__, "convergmon", convergmon, nindent__);
-  }
-
   AutopilotMode::AutopilotMode(void)
   {
     m_header.mgid = 511;
@@ -19208,13 +17144,6 @@ namespace IMC
     bfr__ += IMC::deserialize(autonomy, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(mode, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  AutopilotMode::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "autonomy", autonomy, nindent__);
-    IMC::toJSON(os__, "mode", mode, nindent__);
   }
 
   FormationState::FormationState(void)
@@ -19302,19 +17231,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  FormationState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "possimerr", possimerr, nindent__);
-    IMC::toJSON(os__, "converg", converg, nindent__);
-    IMC::toJSON(os__, "turbulence", turbulence, nindent__);
-    IMC::toJSON(os__, "possimmon", possimmon, nindent__);
-    IMC::toJSON(os__, "commmon", commmon, nindent__);
-    IMC::toJSON(os__, "convergmon", convergmon, nindent__);
-  }
-
   ReportControl::ReportControl(void)
   {
     m_header.mgid = 513;
@@ -19378,15 +17294,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(period, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(sys_dst, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  ReportControl::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "comm_interface", comm_interface, nindent__);
-    IMC::toJSON(os__, "period", period, nindent__);
-    IMC::toJSON(os__, "sys_dst", sys_dst, nindent__);
   }
 
   StateReport::StateReport(void)
@@ -19484,21 +17391,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  StateReport::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "stime", stime, nindent__);
-    IMC::toJSON(os__, "latitude", latitude, nindent__);
-    IMC::toJSON(os__, "longitude", longitude, nindent__);
-    IMC::toJSON(os__, "altitude", altitude, nindent__);
-    IMC::toJSON(os__, "depth", depth, nindent__);
-    IMC::toJSON(os__, "heading", heading, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "fuel", fuel, nindent__);
-    IMC::toJSON(os__, "exec_state", exec_state, nindent__);
-    IMC::toJSON(os__, "plan_checksum", plan_checksum, nindent__);
-  }
-
   TransmissionRequest::TransmissionRequest(void)
   {
     m_header.mgid = 515;
@@ -19588,20 +17480,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(txt_data, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(raw_data, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  TransmissionRequest::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "req_id", req_id, nindent__);
-    IMC::toJSON(os__, "comm_mean", comm_mean, nindent__);
-    IMC::toJSON(os__, "destination", destination, nindent__);
-    IMC::toJSON(os__, "deadline", deadline, nindent__);
-    IMC::toJSON(os__, "range", range, nindent__);
-    IMC::toJSON(os__, "data_mode", data_mode, nindent__);
-    msg_data.toJSON(os__, "msg_data", nindent__);
-    IMC::toJSON(os__, "txt_data", txt_data, nindent__);
-    IMC::toJSON(os__, "raw_data", raw_data, nindent__);
   }
 
   void
@@ -19714,15 +17592,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  TransmissionStatus::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "req_id", req_id, nindent__);
-    IMC::toJSON(os__, "status", status, nindent__);
-    IMC::toJSON(os__, "range", range, nindent__);
-    IMC::toJSON(os__, "info", info, nindent__);
-  }
-
   SmsRequest::SmsRequest(void)
   {
     m_header.mgid = 517;
@@ -19788,15 +17657,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  SmsRequest::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "req_id", req_id, nindent__);
-    IMC::toJSON(os__, "destination", destination, nindent__);
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    IMC::toJSON(os__, "sms_text", sms_text, nindent__);
-  }
-
   SmsStatus::SmsStatus(void)
   {
     m_header.mgid = 518;
@@ -19857,14 +17717,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  SmsStatus::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "req_id", req_id, nindent__);
-    IMC::toJSON(os__, "status", status, nindent__);
-    IMC::toJSON(os__, "info", info, nindent__);
-  }
-
   VtolState::VtolState(void)
   {
     m_header.mgid = 519;
@@ -19915,12 +17767,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  VtolState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "state", state, nindent__);
-  }
-
   ArmingState::ArmingState(void)
   {
     m_header.mgid = 520;
@@ -19969,12 +17815,6 @@ namespace IMC
     const uint8_t* start__ = bfr__;
     bfr__ += IMC::deserialize(state, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  ArmingState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "state", state, nindent__);
   }
 
   TCPRequest::TCPRequest(void)
@@ -20041,15 +17881,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(timeout, bfr__, size__);
     bfr__ += msg_data.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  TCPRequest::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "req_id", req_id, nindent__);
-    IMC::toJSON(os__, "destination", destination, nindent__);
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-    msg_data.toJSON(os__, "msg_data", nindent__);
   }
 
   void
@@ -20157,14 +17988,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  TCPStatus::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "req_id", req_id, nindent__);
-    IMC::toJSON(os__, "status", status, nindent__);
-    IMC::toJSON(os__, "info", info, nindent__);
-  }
-
   AssetReport::AssetReport(void)
   {
     m_header.mgid = 525;
@@ -20259,21 +18082,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(cog, bfr__, size__);
     bfr__ += msgs.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  AssetReport::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
-    IMC::toJSON(os__, "report_time", report_time, nindent__);
-    IMC::toJSON(os__, "medium", medium, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "depth", depth, nindent__);
-    IMC::toJSON(os__, "alt", alt, nindent__);
-    IMC::toJSON(os__, "sog", sog, nindent__);
-    IMC::toJSON(os__, "cog", cog, nindent__);
-    msgs.toJSON(os__, "msgs", nindent__);
   }
 
   void
@@ -20410,15 +18218,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  PlanVariable::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
-    IMC::toJSON(os__, "value", value, nindent__);
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "access", access, nindent__);
-  }
-
   PlanManeuver::PlanManeuver(void)
   {
     m_header.mgid = 552;
@@ -20485,15 +18284,6 @@ namespace IMC
     bfr__ += start_actions.reverseDeserialize(bfr__, size__);
     bfr__ += end_actions.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  PlanManeuver::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "maneuver_id", maneuver_id, nindent__);
-    data.toJSON(os__, "data", nindent__);
-    start_actions.toJSON(os__, "start_actions", nindent__);
-    end_actions.toJSON(os__, "end_actions", nindent__);
   }
 
   void
@@ -20628,15 +18418,6 @@ namespace IMC
   }
 
   void
-  PlanTransition::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "source_man", source_man, nindent__);
-    IMC::toJSON(os__, "dest_man", dest_man, nindent__);
-    IMC::toJSON(os__, "conditions", conditions, nindent__);
-    actions.toJSON(os__, "actions", nindent__);
-  }
-
-  void
   PlanTransition::setTimeStampNested(double value__)
   {
     actions.setTimeStamp(value__);
@@ -20759,20 +18540,6 @@ namespace IMC
     bfr__ += start_actions.reverseDeserialize(bfr__, size__);
     bfr__ += end_actions.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  PlanSpecification::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "plan_id", plan_id, nindent__);
-    IMC::toJSON(os__, "description", description, nindent__);
-    IMC::toJSON(os__, "vnamespace", vnamespace, nindent__);
-    variables.toJSON(os__, "variables", nindent__);
-    IMC::toJSON(os__, "start_man_id", start_man_id, nindent__);
-    maneuvers.toJSON(os__, "maneuvers", nindent__);
-    transitions.toJSON(os__, "transitions", nindent__);
-    start_actions.toJSON(os__, "start_actions", nindent__);
-    end_actions.toJSON(os__, "end_actions", nindent__);
   }
 
   void
@@ -20902,13 +18669,6 @@ namespace IMC
   }
 
   void
-  EmergencyControl::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "command", command, nindent__);
-    plan.toJSON(os__, "plan", nindent__);
-  }
-
-  void
   EmergencyControl::setTimeStampNested(double value__)
   {
     if (!plan.isNull())
@@ -21014,14 +18774,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  EmergencyControlState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "state", state, nindent__);
-    IMC::toJSON(os__, "plan_id", plan_id, nindent__);
-    IMC::toJSON(os__, "comm_level", comm_level, nindent__);
-  }
-
   PlanDB::PlanDB(void)
   {
     m_header.mgid = 556;
@@ -21096,17 +18848,6 @@ namespace IMC
     bfr__ += arg.reverseDeserialize(bfr__, size__);
     bfr__ += IMC::reverseDeserialize(info, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  PlanDB::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "request_id", request_id, nindent__);
-    IMC::toJSON(os__, "plan_id", plan_id, nindent__);
-    arg.toJSON(os__, "arg", nindent__);
-    IMC::toJSON(os__, "info", info, nindent__);
   }
 
   void
@@ -21229,17 +18970,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  PlanDBInformation::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "plan_id", plan_id, nindent__);
-    IMC::toJSON(os__, "plan_size", plan_size, nindent__);
-    IMC::toJSON(os__, "change_time", change_time, nindent__);
-    IMC::toJSON(os__, "change_sid", change_sid, nindent__);
-    IMC::toJSON(os__, "change_sname", change_sname, nindent__);
-    IMC::toJSON(os__, "md5", md5, nindent__);
-  }
-
   PlanDBState::PlanDBState(void)
   {
     m_header.mgid = 557;
@@ -21319,18 +19049,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(md5, bfr__, size__);
     bfr__ += plans_info.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  PlanDBState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "plan_count", plan_count, nindent__);
-    IMC::toJSON(os__, "plan_size", plan_size, nindent__);
-    IMC::toJSON(os__, "change_time", change_time, nindent__);
-    IMC::toJSON(os__, "change_sid", change_sid, nindent__);
-    IMC::toJSON(os__, "change_sname", change_sname, nindent__);
-    IMC::toJSON(os__, "md5", md5, nindent__);
-    plans_info.toJSON(os__, "plans_info", nindent__);
   }
 
   void
@@ -21442,18 +19160,6 @@ namespace IMC
     bfr__ += arg.reverseDeserialize(bfr__, size__);
     bfr__ += IMC::reverseDeserialize(info, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  PlanControl::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "request_id", request_id, nindent__);
-    IMC::toJSON(os__, "plan_id", plan_id, nindent__);
-    IMC::toJSON(os__, "flags", flags, nindent__);
-    arg.toJSON(os__, "arg", nindent__);
-    IMC::toJSON(os__, "info", info, nindent__);
   }
 
   void
@@ -21586,19 +19292,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  PlanControlState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "state", state, nindent__);
-    IMC::toJSON(os__, "plan_id", plan_id, nindent__);
-    IMC::toJSON(os__, "plan_eta", plan_eta, nindent__);
-    IMC::toJSON(os__, "plan_progress", plan_progress, nindent__);
-    IMC::toJSON(os__, "man_id", man_id, nindent__);
-    IMC::toJSON(os__, "man_type", man_type, nindent__);
-    IMC::toJSON(os__, "man_eta", man_eta, nindent__);
-    IMC::toJSON(os__, "last_outcome", last_outcome, nindent__);
-  }
-
   PlanGeneration::PlanGeneration(void)
   {
     m_header.mgid = 562;
@@ -21662,15 +19355,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(plan_id, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(params, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  PlanGeneration::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "cmd", cmd, nindent__);
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "plan_id", plan_id, nindent__);
-    IMC::toJSON(os__, "params", params, nindent__);
   }
 
   LeaderState::LeaderState(void)
@@ -21826,31 +19510,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  LeaderState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "group_name", group_name, nindent__);
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "height", height, nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "phi", phi, nindent__);
-    IMC::toJSON(os__, "theta", theta, nindent__);
-    IMC::toJSON(os__, "psi", psi, nindent__);
-    IMC::toJSON(os__, "vx", vx, nindent__);
-    IMC::toJSON(os__, "vy", vy, nindent__);
-    IMC::toJSON(os__, "vz", vz, nindent__);
-    IMC::toJSON(os__, "p", p, nindent__);
-    IMC::toJSON(os__, "q", q, nindent__);
-    IMC::toJSON(os__, "r", r, nindent__);
-    IMC::toJSON(os__, "svx", svx, nindent__);
-    IMC::toJSON(os__, "svy", svy, nindent__);
-    IMC::toJSON(os__, "svz", svz, nindent__);
-  }
-
   PlanStatistics::PlanStatistics(void)
   {
     m_header.mgid = 564;
@@ -21929,18 +19588,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(actions, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(fuel, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  PlanStatistics::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "plan_id", plan_id, nindent__);
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "properties", properties, nindent__);
-    IMC::toJSON(os__, "durations", durations, nindent__);
-    IMC::toJSON(os__, "distances", distances, nindent__);
-    IMC::toJSON(os__, "actions", actions, nindent__);
-    IMC::toJSON(os__, "fuel", fuel, nindent__);
   }
 
   ReportedState::ReportedState(void)
@@ -22033,20 +19680,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  ReportedState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "depth", depth, nindent__);
-    IMC::toJSON(os__, "roll", roll, nindent__);
-    IMC::toJSON(os__, "pitch", pitch, nindent__);
-    IMC::toJSON(os__, "yaw", yaw, nindent__);
-    IMC::toJSON(os__, "rcp_time", rcp_time, nindent__);
-    IMC::toJSON(os__, "sid", sid, nindent__);
-    IMC::toJSON(os__, "s_type", s_type, nindent__);
-  }
-
   RemoteSensorInfo::RemoteSensorInfo(void)
   {
     m_header.mgid = 601;
@@ -22127,18 +19760,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  RemoteSensorInfo::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "id", id, nindent__);
-    IMC::toJSON(os__, "sensor_class", sensor_class, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "alt", alt, nindent__);
-    IMC::toJSON(os__, "heading", heading, nindent__);
-    IMC::toJSON(os__, "data", data, nindent__);
-  }
-
   MapPoint::MapPoint(void)
   {
     m_header.mgid = 604;
@@ -22197,14 +19818,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(lon, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(alt, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  MapPoint::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "alt", alt, nindent__);
   }
 
   MapFeature::MapFeature(void)
@@ -22281,17 +19894,6 @@ namespace IMC
     bfr__ += IMC::deserialize(rgb_blue, bfr__, size__);
     bfr__ += feature.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  MapFeature::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "id", id, nindent__);
-    IMC::toJSON(os__, "feature_type", feature_type, nindent__);
-    IMC::toJSON(os__, "rgb_red", rgb_red, nindent__);
-    IMC::toJSON(os__, "rgb_green", rgb_green, nindent__);
-    IMC::toJSON(os__, "rgb_blue", rgb_blue, nindent__);
-    feature.toJSON(os__, "feature", nindent__);
   }
 
   void
@@ -22378,13 +19980,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(id, bfr__, size__);
     bfr__ += features.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  Map::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "id", id, nindent__);
-    features.toJSON(os__, "features", nindent__);
   }
 
   void
@@ -22476,14 +20071,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(id, bfr__, size__);
     bfr__ += arg.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  CcuEvent::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "id", id, nindent__);
-    arg.toJSON(os__, "arg", nindent__);
   }
 
   void
@@ -22588,13 +20175,6 @@ namespace IMC
   }
 
   void
-  VehicleLinks::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "localname", localname, nindent__);
-    links.toJSON(os__, "links", nindent__);
-  }
-
-  void
   VehicleLinks::setTimeStampNested(double value__)
   {
     links.setTimeStamp(value__);
@@ -22684,14 +20264,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  TrexObservation::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeline", timeline, nindent__);
-    IMC::toJSON(os__, "predicate", predicate, nindent__);
-    IMC::toJSON(os__, "attributes", attributes, nindent__);
-  }
-
   TrexCommand::TrexCommand(void)
   {
     m_header.mgid = 652;
@@ -22750,14 +20322,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(goal_id, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(goal_xml, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  TrexCommand::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "command", command, nindent__);
-    IMC::toJSON(os__, "goal_id", goal_id, nindent__);
-    IMC::toJSON(os__, "goal_xml", goal_xml, nindent__);
   }
 
   TrexAttribute::TrexAttribute(void)
@@ -22825,15 +20389,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  TrexAttribute::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
-    IMC::toJSON(os__, "attr_type", attr_type, nindent__);
-    IMC::toJSON(os__, "min", min, nindent__);
-    IMC::toJSON(os__, "max", max, nindent__);
-  }
-
   TrexToken::TrexToken(void)
   {
     m_header.mgid = 657;
@@ -22893,14 +20448,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(predicate, bfr__, size__);
     bfr__ += attributes.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  TrexToken::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeline", timeline, nindent__);
-    IMC::toJSON(os__, "predicate", predicate, nindent__);
-    attributes.toJSON(os__, "attributes", nindent__);
   }
 
   void
@@ -22992,14 +20539,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(goal_id, bfr__, size__);
     bfr__ += token.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  TrexOperation::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "goal_id", goal_id, nindent__);
-    token.toJSON(os__, "token", nindent__);
   }
 
   void
@@ -23104,13 +20643,6 @@ namespace IMC
   }
 
   void
-  TrexPlan::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "reactor", reactor, nindent__);
-    tokens.toJSON(os__, "tokens", nindent__);
-  }
-
-  void
   TrexPlan::setTimeStampNested(double value__)
   {
     tokens.setTimeStamp(value__);
@@ -23195,13 +20727,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  Event::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "topic", topic, nindent__);
-    IMC::toJSON(os__, "data", data, nindent__);
-  }
-
   CompressedImage::CompressedImage(void)
   {
     m_header.mgid = 702;
@@ -23255,13 +20780,6 @@ namespace IMC
     bfr__ += IMC::deserialize(frameid, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(data, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  CompressedImage::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "frameid", frameid, nindent__);
-    IMC::toJSON(os__, "data", data, nindent__);
   }
 
   ImageTxSettings::ImageTxSettings(void)
@@ -23327,15 +20845,6 @@ namespace IMC
     bfr__ += IMC::deserialize(reps, bfr__, size__);
     bfr__ += IMC::deserialize(tsize, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  ImageTxSettings::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "fps", fps, nindent__);
-    IMC::toJSON(os__, "quality", quality, nindent__);
-    IMC::toJSON(os__, "reps", reps, nindent__);
-    IMC::toJSON(os__, "tsize", tsize, nindent__);
   }
 
   RemoteState::RemoteState(void)
@@ -23408,16 +20917,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(speed, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(psi, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  RemoteState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "depth", depth, nindent__);
-    IMC::toJSON(os__, "speed", speed, nindent__);
-    IMC::toJSON(os__, "psi", psi, nindent__);
   }
 
   Target::Target(void)
@@ -23502,18 +21001,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  Target::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "label", label, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "cog", cog, nindent__);
-    IMC::toJSON(os__, "sog", sog, nindent__);
-  }
-
   EntityParameter::EntityParameter(void)
   {
     m_header.mgid = 801;
@@ -23567,13 +21054,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(name, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(value, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  EntityParameter::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   EntityParameters::EntityParameters(void)
@@ -23630,13 +21110,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(name, bfr__, size__);
     bfr__ += params.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  EntityParameters::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
-    params.toJSON(os__, "params", nindent__);
   }
 
   void
@@ -23729,14 +21202,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  QueryEntityParameters::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
-    IMC::toJSON(os__, "visibility", visibility, nindent__);
-    IMC::toJSON(os__, "scope", scope, nindent__);
-  }
-
   SetEntityParameters::SetEntityParameters(void)
   {
     m_header.mgid = 804;
@@ -23791,13 +21256,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(name, bfr__, size__);
     bfr__ += params.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  SetEntityParameters::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
-    params.toJSON(os__, "params", nindent__);
   }
 
   void
@@ -23880,12 +21338,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  SaveEntityParameters::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
-  }
-
   CreateSession::CreateSession(void)
   {
     m_header.mgid = 806;
@@ -23936,12 +21388,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  CreateSession::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
-  }
-
   CloseSession::CloseSession(void)
   {
     m_header.mgid = 807;
@@ -23990,12 +21436,6 @@ namespace IMC
     const uint8_t* start__ = bfr__;
     bfr__ += IMC::reverseDeserialize(sessid, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  CloseSession::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "sessid", sessid, nindent__);
   }
 
   SessionSubscription::SessionSubscription(void)
@@ -24053,13 +21493,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  SessionSubscription::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "sessid", sessid, nindent__);
-    IMC::toJSON(os__, "messages", messages, nindent__);
-  }
-
   SessionKeepAlive::SessionKeepAlive(void)
   {
     m_header.mgid = 809;
@@ -24108,12 +21541,6 @@ namespace IMC
     const uint8_t* start__ = bfr__;
     bfr__ += IMC::reverseDeserialize(sessid, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  SessionKeepAlive::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "sessid", sessid, nindent__);
   }
 
   SessionStatus::SessionStatus(void)
@@ -24171,13 +21598,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  SessionStatus::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "sessid", sessid, nindent__);
-    IMC::toJSON(os__, "status", status, nindent__);
-  }
-
   PushEntityParameters::PushEntityParameters(void)
   {
     m_header.mgid = 811;
@@ -24228,12 +21648,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  PushEntityParameters::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
-  }
-
   PopEntityParameters::PopEntityParameters(void)
   {
     m_header.mgid = 812;
@@ -24282,12 +21696,6 @@ namespace IMC
     const uint8_t* start__ = bfr__;
     bfr__ += IMC::reverseDeserialize(name, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  PopEntityParameters::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
   }
 
   IoEvent::IoEvent(void)
@@ -24343,13 +21751,6 @@ namespace IMC
     bfr__ += IMC::deserialize(type, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(error, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  IoEvent::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "error", error, nindent__);
   }
 
   UamTxFrame::UamTxFrame(void)
@@ -24417,15 +21818,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  UamTxFrame::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "seq", seq, nindent__);
-    IMC::toJSON(os__, "sys_dst", sys_dst, nindent__);
-    IMC::toJSON(os__, "flags", flags, nindent__);
-    IMC::toJSON(os__, "data", data, nindent__);
-  }
-
   UamRxFrame::UamRxFrame(void)
   {
     m_header.mgid = 815;
@@ -24489,15 +21881,6 @@ namespace IMC
     bfr__ += IMC::deserialize(flags, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(data, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  UamRxFrame::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "sys_src", sys_src, nindent__);
-    IMC::toJSON(os__, "sys_dst", sys_dst, nindent__);
-    IMC::toJSON(os__, "flags", flags, nindent__);
-    IMC::toJSON(os__, "data", data, nindent__);
   }
 
   UamTxStatus::UamTxStatus(void)
@@ -24572,14 +21955,6 @@ namespace IMC
     value = static_cast<uint8_t>(val);
   }
 
-  void
-  UamTxStatus::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "seq", seq, nindent__);
-    IMC::toJSON(os__, "value", value, nindent__);
-    IMC::toJSON(os__, "error", error, nindent__);
-  }
-
   UamRxRange::UamRxRange(void)
   {
     m_header.mgid = 817;
@@ -24652,14 +22027,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  UamRxRange::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "seq", seq, nindent__);
-    IMC::toJSON(os__, "sys", sys, nindent__);
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   UamTxRange::UamTxRange(void)
   {
     m_header.mgid = 818;
@@ -24718,14 +22085,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(sys_dst, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(timeout, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  UamTxRange::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "seq", seq, nindent__);
-    IMC::toJSON(os__, "sys_dst", sys_dst, nindent__);
-    IMC::toJSON(os__, "timeout", timeout, nindent__);
   }
 
   FormCtrlParam::FormCtrlParam(void)
@@ -24803,17 +22162,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  FormCtrlParam::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "action", action, nindent__);
-    IMC::toJSON(os__, "longain", longain, nindent__);
-    IMC::toJSON(os__, "latgain", latgain, nindent__);
-    IMC::toJSON(os__, "bondthick", bondthick, nindent__);
-    IMC::toJSON(os__, "leadgain", leadgain, nindent__);
-    IMC::toJSON(os__, "deconflgain", deconflgain, nindent__);
-  }
-
   FormationEval::FormationEval(void)
   {
     m_header.mgid = 821;
@@ -24872,14 +22220,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(dist_min_abs, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(dist_min_mean, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  FormationEval::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "err_mean", err_mean, nindent__);
-    IMC::toJSON(os__, "dist_min_abs", dist_min_abs, nindent__);
-    IMC::toJSON(os__, "dist_min_mean", dist_min_mean, nindent__);
   }
 
   FormationControlParams::FormationControlParams(void)
@@ -24982,22 +22322,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  FormationControlParams::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "action", action, nindent__);
-    IMC::toJSON(os__, "lon_gain", lon_gain, nindent__);
-    IMC::toJSON(os__, "lat_gain", lat_gain, nindent__);
-    IMC::toJSON(os__, "bond_thick", bond_thick, nindent__);
-    IMC::toJSON(os__, "lead_gain", lead_gain, nindent__);
-    IMC::toJSON(os__, "deconfl_gain", deconfl_gain, nindent__);
-    IMC::toJSON(os__, "accel_switch_gain", accel_switch_gain, nindent__);
-    IMC::toJSON(os__, "safe_dist", safe_dist, nindent__);
-    IMC::toJSON(os__, "deconflict_offset", deconflict_offset, nindent__);
-    IMC::toJSON(os__, "accel_safe_margin", accel_safe_margin, nindent__);
-    IMC::toJSON(os__, "accel_lim_x", accel_lim_x, nindent__);
-  }
-
   FormationEvaluation::FormationEvaluation(void)
   {
     m_header.mgid = 823;
@@ -25082,19 +22406,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(time, bfr__, size__);
     bfr__ += controlparams.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  FormationEvaluation::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "err_mean", err_mean, nindent__);
-    IMC::toJSON(os__, "dist_min_abs", dist_min_abs, nindent__);
-    IMC::toJSON(os__, "dist_min_mean", dist_min_mean, nindent__);
-    IMC::toJSON(os__, "roll_rate_mean", roll_rate_mean, nindent__);
-    IMC::toJSON(os__, "time", time, nindent__);
-    controlparams.toJSON(os__, "controlparams", nindent__);
   }
 
   void
@@ -25207,15 +22518,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  SoiWaypoint::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "eta", eta, nindent__);
-    IMC::toJSON(os__, "duration", duration, nindent__);
-  }
-
   SoiPlan::SoiPlan(void)
   {
     m_header.mgid = 851;
@@ -25270,13 +22572,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(plan_id, bfr__, size__);
     bfr__ += waypoints.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  SoiPlan::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "plan_id", plan_id, nindent__);
-    waypoints.toJSON(os__, "waypoints", nindent__);
   }
 
   void
@@ -25378,16 +22673,6 @@ namespace IMC
     bfr__ += plan.reverseDeserialize(bfr__, size__);
     bfr__ += IMC::reverseDeserialize(info, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  SoiCommand::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "type", type, nindent__);
-    IMC::toJSON(os__, "command", command, nindent__);
-    IMC::toJSON(os__, "settings", settings, nindent__);
-    plan.toJSON(os__, "plan", nindent__);
-    IMC::toJSON(os__, "info", info, nindent__);
   }
 
   void
@@ -25500,15 +22785,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  SoiState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "state", state, nindent__);
-    IMC::toJSON(os__, "plan_id", plan_id, nindent__);
-    IMC::toJSON(os__, "wpt_id", wpt_id, nindent__);
-    IMC::toJSON(os__, "settings_chk", settings_chk, nindent__);
-  }
-
   MessagePart::MessagePart(void)
   {
     m_header.mgid = 877;
@@ -25574,15 +22850,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  MessagePart::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "uid", uid, nindent__);
-    IMC::toJSON(os__, "frag_number", frag_number, nindent__);
-    IMC::toJSON(os__, "num_frags", num_frags, nindent__);
-    IMC::toJSON(os__, "data", data, nindent__);
-  }
-
   NeptusBlob::NeptusBlob(void)
   {
     m_header.mgid = 888;
@@ -25636,13 +22903,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(content_type, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(content, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  NeptusBlob::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "content_type", content_type, nindent__);
-    IMC::toJSON(os__, "content", content, nindent__);
   }
 
   Aborted::Aborted(void)
@@ -25744,14 +23004,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  UsblAngles::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "target", target, nindent__);
-    IMC::toJSON(os__, "bearing", bearing, nindent__);
-    IMC::toJSON(os__, "elevation", elevation, nindent__);
-  }
-
   UsblPosition::UsblPosition(void)
   {
     m_header.mgid = 891;
@@ -25815,15 +23067,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(y, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(z, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  UsblPosition::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "target", target, nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
   }
 
   UsblFix::UsblFix(void)
@@ -25898,16 +23141,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  UsblFix::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "target", target, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-  }
-
   ParametersXml::ParametersXml(void)
   {
     m_header.mgid = 893;
@@ -25961,13 +23194,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(locale, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(config, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  ParametersXml::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "locale", locale, nindent__);
-    IMC::toJSON(os__, "config", config, nindent__);
   }
 
   GetParametersXml::GetParametersXml(void)
@@ -26069,14 +23295,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  SetImageCoords::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "camid", camid, nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-  }
-
   GetImageCoords::GetImageCoords(void)
   {
     m_header.mgid = 896;
@@ -26135,14 +23353,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(x, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(y, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  GetImageCoords::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "camid", camid, nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
   }
 
   GetWorldCoordinates::GetWorldCoordinates(void)
@@ -26218,17 +23428,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(y, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(z, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  GetWorldCoordinates::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "tracking", tracking, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
   }
 
   UsblAnglesExtended::UsblAnglesExtended(void)
@@ -26323,20 +23522,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(psi, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(accuracy, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  UsblAnglesExtended::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "target", target, nindent__);
-    IMC::toJSON(os__, "lbearing", lbearing, nindent__);
-    IMC::toJSON(os__, "lelevation", lelevation, nindent__);
-    IMC::toJSON(os__, "bearing", bearing, nindent__);
-    IMC::toJSON(os__, "elevation", elevation, nindent__);
-    IMC::toJSON(os__, "phi", phi, nindent__);
-    IMC::toJSON(os__, "theta", theta, nindent__);
-    IMC::toJSON(os__, "psi", psi, nindent__);
-    IMC::toJSON(os__, "accuracy", accuracy, nindent__);
   }
 
   UsblPositionExtended::UsblPositionExtended(void)
@@ -26443,22 +23628,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  UsblPositionExtended::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "target", target, nindent__);
-    IMC::toJSON(os__, "x", x, nindent__);
-    IMC::toJSON(os__, "y", y, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "n", n, nindent__);
-    IMC::toJSON(os__, "e", e, nindent__);
-    IMC::toJSON(os__, "d", d, nindent__);
-    IMC::toJSON(os__, "phi", phi, nindent__);
-    IMC::toJSON(os__, "theta", theta, nindent__);
-    IMC::toJSON(os__, "psi", psi, nindent__);
-    IMC::toJSON(os__, "accuracy", accuracy, nindent__);
-  }
-
   UsblFixExtended::UsblFixExtended(void)
   {
     m_header.mgid = 900;
@@ -26537,17 +23706,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  UsblFixExtended::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "target", target, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "accuracy", accuracy, nindent__);
-  }
-
   UsblModem::UsblModem(void)
   {
     m_header.mgid = 901;
@@ -26620,16 +23778,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  UsblModem::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "z", z, nindent__);
-    IMC::toJSON(os__, "z_units", z_units, nindent__);
-  }
-
   UsblConfig::UsblConfig(void)
   {
     m_header.mgid = 902;
@@ -26684,13 +23832,6 @@ namespace IMC
     bfr__ += IMC::deserialize(op, bfr__, size__);
     bfr__ += modems.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  UsblConfig::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
-    modems.toJSON(os__, "modems", nindent__);
   }
 
   void
@@ -26790,13 +23931,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  DissolvedOrganicMatter::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-    IMC::toJSON(os__, "type", type, nindent__);
-  }
-
   OpticalBackscatter::OpticalBackscatter(void)
   {
     m_header.mgid = 904;
@@ -26857,12 +23991,6 @@ namespace IMC
   OpticalBackscatter::setValueFP(fp64_t val)
   {
     value = static_cast<fp32_t>(val);
-  }
-
-  void
-  OpticalBackscatter::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   Tachograph::Tachograph(void)
@@ -26990,27 +24118,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  Tachograph::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "timestamp_last_service", timestamp_last_service, nindent__);
-    IMC::toJSON(os__, "time_next_service", time_next_service, nindent__);
-    IMC::toJSON(os__, "time_motor_next_service", time_motor_next_service, nindent__);
-    IMC::toJSON(os__, "time_idle_ground", time_idle_ground, nindent__);
-    IMC::toJSON(os__, "time_idle_air", time_idle_air, nindent__);
-    IMC::toJSON(os__, "time_idle_water", time_idle_water, nindent__);
-    IMC::toJSON(os__, "time_idle_underwater", time_idle_underwater, nindent__);
-    IMC::toJSON(os__, "time_idle_unknown", time_idle_unknown, nindent__);
-    IMC::toJSON(os__, "time_motor_ground", time_motor_ground, nindent__);
-    IMC::toJSON(os__, "time_motor_air", time_motor_air, nindent__);
-    IMC::toJSON(os__, "time_motor_water", time_motor_water, nindent__);
-    IMC::toJSON(os__, "time_motor_underwater", time_motor_underwater, nindent__);
-    IMC::toJSON(os__, "time_motor_unknown", time_motor_unknown, nindent__);
-    IMC::toJSON(os__, "rpm_min", rpm_min, nindent__);
-    IMC::toJSON(os__, "rpm_max", rpm_max, nindent__);
-    IMC::toJSON(os__, "depth_max", depth_max, nindent__);
-  }
-
   ApmStatus::ApmStatus(void)
   {
     m_header.mgid = 906;
@@ -27064,13 +24171,6 @@ namespace IMC
     bfr__ += IMC::deserialize(severity, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(text, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  ApmStatus::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "severity", severity, nindent__);
-    IMC::toJSON(os__, "text", text, nindent__);
   }
 
   SadcReadings::SadcReadings(void)
@@ -27144,14 +24244,6 @@ namespace IMC
   SadcReadings::setValueFP(fp64_t val)
   {
     value = static_cast<int32_t>(val);
-  }
-
-  void
-  SadcReadings::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "channel", channel, nindent__);
-    IMC::toJSON(os__, "value", value, nindent__);
-    IMC::toJSON(os__, "gain", gain, nindent__);
   }
 
   DmsDetection::DmsDetection(void)
@@ -27279,27 +24371,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  DmsDetection::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "ch01", ch01, nindent__);
-    IMC::toJSON(os__, "ch02", ch02, nindent__);
-    IMC::toJSON(os__, "ch03", ch03, nindent__);
-    IMC::toJSON(os__, "ch04", ch04, nindent__);
-    IMC::toJSON(os__, "ch05", ch05, nindent__);
-    IMC::toJSON(os__, "ch06", ch06, nindent__);
-    IMC::toJSON(os__, "ch07", ch07, nindent__);
-    IMC::toJSON(os__, "ch08", ch08, nindent__);
-    IMC::toJSON(os__, "ch09", ch09, nindent__);
-    IMC::toJSON(os__, "ch10", ch10, nindent__);
-    IMC::toJSON(os__, "ch11", ch11, nindent__);
-    IMC::toJSON(os__, "ch12", ch12, nindent__);
-    IMC::toJSON(os__, "ch13", ch13, nindent__);
-    IMC::toJSON(os__, "ch14", ch14, nindent__);
-    IMC::toJSON(os__, "ch15", ch15, nindent__);
-    IMC::toJSON(os__, "ch16", ch16, nindent__);
-  }
-
   HomePosition::HomePosition(void)
   {
     m_header.mgid = 909;
@@ -27377,17 +24448,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  HomePosition::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "op", op, nindent__);
-    IMC::toJSON(os__, "lat", lat, nindent__);
-    IMC::toJSON(os__, "lon", lon, nindent__);
-    IMC::toJSON(os__, "height", height, nindent__);
-    IMC::toJSON(os__, "depth", depth, nindent__);
-    IMC::toJSON(os__, "alt", alt, nindent__);
-  }
-
   ADCPBeam::ADCPBeam(void)
   {
     m_header.mgid = 1016;
@@ -27449,14 +24509,6 @@ namespace IMC
     return bfr__ - start__;
   }
 
-  void
-  ADCPBeam::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "vel", vel, nindent__);
-    IMC::toJSON(os__, "amp", amp, nindent__);
-    IMC::toJSON(os__, "cor", cor, nindent__);
-  }
-
   CurrentProfileCell::CurrentProfileCell(void)
   {
     m_header.mgid = 1015;
@@ -27511,13 +24563,6 @@ namespace IMC
     bfr__ += IMC::reverseDeserialize(cell_position, bfr__, size__);
     bfr__ += beams.reverseDeserialize(bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  CurrentProfileCell::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "cell_position", cell_position, nindent__);
-    beams.toJSON(os__, "beams", nindent__);
   }
 
   void
@@ -27617,15 +24662,6 @@ namespace IMC
   }
 
   void
-  CurrentProfile::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "nbeams", nbeams, nindent__);
-    IMC::toJSON(os__, "ncells", ncells, nindent__);
-    IMC::toJSON(os__, "coord_sys", coord_sys, nindent__);
-    profile.toJSON(os__, "profile", nindent__);
-  }
-
-  void
   CurrentProfile::setTimeStampNested(double value__)
   {
     profile.setTimeStamp(value__);
@@ -27722,13 +24758,6 @@ namespace IMC
     value = static_cast<uint8_t>(val);
   }
 
-  void
-  GpioState::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   GpioStateGet::GpioStateGet(void)
   {
     m_header.mgid = 2001;
@@ -27777,12 +24806,6 @@ namespace IMC
     const uint8_t* start__ = bfr__;
     bfr__ += IMC::reverseDeserialize(name, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  GpioStateGet::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
   }
 
   GpioStateSet::GpioStateSet(void)
@@ -27852,13 +24875,6 @@ namespace IMC
     value = static_cast<uint8_t>(val);
   }
 
-  void
-  GpioStateSet::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "name", name, nindent__);
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   ColoredDissolvedOrganicMatter::ColoredDissolvedOrganicMatter(void)
   {
     m_header.mgid = 2003;
@@ -27919,12 +24935,6 @@ namespace IMC
   ColoredDissolvedOrganicMatter::setValueFP(fp64_t val)
   {
     value = static_cast<fp32_t>(val);
-  }
-
-  void
-  ColoredDissolvedOrganicMatter::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
   }
 
   FluorescentDissolvedOrganicMatter::FluorescentDissolvedOrganicMatter(void)
@@ -27989,12 +24999,6 @@ namespace IMC
     value = static_cast<fp32_t>(val);
   }
 
-  void
-  FluorescentDissolvedOrganicMatter::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   TotalMagIntensity::TotalMagIntensity(void)
   {
     m_header.mgid = 2006;
@@ -28057,12 +25061,6 @@ namespace IMC
     value = static_cast<fp64_t>(val);
   }
 
-  void
-  TotalMagIntensity::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "value", value, nindent__);
-  }
-
   CommRestriction::CommRestriction(void)
   {
     m_header.mgid = 2010;
@@ -28116,12 +25114,5 @@ namespace IMC
     bfr__ += IMC::deserialize(restriction, bfr__, size__);
     bfr__ += IMC::reverseDeserialize(reason, bfr__, size__);
     return bfr__ - start__;
-  }
-
-  void
-  CommRestriction::fieldsToJSON(std::ostream& os__, unsigned nindent__) const
-  {
-    IMC::toJSON(os__, "restriction", restriction, nindent__);
-    IMC::toJSON(os__, "reason", reason, nindent__);
   }
 }

@@ -3,6 +3,8 @@
 #include "parsers.h"
 #include "IMC_GENERATED/Definitions.hpp"
 
+namespace IMC
+{
 static const uint16_t crc16_ibm_table[256] = 
 {
   0x0000, 0xC0C1, 0xC181, 0x0140, 0xC301, 0x03C0, 0x0280, 0xC241,
@@ -50,21 +52,21 @@ static uint16_t compute_CRC16(const uint8_t* bfr, uint16_t bfr_len)
 
 
 
-typedef Message* (*Constructor) (void);
+// typedef Message* (*Constructor) (void);
 
-static std::unordered_map<uint16_t, Constructor> constructors_by_id = {
-#define MESSAGE(id, type) \
-  {id, []()->Message* { return new type(); }},
+// static std::unordered_map<uint16_t, Constructor> constructors_by_id = {
+// #define MESSAGE(id, type) \
+//   {id, []()->Message* { return new IMC::type(); }},
 
-#include "types.def"
-}; 
+// #include "IMC_GENERATED/Factory.def"
+// }; 
 
 Message* produce(uint16_t id)
 {
-  return constructors_by_id[id]();
+  return nullptr; //constructors_by_id[id]();
 }
 
-Message* parserIMC(const uint8_t* bfr, uint16_t bfr_len)
+Message* parser(const uint8_t* bfr, uint16_t bfr_len)
 {
   Header hdr;
   parserHeader(hdr, bfr);
@@ -83,14 +85,14 @@ void parserHeader(Header& hdr, const uint8_t* msg)
 {
   uint64_t data;
   memcpy(&hdr.sync,     msg,    2);
-  memcpy(&hdr.msgid,    msg+2,  2);
+  memcpy(&hdr.mgid,     msg+2,  2);
   memcpy(&hdr.size,     msg+4,  2);
   memcpy(&data,         msg+6,  8);
   memcpy(&hdr.src,      msg+14, 2);
   memcpy(&hdr.src_ent,  msg+16, 1);
   memcpy(&hdr.dst,      msg+17, 2);
   memcpy(&hdr.dst_ent,  msg+19, 2);
-  hdr.timestamp = fp64_t::to_float(data);
+  hdr.timestamp = to_float(data);
 }
 
 Message* parserPayload(const Header& hdr, const uint8_t* bfr)
@@ -106,5 +108,7 @@ Message* parserPayload(const Header& hdr, const uint8_t* bfr)
 
   return nullptr;
 
-  return produce(hdr.msgid);
+  return produce(hdr.mgid);
+}
+
 }

@@ -6,10 +6,14 @@
 
 // Local headers
 #include "Header.h"
+#include "Message.h"
 
-Message* parserIMC(const uint8_t* bfr, uint16_t bfr_len);
-void parserHeader(Header& hdr, const uint8_t* msg);
-Message* parserPayload(const Header& hdr, const uint8_t* bfr);
-Message* produce(uint16_t id);
+namespace IMC
+{
+  Message* parser(const uint8_t* bfr, uint16_t bfr_len);
+  void parserHeader(Header& hdr, const uint8_t* msg);
+  Message* parserPayload(const Header& hdr, const uint8_t* bfr);
+  Message* produce(uint16_t id);
+}
 
 #endif

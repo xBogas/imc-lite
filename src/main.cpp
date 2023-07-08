@@ -34,7 +34,7 @@ void readUDP()
     memset(packetBuffer, 0, packetSize);
     int bfr_len = sock.read(packetBuffer, packetSize);
 
-    Message* msg = parserIMC(packetBuffer, bfr_len);
+    IMC::Message* msg = IMC::parser(packetBuffer, bfr_len);
     if (msg)
     {
       Serial.println("Created IMC msg: ");
@@ -58,7 +58,7 @@ void readSerial()
     Serial.print("uint64_t: ");
     Serial.println(data, 10);
 
-    float rv = fp64_t::to_float(data);
+    float rv = to_float(data);
     Serial.print("Converted to float ");
     Serial.println(rv);
   }

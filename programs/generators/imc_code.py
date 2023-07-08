@@ -234,11 +234,11 @@ class Message:
             f.body('value = static_cast<{0}>(val);'.format(value.get('type')))
             public.append(f)
 
-        # fieldsToJSON()
-        if self.has_fields():
-            f = Function('fieldsToJSON', 'void', [Var('os__', 'std::ostream&'), Var('nindent__', 'unsigned')], const = True)
-            f.add_body(self.fields_to_json())
-            public.append(f)
+        # # fieldsToJSON()
+        # if self.has_fields():
+        #     f = Function('fieldsToJSON', 'void', [Var('os__', 'std::ostream&'), Var('nindent__', 'unsigned')], const = True)
+        #     f.add_body(self.fields_to_json())
+        #     public.append(f)
 
         # Nested functions.
         if self.count_nested() > 0:
@@ -315,14 +315,14 @@ class Message:
                 function.set_class(node.get('abbrev'))
                 cpp.append(function)
 
-    def fields_to_json(self):
-        lines = []
-        for field in self._node.findall('field'):
-            if field.get('type').startswith('message'):
-                lines.append('{0}.toJSON(os__, "{0}", nindent__);'.format(get_name(field)))
-            else:
-                lines.append('IMC::toJSON(os__, "{0}", {0}, nindent__);'.format(get_name(field)))
-        return '\n'.join(lines)
+    # def fields_to_json(self):
+    #     lines = []
+    #     for field in self._node.findall('field'):
+    #         if field.get('type').startswith('message'):
+    #             lines.append('{0}.toJSON(os__, "{0}", nindent__);'.format(get_name(field)))
+    #         else:
+    #             lines.append('IMC::toJSON(os__, "{0}", {0}, nindent__);'.format(get_name(field)))
+    #     return '\n'.join(lines)
 
     def validate(field):
         min_value = field.get('min', None)
@@ -524,7 +524,7 @@ f.write()
 # SuperTypes.hpp                                                               #
 ################################################################################
 f = File('SuperTypes.hpp', dest_folder, md5 = xml_md5)
-f.add_dune_headers('IMC_GENERATED/Message.hpp')
+f.add_dune_headers('Header.h')
 for group in root.findall("message-groups/message-group"):
     f.append(comment('Super type %s' % group.get('name'), nl = ''))
     f.append('class %s: public Message\n{' % group.get('abbrev'))
@@ -536,10 +536,10 @@ f.write()
 ################################################################################
 hpp = File('Definitions.hpp', dest_folder, md5 = xml_md5)
 hpp.add_isoc_headers('ostream', 'string', 'vector')
-hpp.add_dune_headers('IMC_GENERATED/Message.hpp',
-                     'IMC_GENERATED/InlineMessage.hpp', 'IMC_GENERATED/MessageList.hpp',
+hpp.add_dune_headers('Header.h', 'Message.h', 'Serialization.h',
+                     'InlineMessage.h', 'MessageList.h', 'JSON.h',
                      'IMC_GENERATED/Enumerations.hpp', 'IMC_GENERATED/Bitfields.hpp',
-                     'IMC_GENERATED/SuperTypes.hpp', 'IMC_GENERATED/JSON.hpp')
+                     'IMC_GENERATED/SuperTypes.hpp')
 
 ################################################################################
 # Definitions.cpp                                                              #

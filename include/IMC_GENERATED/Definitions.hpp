@@ -41,13 +41,14 @@
 #include <vector>
 
 // IMC headers.
-#include "IMC_GENERATED/Message.hpp"
-#include "IMC_GENERATED/InlineMessage.hpp"
-#include "IMC_GENERATED/MessageList.hpp"
+#include "Header.h"
+#include "Message.h"
+#include "Serialization.h"
+#include "InlineMessage.h"
+#include "MessageList.h"
 #include "IMC_GENERATED/Enumerations.hpp"
 #include "IMC_GENERATED/Bitfields.hpp"
 #include "IMC_GENERATED/SuperTypes.hpp"
-#include "IMC_GENERATED/JSON.hpp"
 
 namespace IMC
 {
@@ -139,9 +140,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(description);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Query Entity State.
@@ -273,9 +271,6 @@ namespace IMC
 
     void
     setSubId(uint16_t subid);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Query Entity Information.
@@ -340,9 +335,6 @@ namespace IMC
 
     void
     setSubId(uint16_t subid);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Entity List.
@@ -418,9 +410,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(list);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! CPU Usage.
@@ -485,9 +474,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Transport Bindings.
@@ -554,9 +540,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(consumer);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Restart System.
@@ -624,9 +607,6 @@ namespace IMC
     {
       return 1;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Device Calibration Control.
@@ -698,9 +678,6 @@ namespace IMC
     {
       return 1;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Device Calibration State.
@@ -786,9 +763,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(step);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Entity Activation State.
@@ -876,9 +850,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(error);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Query Entity Activation State.
@@ -1035,9 +1006,6 @@ namespace IMC
     {
       return 69;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Message List.
@@ -1102,9 +1070,6 @@ namespace IMC
     {
       return msgs.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -1213,9 +1178,6 @@ namespace IMC
     {
       return 80;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Leak Simulation.
@@ -1291,9 +1253,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(entities);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Underwater Acoustics Simulation.
@@ -1373,9 +1332,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(data);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Dynamics Simulation Parameters.
@@ -1449,9 +1405,6 @@ namespace IMC
     {
       return 9;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Storage Usage.
@@ -1518,9 +1471,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Cache Control.
@@ -1604,9 +1554,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(snapshot) + message.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -1706,9 +1653,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(name);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Log Book Entry.
@@ -1794,9 +1738,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(context) + IMC::getSerializationSize(text);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Log Book Control.
@@ -1878,9 +1819,6 @@ namespace IMC
     {
       return msg.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -1976,9 +1914,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(file);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Clock Control.
@@ -2058,9 +1993,6 @@ namespace IMC
     {
       return 10;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Historic CTD.
@@ -2123,9 +2055,6 @@ namespace IMC
     {
       return 12;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Historic Telemetry.
@@ -2192,9 +2121,6 @@ namespace IMC
     {
       return 12;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Historic Sonar Data.
@@ -2282,9 +2208,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(sonar_data);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Historic Event.
@@ -2360,9 +2283,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(text);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Profile Sample.
@@ -2423,9 +2343,6 @@ namespace IMC
     {
       return 6;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Vertical Profile.
@@ -2517,9 +2434,6 @@ namespace IMC
     {
       return samples.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -2665,9 +2579,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(sys_name) + IMC::getSerializationSize(services);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Announce Service.
@@ -2743,9 +2654,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(service);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Receive Signal Strength Information.
@@ -2810,9 +2718,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Voltage Standing Wave Ratio.
@@ -2877,9 +2782,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Link Level.
@@ -2944,9 +2846,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! SMS.
@@ -3015,9 +2914,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(number) + IMC::getSerializationSize(contents);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! SMS Transmit.
@@ -3088,9 +2984,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(destination) + IMC::getSerializationSize(data);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! SMS Receive.
@@ -3157,9 +3050,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(source) + IMC::getSerializationSize(data);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! SMS State.
@@ -3247,9 +3137,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(error);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Text Message.
@@ -3316,9 +3203,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(origin) + IMC::getSerializationSize(text);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Received Iridium Message.
@@ -3391,9 +3275,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(origin) + IMC::getSerializationSize(data);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Transmit Iridium Message.
@@ -3464,9 +3345,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(destination) + IMC::getSerializationSize(data);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Iridium Transmission Status.
@@ -3552,9 +3430,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(text);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Group Membership State.
@@ -3621,9 +3496,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(group_name);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! System Group.
@@ -3709,9 +3581,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(groupname) + IMC::getSerializationSize(grouplist);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Link Latency.
@@ -3778,9 +3647,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Extended Receive Signal Strength Information.
@@ -3847,9 +3713,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Historic Data Series.
@@ -3920,9 +3783,6 @@ namespace IMC
     {
       return data.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -4009,9 +3869,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(data);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Historic Data Sample.
@@ -4088,9 +3945,6 @@ namespace IMC
     {
       return sample.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -4189,9 +4043,6 @@ namespace IMC
       return data.getSerializationSize();
     }
 
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
-
   protected:
     void
     setTimeStampNested(double value__);
@@ -4277,9 +4128,6 @@ namespace IMC
     {
       return cmd.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -4401,9 +4249,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(list);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Telemetry Message.
@@ -4540,9 +4385,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(destination) + IMC::getSerializationSize(source) + IMC::getSerializationSize(data);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! LBL Range.
@@ -4609,9 +4451,6 @@ namespace IMC
 
     void
     setSubId(uint16_t subid);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! LBL Beacon Configuration.
@@ -4688,9 +4527,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(beacon);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! LBL Configuration.
@@ -4768,9 +4604,6 @@ namespace IMC
     {
       return beacons.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -4851,9 +4684,6 @@ namespace IMC
     {
       return message.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -4965,9 +4795,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(sentence) + IMC::getSerializationSize(modem_type) + IMC::getSerializationSize(sys_src) + IMC::getSerializationSize(sys_dst) + IMC::getSerializationSize(data);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Acoustic Operation.
@@ -5081,9 +4908,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(system) + msg.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -5217,9 +5041,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(list);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Acoustic Link Quality.
@@ -5288,9 +5109,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(peer);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Acoustic Transmission Request.
@@ -5380,9 +5198,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(destination) + msg.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -5509,9 +5324,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(info);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Acoustic Release Request.
@@ -5587,9 +5399,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(system);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Revolutions Per Minute.
@@ -5654,9 +5463,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Voltage.
@@ -5721,9 +5527,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Current.
@@ -5788,9 +5591,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! GPS Fix.
@@ -5917,9 +5717,6 @@ namespace IMC
     {
       return 56;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Euler Angles.
@@ -5986,9 +5783,6 @@ namespace IMC
     {
       return 40;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Euler Angles Delta.
@@ -6055,9 +5849,6 @@ namespace IMC
     {
       return 36;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Angular Velocity.
@@ -6122,9 +5913,6 @@ namespace IMC
     {
       return 32;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Acceleration.
@@ -6189,9 +5977,6 @@ namespace IMC
     {
       return 32;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Magnetic Field.
@@ -6256,9 +6041,6 @@ namespace IMC
     {
       return 32;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Ground Velocity.
@@ -6334,9 +6116,6 @@ namespace IMC
     {
       return 25;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Water Velocity.
@@ -6412,9 +6191,6 @@ namespace IMC
     {
       return 25;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Velocity Delta.
@@ -6479,9 +6255,6 @@ namespace IMC
     {
       return 32;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Device State.
@@ -6550,9 +6323,6 @@ namespace IMC
     {
       return 24;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Beam Configuration.
@@ -6613,9 +6383,6 @@ namespace IMC
     {
       return 8;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Distance.
@@ -6702,9 +6469,6 @@ namespace IMC
     void
     setValueFP(fp64_t val);
 
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
-
   protected:
     void
     setTimeStampNested(double value__);
@@ -6784,9 +6548,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Pressure.
@@ -6851,9 +6612,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Depth.
@@ -6918,9 +6676,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Depth Offset.
@@ -6985,9 +6740,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Sound Speed.
@@ -7052,9 +6804,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Water Density.
@@ -7119,9 +6868,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Conductivity.
@@ -7186,9 +6932,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Salinity.
@@ -7253,9 +6996,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Wind Speed.
@@ -7318,9 +7058,6 @@ namespace IMC
     {
       return 12;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Relative Humidity.
@@ -7385,9 +7122,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Device Data (Text).
@@ -7452,9 +7186,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(value);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Device Data (Binary).
@@ -7519,9 +7250,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(value);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Force.
@@ -7586,9 +7314,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Sonar Data.
@@ -7678,9 +7403,6 @@ namespace IMC
     {
       return beam_config.getSerializationSize() + IMC::getSerializationSize(data);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -7817,9 +7539,6 @@ namespace IMC
     {
       return 1;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Fuel Level.
@@ -7894,9 +7613,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! GPS Navigation Data.
@@ -7983,9 +7699,6 @@ namespace IMC
     {
       return 68;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Servo Position.
@@ -8058,9 +7771,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Data Sanity.
@@ -8128,9 +7838,6 @@ namespace IMC
     {
       return 1;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Rhodamine Dye.
@@ -8195,9 +7902,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Crude Oil.
@@ -8262,9 +7966,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Fine Oil.
@@ -8329,9 +8030,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Turbidity.
@@ -8396,9 +8094,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Chlorophyll.
@@ -8463,9 +8158,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Fluorescein.
@@ -8530,9 +8222,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Phycocyanin.
@@ -8597,9 +8286,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Phycoerythrin.
@@ -8664,9 +8350,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! GPS Fix RTK.
@@ -8779,9 +8462,6 @@ namespace IMC
     {
       return 58;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Estimated State.
@@ -8878,9 +8558,6 @@ namespace IMC
     {
       return 88;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! External Navigation Data.
@@ -8958,9 +8635,6 @@ namespace IMC
     {
       return state.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -9041,9 +8715,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Air Saturation.
@@ -9108,9 +8779,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Throttle.
@@ -9175,9 +8843,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! pH.
@@ -9242,9 +8907,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Redox Potential.
@@ -9309,9 +8971,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Camera Zoom.
@@ -9393,9 +9052,6 @@ namespace IMC
 
     void
     setSubId(uint16_t subid);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Set Thruster Actuation.
@@ -9468,9 +9124,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Set Servo Position.
@@ -9543,9 +9196,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Set Control Surface Deflection.
@@ -9612,9 +9262,6 @@ namespace IMC
 
     void
     setSubId(uint16_t subid);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Remote Actions Request.
@@ -9690,9 +9337,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(actions);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Remote Actions.
@@ -9757,9 +9401,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(actions);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Button Event.
@@ -9826,9 +9467,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! LCD Control.
@@ -9910,9 +9548,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(text);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Power Operation.
@@ -9994,9 +9629,6 @@ namespace IMC
     {
       return 13;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Power Channel Control.
@@ -10086,9 +9718,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(name);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Query Power Channel State.
@@ -10217,9 +9846,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(name);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! LED Brightness.
@@ -10292,9 +9918,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Query LED Brightness.
@@ -10359,9 +9982,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(name);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Set LED Brightness.
@@ -10434,9 +10054,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Set PWM.
@@ -10505,9 +10122,6 @@ namespace IMC
 
     void
     setSubId(uint16_t subid);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! PWM.
@@ -10576,9 +10190,6 @@ namespace IMC
 
     void
     setSubId(uint16_t subid);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Estimated Stream Velocity.
@@ -10641,9 +10252,6 @@ namespace IMC
     {
       return 24;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Indicated Speed.
@@ -10708,9 +10316,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! True Speed.
@@ -10775,9 +10380,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Navigation Uncertainty.
@@ -10862,9 +10464,6 @@ namespace IMC
     {
       return 56;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Navigation Data.
@@ -10939,9 +10538,6 @@ namespace IMC
     {
       return 36;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! GPS Fix Rejection.
@@ -11017,9 +10613,6 @@ namespace IMC
     {
       return 5;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! LBL Range Acceptance.
@@ -11103,9 +10696,6 @@ namespace IMC
 
     void
     setSubId(uint16_t subid);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! DVL Rejection.
@@ -11198,9 +10788,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! LBL Beacon Position Estimate.
@@ -11275,9 +10862,6 @@ namespace IMC
     {
       return beacon.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -11373,9 +10957,6 @@ namespace IMC
     {
       return 1;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! GroupStreamVelocity.
@@ -11438,9 +11019,6 @@ namespace IMC
     {
       return 24;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Airflow.
@@ -11503,9 +11081,6 @@ namespace IMC
     {
       return 12;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Desired Heading.
@@ -11570,9 +11145,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Desired Z.
@@ -11639,9 +11211,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Desired Speed.
@@ -11708,9 +11277,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Desired Roll.
@@ -11775,9 +11341,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Desired Pitch.
@@ -11842,9 +11405,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Desired Vertical Rate.
@@ -11909,9 +11469,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Desired Path.
@@ -12015,9 +11572,6 @@ namespace IMC
     {
       return 56;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Desired Control.
@@ -12105,9 +11659,6 @@ namespace IMC
     {
       return 49;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Desired Heading Rate.
@@ -12172,9 +11723,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Desired Velocity.
@@ -12262,9 +11810,6 @@ namespace IMC
     {
       return 49;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Path Control State.
@@ -12374,9 +11919,6 @@ namespace IMC
     {
       return 81;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Allocated Control Torques.
@@ -12439,9 +11981,6 @@ namespace IMC
     {
       return 24;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Control Parcel.
@@ -12506,9 +12045,6 @@ namespace IMC
     {
       return 16;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Brake.
@@ -12578,9 +12114,6 @@ namespace IMC
     {
       return 1;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Desired Linear State.
@@ -12680,9 +12213,6 @@ namespace IMC
     {
       return 74;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Desired Throttle.
@@ -12747,9 +12277,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Goto Maneuver.
@@ -12834,9 +12361,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! PopUp Maneuver.
@@ -12932,9 +12456,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Teleoperation Maneuver.
@@ -12999,9 +12520,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Loiter Maneuver.
@@ -13120,9 +12638,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Idle Maneuver.
@@ -13189,9 +12704,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Low Level Control Maneuver.
@@ -13260,9 +12772,6 @@ namespace IMC
     {
       return control.getSerializationSize() + IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -13382,9 +12891,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Path Point.
@@ -13447,9 +12953,6 @@ namespace IMC
     {
       return 12;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Follow Path Maneuver.
@@ -13530,9 +13033,6 @@ namespace IMC
     {
       return points.getSerializationSize() + IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -13631,9 +13131,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Teleoperation Done.
@@ -13767,9 +13264,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Elevator Maneuver.
@@ -13863,9 +13357,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Trajectory Point.
@@ -13930,9 +13421,6 @@ namespace IMC
     {
       return 16;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Follow Trajectory.
@@ -14013,9 +13501,6 @@ namespace IMC
     {
       return points.getSerializationSize() + IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -14100,9 +13585,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(name) + IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Vehicle Formation Participant.
@@ -14167,9 +13649,6 @@ namespace IMC
     {
       return 14;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Vehicle Formation.
@@ -14252,9 +13731,6 @@ namespace IMC
     {
       return points.getSerializationSize() + participants.getSerializationSize() + IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -14382,9 +13858,6 @@ namespace IMC
     {
       return 2;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Maneuver Control State.
@@ -14466,9 +13939,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(info);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Follow System.
@@ -14541,9 +14011,6 @@ namespace IMC
     {
       return 22;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Communications Relay.
@@ -14616,9 +14083,6 @@ namespace IMC
     {
       return 31;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Polygon Vertex.
@@ -14679,9 +14143,6 @@ namespace IMC
     {
       return 16;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Cover Area.
@@ -14760,9 +14221,6 @@ namespace IMC
     {
       return polygon.getSerializationSize() + IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -14880,9 +14338,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Formation Parameters.
@@ -14964,9 +14419,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(formation_name) + participants.getSerializationSize() + IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -15073,9 +14525,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(group_name) + IMC::getSerializationSize(formation_name) + IMC::getSerializationSize(plan_id) + IMC::getSerializationSize(description) + IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Follow Reference Maneuver.
@@ -15142,9 +14591,6 @@ namespace IMC
     {
       return 15;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Reference To Follow.
@@ -15238,9 +14684,6 @@ namespace IMC
     {
       return speed.getSerializationSize() + z.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -15361,9 +14804,6 @@ namespace IMC
     {
       return reference.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -15486,9 +14926,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(s_id);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Formation Monitoring Data.
@@ -15590,9 +15027,6 @@ namespace IMC
       return rel_state.getSerializationSize();
     }
 
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
-
   protected:
     void
     setTimeStampNested(double value__);
@@ -15689,9 +15123,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Formation.
@@ -15832,9 +15263,6 @@ namespace IMC
       return IMC::getSerializationSize(formation_name) + IMC::getSerializationSize(group_name) + IMC::getSerializationSize(plan_id) + IMC::getSerializationSize(description) + participants.getSerializationSize() + IMC::getSerializationSize(custom);
     }
 
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
-
   protected:
     void
     setTimeStampNested(double value__);
@@ -15928,9 +15356,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Drop Maneuver.
@@ -16009,9 +15434,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Scheduled Goto.
@@ -16095,9 +15517,6 @@ namespace IMC
     {
       return 35;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Rows Coverage.
@@ -16201,9 +15620,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Sample Maneuver.
@@ -16288,9 +15704,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Image Tracking.
@@ -16422,9 +15835,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Land Maneuver.
@@ -16509,9 +15919,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Autonomous Section.
@@ -16610,9 +16017,6 @@ namespace IMC
       return area_limits.getSerializationSize() + IMC::getSerializationSize(controller) + IMC::getSerializationSize(custom);
     }
 
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
-
   protected:
     void
     setTimeStampNested(double value__);
@@ -16706,9 +16110,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(target) + IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Alignment Maneuver.
@@ -16783,9 +16184,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Station Keeping Extended.
@@ -16879,9 +16277,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Maneuver Done.
@@ -17028,9 +16423,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(custom);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Vehicle State.
@@ -17137,9 +16529,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(error_ents) + IMC::getSerializationSize(last_error);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Vehicle Command.
@@ -17241,9 +16630,6 @@ namespace IMC
       return maneuver.getSerializationSize() + IMC::getSerializationSize(info);
     }
 
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
-
   protected:
     void
     setTimeStampNested(double value__);
@@ -17340,9 +16726,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(entities);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Entity Monitoring State.
@@ -17421,9 +16804,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(mnames) + IMC::getSerializationSize(enames) + IMC::getSerializationSize(cnames) + IMC::getSerializationSize(last_error);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Operational Limits.
@@ -17504,9 +16884,6 @@ namespace IMC
     {
       return 53;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Get Operational Limits.
@@ -17618,9 +16995,6 @@ namespace IMC
     {
       return 2;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Control Loops.
@@ -17692,9 +17066,6 @@ namespace IMC
     {
       return 9;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Vehicle Medium.
@@ -17768,9 +17139,6 @@ namespace IMC
     {
       return 1;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Collision.
@@ -17850,9 +17218,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Formation Tracking State.
@@ -17950,9 +17315,6 @@ namespace IMC
     {
       return 15;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Autopilot Mode.
@@ -18030,9 +17392,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(mode);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Formation Tracking State.
@@ -18152,9 +17511,6 @@ namespace IMC
     {
       return 17;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Report Control.
@@ -18257,9 +17613,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(sys_dst);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! State Report.
@@ -18336,9 +17689,6 @@ namespace IMC
     {
       return 24;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Transmission Request.
@@ -18454,9 +17804,6 @@ namespace IMC
       return IMC::getSerializationSize(destination) + msg_data.getSerializationSize() + IMC::getSerializationSize(txt_data) + IMC::getSerializationSize(raw_data);
     }
 
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
-
   protected:
     void
     setTimeStampNested(double value__);
@@ -18563,9 +17910,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(info);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! SMS Transmission Request.
@@ -18636,9 +17980,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(destination) + IMC::getSerializationSize(sms_text);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! SMS Transmission Status.
@@ -18720,9 +18061,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(info);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! VTOL State.
@@ -18796,9 +18134,6 @@ namespace IMC
     {
       return 1;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Arming State.
@@ -18866,9 +18201,6 @@ namespace IMC
     {
       return 1;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! TCP Transmission Request.
@@ -18939,9 +18271,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(destination) + msg_data.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -19043,9 +18372,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(info);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Asset Report .
@@ -19141,9 +18467,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(name) + msgs.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -19307,9 +18630,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(name) + IMC::getSerializationSize(value);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Plan Maneuver.
@@ -19380,9 +18700,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(maneuver_id) + data.getSerializationSize() + start_actions.getSerializationSize() + end_actions.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -19469,9 +18786,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(source_man) + IMC::getSerializationSize(dest_man) + IMC::getSerializationSize(conditions) + actions.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -19568,9 +18882,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(plan_id) + IMC::getSerializationSize(description) + IMC::getSerializationSize(vnamespace) + variables.getSerializationSize() + IMC::getSerializationSize(start_man_id) + maneuvers.getSerializationSize() + transitions.getSerializationSize() + start_actions.getSerializationSize() + end_actions.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -19670,9 +18981,6 @@ namespace IMC
     {
       return plan.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -19774,9 +19082,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(plan_id);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Plan DB.
@@ -19886,9 +19191,6 @@ namespace IMC
       return IMC::getSerializationSize(plan_id) + arg.getSerializationSize() + IMC::getSerializationSize(info);
     }
 
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
-
   protected:
     void
     setTimeStampNested(double value__);
@@ -19978,9 +19280,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(plan_id) + IMC::getSerializationSize(change_sname) + IMC::getSerializationSize(md5);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Plan DB State.
@@ -20057,9 +19356,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(change_sname) + IMC::getSerializationSize(md5) + plans_info.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -20188,9 +19484,6 @@ namespace IMC
       return IMC::getSerializationSize(plan_id) + arg.getSerializationSize() + IMC::getSerializationSize(info);
     }
 
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
-
   protected:
     void
     setTimeStampNested(double value__);
@@ -20308,9 +19601,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(plan_id) + IMC::getSerializationSize(man_id);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Plan Generation.
@@ -20401,9 +19691,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(plan_id) + IMC::getSerializationSize(params);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Leader State.
@@ -20517,9 +19804,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(group_name);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Plan Statistics.
@@ -20622,9 +19906,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(plan_id) + IMC::getSerializationSize(durations) + IMC::getSerializationSize(distances) + IMC::getSerializationSize(actions) + IMC::getSerializationSize(fuel);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Reported State.
@@ -20720,9 +20001,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(sid);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Remote Sensor Info.
@@ -20799,9 +20077,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(id) + IMC::getSerializationSize(sensor_class) + IMC::getSerializationSize(data);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! MapPoint.
@@ -20864,9 +20139,6 @@ namespace IMC
     {
       return 20;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Map Feature.
@@ -20961,9 +20233,6 @@ namespace IMC
       return IMC::getSerializationSize(id) + feature.getSerializationSize();
     }
 
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
-
   protected:
     void
     setTimeStampNested(double value__);
@@ -21045,9 +20314,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(id) + features.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -21156,9 +20422,6 @@ namespace IMC
       return IMC::getSerializationSize(id) + arg.getSerializationSize();
     }
 
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
-
   protected:
     void
     setTimeStampNested(double value__);
@@ -21240,9 +20503,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(localname) + links.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -21327,9 +20587,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(timeline) + IMC::getSerializationSize(predicate) + IMC::getSerializationSize(attributes);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! TREX Command.
@@ -21415,9 +20672,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(goal_id) + IMC::getSerializationSize(goal_xml);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! TREX Attribute.
@@ -21503,9 +20757,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(name) + IMC::getSerializationSize(min) + IMC::getSerializationSize(max);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! TREX Token.
@@ -21574,9 +20825,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(timeline) + IMC::getSerializationSize(predicate) + attributes.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -21677,9 +20925,6 @@ namespace IMC
       return IMC::getSerializationSize(goal_id) + token.getSerializationSize();
     }
 
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
-
   protected:
     void
     setTimeStampNested(double value__);
@@ -21762,9 +21007,6 @@ namespace IMC
       return IMC::getSerializationSize(reactor) + tokens.getSerializationSize();
     }
 
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
-
   protected:
     void
     setTimeStampNested(double value__);
@@ -21846,9 +21088,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(topic) + IMC::getSerializationSize(data);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Compressed Image.
@@ -21915,9 +21154,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(data);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Image Transmission Settings.
@@ -21982,9 +21218,6 @@ namespace IMC
     {
       return 4;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Remote State.
@@ -22051,9 +21284,6 @@ namespace IMC
     {
       return 17;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Target.
@@ -22130,9 +21360,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(label);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! EntityParameter.
@@ -22199,9 +21426,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(name) + IMC::getSerializationSize(value);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! EntityParameters.
@@ -22268,9 +21492,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(name) + params.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -22355,9 +21576,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(name) + IMC::getSerializationSize(visibility) + IMC::getSerializationSize(scope);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! SetEntityParameters.
@@ -22424,9 +21642,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(name) + params.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -22507,9 +21722,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(name);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Create Session.
@@ -22568,9 +21780,6 @@ namespace IMC
     {
       return 4;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Close Session.
@@ -22629,9 +21838,6 @@ namespace IMC
     {
       return 4;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Session Subscription.
@@ -22698,9 +21904,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(messages);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Session Keep-Alive.
@@ -22759,9 +21962,6 @@ namespace IMC
     {
       return 4;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Session Status.
@@ -22831,9 +22031,6 @@ namespace IMC
     {
       return 5;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Push Entity Parameters.
@@ -22898,9 +22095,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(name);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Pop Entity Parameters.
@@ -22965,9 +22159,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(name);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! I/O Event.
@@ -23043,9 +22234,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(error);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! UamTxFrame.
@@ -23127,9 +22315,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(sys_dst) + IMC::getSerializationSize(data);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! UamRxFrame.
@@ -23209,9 +22394,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(sys_src) + IMC::getSerializationSize(sys_dst) + IMC::getSerializationSize(data);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! UamTxStatus.
@@ -23311,9 +22493,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! UamRxRange.
@@ -23388,9 +22567,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! UamTxRange.
@@ -23459,9 +22635,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(sys_dst);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Formation Control Parameters.
@@ -23541,9 +22714,6 @@ namespace IMC
     {
       return 21;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Formation Evaluation Data.
@@ -23606,9 +22776,6 @@ namespace IMC
     {
       return 12;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Formation Control Parameters.
@@ -23698,9 +22865,6 @@ namespace IMC
     {
       return 41;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Formation Evaluation Data.
@@ -23804,9 +22968,6 @@ namespace IMC
       return controlparams.getSerializationSize();
     }
 
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
-
   protected:
     void
     setTimeStampNested(double value__);
@@ -23886,9 +23047,6 @@ namespace IMC
     {
       return 14;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! SOI Plan.
@@ -23955,9 +23113,6 @@ namespace IMC
     {
       return waypoints.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -24075,9 +23230,6 @@ namespace IMC
       return IMC::getSerializationSize(settings) + plan.getSerializationSize() + IMC::getSerializationSize(info);
     }
 
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
-
   protected:
     void
     setTimeStampNested(double value__);
@@ -24168,9 +23320,6 @@ namespace IMC
     {
       return 6;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Message Fragment.
@@ -24241,9 +23390,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(data);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Neptus Blob.
@@ -24310,9 +23456,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(content_type) + IMC::getSerializationSize(content);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Aborted.
@@ -24428,9 +23571,6 @@ namespace IMC
     {
       return 10;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! USBL Position.
@@ -24495,9 +23635,6 @@ namespace IMC
     {
       return 14;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! USBL Fix.
@@ -24564,9 +23701,6 @@ namespace IMC
     {
       return 23;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Parameters XML.
@@ -24633,9 +23767,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(locale) + IMC::getSerializationSize(config);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Get Parameters XML.
@@ -24751,9 +23882,6 @@ namespace IMC
     {
       return 5;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Get Image Coordinates.
@@ -24816,9 +23944,6 @@ namespace IMC
     {
       return 5;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Get World Coordinates.
@@ -24887,9 +24012,6 @@ namespace IMC
     {
       return 29;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! USBL Angles Extended.
@@ -24970,9 +24092,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(target);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! USBL Position Extended.
@@ -25057,9 +24176,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(target);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! USBL Fix Extended.
@@ -25134,9 +24250,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(target);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! USBL Modem Configuration.
@@ -25209,9 +24322,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(name);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! USBL Configuration.
@@ -25289,9 +24399,6 @@ namespace IMC
     {
       return modems.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -25383,9 +24490,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Optical Backscattering Coefficient.
@@ -25450,9 +24554,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Tachograph.
@@ -25541,9 +24642,6 @@ namespace IMC
     {
       return 64;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! APM Status.
@@ -25631,9 +24729,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(text);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! SADC Readings.
@@ -25713,9 +24808,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! DMS Detection.
@@ -25804,9 +24896,6 @@ namespace IMC
     {
       return 64;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Home Position.
@@ -25884,9 +24973,6 @@ namespace IMC
     {
       return 29;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! ADCP Beam Measurements.
@@ -25949,9 +25035,6 @@ namespace IMC
     {
       return 9;
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Current Profile Cell.
@@ -26018,9 +25101,6 @@ namespace IMC
     {
       return beams.getSerializationSize();
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
 
   protected:
     void
@@ -26119,9 +25199,6 @@ namespace IMC
       return profile.getSerializationSize();
     }
 
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
-
   protected:
     void
     setTimeStampNested(double value__);
@@ -26209,9 +25286,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Get GPIO State.
@@ -26276,9 +25350,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(name);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Set GPIO State.
@@ -26351,9 +25422,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Colored Dissolved Organic Matter.
@@ -26418,9 +25486,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Fluorescent Dissolved Organic Matter.
@@ -26485,9 +25550,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Total Magnetic Field Intensity.
@@ -26552,9 +25614,6 @@ namespace IMC
 
     void
     setValueFP(fp64_t val);
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 
   //! Communication Restriction.
@@ -26634,9 +25693,6 @@ namespace IMC
     {
       return IMC::getSerializationSize(reason);
     }
-
-    void
-    fieldsToJSON(std::ostream& os__, unsigned nindent__) const;
   };
 }
 

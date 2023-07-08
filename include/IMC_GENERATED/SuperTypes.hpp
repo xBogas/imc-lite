@@ -36,7 +36,7 @@
 #define IMC_SUPERTYPES_HPP_INCLUDED_
 
 // IMC headers.
-#include "IMC_GENERATED/Message.hpp"
+#include "Header.h"
 
 namespace IMC
 {

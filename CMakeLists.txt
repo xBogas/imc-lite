@@ -31,7 +31,10 @@ macro(dune_target_imc target_name)
 
     COMMAND ${PROGRAM_PYTHON}
     ${PROJECT_SOURCE_DIR}/programs/generators/imc_blob.py
-    -x ${IMC_XML} ${PROJECT_SOURCE_DIR}/include/IMC_GENERATED ${PROJECT_SOURCE_DIR}/src/IMC_GENERATED
+    -x ${IMC_XML} 
+    ${IMC_FOLDER}
+#    ${PROJECT_SOURCE_DIR}/src/IMC_GENERATED
+    ${IMC_FOLDER}
 
     COMMAND ${PROGRAM_PYTHON}
     ${PROJECT_SOURCE_DIR}/programs/generators/imc_tests.py
