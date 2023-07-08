@@ -42,7 +42,6 @@
 
 // IMC headers.
 #include "IMC_GENERATED/Definitions.hpp"
-//#include "IMC_GENERATED/Factory.hpp"
 
 namespace IMC
 {

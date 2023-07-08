@@ -527,7 +527,7 @@ f.write()
 # SuperTypes.hpp                                                               #
 ################################################################################
 f = File('SuperTypes.hpp', dest_folder_hpp, md5 = xml_md5)
-f.add_dune_headers('Header.h')
+f.add_local_headers('Header.h')
 for group in root.findall("message-groups/message-group"):
     f.append(comment('Super type %s' % group.get('name'), nl = ''))
     f.append('class %s: public Message\n{' % group.get('abbrev'))
@@ -539,18 +539,18 @@ f.write()
 ################################################################################
 hpp = File('Definitions.hpp', dest_folder_hpp, md5 = xml_md5)
 hpp.add_isoc_headers('ostream', 'string', 'vector')
-hpp.add_dune_headers('Header.h', 'Message.h', 'Serialization.h',
-                     'InlineMessage.h', 'MessageList.h',
-                     'IMC_GENERATED/Enumerations.hpp', 'IMC_GENERATED/Bitfields.hpp',
-                     'IMC_GENERATED/SuperTypes.hpp')
+hpp.add_imc_headers('Enumerations.hpp', 'Bitfields.hpp',
+                    'SuperTypes.hpp')
+
+hpp.add_local_headers('Header.h', 'Message.h', 'Serialization.h',
+                      'InlineMessage.h', 'MessageList.h')
 
 ################################################################################
 # Definitions.cpp                                                              #
 ################################################################################
 cpp = File('Definitions.cpp', dest_folder_cpp, md5 = xml_md5)
 cpp.add_isoc_headers('algorithm','iostream', 'iomanip', 'string', 'cstdio', 'cstring')
-cpp.add_dune_headers('IMC_GENERATED/Definitions.hpp',
-                     'IMC_GENERATED/Factory.hpp')
+cpp.add_imc_headers('Definitions.hpp')
 
 deps = Dependencies(root)
 abbrevs = deps.get_list()
@@ -560,3 +560,10 @@ for abbrev in abbrevs:
     Message(root, msg, hpp, cpp, consts)
 hpp.write()
 cpp.write()
+
+################################################################################
+# Factory.def                                                                  #
+################################################################################
+f = File('Factory.def', dest_folder_hpp, md5 = xml_md5)
+f.add_imc_headers()
+f.write()

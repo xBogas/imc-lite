@@ -41,14 +41,16 @@
 #include <vector>
 
 // IMC headers.
+#include "IMC_GENERATED/Enumerations.hpp"
+#include "IMC_GENERATED/Bitfields.hpp"
+#include "IMC_GENERATED/SuperTypes.hpp"
+
+// Local headers.
 #include "Header.h"
 #include "Message.h"
 #include "Serialization.h"
 #include "InlineMessage.h"
 #include "MessageList.h"
-#include "IMC_GENERATED/Enumerations.hpp"
-#include "IMC_GENERATED/Bitfields.hpp"
-#include "IMC_GENERATED/SuperTypes.hpp"
 
 namespace IMC
 {

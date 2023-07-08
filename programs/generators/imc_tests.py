@@ -187,7 +187,7 @@ root = tree.getroot()
 fd = File(CXX, dest_folder, ns = None, md5 = xml_md5)
 
 fd.append("// IMC Generated Files")
-fd.append('#include "IMC.hpp"\n\n')
+fd.append('#include "IMC_GENERATED/IMC.hpp"\n\n')
 fd.append("// Local header file")
 fd.append('#include "Test.hpp"\n')
 fd.append('int\nmain(void)\n{')

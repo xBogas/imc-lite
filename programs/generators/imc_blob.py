@@ -97,7 +97,7 @@ f_out.close()
 # Blob.cpp                                                                     #
 ################################################################################
 fd = File(CXX, dest_folder_cpp, md5 = xml_md5)
-fd.add_dune_headers('IMC_GENERATED/' + HPP)
+fd.add_imc_headers(HPP)
 
 # Byte array.
 fd.append('static const unsigned char c_imc_blob[] = \n{')
