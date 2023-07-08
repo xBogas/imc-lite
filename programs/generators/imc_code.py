@@ -370,8 +370,10 @@ class Message:
 import argparse
 parser = argparse.ArgumentParser(
     description="Strip, compress and generate IMC.xml blob.")
-parser.add_argument('dest_folder', metavar='DEST_FOLDER',
-                    help="destination folder")
+parser.add_argument('dest_folder_hpp', metavar='DEST_FOLDER_HPP',
+                    help="destination folder .HPP")
+parser.add_argument('dest_folder_cpp', metavar='DEST_FOLDER_CPP',
+                    help="destination folder .CPP")
 parser.add_argument('-x', '--xml', metavar='IMC_XML',
                     help="IMC XML file")
 parser.add_argument('-f', '--force', action='store_true', required=False,
@@ -379,7 +381,8 @@ parser.add_argument('-f', '--force', action='store_true', required=False,
 args = parser.parse_args()
 
 xml_md5 = compute_md5(args.xml)
-dest_folder = args.dest_folder
+dest_folder_hpp = args.dest_folder_hpp
+dest_folder_cpp = args.dest_folder_cpp
 
 # Parse XML specification.
 import xml.etree.ElementTree as ET
@@ -446,7 +449,7 @@ for f in root.findall('footer/field'):
 ################################################################################
 # Enumerations.hpp                                                             #
 ################################################################################
-f = File('Enumerations.hpp', dest_folder, md5 = xml_md5)
+f = File('Enumerations.hpp', dest_folder_hpp, md5 = xml_md5)
 ens = root.findall('enumerations/def')
 for en in ens:
     enum = Enum(en.get('abbrev'), en.get('name'))
@@ -459,7 +462,7 @@ f.write()
 ################################################################################
 # Bitfields.hpp                                                                #
 ################################################################################
-f = File('Bitfields.hpp', dest_folder, md5 = xml_md5)
+f = File('Bitfields.hpp', dest_folder_hpp, md5 = xml_md5)
 ens = root.findall('bitfields/def')
 for en in ens:
     enum = Enum(en.get('abbrev'), en.get('name'))
@@ -472,7 +475,7 @@ f.write()
 ################################################################################
 # Constants.hpp                                                                #
 ################################################################################
-f = File('Constants.hpp', dest_folder, ns = False, md5 = xml_md5)
+f = File('Constants.hpp', dest_folder_hpp, ns = False, md5 = xml_md5)
 
 # Macros
 f.append(Macro('CONST_VERSION', '"%(version)s"' % consts, 'IMC version string'))
@@ -491,7 +494,7 @@ f.write()
 ################################################################################
 # Macros.hpp                                                                   #
 ################################################################################
-f = File('Macros.hpp', dest_folder, ns = False, md5 = xml_md5)
+f = File('Macros.hpp', dest_folder_hpp, ns = False, md5 = xml_md5)
 msgs = root.findall('message')
 for msg in msgs:
     f.append(Macro(msg.get('abbrev').upper(),
@@ -514,7 +517,7 @@ f.write()
 ################################################################################
 # Factory.def                                                                  #
 ################################################################################
-f = File('Factory.def', dest_folder, ns = False, md5 = xml_md5)
+f = File('Factory.def', dest_folder_hpp, ns = False, md5 = xml_md5)
 for msg in root.findall('message'):
     f.append('MESSAGE(%(id)s, %(abbrev)s)' % msg.attrib)
 f.append('#undef MESSAGE')
@@ -523,7 +526,7 @@ f.write()
 ################################################################################
 # SuperTypes.hpp                                                               #
 ################################################################################
-f = File('SuperTypes.hpp', dest_folder, md5 = xml_md5)
+f = File('SuperTypes.hpp', dest_folder_hpp, md5 = xml_md5)
 f.add_dune_headers('Header.h')
 for group in root.findall("message-groups/message-group"):
     f.append(comment('Super type %s' % group.get('name'), nl = ''))
@@ -534,18 +537,18 @@ f.write()
 ################################################################################
 # Definitions.hpp                                                              #
 ################################################################################
-hpp = File('Definitions.hpp', dest_folder, md5 = xml_md5)
+hpp = File('Definitions.hpp', dest_folder_hpp, md5 = xml_md5)
 hpp.add_isoc_headers('ostream', 'string', 'vector')
 hpp.add_dune_headers('Header.h', 'Message.h', 'Serialization.h',
-                     'InlineMessage.h', 'MessageList.h', 'JSON.h',
+                     'InlineMessage.h', 'MessageList.h',
                      'IMC_GENERATED/Enumerations.hpp', 'IMC_GENERATED/Bitfields.hpp',
                      'IMC_GENERATED/SuperTypes.hpp')
 
 ################################################################################
 # Definitions.cpp                                                              #
 ################################################################################
-cpp = File('Definitions.cpp', dest_folder, md5 = xml_md5)
-cpp.add_isoc_headers('algorithm','iostream', 'iomanip', 'string', 'cstdio')
+cpp = File('Definitions.cpp', dest_folder_cpp, md5 = xml_md5)
+cpp.add_isoc_headers('algorithm','iostream', 'iomanip', 'string', 'cstdio', 'cstring')
 cpp.add_dune_headers('IMC_GENERATED/Definitions.hpp',
                      'IMC_GENERATED/Factory.hpp')
 

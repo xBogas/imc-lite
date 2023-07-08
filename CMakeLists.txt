@@ -17,7 +17,8 @@ if(PYTHON_EXE)
     message(FATAL_ERROR "Pls include IMC.xml file inside imc/")
   endif()
 
-  set(IMC_FOLDER ${PROJECT_SOURCE_DIR}/include/IMC_GENERATED)
+  set(IMC_FOLDER_HPP ${PROJECT_SOURCE_DIR}/include/IMC_GENERATED)
+  set(IMC_FOLDER_CPP ${PROJECT_SOURCE_DIR}/src/IMC_GENERATED)
   set(IMC_TEST_FOLDER ${PROJECT_SOURCE_DIR}/test)
 else()
   message(FATAL_ERROR "Install python")
@@ -27,14 +28,15 @@ macro(dune_target_imc target_name)
   add_custom_target(${target_name}
     COMMAND ${PROGRAM_PYTHON}
     ${PROJECT_SOURCE_DIR}/programs/generators/imc_code.py
-    -x ${IMC_XML} ${IMC_FOLDER}
+    -x ${IMC_XML} 
+    ${IMC_FOLDER_HPP}
+    ${IMC_FOLDER_CPP}
 
     COMMAND ${PROGRAM_PYTHON}
     ${PROJECT_SOURCE_DIR}/programs/generators/imc_blob.py
     -x ${IMC_XML} 
-    ${IMC_FOLDER}
-#    ${PROJECT_SOURCE_DIR}/src/IMC_GENERATED
-    ${IMC_FOLDER}
+    ${IMC_FOLDER_HPP}
+    ${IMC_FOLDER_CPP}
 
     COMMAND ${PROGRAM_PYTHON}
     ${PROJECT_SOURCE_DIR}/programs/generators/imc_tests.py

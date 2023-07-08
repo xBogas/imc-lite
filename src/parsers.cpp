@@ -52,14 +52,14 @@ static uint16_t compute_CRC16(const uint8_t* bfr, uint16_t bfr_len)
 
 
 
-// typedef Message* (*Constructor) (void);
+typedef Message* (*Constructor) (void);
 
-// static std::unordered_map<uint16_t, Constructor> constructors_by_id = {
-// #define MESSAGE(id, type) \
-//   {id, []()->Message* { return new IMC::type(); }},
+static std::unordered_map<uint16_t, Constructor> constructors_by_id = {
+#define MESSAGE(id, type) \
+  {id, []()->Message* { return new type; }},
 
-// #include "IMC_GENERATED/Factory.def"
-// }; 
+#include "IMC_GENERATED/Factory.def"
+}; 
 
 Message* produce(uint16_t id)
 {

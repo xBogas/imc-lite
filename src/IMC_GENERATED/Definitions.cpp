@@ -38,6 +38,7 @@
 #include <iomanip>
 #include <string>
 #include <cstdio>
+#include <cstring>
 
 // IMC headers.
 #include "IMC_GENERATED/Definitions.hpp"
