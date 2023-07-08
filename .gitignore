@@ -5,7 +5,10 @@
 .vscode/ipch
 .vscode
 *.json
-imc/
+
+imc/**
 build/
 include/IMC_GENERATED/**
 src/IMC_GENERATED/**
+
+**/__pycache__
