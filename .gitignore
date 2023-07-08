@@ -7,4 +7,5 @@
 *.json
 imc/
 build/
-include/IMC_GENERATED/
+include/IMC_GENERATED/**
+src/IMC_GENERATED/**
