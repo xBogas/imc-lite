@@ -1,8 +1,10 @@
 # Tasks to do
 
-- [ ] IMC serialization/deserialization
+- [x] IMC serialization/deserialization
 - [ ] IMC auxiliary classes
+  - [ ] MessageList
+  - [ ] InlineMessage
 - [ ] UDP packets serialization/deserialization
 - [ ] Create "threads"
-- [ ] Create actuators templates for each (relevant msg)
+- [ ] Create actuators "threads"
 - [ ] Add documentation
