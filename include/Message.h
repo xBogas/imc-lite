@@ -1,9 +1,6 @@
-#ifndef IMC_MESSAGE_HPP_INCLUDED_
-#define IMC_MESSAGE_HPP_INCLUDED_
+#ifndef IMC_MESSAGE_H_INCLUDED_
+#define IMC_MESSAGE_H_INCLUDED_
 
-#include <iosfwd>
-
-#include "IMC_GENERATED/Constants.hpp"
 #include "Header.h"
 
 namespace IMC
@@ -240,7 +237,28 @@ namespace IMC
 		//! @param[in] other message to compare.
 		//! @return true if messages are equal, false otherwise.
 		bool
-		operator==(const Message& other) const;
+		operator==(const Message& other) const
+		{
+			if (getId() != other.getId())
+				return false;
+
+			if (getTimeStamp() != other.getTimeStamp())
+				return false;
+
+			if (getSource() != other.getSource())
+				return false;
+
+			if (getSourceEntity() != other.getSourceEntity())
+				return false;
+
+			if (getDestination() != other.getDestination())
+				return false;
+
+			if (getDestinationEntity() != other.getDestinationEntity())
+				return false;
+
+			return fieldsEqual(other);
+		}
 
 		//! Compare messages for inequality.
 		//! @param[in] other message to compare.

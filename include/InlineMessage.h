@@ -1,6 +1,10 @@
 #ifndef IMC_INLINE_MESSAGE_HPP_INCLUDED_
 #define IMC_INLINE_MESSAGE_HPP_INCLUDED_
 
+#include "IMC_GENERATED/Constants.hpp"
+#include "Message.h"
+#include "Serialization.h"
+
 namespace IMC
 {
   template<typename Type>

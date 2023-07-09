@@ -90,15 +90,15 @@ class File:
                 text += '#include <' + hdr + '>\n'
             text += '\n'
 
-        if len(self.imc_hdrs) > 0:
-            text += utils.comment('IMC headers', dox = False)
-            for hdr in self.imc_hdrs:
-                text += '#include "' + hdr + '"\n'
-            text += '\n'
-
         if len(self.local_hdrs) > 0:
             text += utils.comment('Local headers', dox = False)
             for hdr in self.local_hdrs:
+                text += '#include "' + hdr + '"\n'
+            text += '\n'
+
+        if len(self.imc_hdrs) > 0:
+            text += utils.comment('IMC headers', dox = False)
+            for hdr in self.imc_hdrs:
                 text += '#include "' + hdr + '"\n'
             text += '\n'
 

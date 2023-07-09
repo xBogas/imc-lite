@@ -1,5 +1,5 @@
-#ifndef IMC_DEFINES_H_INCLUDED
-#define IMC_DEFINES_H_INCLUDED
+#ifndef IMC_HEADER_H_INCLUDED_
+#define IMC_HEADER_H_INCLUDED_
 
 // C headers
 #include <inttypes.h>
