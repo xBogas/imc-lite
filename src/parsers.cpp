@@ -63,7 +63,7 @@ static std::unordered_map<uint16_t, Constructor> constructors_by_id = {
 
 Message* produce(uint16_t id)
 {
-  return nullptr; //constructors_by_id[id]();
+  return constructors_by_id[id]();
 }
 
 Message* parser(const uint8_t* bfr, uint16_t bfr_len)
@@ -106,9 +106,19 @@ Message* parserPayload(const Header& hdr, const uint8_t* bfr)
   if (crc != r_crc)
     return nullptr;
 
-  return nullptr;
+  Message* msg = produce(hdr.mgid);
+  if(msg)
+  {
+    msg->deserializeFields(bfr + DUNE_IMC_CONST_HEADER_SIZE, hdr.size);
 
-  return produce(hdr.mgid);
+    msg->setTimeStamp(hdr.timestamp);
+    msg->setSource(hdr.src);
+    msg->setSourceEntity(hdr.src_ent);
+    msg->setDestination(hdr.dst);
+    msg->setDestinationEntity(hdr.dst_ent);
+  }
+
+  return msg;
 }
 
 }

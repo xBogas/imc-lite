@@ -3,7 +3,7 @@
 - [x] IMC serialization/deserialization
 - [ ] IMC auxiliary classes
   - [ ] MessageList
-  - [ ] InlineMessage
+  - [x] InlineMessage
 - [ ] UDP packets serialization/deserialization
 - [ ] Create "threads"
 - [ ] Create actuators "threads"

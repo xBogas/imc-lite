@@ -4,6 +4,7 @@
 // Local headers
 #include "parsers.h"
 #include "IMC_GENERATED/Blob.hpp"
+#include "IMC_GENERATED/Definitions.hpp"
 
 static const IPAddress ip(10, 0, 2, 83);
 
