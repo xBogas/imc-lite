@@ -1,4 +1,4 @@
-# MASTERS THESIS - João Bogas
+# IMC adaptation to microcontrollers
 
 ## Generate IMC files
 
