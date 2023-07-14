@@ -8,6 +8,10 @@
 
 static const IPAddress ip(10, 0, 2, 83);
 
+static IPAddress remote(10,0,2,81);
+
+static uint16_t remote_port;
+
 static EthernetUDP sock;
 
 static const int port = 8080;
@@ -22,8 +26,9 @@ void readUDP()
     Serial.print("Received packet of size ");
     Serial.println(packetSize);
     Serial.print("From ");
-    IPAddress remote = sock.remoteIP();
-    
+    remote = sock.remoteIP();
+    remote_port = sock.remotePort();
+
     for (int i = 0; i < 4; i++) 
     {
       Serial.print(remote[i], DEC);
@@ -40,11 +45,23 @@ void readUDP()
     {
       Serial.println("Created IMC msg: ");
       Serial.println(msg->getName());
-      delete msg;
+      sendUDP(msg);
+      msg = NULL;
     }
   }
 }
 
+void sendUDP(IMC::Message* msg)
+{
+  uint32_t size = msg->getSerializationSize();
+  uint8_t bfr[size];
+
+  uint16_t rv = IMC::parser(msg, bfr, size);
+
+  Serial.println("Sending IMC UDP packet");
+  sock.beginPacket(remote, remote_port);
+  sock.write(bfr, rv);
+}
 
 void readSerial()
 {

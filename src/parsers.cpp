@@ -121,4 +121,37 @@ Message* parserPayload(const Header& hdr, const uint8_t* bfr)
   return msg;
 }
 
+static uint16_t serializeHeader(const Message* msg, uint8_t* bfr)
+{
+  uint8_t* ptr = bfr;
+
+  ptr += IMC::serialize((uint16_t)DUNE_IMC_CONST_SYNC, ptr);
+  ptr += IMC::serialize(msg->getId(), ptr);
+  ptr += IMC::serialize((uint16_t)msg->getPayloadSerializationSize(), ptr);
+  fconv_t time;
+  time.data = msg->getTimeStamp();
+  ptr += IMC::serialize(to_fp64(time.bits), ptr);
+  ptr += IMC::serialize((uint16_t)msg->getSource(), ptr);
+  ptr += IMC::serialize(msg->getSourceEntity(), ptr);
+  ptr += IMC::serialize((uint16_t)msg->getDestination(), ptr);
+  ptr += IMC::serialize(msg->getDestinationEntity(), ptr);
+
+  return DUNE_IMC_CONST_HEADER_SIZE;
+}
+
+uint16_t parser(const Message *msg, uint8_t *bfr, uint16_t bfr_len)
+{
+  uint16_t size = msg->getSerializationSize();
+  if (size > DUNE_IMC_CONST_MAX_SIZE)
+    return -1;
+
+  uint8_t* ptr = bfr;
+  ptr += serializeHeader(msg, bfr);
+  msg->serializeFields(ptr);
+
+  uint16_t crc = compute_CRC16(bfr, size-DUNE_IMC_CONST_FOOTER_SIZE);
+  memcpy(bfr + (size-DUNE_IMC_CONST_FOOTER_SIZE), &crc, 2);
+  return size;
+}
+
 }

@@ -14,6 +14,7 @@ namespace IMC
   void parserHeader(Header& hdr, const uint8_t* msg);
   Message* parserPayload(const Header& hdr, const uint8_t* bfr);
   Message* produce(uint16_t id);
+  uint16_t parser(const Message* msg, uint8_t* bfr, uint16_t bfr_len);
 }
 
 #endif
