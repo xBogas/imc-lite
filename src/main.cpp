@@ -1,12 +1,12 @@
 #include <Arduino.h>
-#include <STM32Ethernet.h>
+//#include <STM32Ethernet.h>
 
 // Local headers
-#include "parsers.h"
-#include "IMC_GENERATED/Blob.hpp"
-#include "IMC_GENERATED/Definitions.hpp"
+//#include "parsers.h"
+//#include "IMC_GENERATED/Blob.hpp"
+//#include "IMC_GENERATED/Definitions.hpp"
 
-static const IPAddress ip(10, 0, 2, 83);
+/* static const IPAddress ip(10, 0, 2, 83);
 
 static IPAddress remote(10,0,2,81);
 
@@ -80,24 +80,32 @@ void readSerial()
     Serial.print("Converted to float ");
     Serial.println(rv);
   }
-}
+} */
 
+bool serial_ready = false;
+
+#include "Tasks.h"
+
+static uint32_t start;
 
 void setup() 
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
+  delay(250);
+  Serial.println("Ready for debug");
+  print_debug_msg();
+  serial_ready = true;
+  //create_pwm();
+  // Ethernet.begin(ip);
+  // if(sock.begin(port))
+  //   Serial.println("sock ready");
+  // sock.begin(ip);
   delay(500);
-
-  Ethernet.begin(ip);
-  if(sock.begin(port))
-    Serial.println("sock ready");
-
-  sock.begin(ip);
-  Serial.println("Setup completed");
+  start_tasks();
 }
+
 
 
 void loop() 
 {
-  readUDP();
 }
