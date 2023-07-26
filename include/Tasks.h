@@ -3,7 +3,7 @@
 
 #include <Arduino.h>
 
-#include <string>
+#include "debug.h"
 
 class Tasks
 {
@@ -27,11 +27,9 @@ protected:
   const char* name;
 };
 
-void debug(const char* src, const char* format, ...);
 
 void add_task(Tasks* obj);
 void start_tasks();
-
 void print_debug_msg();
 
 #endif
