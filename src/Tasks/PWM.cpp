@@ -18,17 +18,17 @@ struct Task : public Tasks
   ~Task()
   { }
 
-  void start() override
+  void start()
   {
     debug("Enabled");
-    timer->attachInterrupt(std::bind(&Task::run, this));
+    timer->attachInterrupt(std::bind(&Task::loop, this));
     timer->refresh();
     timer->resume();
   }
 
-  void run() override
+  void loop()
   {
-    debug("Task running");
+    debug("PWM Task running");
     uint32_t start = millis();
     while ((millis() - start) < 10);
     debug("Task concluded");

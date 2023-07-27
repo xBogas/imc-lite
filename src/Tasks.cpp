@@ -41,7 +41,6 @@ void start_tasks()
     ptr = ptr->next;
     number--;
   }
-
 }
 
 Tasks::Tasks(const char* _name): 

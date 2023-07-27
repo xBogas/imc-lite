@@ -1,0 +1,29 @@
+// Core includes
+#include "Tasks.h"
+#include "Timer.h"
+
+
+struct Task: public Tasks
+{
+  Task():
+    Tasks("_param_name")
+  {
+    debug("Creating task");
+    timer = setTimer(DEFAULT_TIMER);
+    if (timer != NULL)
+      debug("Timer allocated");
+    else
+      debug("Failed to allocate timer");
+  }
+
+  ~Task()
+  { }
+
+  //! Main loop.
+  void loop()
+  {
+    debug("Task running");
+  }
+};
+
+static Task worker;

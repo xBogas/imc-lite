@@ -27,23 +27,23 @@ endif(PYTHON_EXE)
 macro(dune_target_imc target_name)
   add_custom_target(${target_name}
     COMMAND ${PROGRAM_PYTHON}
-    ${PROJECT_SOURCE_DIR}/programs/generators/imc_code.py
+    ${PROJECT_SOURCE_DIR}/scripts/generators/imc_code.py
     -x ${IMC_XML} 
     ${IMC_FOLDER_HPP}
     ${IMC_FOLDER_CPP}
 
     COMMAND ${PROGRAM_PYTHON}
-    ${PROJECT_SOURCE_DIR}/programs/generators/imc_blob.py
+    ${PROJECT_SOURCE_DIR}/scripts/generators/imc_blob.py
     -x ${IMC_XML} 
     ${IMC_FOLDER_HPP}
     ${IMC_FOLDER_CPP}
 
     COMMAND ${PROGRAM_PYTHON}
-    ${PROJECT_SOURCE_DIR}/programs/generators/imc_tests.py
+    ${PROJECT_SOURCE_DIR}/scripts/generators/imc_tests.py
     -x ${IMC_XML} ${IMC_TEST_FOLDER}
 
     COMMAND ${PROGRAM_PYTHON}
-    ${PROJECT_SOURCE_DIR}/programs/generators/imc_addresses.py
+    ${PROJECT_SOURCE_DIR}/scripts/generators/imc_addresses.py
     -x ${IMC_ADDRESSES_XML} ${PROJECT_SOURCE_DIR}/etc/imc-addresses.ini
 
     DEPENDS ${xml})

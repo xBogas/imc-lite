@@ -5,6 +5,8 @@
 
 #include "debug.h"
 
+#define DEFAULT_TIMER 500
+
 class Tasks
 {
 public:
@@ -21,7 +23,6 @@ public:
 
   void debug(const char* format, ...);
 
-  virtual void run() = 0;
 protected:
   HardwareTimer* timer;
   const char* name;
