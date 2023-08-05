@@ -1,16 +1,24 @@
 #include "serial.h"
 #include <string.h>
+#include <stdio.h>
 
 UART_HandleTypeDef default_uart;
 
 static SERIAL_STATE default_uart_state = SERIAL_INIT;
 
-// static uint8_t _txBuffer[64] = {0};
+static uint8_t _txBuffer[64] = {0};
 // static uint8_t _rxBuffer[64] = {0};
 
 void serial_write(char* msg)
 {
-  HAL_UART_Transmit(&default_uart, msg, strlen(msg), 500);
+  int size = sprintf((char*)_txBuffer, "%s\r\n", msg);
+  HAL_UART_Transmit(&default_uart, _txBuffer, size, 500);
+}
+
+void send_HB(void)
+{
+  char msg[] = "$HB\r\n";
+  HAL_UART_Transmit(&default_uart, (uint8_t*)msg, 6, 500);
 }
 
 SERIAL_STATE serial_ready(void)

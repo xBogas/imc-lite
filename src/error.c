@@ -1,10 +1,10 @@
-//! Overrides for Cortex-M7 Vector table Handles 
 #include "error.h"
 #include <cmsis_gcc.h>
+#include <string.h>
 
-const char* ERROR_MSG;
+char ERROR_MSG[64];
 
-void Error_Handler(void)
+void __attribute__((weak)) Error_Handler(void)
 {
   __disable_irq();
   if (serial_ready())
@@ -13,6 +13,12 @@ void Error_Handler(void)
   while(1);
 }
 
+void set_error(char* msg)
+{
+  strcpy(ERROR_MSG, msg);
+}
+
+//! Overrides for Cortex-M7 Vector table Handles 
 void NMI_Handler(void)
 {
   Error_Handler();

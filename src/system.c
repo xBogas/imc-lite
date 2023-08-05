@@ -69,7 +69,7 @@ static void wait_ready(uint32_t reg, uint32_t state, uint32_t timeout)
   {
     if (HAL_GetTick() - start > timeout)
     {
-      ERROR_MSG = "Config_clock timeout";
+      set_error("Config_clock timeout");
       Error();
     }
   }

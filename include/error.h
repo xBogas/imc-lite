@@ -1,7 +1,10 @@
 #include <inttypes.h>
 
-//! Error Handler
+//! Error Handler - can be override
 void Error_Handler(void);
 
+//! Error macro
+#define Error() Error_Handler()
+
 //! For error 
-extern const char* ERROR_MSG;
+void set_error(char*);
