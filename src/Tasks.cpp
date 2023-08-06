@@ -3,7 +3,7 @@
 
 struct ElemTasks
 {
-  Tasks* index;
+  AbstractTask* index;
   ElemTasks* next;
 };
 
@@ -18,9 +18,9 @@ static LTasks_t list_tasks = {
   .size = 0
 };
 
-void add_task(Tasks *obj)
+void add_task(AbstractTask *obj)
 {
-  obj->debug("Adding Task");
+  obj->debug("Adding Task %s", obj->getName());
   ElemTasks* ptr =  list_tasks.first;
   ElemTasks* new_obj = new ElemTasks{obj, ptr};
   list_tasks.first = new_obj;
@@ -43,26 +43,35 @@ void start_tasks()
   }
 }
 
-Tasks::Tasks(const char* _name): 
+AbstractTask::AbstractTask(const char* _name): 
   name(_name), 
   timer(NULL)
 {
   add_task(this);
 }
 
-Tasks::~Tasks()
+AbstractTask::~AbstractTask()
 {
   debug("Ending task");
 }
 
-void Tasks::stop()
+void AbstractTask::start()
+{
+  debug("Enabled");
+  setup();
+  timer->attachInterrupt(std::bind(&AbstractTask::loop, this));
+  timer->refresh();
+  timer->resume();
+}
+  
+void AbstractTask::stop()
 {
   debug("Stopping task ");
 }
 
 extern bool serial_ready;
 
-void Tasks::debug(const char* format, ...)
+void AbstractTask::debug(const char* format, ...)
 {
   char bfr[128];
   va_list args;

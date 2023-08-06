@@ -1,11 +1,24 @@
+// ****************************************************************
+// Copyright 2023 Universidade do Porto - Faculdade de Engenharia *
+// Laboratório de Sistemas e Tecnologia Subaquática (LSTS)        *
+// Departamento de Engenharia Electrotécnica e de Computadores    *
+// ****************************************************************
+// Author: João Bogas                                             *
+// ****************************************************************
+
+// Core includes
 #include "Tasks.h"
 #include "Timer.h"
 
+#include "IMC_GENERATED/Definitions.hpp"
 
-struct Task : public Tasks
+namespace Tasks {
+namespace GPIO {
+
+struct Task : public AbstractTask
 {
   Task(): 
-    Tasks("GPIO")
+    AbstractTask("GPIO")
   {
     debug("Creating task");
     timer = setTimer(500);
@@ -18,21 +31,26 @@ struct Task : public Tasks
   ~Task()
   { }
 
-  void start()
-  {
-    debug("Enabled");
-    timer->attachInterrupt(std::bind(&Task::loop, this));
-    timer->refresh();
-    timer->resume();
+  void setup()
+  { 
+    start = millis();
   }
 
+
+  uint32_t start;
   void loop()
   {
-    debug("Gpio Task running");
-    uint32_t start = millis();
-    while ((millis() - start) < 50);
-    debug("Task concluded");
+    if ((millis() - start) > 1'000)
+    {
+      IMC::Message* msg = new IMC::SetPWM();
+
+      dispatch(msg->clone());
+      start = millis();
+      delete msg;
+    }
   }
 };
 
-static Task worker;
+//static Task worker;
+
+}}

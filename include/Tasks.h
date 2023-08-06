@@ -4,32 +4,60 @@
 #include <Arduino.h>
 
 #include "debug.h"
+#include "MailBox.h"
+#include "Bus.h"
 
 #define DEFAULT_TIMER 500
 
-class Tasks
+/**
+ * How to do the BUS subscribe - dispatch message 
+ * Task will subscrive -> imc msg
+ * AbstractTask will send a _ptr_ to a buffer to BUS
+ * AbstractTask will also save a callback
+ * when msg is dipatch BUS will fill that _ptr_ with the msg
+ * loop will runConsumers
+*/
+
+class AbstractTask
 {
 public:
-  Tasks(const char* _name);
+  AbstractTask(const char* _name);
 
-  virtual ~Tasks();
+  virtual ~AbstractTask();
 
-  virtual void start() = 0;
+  void start();
 
   void stop();
 
   const char* getName()
-  {return name;}
+  { return name; }
 
   void debug(const char* format, ...);
 
 protected:
+
+  template<typename Msg, typename Obj>
+  void subscribe(Obj& task, void (Obj::*consumer)(const Msg*) = &Obj::consume)
+  {
+    if (consumer == NULL)
+      debug("ERR");
+    
+    container.subscribe(Msg::getIdStatic(), new Callback(task, consumer));
+  }
+
+  virtual void setup(void) = 0;
+
+  virtual void loop(void) = 0;
+
+  void runConsumers(void)
+  { container.consume(); }
+
   HardwareTimer* timer;
   const char* name;
+  MailBox container;
 };
 
-
-void add_task(Tasks* obj);
+void add_task(AbstractTask* obj);
 void start_tasks();
 void print_debug_msg();
 

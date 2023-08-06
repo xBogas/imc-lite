@@ -1,38 +1,49 @@
+// ****************************************************************
+// Copyright 2023 Universidade do Porto - Faculdade de Engenharia *
+// Laboratório de Sistemas e Tecnologia Subaquática (LSTS)        *
+// Departamento de Engenharia Electrotécnica e de Computadores    *
+// ****************************************************************
+// Author: João Bogas                                             *
+// ****************************************************************
+
+// Core includes
 #include "Tasks.h"
 #include "Timer.h"
+#include "Bus.h"
+#include "IMC_GENERATED/Definitions.hpp"
 
+namespace Tasks {
+namespace PWM {
 
-struct Task : public Tasks
+struct Task : public AbstractTask
 {
   Task()
-    : Tasks("PWM")
+    : AbstractTask("PWM")
   {
     debug("Creating task");
-    timer = setTimer(700);
-    if (timer != NULL)
-      debug("Timer allocated");
-    else
-      debug("Failed to allocate timer");
+    timer = setTimer(5);
+    subscribe<IMC::SetPWM>(*this, &Task::consume);
   }
 
   ~Task()
   { }
 
-  void start()
+  void setup()
+  { }
+
+  void consume(const IMC::SetPWM* msg)
   {
-    debug("Enabled");
-    timer->attachInterrupt(std::bind(&Task::loop, this));
-    timer->refresh();
-    timer->resume();
+    debug("Consuming SetPWM");
+    debug("Set PWM %d on %d", msg->id, msg->duty_cycle);
   }
 
   void loop()
   {
-    debug("PWM Task running");
-    uint32_t start = millis();
-    while ((millis() - start) < 10);
-    debug("Task concluded");
+    runConsumers();
   }
+
 };
 
 static Task worker;
+
+}}

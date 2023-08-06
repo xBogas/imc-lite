@@ -14,42 +14,32 @@
 #include "parsers.h"
 #include <STM32Ethernet.h>
 
-struct Task: public Tasks
+namespace Tasks {
+namespace UDP {
+
+//! Very Memory heavy task > 40 KB
+//TODO: Create smaller EthernetUDP class
+struct Task: public AbstractTask
 {
-  const IPAddress src_ip;
   EthernetUDP sock;
   uint16_t remote_port;
-  const IPAddress remote;
-  const int port;
-  uint8_t packetBuffer[100];
+  uint8_t packetBuffer[66];
 
   Task():
-    Tasks("UDP"),
-    src_ip(10, 0, 2, 83),
-    remote(10,0,2,81),
-    port(8080)
+    AbstractTask("UDP")
   {
-    debug("Creating task");
-    timer = setTimer(100);
-    if (timer != NULL)
-      debug("Timer allocated");
-    else
-      debug("Failed to allocate timer");
+    timer = setTimer(5);
   }
 
   ~Task()
   { }
 
-  void start()
+  void setup()
   {
-    debug("Enabled");
+    const IPAddress src_ip(10, 0, 2, 83);
     Ethernet.begin(src_ip);
-    if(sock.begin(port))
+    if(sock.begin(8080))
       debug("Socket ready");
-
-    timer->attachInterrupt(std::bind(&Task::loop, this));
-    timer->refresh();
-    timer->resume();
   }
 
   void readUDP();
@@ -57,30 +47,36 @@ struct Task: public Tasks
   //! Main loop.
   void loop()
   {
-    debug("Task starting");
     readUDP();
-    debug("Task concluded");
   }
 };
-
-static Task worker_UDP;
 
 void Task::readUDP()
 {
   int packetSize = sock.parsePacket();
-  if (packetSize) 
+  if (packetSize)
   {
-    if (sock.remoteIP() != remote)
+    union
+    {
+      uint8_t arr[4];
+      uint32_t u32;
+    } conv;
+    
+    conv.u32 = sock.remoteIP();
+
+    debug("Received %d from remote %d.%d.%d.%d", packetSize, 
+      conv.arr[0], conv.arr[1], conv.arr[2], conv.arr[3]);
+
+    int bfr_len = sock.read(packetBuffer, packetSize);
+    IMC::Message* msg = IMC::parser(packetBuffer, bfr_len);
+    if (msg == NULL)
       return;
 
-    debug("Received packet of size %d from remote", packetSize);
-    
-    memset(packetBuffer, 0, packetSize);
-    int bfr_len = sock.read(packetBuffer, packetSize);
-
-    IMC::Message* msg = IMC::parser(packetBuffer, bfr_len);
+    debug("Received %s message", msg->getName());
+    dispatch(msg);
     delete msg;
   }
-  else
-    debug("Socket empty");
 }
+
+static Task worker;
+}}
