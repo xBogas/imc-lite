@@ -3,25 +3,18 @@
 
 #include "Header.h"
 
+
 namespace IMC
 {
   class Message
 	{
 	public:
 		//! Default constructor.
-		Message(void)
-		{
-			m_header.src = 0xffff;
-			m_header.src_ent = DUNE_IMC_CONST_UNK_EID;
-			m_header.dst = 0xffff;
-			m_header.dst_ent = DUNE_IMC_CONST_UNK_EID;
-			m_header.timestamp = -1.0;
-		}
+		Message(void);
 
 		//! Default destructor.
 		virtual
-		~Message(void)
-		{ }
+		~Message(void);
 
 		//! Retrieve a copy of the message.
 		//! @return message copy.

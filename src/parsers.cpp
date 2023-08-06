@@ -2,6 +2,7 @@
 
 #include "parsers.h"
 #include "IMC_GENERATED/Definitions.hpp"
+#include "debug.h"
 
 namespace IMC
 {
@@ -73,8 +74,8 @@ Message* parser(const uint8_t* bfr, uint16_t bfr_len)
 
   if (hdr.size > bfr_len - (DUNE_IMC_CONST_HEADER_SIZE + DUNE_IMC_CONST_FOOTER_SIZE))
   {
-    Serial.println("Buffer too short");
-    return nullptr;
+    debug("ERR", "Buffer too short");
+    Error_Handler();
   }
 
   Serial.println("Parsing payload");
@@ -104,7 +105,10 @@ Message* parserPayload(const Header& hdr, const uint8_t* bfr)
   uint16_t crc = compute_CRC16(bfr, DUNE_IMC_CONST_HEADER_SIZE + hdr.size);
 
   if (crc != r_crc)
+  {
+
     return nullptr;
+  }
 
   Message* msg = produce(hdr.mgid);
   if(msg)
