@@ -1,5 +1,6 @@
 #include "Timer.h"
-#include "Tasks.h"
+#include "debug.h"
+
 //! for nucleo 144 1-14
 //! 14 it will be used by ethernet
 static TIM_TypeDef* timers[] = {
@@ -31,11 +32,23 @@ HardwareTimer *setTimer(uint32_t ms)
   HardwareTimer* rv = getTimer();
   if (rv == NULL)
   {
-    // Serial.println("Failed allocate timer");
-    return NULL;
+    debug("setTimer","Failed to allocate timer");
+    Error_Handler();
   }
 
   rv->pause();
   rv->setOverflow(ms*1'000, MICROSEC_FORMAT); // timer in ms
   return rv;
 }
+
+
+//TODO: must check timers created for colision
+Timer::Timer(TIM_TypeDef* instance, uint32_t ms) :
+  period(ms)
+{ }
+
+Timer::~Timer()
+{ }
+
+void Timer::add_interrupt(void(*callable)(void))
+{ }
