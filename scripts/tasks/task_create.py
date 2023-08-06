@@ -40,7 +40,7 @@ class Task:
 
     def body(self):
         fd = open(os.path.join(__location__, 'template.txt'))
-        body = fd.read().replace('_param_name', self._name_)
+        body = fd.read().replace('_param_task_name_', self._name_)
         fd.close()
         return '\n'+body+'\n\n'
 
@@ -68,6 +68,9 @@ task_folder = os.path.join(args.path, 'src/Tasks/')
 if os.path.isdir(task_folder) is False:
     print(f"{task_folder} doesn't contain src/Tasks directory")
     exit(1)
+
+if args.author == '.':
+    args.author = 'João Bogas'
 
 task = Task(args.author, args.name)
 
