@@ -43,9 +43,10 @@ void start_tasks()
   }
 }
 
-AbstractTask::AbstractTask(const char* _name): 
-  name(_name), 
-  timer(NULL)
+AbstractTask::AbstractTask(const char* _name, Context& c): 
+  timer(NULL),
+  name(_name),
+  container(c) 
 {
   add_task(this);
 }

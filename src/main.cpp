@@ -1,6 +1,9 @@
 #include "Tasks.h"
+#include "Launcher.h"
 
 bool serial_ready = false;
+
+AbstractTask* ptr;
 
 void setup() 
 {
@@ -8,9 +11,7 @@ void setup()
   delay(250);
   Serial.println("Ready for debug");
   serial_ready = true;
-  print_debug_msg();
-  delay(500);
-  start_tasks();
+  Launcher boot;
 }
 
 

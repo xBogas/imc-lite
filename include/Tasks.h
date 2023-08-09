@@ -4,8 +4,14 @@
 #include <Arduino.h>
 
 #include "debug.h"
+#include "Context.h"
 #include "MailBox.h"
-#include "Bus.h"
+
+#define TASK_EXPORT(name)                             \
+  AbstractTask*                                       \
+  create##name##Task(const char* _name_, Context& _c_)  \
+  { return new Tasks::name::Task(_c_); }
+
 
 #define DEFAULT_TIMER 500
 
@@ -21,7 +27,7 @@
 class AbstractTask
 {
 public:
-  AbstractTask(const char* _name);
+  AbstractTask(const char* _name, Context& c);
 
   virtual ~AbstractTask();
 
@@ -52,7 +58,14 @@ protected:
   void runConsumers(void)
   { container.consume(); }
 
+  void dispatch(const IMC::Message* msg)
+  {
+    container.dispatch(msg);
+  }
+
   HardwareTimer* timer;
+
+private:
   const char* name;
   MailBox container;
 };

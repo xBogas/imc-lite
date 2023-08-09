@@ -10,6 +10,7 @@
 // Core includes
 #include "Tasks.h"
 #include "Timer.h"
+#include "Context.h"
 
 #include "parsers.h"
 #include <STM32Ethernet.h>
@@ -25,8 +26,8 @@ struct Task: public AbstractTask
   uint16_t remote_port;
   uint8_t packetBuffer[66];
 
-  Task():
-    AbstractTask("UDP")
+  Task(Context& c):
+    AbstractTask("UDP", c)
   {
     timer = setTimer(5);
   }
@@ -78,5 +79,9 @@ void Task::readUDP()
   }
 }
 
-static Task worker;
+//static Task worker;
 }}
+
+
+
+TASK_EXPORT(UDP)

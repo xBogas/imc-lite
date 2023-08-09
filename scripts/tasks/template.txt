@@ -33,3 +33,5 @@ static struct Task: public AbstractTask
 
 
 }}
+
+TASK_EXPORT(_param_task_name_)

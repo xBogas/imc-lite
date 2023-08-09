@@ -3,7 +3,8 @@
 #include "debug.h"
 #include "IMC_GENERATED/Definitions.hpp"
 
-MailBox::MailBox(void)
+MailBox::MailBox(Context& c) :
+  imc_bus(c.imc_bus)
 { }
 
 //TODO: unsubsribe before deleting queue
@@ -19,7 +20,7 @@ MessageQueue& MailBox::createQueue(const AbstractCallback* call)
 
 void MailBox::subscribe(uint16_t msg_id, const AbstractCallback* call)
 {
-  bus_subscribe(msg_id, createQueue(call));
+  imc_bus.registerQueue(msg_id, createQueue(call));
 }
 
 void MailBox::consume(void)

@@ -17,15 +17,11 @@ namespace GPIO {
 
 struct Task : public AbstractTask
 {
-  Task(): 
-    AbstractTask("GPIO")
+  Task(Context& c):
+    AbstractTask("GPIO", c)
   {
     debug("Creating task");
-    timer = setTimer(500);
-    if (timer != NULL)
-      debug("Timer allocated");
-    else
-      debug("Failed to allocate timer");
+    timer = setTimer(50);
   }
 
   ~Task()
@@ -40,17 +36,16 @@ struct Task : public AbstractTask
   uint32_t start;
   void loop()
   {
-    if ((millis() - start) > 1'000)
-    {
-      IMC::Message* msg = new IMC::SetPWM();
+    IMC::Message* msg = new IMC::SetPWM();
 
-      dispatch(msg->clone());
-      start = millis();
-      delete msg;
-    }
+    dispatch(msg);
+    delete msg;
   }
 };
 
 //static Task worker;
 
 }}
+
+
+TASK_EXPORT(GPIO)
