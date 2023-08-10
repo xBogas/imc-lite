@@ -5,13 +5,12 @@
 TASK_CREATE(UDP)
 TASK_CREATE(PWM)
 TASK_CREATE(GPIO)
-TASK_CREATE(Test)
 
 #undef TASK_CREATE
 
 void registerTasks(void)
 {
   createTask("UDP", createUDPTask);
-  createTask("PWM", createPWMask);
+  createTask("PWM", createPWMTask);
   createTask("GPIO", createGPIOTask);
 }
