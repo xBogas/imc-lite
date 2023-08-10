@@ -12,6 +12,7 @@ void setup()
   Serial.println("Ready for debug");
   serial_ready = true;
   Launcher boot;
+  boot.startTasks();
 }
 
 

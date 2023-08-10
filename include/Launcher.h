@@ -14,6 +14,8 @@ public:
   Launcher();
 
   ~Launcher();
+
+  void startTasks(void);
 };
 
 #endif

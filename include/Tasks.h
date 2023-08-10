@@ -35,12 +35,12 @@ public:
 
   void stop();
 
-  const char* getName()
+  const char* getName() const
   { return name; }
 
-  void debug(const char* format, ...);
-
 protected:
+
+  void debug(const char* format, ...);
 
   template<typename Msg, typename Obj>
   void subscribe(Obj& task, void (Obj::*consumer)(const Msg*) = &Obj::consume)
@@ -70,8 +70,6 @@ private:
   MailBox container;
 };
 
-void add_task(AbstractTask* obj);
-void start_tasks();
 void print_debug_msg();
 
 #endif
