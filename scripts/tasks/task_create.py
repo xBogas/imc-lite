@@ -53,8 +53,62 @@ class Task:
         fd.write(self.header())
         fd.write(self.body())
         fd.close()
+        print(f'Created Task {self._name_}')
 
+class Constructor:
+    def __init__(self, name):
+        self._name_ = name
 
+    def macro(self, lines):
+
+        macros = []
+        last_macro = False
+
+        for number, line in enumerate(lines, start=1):
+            line = line.rstrip()
+            has_line = line.startswith('TASK_CREATE')
+            if not has_line and last_macro:
+                macros.append(f'TASK_CREATE({self._name_})\n')
+                last_macro = has_line
+                continue
+
+            last_macro = has_line
+            if line.startswith('#undef'):
+                macros.append(line)
+                return '\n'.join(macros)+'\n', number
+
+            macros.append(line)
+
+        #return '\n'.join(macros)+'\n'
+
+    def register(self, lines, numb):
+
+        register = []
+        for line in lines[numb:]:
+
+            line = line.rstrip()
+            if line.startswith('}'):
+                register.append(f'  createTask("{self._name_}", create{self._name_}Task);')
+                return '\n'.join(register)+'\n}\n'
+
+            register.append(line)
+        print('Err')
+
+    def write(self, path):
+        path = os.path.join(path,'include/Launcher.def')
+        if not os.path.isfile(path):
+            print(f'File not found')
+            exit(1)
+        fd = open(path, 'r')
+        lines = fd.readlines()
+
+        fd = open(path, 'w')
+        text, lines_read = self.macro(lines)
+        fd.write(text)
+        fd.write(self.register(lines, lines_read))
+        fd.close()
+
+        print('Exported constructor')
 
 parser = argparse.ArgumentParser()
 
@@ -73,5 +127,9 @@ if args.author == '.':
     args.author = 'João Bogas'
 
 task = Task(args.author, args.name)
+task.write(task_folder+args.name+'.cpp')
 
-task.write(task_folder+args.name+".cpp")
+print(os.path.join(args.path,'include/Launcher.def'))
+
+append = Constructor(args.name)
+append.write(args.path)

@@ -2,13 +2,13 @@
 #include "Tasks.h"
 #include "Timer.h"
 
-namespace Task {
+namespace Tasks {
 namespace _param_task_name_ {
 
-static struct Task: public AbstractTask
+struct Task: public AbstractTask
 {
-  Task():
-    AbstractTask("_param_task_name_")
+  Task(Context& c):
+    AbstractTask("_param_task_name_", c)
   {
     debug("Creating task");
     timer = setTimer(DEFAULT_TIMER);
@@ -29,7 +29,7 @@ static struct Task: public AbstractTask
   {
     debug("Task running");
   }
-} worker;
+};
 
 
 }}
