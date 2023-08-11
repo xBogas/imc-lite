@@ -11,4 +11,6 @@ build/
 include/IMC_GENERATED/**
 src/IMC_GENERATED/**
 
+user/**
+
 **/__pycache__
