@@ -36,16 +36,17 @@ struct Task : public AbstractTask
   uint32_t start;
   void loop()
   {
-    IMC::Message* msg = new IMC::SetPWM();
-
+    IMC::SetPWM* msg = new IMC::SetPWM();
+    msg->duty_cycle = 1'000;
+    msg->period = 2'000;
+    msg->id = 1;
     dispatch(msg);
     delete msg;
   }
 };
 
-//static Task worker;
-
 }}
 
 
+TASK
 TASK_EXPORT(GPIO)

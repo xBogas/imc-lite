@@ -7,6 +7,8 @@
 #include "Context.h"
 #include "MailBox.h"
 
+#define TASK
+
 #define TASK_EXPORT(name)                             \
   AbstractTask*                                       \
   create##name##Task(const char* _name_, Context& _c_)  \
@@ -60,6 +62,7 @@ protected:
 
   void dispatch(const IMC::Message* msg)
   {
+    debug("Dispatching msg %s", msg->getName());
     container.dispatch(msg);
   }
 

@@ -37,7 +37,7 @@ struct Task: public AbstractTask
 
   void setup()
   {
-    const IPAddress src_ip(10, 0, 2, 83);
+    const IPAddress src_ip(192, 168, 1, 200);
     Ethernet.begin(src_ip);
     if(sock.begin(8080))
       debug("Socket ready");
@@ -79,9 +79,9 @@ void Task::readUDP()
   }
 }
 
-//static Task worker;
 }}
 
 
 
+TASK
 TASK_EXPORT(UDP)

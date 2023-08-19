@@ -17,6 +17,7 @@ namespace PWM {
 
 struct Task : public AbstractTask
 {
+  
   Task(Context& c)
     : AbstractTask("PWM", c)
   {
@@ -44,9 +45,8 @@ struct Task : public AbstractTask
 
 };
 
-//static Task worker;
-
 }}
 
 
+//TASK
 TASK_EXPORT(PWM)

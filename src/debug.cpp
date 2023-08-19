@@ -53,6 +53,7 @@ extern bool serial_ready;
 
 void debug(const char* src, const char *format, ...)
 {
+#ifdef DEBUG
   char bfr[128];
   va_list args;
   va_start(args, format);
@@ -65,4 +66,5 @@ void debug(const char* src, const char *format, ...)
     Serial.println(task_info);
   else
     add_msg(task_info);
+#endif
 }

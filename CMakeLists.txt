@@ -4,7 +4,12 @@ cmake_minimum_required(VERSION 3.1 FATAL_ERROR)
 
 project(LITE)
 
-find_program(PYTHON_EXE NAMES python3)
+find_program(PYTHON_EXE NAMES python)
+
+if(PYTHON_EXE)
+  find_program(PYTHON_EXE NAMES python3)
+endif(PYTHON_EXE)
+
 
 if(PYTHON_EXE)
   message(STATUS "IMC code generation enabled")

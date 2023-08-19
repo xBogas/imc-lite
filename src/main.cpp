@@ -3,7 +3,6 @@
 
 bool serial_ready = false;
 
-AbstractTask* ptr;
 
 void setup() 
 {
