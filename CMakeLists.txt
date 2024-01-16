@@ -44,10 +44,6 @@ macro(dune_target_imc target_name)
     ${IMC_FOLDER_CPP}
 
     COMMAND ${PROGRAM_PYTHON}
-    ${PROJECT_SOURCE_DIR}/scripts/generators/imc_tests.py
-    -x ${IMC_XML} ${IMC_TEST_FOLDER}
-
-    COMMAND ${PROGRAM_PYTHON}
     ${PROJECT_SOURCE_DIR}/scripts/generators/imc_addresses.py
     -x ${IMC_ADDRESSES_XML} ${PROJECT_SOURCE_DIR}/etc/imc-addresses.ini
 
