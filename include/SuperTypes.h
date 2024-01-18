@@ -32,6 +32,9 @@
 // IMC XML MD5: 762ef830be415e1c3e6f5b429829f51a                            *
 //***************************************************************************
 
+#ifndef IMC_SUPERTYPES_HPP_INCLUDED_
+#define IMC_SUPERTYPES_HPP_INCLUDED_
+
 // Local headers.
 #include "Header.h"
 #include "Message.h"
@@ -53,3 +56,5 @@ namespace IMC
   {
   };
 }
+
+#endif

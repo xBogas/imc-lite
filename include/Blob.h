@@ -37,22 +37,22 @@
 
 namespace IMC
 {
-	//! The IMC Blob is a byte array with the XML used to generate C++
-	//! code. The 'description' tags are removed and the XML document is
-	//! compressed with Gzip.
-	class Blob
-	{
-	public:
-		//! Retrieve pointer to blob data.
-		//! @return pointer to blob data.
-		static const unsigned char*
-		getData(void);
+  //! The IMC Blob is a byte array with the XML used to generate C++
+  //! code. The 'description' tags are removed and the XML document is
+  //! compressed with Gzip.
+  class Blob
+  {
+  public:
+    //! Retrieve pointer to blob data.
+    //! @return pointer to blob data.
+    static const unsigned char*
+    getData(void);
 
-		//! Retrieve size of the blob in bytes.
-		//! @return blob's size.
-		static unsigned int
-		getSize(void);
-	};
+    //! Retrieve size of the blob in bytes.
+    //! @return blob's size.
+    static unsigned int
+    getSize(void);
+  };
 }
 
 #endif

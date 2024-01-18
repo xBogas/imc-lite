@@ -1,9 +1,6 @@
 #ifndef IMC_PARSERS_H_INCLUDED_
 #define IMC_PARSERS_H_INCLUDED_
 
-// Arduino framework headers
-#include <Arduino.h>
-
 // Local headers
 #include "Header.h"
 #include "Message.h"

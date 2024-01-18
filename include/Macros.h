@@ -32,6 +32,9 @@
 // IMC XML MD5: 762ef830be415e1c3e6f5b429829f51a                            *
 //***************************************************************************
 
+#ifndef IMC_MACROS_HPP_INCLUDED_
+#define IMC_MACROS_HPP_INCLUDED_
+
 //! EntityState identification number.
 #define DUNE_IMC_ENTITYSTATE 1
 //! QueryEntityState identification number.
@@ -690,3 +693,5 @@
 #define DUNE_IMC_TOTALMAGINTENSITY 2006
 //! CommRestriction identification number.
 #define DUNE_IMC_COMMRESTRICTION 2010
+
+#endif

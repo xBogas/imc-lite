@@ -137,12 +137,8 @@ namespace IMC
 		parserHeader(hdr, bfr);
 
 		if (hdr.size > bfr_len - (DUNE_IMC_CONST_HEADER_SIZE + DUNE_IMC_CONST_FOOTER_SIZE))
-		{
 			debug("ERR", "Buffer too short");
-			Error_Handler();
-		}
 
-		Serial.println("Parsing payload");
 		return parserPayload(hdr, bfr);
 	}
 

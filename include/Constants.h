@@ -32,6 +32,9 @@
 // IMC XML MD5: 762ef830be415e1c3e6f5b429829f51a                            *
 //***************************************************************************
 
+#ifndef IMC_CONSTANTS_HPP_INCLUDED_
+#define IMC_CONSTANTS_HPP_INCLUDED_
+
 //! IMC version string.
 #define DUNE_IMC_CONST_VERSION "5.4.30"
 //! Git repository information.
@@ -54,3 +57,5 @@
 #define DUNE_IMC_CONST_UNK_EID 255
 //! System entity identifier.
 #define DUNE_IMC_CONST_SYS_EID 0
+
+#endif
