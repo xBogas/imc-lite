@@ -1,0 +1,12 @@
+{
+	"name" : "IMC",
+	"version" : "0.0",
+	"description" : "IMC interface for micro controllers",
+	"repository" :
+	{
+		"type" : "git",
+		"url" : "https://github.com/xBogas/imc-lite"
+	},
+	"frameworks" : "arduino",
+	"platforms" : "ststm32"
+}
