@@ -7,6 +7,6 @@
 		"type" : "git",
 		"url" : "https://github.com/xBogas/imc-lite"
 	},
-	"frameworks" : "arduino",
-	"platforms" : "ststm32"
+	"frameworks" : "*",
+	"platforms" : "*"
 }
