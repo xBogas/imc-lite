@@ -75,7 +75,7 @@ class File:
     def write(self):
         print('* ' + self.path)
         text = utils.get_cxx_copyright(self.md5, self._skip_md5) + '\n'
-        if self.path_ext == '.hpp':
+        if self.path_ext == '.h':
             if type(self._ns) is list:
                 prefix = ('_'.join(self._ns)).upper()
             else:
@@ -118,7 +118,7 @@ class File:
             else:
                 text += '}\n'
 
-        if self.path_ext == '.hpp':
+        if self.path_ext == '.h':
             text += '\n#endif'
 
         text += '\n'
