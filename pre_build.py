@@ -64,6 +64,8 @@ code_py = find_file('imc_code.py', lib_dir)
 
 # ######################### Check if IMC.xml exists #########################
 proj_dir = env.get("PROJECT_DIR")
+if proj_dir == None:
+	proj_dir = os.getcwd() 
 source_xml = search_dir('IMC.xml', proj_dir)
 if source_xml == None:
 	warn("IMC.xml not found! Downloading ...")
