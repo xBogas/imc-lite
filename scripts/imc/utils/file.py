@@ -34,11 +34,8 @@ import os.path
 from utils import utils
 
 def check_dir(path):
-    if os.path.isdir(path):
-        print(f"Directory exists {path}")
-    else:
-        print(f"Directory doesn't exist {path}")
-        print("Creating Directory")
+    if not os.path.isdir(path):
+        print(f"Creating Directory {path}")
         os.mkdir(path)
 
 
