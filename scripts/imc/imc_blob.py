@@ -46,9 +46,7 @@ CXX = 'Blob.cpp'
 import argparse
 parser = argparse.ArgumentParser(
     description="Strip, compress and generate IMC.xml blob.")
-parser.add_argument('dest_folder_hpp', metavar='DEST_FOLDER_HPP',
-                    help="destination folder")
-parser.add_argument('dest_folder_cpp', metavar='DEST_FOLDER_CPP',
+parser.add_argument('dest_folder', metavar='DEST_FOLDER',
                     help="destination folder")
 parser.add_argument('-x', '--xml', metavar='IMC_XML',
                     help="IMC XML file")
@@ -57,22 +55,23 @@ parser.add_argument('-f', '--force', action='store_true', required=False,
 args = parser.parse_args()
 
 xml_md5 = compute_md5(args.xml);
-dest_folder_hpp = args.dest_folder_hpp
-dest_folder_cpp = args.dest_folder_cpp
+parent = args.dest_folder
+dest_folder_hpp = os.path.join(parent, 'include')
+dest_folder_cpp = os.path.join(parent, 'src')
 
 check_dir(dest_folder_hpp)
 check_dir(dest_folder_cpp)
 
-# cpp, hpp = False, False
-# if not args.force:
-#     if file_md5_matches(os.path.join(dest_folder_cpp, CXX), xml_md5):
-#         print('* ' + os.path.join(dest_folder_cpp, CXX) + ' [Skipped]')
-#         cpp = True
-#     if file_md5_matches(os.path.join(dest_folder_hpp, HPP), xml_md5):
-#         print('* ' + os.path.join(dest_folder_hpp, HPP) + ' [Skipped]')
-#         hpp = True
-#     if cpp and hpp :
-#         sys.exit(0)
+cpp, hpp = False, False
+if not args.force:
+    if file_md5_matches(os.path.join(dest_folder_cpp, CXX), xml_md5):
+        print('* ' + os.path.join(dest_folder_cpp, CXX) + ' [Skipped]')
+        cpp = True
+    if file_md5_matches(os.path.join(dest_folder_hpp, HPP), xml_md5):
+        print('* ' + os.path.join(dest_folder_hpp, HPP) + ' [Skipped]')
+        hpp = True
+    if cpp and hpp :
+        sys.exit(0)
 
 
 # Parse XML specification.
@@ -100,64 +99,65 @@ f_out.close()
 ################################################################################
 # Blob.cpp                                                                     #
 ################################################################################
-fd = File(CXX, dest_folder_cpp, md5 = xml_md5)
-fd.add_imc_headers(HPP)
+if not cpp:
+    fd = File(CXX, dest_folder_cpp, md5 = xml_md5)
+    fd.add_imc_headers(HPP)
 
-# Byte array.
-fd.append('static const unsigned char c_imc_blob[] = \n{')
+    # Byte array.
+    fd.append('static const unsigned char c_imc_blob[] = \n{')
 
-import binascii
-octets = []
-with open(tmp.name, 'rb') as f_gz:
-    h = binascii.hexlify(f_gz.read())
-    octets += ['0x' + h[i : i + 2].decode() for i in range(0, len(h), 2)]
+    import binascii
+    octets = []
+    with open(tmp.name, 'rb') as f_gz:
+        h = binascii.hexlify(f_gz.read())
+        octets += ['0x' + h[i : i + 2].decode() for i in range(0, len(h), 2)]
 
-octets_per_line = 10
+    octets_per_line = 10
 
-for i in range(0, len(octets), octets_per_line):
-    l = octets[i : i + octets_per_line]
-    s = ','
-    if i + octets_per_line >= len(octets):
-        s = ''
-    fd.append(', '.join(l) + s)
+    for i in range(0, len(octets), octets_per_line):
+        l = octets[i : i + octets_per_line]
+        s = ','
+        if i + octets_per_line >= len(octets):
+            s = ''
+        fd.append(', '.join(l) + s)
 
-fd.append('};')
-fd.append('\n')
+    fd.append('};')
+    fd.append('\n')
 
-# getData()
-f = Function('Blob::getData', 'const unsigned char*')
-f.body('return c_imc_blob;')
-fd.append(f)
+    # getData()
+    f = Function('Blob::getData', 'const unsigned char*')
+    f.body('return c_imc_blob;')
+    fd.append(f)
 
-# getSize()
-f = Function('Blob::getSize', 'unsigned int')
-f.body('return sizeof(c_imc_blob);')
-fd.append(f)
+    # getSize()
+    f = Function('Blob::getSize', 'unsigned int')
+    f.body('return sizeof(c_imc_blob);')
+    fd.append(f)
 
-fd.write()
+    fd.write()
 
 ################################################################################
 # Blob.hpp                                                                     #
 ################################################################################
+if not hpp:
+    hpp = File(HPP, dest_folder_hpp, md5 = xml_md5)
 
-hpp = File(HPP, dest_folder_hpp, md5 = xml_md5)
+    str = 'The IMC Blob is a byte array with the XML used to generate C++\n'
+    str += '//! code. The \'description\' tags are removed and the XML document is\n'
+    str += '//! compressed with Gzip'
+    hpp.append(comment(str, nl = ''))
+    hpp.append('class Blob');
+    hpp.append('{')
+    hpp.append('public:')
 
-str = 'The IMC Blob is a byte array with the XML used to generate C++\n'
-str += '//! code. The \'description\' tags are removed and the XML document is\n'
-str += '//! compressed with Gzip'
-hpp.append(comment(str, nl = ''))
-hpp.append('class Blob');
-hpp.append('{')
-hpp.append('public:')
+    hpp.append(comment('Retrieve pointer to blob data', nl = ''))
+    hpp.append(comment('@return pointer to blob data', nl = ''))
+    f = Function('getData', 'const unsigned char*', static=True)
+    hpp.append(f.decl());
 
-hpp.append(comment('Retrieve pointer to blob data', nl = ''))
-hpp.append(comment('@return pointer to blob data', nl = ''))
-f = Function('getData', 'const unsigned char*', static=True)
-hpp.append(f.decl());
-
-hpp.append(comment('Retrieve size of the blob in bytes', nl = ''))
-hpp.append(comment('@return blob\'s size', nl = ''))
-f = Function('getSize', 'unsigned int' , static=True)
-hpp.append(f.decl());
-hpp.append('};')
-hpp.write()
+    hpp.append(comment('Retrieve size of the blob in bytes', nl = ''))
+    hpp.append(comment('@return blob\'s size', nl = ''))
+    f = Function('getSize', 'unsigned int' , static=True)
+    hpp.append(f.decl());
+    hpp.append('};')
+    hpp.write()

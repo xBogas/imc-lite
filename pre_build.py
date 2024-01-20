@@ -11,14 +11,15 @@ def error(msg):
 	"""
 	Print error message and exit
 	"""
-	print("\033[91m", msg)
+	print("\033[91m" + msg + "\033[0m")
 	sys.exit(1)
+
 
 def warn(msg):
 	"""
 	Print warning message
 	"""
-	print("\033[93m" + msg)
+	print("\033[93m" + msg + "\033[0m")
 
 
 def find_file(fd, paths, err=True):
@@ -47,13 +48,31 @@ def search_dir(filename, search_path):
 
 	return None
 
-def check_file(dir, file_name):
-	"""
-	Check if a file exists in a directory
-	"""
-	return os.path.exists(os.path.join(dir, file_name))
+def run_script(script, xml, dir, force):
+    args = ['python', script, '-x' + xml, dir]
+    if force:
+        args.append('--force')
+    subprocess.run(args)
+
+# lib_dir = env.get("LIBSOURCE_DIRS", [])
+lib_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+
+clone_py = find_file('imc_download.py', lib_dir)
+blob_py = find_file('imc_blob.py', lib_dir)
+code_py = find_file('imc_code.py', lib_dir)
 
 
+# Check if code generation is forced
+try:
+	force_imc = env.GetProjectOption('custom_force_imc')
+	valid_params = ['True', 'true', '1']
+	if force_imc in valid_params:
+		force_imc = True
+	else:
+		force_imc = False
+
+except:
+	force_imc = False
 
 # lib_dir = env.get("LIBSOURCE_DIRS", [])
 lib_dir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -73,43 +92,13 @@ if source_xml == None:
 		subprocess.run(['python', clone_py, proj_dir+'/imc/'], stderr=subprocess.PIPE)
 		source_xml = search_dir('IMC.xml', proj_dir)
 	except:
-		error('Error downloading IMC.xml')
+		error("Error downloading IMC.xml")
 
 if source_xml == None:
-	error('Error downloading IMC.xml')
+	error("Error downloading IMC.xml")
 
 print("Using IMC from ", source_xml)
 # ###########################################################################
 
-
-# #######################  Check IMC generated files ########################
-dir_hpp = os.path.join(lib_dir, 'include')
-dir_cpp = os.path.join(lib_dir, 'src')
-
-headers = ['Bitfields.h',
-		   'Constants.h',
-		   'Definitions.h',
-		   'Enumerations.h',
-		   'Factory.def',
-		   'Macros.h',
-		   'SuperTypes.h']
-
-if not check_file(dir_hpp, 'Blob.h') or not check_file(dir_cpp, 'Blob.cpp'):
-	print("Creating Blob files ...")
-	subprocess.run(['python', 
-					blob_py, 
-					'-x' + source_xml,
-					dir_hpp,
-					dir_cpp])
-
-
-for file_name in headers:
-	file_path = os.path.join(dir_hpp, file_name)
-	if not os.path.exists(file_path):
-		print("Creating code files")
-		subprocess.run(['python',
-				  		code_py,
-						'-x' + source_xml,
-						dir_hpp,
-						dir_cpp])
-		break
+run_script(blob_py, source_xml, lib_dir, force_imc)
+run_script(code_py, source_xml, lib_dir, force_imc)

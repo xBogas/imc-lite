@@ -366,14 +366,131 @@ class Message:
         return len(self._node.findall("field[@type='message']")) + \
                len(self._node.findall("field[@type='message-list']"))
 
+
+def Enumerations(root, dest_folder, xml_md5):
+    """
+    Generate Enumerations.h
+    """
+    f = File('Enumerations.h', dest_folder, md5 = xml_md5)
+    ens = root.findall('enumerations/def')
+    for en in ens:
+        enum = Enum(en.get('abbrev'), en.get('name'))
+        for field in en.findall('value'):
+            name = en.get('prefix') + '_' + field.get('abbrev')
+            enum.add_field(EnumField(name, field.get('id'), field.get('name')))
+        f.append(enum)
+    f.write()
+
+
+def Bitfields(root, dest_folder, xml_md5):
+    """
+    Generate Bitfields.h
+    """
+    f = File('Bitfields.h', dest_folder, md5 = xml_md5)
+    ens = root.findall('bitfields/def')
+    for en in ens:
+        enum = Enum(en.get('abbrev'), en.get('name'))
+        for field in en.findall('value'):
+            name = en.get('prefix') + '_' + field.get('abbrev')
+            enum.add_field(EnumField(name, field.get('id'), field.get('name')))
+        f.append(enum)
+    f.write()
+
+
+def Constants(consts, dest_folder, xml_md5):
+    """
+    Generate Constants.h
+    """
+    f = File('Constants.h', dest_folder, ns = False, md5 = xml_md5)
+
+    # Macros
+    f.append(Macro('CONST_VERSION', '"%(version)s"' % consts, 'IMC version string'))
+    f.append(Macro('CONST_GIT_INFO', '"%(git_info)s"' % consts, 'Git repository information'))
+    f.append(Macro('CONST_MD5', '"%(md5)s"' % consts, 'MD5 sum of XML specification file'))
+    f.append(Macro('CONST_SYNC', consts['sync'], 'Synchronization number'))
+    f.append(Macro('CONST_SYNC_REV', consts['sync_rev'], 'Reversed synchronization number'))
+    f.append(Macro('CONST_HEADER_SIZE', consts['header_size'], 'Size of the header in bytes'))
+    f.append(Macro('CONST_FOOTER_SIZE', consts['footer_size'], 'Size of the footer in bytes'))
+    f.append(Macro('CONST_NULL_ID', CONST_NULL_ID, 'Identification number of the null message'))
+    f.append(Macro('CONST_MAX_SIZE', 2**16-1, 'Maximum message data size'))
+    f.append(Macro('CONST_UNK_EID', 255, 'Unknown entity identifier'))
+    f.append(Macro('CONST_SYS_EID', 0, 'System entity identifier'))
+    f.write()
+
+
+def Macros(root, dest_folder, xml_md5):
+    """
+    Generate Macros.h
+    """
+    f = File('Macros.h', dest_folder, ns = False, md5 = xml_md5)
+    msgs = root.findall('message')
+    for msg in msgs:
+        f.append(Macro(msg.get('abbrev').upper(),
+                    msg.get('id'),
+                    msg.get('abbrev') + ' identification number'))
+    f.write()
+
+
+def Factory(root, dest_folder, xml_md5):
+    """
+    Generate Factory.def
+    """
+    f = File('Factory.def', dest_folder, ns = False, md5 = xml_md5)
+    for msg in root.findall('message'):
+        f.append('MESSAGE(%(id)s, %(abbrev)s)' % msg.attrib)
+    f.append('#undef MESSAGE')
+    f.write()
+
+
+def SuperTypes(root, dest_folder, xml_md5):
+    """
+    Generate SuperTypes.h
+    """
+    f = File('SuperTypes.h', dest_folder, md5 = xml_md5)
+    f.add_local_headers('Header.h', 'Message.h')
+    for group in root.findall("message-groups/message-group"):
+        f.append(comment('Super type %s' % group.get('name'), nl = ''))
+        f.append('class %s: public Message\n{' % group.get('abbrev'))
+        f.append('};\n')
+    f.write()
+
+
+def Definitions(root, consts, dest_folder, xml_md5):
+    """
+    Generate Definitions.h and Definitions.cpp
+    """
+    dest_folder_hpp = os.path.join(dest_folder, 'include')
+    dest_folder_cpp = os.path.join(dest_folder, 'src')
+
+    hpp = File('Definitions.h', dest_folder_hpp, md5 = xml_md5)
+
+    hpp.add_local_headers('Header.h', 'Message.h', 'Serialization.h',
+                        'InlineMessage.h', 'MessageList.h')
+
+    hpp.add_imc_headers('Enumerations.h', 'Bitfields.h',
+                        'SuperTypes.h')
+
+    cpp = File('Definitions.cpp', dest_folder_cpp, md5 = xml_md5)
+    cpp.add_imc_headers('Definitions.h')
+
+    deps = Dependencies(root)
+    abbrevs = deps.get_list()
+
+    for abbrev in abbrevs:
+        msg = root.find("message[@abbrev='%s']" % abbrev)
+        Message(root, msg, hpp, cpp, consts)
+    hpp.write()
+    cpp.write()
+
+
 # Parse command line arguments.
 import argparse
+import sys
+
 parser = argparse.ArgumentParser(
     description="Strip, compress and generate IMC.xml blob.")
-parser.add_argument('dest_folder_hpp', metavar='DEST_FOLDER_HPP',
-                    help="destination folder .h")
-parser.add_argument('dest_folder_cpp', metavar='DEST_FOLDER_CPP',
-                    help="destination folder .CPP")
+parser.add_argument('dest_folder', metavar='DEST_FOLDER',
+                    help="destination folder")
 parser.add_argument('-x', '--xml', metavar='IMC_XML',
                     help="IMC XML file")
 parser.add_argument('-f', '--force', action='store_true', required=False,
@@ -381,11 +498,9 @@ parser.add_argument('-f', '--force', action='store_true', required=False,
 args = parser.parse_args()
 
 xml_md5 = compute_md5(args.xml)
-dest_folder_hpp = args.dest_folder_hpp
-dest_folder_cpp = args.dest_folder_cpp
-
-check_dir(dest_folder_hpp)
-check_dir(dest_folder_cpp)
+parent = args.dest_folder
+dest_folder_hpp = os.path.join(parent, 'include')
+dest_folder_cpp = os.path.join(parent, 'src')
 
 # Parse XML specification.
 import xml.etree.ElementTree as ET
@@ -449,106 +564,47 @@ consts['footer_size'] = 0
 for f in root.findall('footer/field'):
     consts['footer_size'] += consts['sizes'][f.get('type')]
 
-################################################################################
-# Enumerations.h                                                             #
-################################################################################
-f = File('Enumerations.h', dest_folder_hpp, md5 = xml_md5)
-ens = root.findall('enumerations/def')
-for en in ens:
-    enum = Enum(en.get('abbrev'), en.get('name'))
-    for field in en.findall('value'):
-        name = en.get('prefix') + '_' + field.get('abbrev')
-        enum.add_field(EnumField(name, field.get('id'), field.get('name')))
-    f.append(enum)
-f.write()
 
-################################################################################
-# Bitfields.h                                                                #
-################################################################################
-f = File('Bitfields.h', dest_folder_hpp, md5 = xml_md5)
-ens = root.findall('bitfields/def')
-for en in ens:
-    enum = Enum(en.get('abbrev'), en.get('name'))
-    for field in en.findall('value'):
-        name = en.get('prefix') + '_' + field.get('abbrev')
-        enum.add_field(EnumField(name, field.get('id'), field.get('name')))
-    f.append(enum)
-f.write()
+check_dir(dest_folder_hpp)
+check_dir(dest_folder_cpp)
 
-################################################################################
-# Constants.h                                                                #
-################################################################################
-f = File('Constants.h', dest_folder_hpp, ns = False, md5 = xml_md5)
+DEFS = [os.path.join(dest_folder_cpp, 'Definitions.cpp'),
+       os.path.join(dest_folder_hpp, 'Definitions.h')]
 
-# Macros
-f.append(Macro('CONST_VERSION', '"%(version)s"' % consts, 'IMC version string'))
-f.append(Macro('CONST_GIT_INFO', '"%(git_info)s"' % consts, 'Git repository information'))
-f.append(Macro('CONST_MD5', '"%(md5)s"' % consts, 'MD5 sum of XML specification file'))
-f.append(Macro('CONST_SYNC', consts['sync'], 'Synchronization number'))
-f.append(Macro('CONST_SYNC_REV', consts['sync_rev'], 'Reversed synchronization number'))
-f.append(Macro('CONST_HEADER_SIZE', consts['header_size'], 'Size of the header in bytes'))
-f.append(Macro('CONST_FOOTER_SIZE', consts['footer_size'], 'Size of the footer in bytes'))
-f.append(Macro('CONST_NULL_ID', CONST_NULL_ID, 'Identification number of the null message'))
-f.append(Macro('CONST_MAX_SIZE', 2**16-1, 'Maximum message data size'))
-f.append(Macro('CONST_UNK_EID', 255, 'Unknown entity identifier'))
-f.append(Macro('CONST_SYS_EID', 0, 'System entity identifier'))
-f.write()
+from functools import partial
 
-################################################################################
-# Macros.h                                                                   #
-################################################################################
-f = File('Macros.h', dest_folder_hpp, ns = False, md5 = xml_md5)
-msgs = root.findall('message')
-for msg in msgs:
-    f.append(Macro(msg.get('abbrev').upper(),
-                   msg.get('id'),
-                   msg.get('abbrev') + ' identification number'))
-f.write()
+HEADERS = [('Enumerations.h', partial(Enumerations, root, dest_folder_hpp, xml_md5)),
+           ('Bitfields.h', partial(Bitfields, root, dest_folder_hpp, xml_md5)),
+           ('Constants.h', partial(Constants, consts, dest_folder_hpp, xml_md5)),
+           ('Macros.h', partial(Macros, root, dest_folder_hpp, xml_md5)),
+           ('Factory.def', partial(Factory, root, dest_folder_hpp, xml_md5)),
+           ('SuperTypes.h', partial(SuperTypes, root, dest_folder_hpp, xml_md5))]
+
+if not args.force:
+    if (file_md5_matches(DEFS[0], xml_md5)  and
+        file_md5_matches(DEFS[1], xml_md5)) :
+        print('* ' + DEFS[0] + ' [Skipped]')
+        print('* ' + DEFS[1] + ' [Skipped]')
+    else :
+        Definitions(root, consts, parent, xml_md5)
+
+    for header, func in HEADERS:
+        fd = os.path.join(dest_folder_hpp, header)
+        if file_md5_matches(fd, xml_md5):
+            print('* ' + fd + ' [Skipped]')
+        else:
+            func()
+
+    sys.exit(0)
 
 
-################################################################################
-# Factory.def                                                                  #
-################################################################################
-f = File('Factory.def', dest_folder_hpp, ns = False, md5 = xml_md5)
-for msg in root.findall('message'):
-    f.append('MESSAGE(%(id)s, %(abbrev)s)' % msg.attrib)
-f.append('#undef MESSAGE')
-f.write()
 
-################################################################################
-# SuperTypes.h                                                               #
-################################################################################
-f = File('SuperTypes.h', dest_folder_hpp, md5 = xml_md5)
-f.add_local_headers('Header.h', 'Message.h')
-for group in root.findall("message-groups/message-group"):
-    f.append(comment('Super type %s' % group.get('name'), nl = ''))
-    f.append('class %s: public Message\n{' % group.get('abbrev'))
-    f.append('};\n')
-f.write()
+# Generate files.
+Enumerations(root, dest_folder_hpp, xml_md5)
+Bitfields(root, dest_folder_hpp, xml_md5)
+Constants(consts, dest_folder_hpp, xml_md5)
+Macros(root, dest_folder_hpp, xml_md5)
+Factory(root, dest_folder_hpp, xml_md5)
+SuperTypes(root, dest_folder_hpp, xml_md5)
+Definitions(root, consts, parent, xml_md5)
 
-################################################################################
-# Definitions.h                                                              #
-################################################################################
-hpp = File('Definitions.h', dest_folder_hpp, md5 = xml_md5)
-
-hpp.add_local_headers('Header.h', 'Message.h', 'Serialization.h',
-                      'InlineMessage.h', 'MessageList.h')
-
-hpp.add_imc_headers('Enumerations.h', 'Bitfields.h',
-                    'SuperTypes.h')
-
-
-################################################################################
-# Definitions.cpp                                                              #
-################################################################################
-cpp = File('Definitions.cpp', dest_folder_cpp, md5 = xml_md5)
-cpp.add_imc_headers('Definitions.h')
-
-deps = Dependencies(root)
-abbrevs = deps.get_list()
-
-for abbrev in abbrevs:
-    msg = root.find("message[@abbrev='%s']" % abbrev)
-    Message(root, msg, hpp, cpp, consts)
-hpp.write()
-cpp.write()
