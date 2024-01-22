@@ -46,7 +46,9 @@ CXX = 'Blob.cpp'
 import argparse
 parser = argparse.ArgumentParser(
     description="Strip, compress and generate IMC.xml blob.")
-parser.add_argument('dest_folder', metavar='DEST_FOLDER',
+parser.add_argument('dest_folder_hpp', metavar='DEST_FOLDER_HPP',
+                    help="destination folder")
+parser.add_argument('dest_folder_cpp', metavar='DEST_FOLDER_CPP',
                     help="destination folder")
 parser.add_argument('-x', '--xml', metavar='IMC_XML',
                     help="IMC XML file")
@@ -55,9 +57,8 @@ parser.add_argument('-f', '--force', action='store_true', required=False,
 args = parser.parse_args()
 
 xml_md5 = compute_md5(args.xml);
-parent = args.dest_folder
-dest_folder_hpp = os.path.join(parent, 'include')
-dest_folder_cpp = os.path.join(parent, 'src')
+dest_folder_hpp = args.dest_folder_hpp
+dest_folder_cpp = args.dest_folder_cpp
 
 check_dir(dest_folder_hpp)
 check_dir(dest_folder_cpp)

@@ -455,14 +455,11 @@ def SuperTypes(root, dest_folder, xml_md5):
     f.write()
 
 
-def Definitions(root, consts, dest_folder, xml_md5):
+def Definitions(root, consts, dir_hpp, dir_cpp, xml_md5):
     """
     Generate Definitions.h and Definitions.cpp
     """
-    dest_folder_hpp = os.path.join(dest_folder, 'include')
-    dest_folder_cpp = os.path.join(dest_folder, 'src')
-
-    hpp = File('Definitions.h', dest_folder_hpp, md5 = xml_md5)
+    hpp = File('Definitions.h', dir_hpp, md5 = xml_md5)
 
     hpp.add_local_headers('Header.h', 'Message.h', 'Serialization.h',
                         'InlineMessage.h', 'MessageList.h')
@@ -470,7 +467,7 @@ def Definitions(root, consts, dest_folder, xml_md5):
     hpp.add_imc_headers('Enumerations.h', 'Bitfields.h',
                         'SuperTypes.h')
 
-    cpp = File('Definitions.cpp', dest_folder_cpp, md5 = xml_md5)
+    cpp = File('Definitions.cpp', dir_cpp, md5 = xml_md5)
     cpp.add_imc_headers('Definitions.h')
 
     deps = Dependencies(root)
@@ -489,7 +486,9 @@ import sys
 
 parser = argparse.ArgumentParser(
     description="Strip, compress and generate IMC.xml blob.")
-parser.add_argument('dest_folder', metavar='DEST_FOLDER',
+parser.add_argument('dest_folder_hpp', metavar='DEST_FOLDER_HPP',
+                    help="destination folder")
+parser.add_argument('dest_folder_cpp', metavar='DEST_FOLDER_CPP',
                     help="destination folder")
 parser.add_argument('-x', '--xml', metavar='IMC_XML',
                     help="IMC XML file")
@@ -498,9 +497,8 @@ parser.add_argument('-f', '--force', action='store_true', required=False,
 args = parser.parse_args()
 
 xml_md5 = compute_md5(args.xml)
-parent = args.dest_folder
-dest_folder_hpp = os.path.join(parent, 'include')
-dest_folder_cpp = os.path.join(parent, 'src')
+dest_folder_hpp = args.dest_folder_hpp
+dest_folder_cpp = args.dest_folder_cpp
 
 # Parse XML specification.
 import xml.etree.ElementTree as ET
@@ -586,7 +584,7 @@ if not args.force:
         print('* ' + DEFS[0] + ' [Skipped]')
         print('* ' + DEFS[1] + ' [Skipped]')
     else :
-        Definitions(root, consts, parent, xml_md5)
+        Definitions(root, consts, dest_folder_hpp, dest_folder_cpp, xml_md5)
 
     for header, func in HEADERS:
         fd = os.path.join(dest_folder_hpp, header)
@@ -606,5 +604,5 @@ Constants(consts, dest_folder_hpp, xml_md5)
 Macros(root, dest_folder_hpp, xml_md5)
 Factory(root, dest_folder_hpp, xml_md5)
 SuperTypes(root, dest_folder_hpp, xml_md5)
-Definitions(root, consts, parent, xml_md5)
+Definitions(root, consts, dest_folder_hpp, dest_folder_cpp, xml_md5)
 
