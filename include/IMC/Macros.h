@@ -36,662 +36,662 @@
 #define IMC_MACROS_HPP_INCLUDED_
 
 //! EntityState identification number.
-#define DUNE_IMC_ENTITYSTATE 1
+#define IMC_ENTITYSTATE 1
 //! QueryEntityState identification number.
-#define DUNE_IMC_QUERYENTITYSTATE 2
+#define IMC_QUERYENTITYSTATE 2
 //! EntityInfo identification number.
-#define DUNE_IMC_ENTITYINFO 3
+#define IMC_ENTITYINFO 3
 //! QueryEntityInfo identification number.
-#define DUNE_IMC_QUERYENTITYINFO 4
+#define IMC_QUERYENTITYINFO 4
 //! EntityList identification number.
-#define DUNE_IMC_ENTITYLIST 5
+#define IMC_ENTITYLIST 5
 //! CpuUsage identification number.
-#define DUNE_IMC_CPUUSAGE 7
+#define IMC_CPUUSAGE 7
 //! TransportBindings identification number.
-#define DUNE_IMC_TRANSPORTBINDINGS 8
+#define IMC_TRANSPORTBINDINGS 8
 //! RestartSystem identification number.
-#define DUNE_IMC_RESTARTSYSTEM 9
+#define IMC_RESTARTSYSTEM 9
 //! DevCalibrationControl identification number.
-#define DUNE_IMC_DEVCALIBRATIONCONTROL 12
+#define IMC_DEVCALIBRATIONCONTROL 12
 //! DevCalibrationState identification number.
-#define DUNE_IMC_DEVCALIBRATIONSTATE 13
+#define IMC_DEVCALIBRATIONSTATE 13
 //! EntityActivationState identification number.
-#define DUNE_IMC_ENTITYACTIVATIONSTATE 14
+#define IMC_ENTITYACTIVATIONSTATE 14
 //! QueryEntityActivationState identification number.
-#define DUNE_IMC_QUERYENTITYACTIVATIONSTATE 15
+#define IMC_QUERYENTITYACTIVATIONSTATE 15
 //! VehicleOperationalLimits identification number.
-#define DUNE_IMC_VEHICLEOPERATIONALLIMITS 16
+#define IMC_VEHICLEOPERATIONALLIMITS 16
 //! MsgList identification number.
-#define DUNE_IMC_MSGLIST 20
+#define IMC_MSGLIST 20
 //! SimulatedState identification number.
-#define DUNE_IMC_SIMULATEDSTATE 50
+#define IMC_SIMULATEDSTATE 50
 //! LeakSimulation identification number.
-#define DUNE_IMC_LEAKSIMULATION 51
+#define IMC_LEAKSIMULATION 51
 //! UASimulation identification number.
-#define DUNE_IMC_UASIMULATION 52
+#define IMC_UASIMULATION 52
 //! DynamicsSimParam identification number.
-#define DUNE_IMC_DYNAMICSSIMPARAM 53
+#define IMC_DYNAMICSSIMPARAM 53
 //! StorageUsage identification number.
-#define DUNE_IMC_STORAGEUSAGE 100
+#define IMC_STORAGEUSAGE 100
 //! CacheControl identification number.
-#define DUNE_IMC_CACHECONTROL 101
+#define IMC_CACHECONTROL 101
 //! LoggingControl identification number.
-#define DUNE_IMC_LOGGINGCONTROL 102
+#define IMC_LOGGINGCONTROL 102
 //! LogBookEntry identification number.
-#define DUNE_IMC_LOGBOOKENTRY 103
+#define IMC_LOGBOOKENTRY 103
 //! LogBookControl identification number.
-#define DUNE_IMC_LOGBOOKCONTROL 104
+#define IMC_LOGBOOKCONTROL 104
 //! ReplayControl identification number.
-#define DUNE_IMC_REPLAYCONTROL 105
+#define IMC_REPLAYCONTROL 105
 //! ClockControl identification number.
-#define DUNE_IMC_CLOCKCONTROL 106
+#define IMC_CLOCKCONTROL 106
 //! HistoricCTD identification number.
-#define DUNE_IMC_HISTORICCTD 107
+#define IMC_HISTORICCTD 107
 //! HistoricTelemetry identification number.
-#define DUNE_IMC_HISTORICTELEMETRY 108
+#define IMC_HISTORICTELEMETRY 108
 //! HistoricSonarData identification number.
-#define DUNE_IMC_HISTORICSONARDATA 109
+#define IMC_HISTORICSONARDATA 109
 //! HistoricEvent identification number.
-#define DUNE_IMC_HISTORICEVENT 110
+#define IMC_HISTORICEVENT 110
 //! VerticalProfile identification number.
-#define DUNE_IMC_VERTICALPROFILE 111
+#define IMC_VERTICALPROFILE 111
 //! ProfileSample identification number.
-#define DUNE_IMC_PROFILESAMPLE 112
+#define IMC_PROFILESAMPLE 112
 //! Heartbeat identification number.
-#define DUNE_IMC_HEARTBEAT 150
+#define IMC_HEARTBEAT 150
 //! Announce identification number.
-#define DUNE_IMC_ANNOUNCE 151
+#define IMC_ANNOUNCE 151
 //! AnnounceService identification number.
-#define DUNE_IMC_ANNOUNCESERVICE 152
+#define IMC_ANNOUNCESERVICE 152
 //! RSSI identification number.
-#define DUNE_IMC_RSSI 153
+#define IMC_RSSI 153
 //! VSWR identification number.
-#define DUNE_IMC_VSWR 154
+#define IMC_VSWR 154
 //! LinkLevel identification number.
-#define DUNE_IMC_LINKLEVEL 155
+#define IMC_LINKLEVEL 155
 //! Sms identification number.
-#define DUNE_IMC_SMS 156
+#define IMC_SMS 156
 //! SmsTx identification number.
-#define DUNE_IMC_SMSTX 157
+#define IMC_SMSTX 157
 //! SmsRx identification number.
-#define DUNE_IMC_SMSRX 158
+#define IMC_SMSRX 158
 //! SmsState identification number.
-#define DUNE_IMC_SMSSTATE 159
+#define IMC_SMSSTATE 159
 //! TextMessage identification number.
-#define DUNE_IMC_TEXTMESSAGE 160
+#define IMC_TEXTMESSAGE 160
 //! IridiumMsgRx identification number.
-#define DUNE_IMC_IRIDIUMMSGRX 170
+#define IMC_IRIDIUMMSGRX 170
 //! IridiumMsgTx identification number.
-#define DUNE_IMC_IRIDIUMMSGTX 171
+#define IMC_IRIDIUMMSGTX 171
 //! IridiumTxStatus identification number.
-#define DUNE_IMC_IRIDIUMTXSTATUS 172
+#define IMC_IRIDIUMTXSTATUS 172
 //! GroupMembershipState identification number.
-#define DUNE_IMC_GROUPMEMBERSHIPSTATE 180
+#define IMC_GROUPMEMBERSHIPSTATE 180
 //! SystemGroup identification number.
-#define DUNE_IMC_SYSTEMGROUP 181
+#define IMC_SYSTEMGROUP 181
 //! LinkLatency identification number.
-#define DUNE_IMC_LINKLATENCY 182
+#define IMC_LINKLATENCY 182
 //! ExtendedRSSI identification number.
-#define DUNE_IMC_EXTENDEDRSSI 183
+#define IMC_EXTENDEDRSSI 183
 //! HistoricData identification number.
-#define DUNE_IMC_HISTORICDATA 184
+#define IMC_HISTORICDATA 184
 //! CompressedHistory identification number.
-#define DUNE_IMC_COMPRESSEDHISTORY 185
+#define IMC_COMPRESSEDHISTORY 185
 //! HistoricSample identification number.
-#define DUNE_IMC_HISTORICSAMPLE 186
+#define IMC_HISTORICSAMPLE 186
 //! HistoricDataQuery identification number.
-#define DUNE_IMC_HISTORICDATAQUERY 187
+#define IMC_HISTORICDATAQUERY 187
 //! RemoteCommand identification number.
-#define DUNE_IMC_REMOTECOMMAND 188
+#define IMC_REMOTECOMMAND 188
 //! CommSystemsQuery identification number.
-#define DUNE_IMC_COMMSYSTEMSQUERY 189
+#define IMC_COMMSYSTEMSQUERY 189
 //! TelemetryMsg identification number.
-#define DUNE_IMC_TELEMETRYMSG 190
+#define IMC_TELEMETRYMSG 190
 //! LblRange identification number.
-#define DUNE_IMC_LBLRANGE 200
+#define IMC_LBLRANGE 200
 //! LblBeacon identification number.
-#define DUNE_IMC_LBLBEACON 202
+#define IMC_LBLBEACON 202
 //! LblConfig identification number.
-#define DUNE_IMC_LBLCONFIG 203
+#define IMC_LBLCONFIG 203
 //! AcousticMessage identification number.
-#define DUNE_IMC_ACOUSTICMESSAGE 206
+#define IMC_ACOUSTICMESSAGE 206
 //! SimAcousticMessage identification number.
-#define DUNE_IMC_SIMACOUSTICMESSAGE 207
+#define IMC_SIMACOUSTICMESSAGE 207
 //! AcousticOperation identification number.
-#define DUNE_IMC_ACOUSTICOPERATION 211
+#define IMC_ACOUSTICOPERATION 211
 //! AcousticSystemsQuery identification number.
-#define DUNE_IMC_ACOUSTICSYSTEMSQUERY 212
+#define IMC_ACOUSTICSYSTEMSQUERY 212
 //! AcousticSystems identification number.
-#define DUNE_IMC_ACOUSTICSYSTEMS 213
+#define IMC_ACOUSTICSYSTEMS 213
 //! AcousticLink identification number.
-#define DUNE_IMC_ACOUSTICLINK 214
+#define IMC_ACOUSTICLINK 214
 //! AcousticRequest identification number.
-#define DUNE_IMC_ACOUSTICREQUEST 215
+#define IMC_ACOUSTICREQUEST 215
 //! AcousticStatus identification number.
-#define DUNE_IMC_ACOUSTICSTATUS 216
+#define IMC_ACOUSTICSTATUS 216
 //! AcousticRelease identification number.
-#define DUNE_IMC_ACOUSTICRELEASE 217
+#define IMC_ACOUSTICRELEASE 217
 //! Rpm identification number.
-#define DUNE_IMC_RPM 250
+#define IMC_RPM 250
 //! Voltage identification number.
-#define DUNE_IMC_VOLTAGE 251
+#define IMC_VOLTAGE 251
 //! Current identification number.
-#define DUNE_IMC_CURRENT 252
+#define IMC_CURRENT 252
 //! GpsFix identification number.
-#define DUNE_IMC_GPSFIX 253
+#define IMC_GPSFIX 253
 //! EulerAngles identification number.
-#define DUNE_IMC_EULERANGLES 254
+#define IMC_EULERANGLES 254
 //! EulerAnglesDelta identification number.
-#define DUNE_IMC_EULERANGLESDELTA 255
+#define IMC_EULERANGLESDELTA 255
 //! AngularVelocity identification number.
-#define DUNE_IMC_ANGULARVELOCITY 256
+#define IMC_ANGULARVELOCITY 256
 //! Acceleration identification number.
-#define DUNE_IMC_ACCELERATION 257
+#define IMC_ACCELERATION 257
 //! MagneticField identification number.
-#define DUNE_IMC_MAGNETICFIELD 258
+#define IMC_MAGNETICFIELD 258
 //! GroundVelocity identification number.
-#define DUNE_IMC_GROUNDVELOCITY 259
+#define IMC_GROUNDVELOCITY 259
 //! WaterVelocity identification number.
-#define DUNE_IMC_WATERVELOCITY 260
+#define IMC_WATERVELOCITY 260
 //! VelocityDelta identification number.
-#define DUNE_IMC_VELOCITYDELTA 261
+#define IMC_VELOCITYDELTA 261
 //! Distance identification number.
-#define DUNE_IMC_DISTANCE 262
+#define IMC_DISTANCE 262
 //! Temperature identification number.
-#define DUNE_IMC_TEMPERATURE 263
+#define IMC_TEMPERATURE 263
 //! Pressure identification number.
-#define DUNE_IMC_PRESSURE 264
+#define IMC_PRESSURE 264
 //! Depth identification number.
-#define DUNE_IMC_DEPTH 265
+#define IMC_DEPTH 265
 //! DepthOffset identification number.
-#define DUNE_IMC_DEPTHOFFSET 266
+#define IMC_DEPTHOFFSET 266
 //! SoundSpeed identification number.
-#define DUNE_IMC_SOUNDSPEED 267
+#define IMC_SOUNDSPEED 267
 //! WaterDensity identification number.
-#define DUNE_IMC_WATERDENSITY 268
+#define IMC_WATERDENSITY 268
 //! Conductivity identification number.
-#define DUNE_IMC_CONDUCTIVITY 269
+#define IMC_CONDUCTIVITY 269
 //! Salinity identification number.
-#define DUNE_IMC_SALINITY 270
+#define IMC_SALINITY 270
 //! WindSpeed identification number.
-#define DUNE_IMC_WINDSPEED 271
+#define IMC_WINDSPEED 271
 //! RelativeHumidity identification number.
-#define DUNE_IMC_RELATIVEHUMIDITY 272
+#define IMC_RELATIVEHUMIDITY 272
 //! DevDataText identification number.
-#define DUNE_IMC_DEVDATATEXT 273
+#define IMC_DEVDATATEXT 273
 //! DevDataBinary identification number.
-#define DUNE_IMC_DEVDATABINARY 274
+#define IMC_DEVDATABINARY 274
 //! Force identification number.
-#define DUNE_IMC_FORCE 275
+#define IMC_FORCE 275
 //! SonarData identification number.
-#define DUNE_IMC_SONARDATA 276
+#define IMC_SONARDATA 276
 //! Pulse identification number.
-#define DUNE_IMC_PULSE 277
+#define IMC_PULSE 277
 //! PulseDetectionControl identification number.
-#define DUNE_IMC_PULSEDETECTIONCONTROL 278
+#define IMC_PULSEDETECTIONCONTROL 278
 //! FuelLevel identification number.
-#define DUNE_IMC_FUELLEVEL 279
+#define IMC_FUELLEVEL 279
 //! GpsNavData identification number.
-#define DUNE_IMC_GPSNAVDATA 280
+#define IMC_GPSNAVDATA 280
 //! ServoPosition identification number.
-#define DUNE_IMC_SERVOPOSITION 281
+#define IMC_SERVOPOSITION 281
 //! DeviceState identification number.
-#define DUNE_IMC_DEVICESTATE 282
+#define IMC_DEVICESTATE 282
 //! BeamConfig identification number.
-#define DUNE_IMC_BEAMCONFIG 283
+#define IMC_BEAMCONFIG 283
 //! DataSanity identification number.
-#define DUNE_IMC_DATASANITY 284
+#define IMC_DATASANITY 284
 //! RhodamineDye identification number.
-#define DUNE_IMC_RHODAMINEDYE 285
+#define IMC_RHODAMINEDYE 285
 //! CrudeOil identification number.
-#define DUNE_IMC_CRUDEOIL 286
+#define IMC_CRUDEOIL 286
 //! FineOil identification number.
-#define DUNE_IMC_FINEOIL 287
+#define IMC_FINEOIL 287
 //! Turbidity identification number.
-#define DUNE_IMC_TURBIDITY 288
+#define IMC_TURBIDITY 288
 //! Chlorophyll identification number.
-#define DUNE_IMC_CHLOROPHYLL 289
+#define IMC_CHLOROPHYLL 289
 //! Fluorescein identification number.
-#define DUNE_IMC_FLUORESCEIN 290
+#define IMC_FLUORESCEIN 290
 //! Phycocyanin identification number.
-#define DUNE_IMC_PHYCOCYANIN 291
+#define IMC_PHYCOCYANIN 291
 //! Phycoerythrin identification number.
-#define DUNE_IMC_PHYCOERYTHRIN 292
+#define IMC_PHYCOERYTHRIN 292
 //! GpsFixRtk identification number.
-#define DUNE_IMC_GPSFIXRTK 293
+#define IMC_GPSFIXRTK 293
 //! ExternalNavData identification number.
-#define DUNE_IMC_EXTERNALNAVDATA 294
+#define IMC_EXTERNALNAVDATA 294
 //! DissolvedOxygen identification number.
-#define DUNE_IMC_DISSOLVEDOXYGEN 295
+#define IMC_DISSOLVEDOXYGEN 295
 //! AirSaturation identification number.
-#define DUNE_IMC_AIRSATURATION 296
+#define IMC_AIRSATURATION 296
 //! Throttle identification number.
-#define DUNE_IMC_THROTTLE 297
+#define IMC_THROTTLE 297
 //! PH identification number.
-#define DUNE_IMC_PH 298
+#define IMC_PH 298
 //! Redox identification number.
-#define DUNE_IMC_REDOX 299
+#define IMC_REDOX 299
 //! CameraZoom identification number.
-#define DUNE_IMC_CAMERAZOOM 300
+#define IMC_CAMERAZOOM 300
 //! SetThrusterActuation identification number.
-#define DUNE_IMC_SETTHRUSTERACTUATION 301
+#define IMC_SETTHRUSTERACTUATION 301
 //! SetServoPosition identification number.
-#define DUNE_IMC_SETSERVOPOSITION 302
+#define IMC_SETSERVOPOSITION 302
 //! SetControlSurfaceDeflection identification number.
-#define DUNE_IMC_SETCONTROLSURFACEDEFLECTION 303
+#define IMC_SETCONTROLSURFACEDEFLECTION 303
 //! RemoteActionsRequest identification number.
-#define DUNE_IMC_REMOTEACTIONSREQUEST 304
+#define IMC_REMOTEACTIONSREQUEST 304
 //! RemoteActions identification number.
-#define DUNE_IMC_REMOTEACTIONS 305
+#define IMC_REMOTEACTIONS 305
 //! ButtonEvent identification number.
-#define DUNE_IMC_BUTTONEVENT 306
+#define IMC_BUTTONEVENT 306
 //! LcdControl identification number.
-#define DUNE_IMC_LCDCONTROL 307
+#define IMC_LCDCONTROL 307
 //! PowerOperation identification number.
-#define DUNE_IMC_POWEROPERATION 308
+#define IMC_POWEROPERATION 308
 //! PowerChannelControl identification number.
-#define DUNE_IMC_POWERCHANNELCONTROL 309
+#define IMC_POWERCHANNELCONTROL 309
 //! QueryPowerChannelState identification number.
-#define DUNE_IMC_QUERYPOWERCHANNELSTATE 310
+#define IMC_QUERYPOWERCHANNELSTATE 310
 //! PowerChannelState identification number.
-#define DUNE_IMC_POWERCHANNELSTATE 311
+#define IMC_POWERCHANNELSTATE 311
 //! LedBrightness identification number.
-#define DUNE_IMC_LEDBRIGHTNESS 312
+#define IMC_LEDBRIGHTNESS 312
 //! QueryLedBrightness identification number.
-#define DUNE_IMC_QUERYLEDBRIGHTNESS 313
+#define IMC_QUERYLEDBRIGHTNESS 313
 //! SetLedBrightness identification number.
-#define DUNE_IMC_SETLEDBRIGHTNESS 314
+#define IMC_SETLEDBRIGHTNESS 314
 //! SetPWM identification number.
-#define DUNE_IMC_SETPWM 315
+#define IMC_SETPWM 315
 //! PWM identification number.
-#define DUNE_IMC_PWM 316
+#define IMC_PWM 316
 //! EstimatedState identification number.
-#define DUNE_IMC_ESTIMATEDSTATE 350
+#define IMC_ESTIMATEDSTATE 350
 //! EstimatedStreamVelocity identification number.
-#define DUNE_IMC_ESTIMATEDSTREAMVELOCITY 351
+#define IMC_ESTIMATEDSTREAMVELOCITY 351
 //! IndicatedSpeed identification number.
-#define DUNE_IMC_INDICATEDSPEED 352
+#define IMC_INDICATEDSPEED 352
 //! TrueSpeed identification number.
-#define DUNE_IMC_TRUESPEED 353
+#define IMC_TRUESPEED 353
 //! NavigationUncertainty identification number.
-#define DUNE_IMC_NAVIGATIONUNCERTAINTY 354
+#define IMC_NAVIGATIONUNCERTAINTY 354
 //! NavigationData identification number.
-#define DUNE_IMC_NAVIGATIONDATA 355
+#define IMC_NAVIGATIONDATA 355
 //! GpsFixRejection identification number.
-#define DUNE_IMC_GPSFIXREJECTION 356
+#define IMC_GPSFIXREJECTION 356
 //! LblRangeAcceptance identification number.
-#define DUNE_IMC_LBLRANGEACCEPTANCE 357
+#define IMC_LBLRANGEACCEPTANCE 357
 //! DvlRejection identification number.
-#define DUNE_IMC_DVLREJECTION 358
+#define IMC_DVLREJECTION 358
 //! LblEstimate identification number.
-#define DUNE_IMC_LBLESTIMATE 360
+#define IMC_LBLESTIMATE 360
 //! AlignmentState identification number.
-#define DUNE_IMC_ALIGNMENTSTATE 361
+#define IMC_ALIGNMENTSTATE 361
 //! GroupStreamVelocity identification number.
-#define DUNE_IMC_GROUPSTREAMVELOCITY 362
+#define IMC_GROUPSTREAMVELOCITY 362
 //! Airflow identification number.
-#define DUNE_IMC_AIRFLOW 363
+#define IMC_AIRFLOW 363
 //! DesiredHeading identification number.
-#define DUNE_IMC_DESIREDHEADING 400
+#define IMC_DESIREDHEADING 400
 //! DesiredZ identification number.
-#define DUNE_IMC_DESIREDZ 401
+#define IMC_DESIREDZ 401
 //! DesiredSpeed identification number.
-#define DUNE_IMC_DESIREDSPEED 402
+#define IMC_DESIREDSPEED 402
 //! DesiredRoll identification number.
-#define DUNE_IMC_DESIREDROLL 403
+#define IMC_DESIREDROLL 403
 //! DesiredPitch identification number.
-#define DUNE_IMC_DESIREDPITCH 404
+#define IMC_DESIREDPITCH 404
 //! DesiredVerticalRate identification number.
-#define DUNE_IMC_DESIREDVERTICALRATE 405
+#define IMC_DESIREDVERTICALRATE 405
 //! DesiredPath identification number.
-#define DUNE_IMC_DESIREDPATH 406
+#define IMC_DESIREDPATH 406
 //! DesiredControl identification number.
-#define DUNE_IMC_DESIREDCONTROL 407
+#define IMC_DESIREDCONTROL 407
 //! DesiredHeadingRate identification number.
-#define DUNE_IMC_DESIREDHEADINGRATE 408
+#define IMC_DESIREDHEADINGRATE 408
 //! DesiredVelocity identification number.
-#define DUNE_IMC_DESIREDVELOCITY 409
+#define IMC_DESIREDVELOCITY 409
 //! PathControlState identification number.
-#define DUNE_IMC_PATHCONTROLSTATE 410
+#define IMC_PATHCONTROLSTATE 410
 //! AllocatedControlTorques identification number.
-#define DUNE_IMC_ALLOCATEDCONTROLTORQUES 411
+#define IMC_ALLOCATEDCONTROLTORQUES 411
 //! ControlParcel identification number.
-#define DUNE_IMC_CONTROLPARCEL 412
+#define IMC_CONTROLPARCEL 412
 //! Brake identification number.
-#define DUNE_IMC_BRAKE 413
+#define IMC_BRAKE 413
 //! DesiredLinearState identification number.
-#define DUNE_IMC_DESIREDLINEARSTATE 414
+#define IMC_DESIREDLINEARSTATE 414
 //! DesiredThrottle identification number.
-#define DUNE_IMC_DESIREDTHROTTLE 415
+#define IMC_DESIREDTHROTTLE 415
 //! Goto identification number.
-#define DUNE_IMC_GOTO 450
+#define IMC_GOTO 450
 //! PopUp identification number.
-#define DUNE_IMC_POPUP 451
+#define IMC_POPUP 451
 //! Teleoperation identification number.
-#define DUNE_IMC_TELEOPERATION 452
+#define IMC_TELEOPERATION 452
 //! Loiter identification number.
-#define DUNE_IMC_LOITER 453
+#define IMC_LOITER 453
 //! IdleManeuver identification number.
-#define DUNE_IMC_IDLEMANEUVER 454
+#define IMC_IDLEMANEUVER 454
 //! LowLevelControl identification number.
-#define DUNE_IMC_LOWLEVELCONTROL 455
+#define IMC_LOWLEVELCONTROL 455
 //! Rows identification number.
-#define DUNE_IMC_ROWS 456
+#define IMC_ROWS 456
 //! FollowPath identification number.
-#define DUNE_IMC_FOLLOWPATH 457
+#define IMC_FOLLOWPATH 457
 //! PathPoint identification number.
-#define DUNE_IMC_PATHPOINT 458
+#define IMC_PATHPOINT 458
 //! YoYo identification number.
-#define DUNE_IMC_YOYO 459
+#define IMC_YOYO 459
 //! TeleoperationDone identification number.
-#define DUNE_IMC_TELEOPERATIONDONE 460
+#define IMC_TELEOPERATIONDONE 460
 //! StationKeeping identification number.
-#define DUNE_IMC_STATIONKEEPING 461
+#define IMC_STATIONKEEPING 461
 //! Elevator identification number.
-#define DUNE_IMC_ELEVATOR 462
+#define IMC_ELEVATOR 462
 //! FollowTrajectory identification number.
-#define DUNE_IMC_FOLLOWTRAJECTORY 463
+#define IMC_FOLLOWTRAJECTORY 463
 //! TrajectoryPoint identification number.
-#define DUNE_IMC_TRAJECTORYPOINT 464
+#define IMC_TRAJECTORYPOINT 464
 //! CustomManeuver identification number.
-#define DUNE_IMC_CUSTOMMANEUVER 465
+#define IMC_CUSTOMMANEUVER 465
 //! VehicleFormation identification number.
-#define DUNE_IMC_VEHICLEFORMATION 466
+#define IMC_VEHICLEFORMATION 466
 //! VehicleFormationParticipant identification number.
-#define DUNE_IMC_VEHICLEFORMATIONPARTICIPANT 467
+#define IMC_VEHICLEFORMATIONPARTICIPANT 467
 //! StopManeuver identification number.
-#define DUNE_IMC_STOPMANEUVER 468
+#define IMC_STOPMANEUVER 468
 //! RegisterManeuver identification number.
-#define DUNE_IMC_REGISTERMANEUVER 469
+#define IMC_REGISTERMANEUVER 469
 //! ManeuverControlState identification number.
-#define DUNE_IMC_MANEUVERCONTROLSTATE 470
+#define IMC_MANEUVERCONTROLSTATE 470
 //! FollowSystem identification number.
-#define DUNE_IMC_FOLLOWSYSTEM 471
+#define IMC_FOLLOWSYSTEM 471
 //! CommsRelay identification number.
-#define DUNE_IMC_COMMSRELAY 472
+#define IMC_COMMSRELAY 472
 //! CoverArea identification number.
-#define DUNE_IMC_COVERAREA 473
+#define IMC_COVERAREA 473
 //! PolygonVertex identification number.
-#define DUNE_IMC_POLYGONVERTEX 474
+#define IMC_POLYGONVERTEX 474
 //! CompassCalibration identification number.
-#define DUNE_IMC_COMPASSCALIBRATION 475
+#define IMC_COMPASSCALIBRATION 475
 //! FormationParameters identification number.
-#define DUNE_IMC_FORMATIONPARAMETERS 476
+#define IMC_FORMATIONPARAMETERS 476
 //! FormationPlanExecution identification number.
-#define DUNE_IMC_FORMATIONPLANEXECUTION 477
+#define IMC_FORMATIONPLANEXECUTION 477
 //! FollowReference identification number.
-#define DUNE_IMC_FOLLOWREFERENCE 478
+#define IMC_FOLLOWREFERENCE 478
 //! Reference identification number.
-#define DUNE_IMC_REFERENCE 479
+#define IMC_REFERENCE 479
 //! FollowRefState identification number.
-#define DUNE_IMC_FOLLOWREFSTATE 480
+#define IMC_FOLLOWREFSTATE 480
 //! FormationMonitor identification number.
-#define DUNE_IMC_FORMATIONMONITOR 481
+#define IMC_FORMATIONMONITOR 481
 //! RelativeState identification number.
-#define DUNE_IMC_RELATIVESTATE 482
+#define IMC_RELATIVESTATE 482
 //! Dislodge identification number.
-#define DUNE_IMC_DISLODGE 483
+#define IMC_DISLODGE 483
 //! Formation identification number.
-#define DUNE_IMC_FORMATION 484
+#define IMC_FORMATION 484
 //! Launch identification number.
-#define DUNE_IMC_LAUNCH 485
+#define IMC_LAUNCH 485
 //! Drop identification number.
-#define DUNE_IMC_DROP 486
+#define IMC_DROP 486
 //! ScheduledGoto identification number.
-#define DUNE_IMC_SCHEDULEDGOTO 487
+#define IMC_SCHEDULEDGOTO 487
 //! RowsCoverage identification number.
-#define DUNE_IMC_ROWSCOVERAGE 488
+#define IMC_ROWSCOVERAGE 488
 //! Sample identification number.
-#define DUNE_IMC_SAMPLE 489
+#define IMC_SAMPLE 489
 //! ImageTracking identification number.
-#define DUNE_IMC_IMAGETRACKING 490
+#define IMC_IMAGETRACKING 490
 //! Takeoff identification number.
-#define DUNE_IMC_TAKEOFF 491
+#define IMC_TAKEOFF 491
 //! Land identification number.
-#define DUNE_IMC_LAND 492
+#define IMC_LAND 492
 //! AutonomousSection identification number.
-#define DUNE_IMC_AUTONOMOUSSECTION 493
+#define IMC_AUTONOMOUSSECTION 493
 //! FollowPoint identification number.
-#define DUNE_IMC_FOLLOWPOINT 494
+#define IMC_FOLLOWPOINT 494
 //! Alignment identification number.
-#define DUNE_IMC_ALIGNMENT 495
+#define IMC_ALIGNMENT 495
 //! StationKeepingExtended identification number.
-#define DUNE_IMC_STATIONKEEPINGEXTENDED 496
+#define IMC_STATIONKEEPINGEXTENDED 496
 //! ManeuverDone identification number.
-#define DUNE_IMC_MANEUVERDONE 497
+#define IMC_MANEUVERDONE 497
 //! Magnetometer identification number.
-#define DUNE_IMC_MAGNETOMETER 499
+#define IMC_MAGNETOMETER 499
 //! VehicleState identification number.
-#define DUNE_IMC_VEHICLESTATE 500
+#define IMC_VEHICLESTATE 500
 //! VehicleCommand identification number.
-#define DUNE_IMC_VEHICLECOMMAND 501
+#define IMC_VEHICLECOMMAND 501
 //! MonitorEntityState identification number.
-#define DUNE_IMC_MONITORENTITYSTATE 502
+#define IMC_MONITORENTITYSTATE 502
 //! EntityMonitoringState identification number.
-#define DUNE_IMC_ENTITYMONITORINGSTATE 503
+#define IMC_ENTITYMONITORINGSTATE 503
 //! OperationalLimits identification number.
-#define DUNE_IMC_OPERATIONALLIMITS 504
+#define IMC_OPERATIONALLIMITS 504
 //! GetOperationalLimits identification number.
-#define DUNE_IMC_GETOPERATIONALLIMITS 505
+#define IMC_GETOPERATIONALLIMITS 505
 //! Calibration identification number.
-#define DUNE_IMC_CALIBRATION 506
+#define IMC_CALIBRATION 506
 //! ControlLoops identification number.
-#define DUNE_IMC_CONTROLLOOPS 507
+#define IMC_CONTROLLOOPS 507
 //! VehicleMedium identification number.
-#define DUNE_IMC_VEHICLEMEDIUM 508
+#define IMC_VEHICLEMEDIUM 508
 //! Collision identification number.
-#define DUNE_IMC_COLLISION 509
+#define IMC_COLLISION 509
 //! FormState identification number.
-#define DUNE_IMC_FORMSTATE 510
+#define IMC_FORMSTATE 510
 //! AutopilotMode identification number.
-#define DUNE_IMC_AUTOPILOTMODE 511
+#define IMC_AUTOPILOTMODE 511
 //! FormationState identification number.
-#define DUNE_IMC_FORMATIONSTATE 512
+#define IMC_FORMATIONSTATE 512
 //! ReportControl identification number.
-#define DUNE_IMC_REPORTCONTROL 513
+#define IMC_REPORTCONTROL 513
 //! StateReport identification number.
-#define DUNE_IMC_STATEREPORT 514
+#define IMC_STATEREPORT 514
 //! TransmissionRequest identification number.
-#define DUNE_IMC_TRANSMISSIONREQUEST 515
+#define IMC_TRANSMISSIONREQUEST 515
 //! TransmissionStatus identification number.
-#define DUNE_IMC_TRANSMISSIONSTATUS 516
+#define IMC_TRANSMISSIONSTATUS 516
 //! SmsRequest identification number.
-#define DUNE_IMC_SMSREQUEST 517
+#define IMC_SMSREQUEST 517
 //! SmsStatus identification number.
-#define DUNE_IMC_SMSSTATUS 518
+#define IMC_SMSSTATUS 518
 //! VtolState identification number.
-#define DUNE_IMC_VTOLSTATE 519
+#define IMC_VTOLSTATE 519
 //! ArmingState identification number.
-#define DUNE_IMC_ARMINGSTATE 520
+#define IMC_ARMINGSTATE 520
 //! TCPRequest identification number.
-#define DUNE_IMC_TCPREQUEST 521
+#define IMC_TCPREQUEST 521
 //! TCPStatus identification number.
-#define DUNE_IMC_TCPSTATUS 522
+#define IMC_TCPSTATUS 522
 //! AssetReport identification number.
-#define DUNE_IMC_ASSETREPORT 525
+#define IMC_ASSETREPORT 525
 //! Abort identification number.
-#define DUNE_IMC_ABORT 550
+#define IMC_ABORT 550
 //! PlanSpecification identification number.
-#define DUNE_IMC_PLANSPECIFICATION 551
+#define IMC_PLANSPECIFICATION 551
 //! PlanManeuver identification number.
-#define DUNE_IMC_PLANMANEUVER 552
+#define IMC_PLANMANEUVER 552
 //! PlanTransition identification number.
-#define DUNE_IMC_PLANTRANSITION 553
+#define IMC_PLANTRANSITION 553
 //! EmergencyControl identification number.
-#define DUNE_IMC_EMERGENCYCONTROL 554
+#define IMC_EMERGENCYCONTROL 554
 //! EmergencyControlState identification number.
-#define DUNE_IMC_EMERGENCYCONTROLSTATE 555
+#define IMC_EMERGENCYCONTROLSTATE 555
 //! PlanDB identification number.
-#define DUNE_IMC_PLANDB 556
+#define IMC_PLANDB 556
 //! PlanDBState identification number.
-#define DUNE_IMC_PLANDBSTATE 557
+#define IMC_PLANDBSTATE 557
 //! PlanDBInformation identification number.
-#define DUNE_IMC_PLANDBINFORMATION 558
+#define IMC_PLANDBINFORMATION 558
 //! PlanControl identification number.
-#define DUNE_IMC_PLANCONTROL 559
+#define IMC_PLANCONTROL 559
 //! PlanControlState identification number.
-#define DUNE_IMC_PLANCONTROLSTATE 560
+#define IMC_PLANCONTROLSTATE 560
 //! PlanVariable identification number.
-#define DUNE_IMC_PLANVARIABLE 561
+#define IMC_PLANVARIABLE 561
 //! PlanGeneration identification number.
-#define DUNE_IMC_PLANGENERATION 562
+#define IMC_PLANGENERATION 562
 //! LeaderState identification number.
-#define DUNE_IMC_LEADERSTATE 563
+#define IMC_LEADERSTATE 563
 //! PlanStatistics identification number.
-#define DUNE_IMC_PLANSTATISTICS 564
+#define IMC_PLANSTATISTICS 564
 //! ReportedState identification number.
-#define DUNE_IMC_REPORTEDSTATE 600
+#define IMC_REPORTEDSTATE 600
 //! RemoteSensorInfo identification number.
-#define DUNE_IMC_REMOTESENSORINFO 601
+#define IMC_REMOTESENSORINFO 601
 //! Map identification number.
-#define DUNE_IMC_MAP 602
+#define IMC_MAP 602
 //! MapFeature identification number.
-#define DUNE_IMC_MAPFEATURE 603
+#define IMC_MAPFEATURE 603
 //! MapPoint identification number.
-#define DUNE_IMC_MAPPOINT 604
+#define IMC_MAPPOINT 604
 //! CcuEvent identification number.
-#define DUNE_IMC_CCUEVENT 606
+#define IMC_CCUEVENT 606
 //! VehicleLinks identification number.
-#define DUNE_IMC_VEHICLELINKS 650
+#define IMC_VEHICLELINKS 650
 //! TrexObservation identification number.
-#define DUNE_IMC_TREXOBSERVATION 651
+#define IMC_TREXOBSERVATION 651
 //! TrexCommand identification number.
-#define DUNE_IMC_TREXCOMMAND 652
+#define IMC_TREXCOMMAND 652
 //! TrexOperation identification number.
-#define DUNE_IMC_TREXOPERATION 655
+#define IMC_TREXOPERATION 655
 //! TrexAttribute identification number.
-#define DUNE_IMC_TREXATTRIBUTE 656
+#define IMC_TREXATTRIBUTE 656
 //! TrexToken identification number.
-#define DUNE_IMC_TREXTOKEN 657
+#define IMC_TREXTOKEN 657
 //! TrexPlan identification number.
-#define DUNE_IMC_TREXPLAN 658
+#define IMC_TREXPLAN 658
 //! Event identification number.
-#define DUNE_IMC_EVENT 660
+#define IMC_EVENT 660
 //! CompressedImage identification number.
-#define DUNE_IMC_COMPRESSEDIMAGE 702
+#define IMC_COMPRESSEDIMAGE 702
 //! ImageTxSettings identification number.
-#define DUNE_IMC_IMAGETXSETTINGS 703
+#define IMC_IMAGETXSETTINGS 703
 //! RemoteState identification number.
-#define DUNE_IMC_REMOTESTATE 750
+#define IMC_REMOTESTATE 750
 //! Target identification number.
-#define DUNE_IMC_TARGET 800
+#define IMC_TARGET 800
 //! EntityParameter identification number.
-#define DUNE_IMC_ENTITYPARAMETER 801
+#define IMC_ENTITYPARAMETER 801
 //! EntityParameters identification number.
-#define DUNE_IMC_ENTITYPARAMETERS 802
+#define IMC_ENTITYPARAMETERS 802
 //! QueryEntityParameters identification number.
-#define DUNE_IMC_QUERYENTITYPARAMETERS 803
+#define IMC_QUERYENTITYPARAMETERS 803
 //! SetEntityParameters identification number.
-#define DUNE_IMC_SETENTITYPARAMETERS 804
+#define IMC_SETENTITYPARAMETERS 804
 //! SaveEntityParameters identification number.
-#define DUNE_IMC_SAVEENTITYPARAMETERS 805
+#define IMC_SAVEENTITYPARAMETERS 805
 //! CreateSession identification number.
-#define DUNE_IMC_CREATESESSION 806
+#define IMC_CREATESESSION 806
 //! CloseSession identification number.
-#define DUNE_IMC_CLOSESESSION 807
+#define IMC_CLOSESESSION 807
 //! SessionSubscription identification number.
-#define DUNE_IMC_SESSIONSUBSCRIPTION 808
+#define IMC_SESSIONSUBSCRIPTION 808
 //! SessionKeepAlive identification number.
-#define DUNE_IMC_SESSIONKEEPALIVE 809
+#define IMC_SESSIONKEEPALIVE 809
 //! SessionStatus identification number.
-#define DUNE_IMC_SESSIONSTATUS 810
+#define IMC_SESSIONSTATUS 810
 //! PushEntityParameters identification number.
-#define DUNE_IMC_PUSHENTITYPARAMETERS 811
+#define IMC_PUSHENTITYPARAMETERS 811
 //! PopEntityParameters identification number.
-#define DUNE_IMC_POPENTITYPARAMETERS 812
+#define IMC_POPENTITYPARAMETERS 812
 //! IoEvent identification number.
-#define DUNE_IMC_IOEVENT 813
+#define IMC_IOEVENT 813
 //! UamTxFrame identification number.
-#define DUNE_IMC_UAMTXFRAME 814
+#define IMC_UAMTXFRAME 814
 //! UamRxFrame identification number.
-#define DUNE_IMC_UAMRXFRAME 815
+#define IMC_UAMRXFRAME 815
 //! UamTxStatus identification number.
-#define DUNE_IMC_UAMTXSTATUS 816
+#define IMC_UAMTXSTATUS 816
 //! UamRxRange identification number.
-#define DUNE_IMC_UAMRXRANGE 817
+#define IMC_UAMRXRANGE 817
 //! UamTxRange identification number.
-#define DUNE_IMC_UAMTXRANGE 818
+#define IMC_UAMTXRANGE 818
 //! FormCtrlParam identification number.
-#define DUNE_IMC_FORMCTRLPARAM 820
+#define IMC_FORMCTRLPARAM 820
 //! FormationEval identification number.
-#define DUNE_IMC_FORMATIONEVAL 821
+#define IMC_FORMATIONEVAL 821
 //! FormationControlParams identification number.
-#define DUNE_IMC_FORMATIONCONTROLPARAMS 822
+#define IMC_FORMATIONCONTROLPARAMS 822
 //! FormationEvaluation identification number.
-#define DUNE_IMC_FORMATIONEVALUATION 823
+#define IMC_FORMATIONEVALUATION 823
 //! SoiWaypoint identification number.
-#define DUNE_IMC_SOIWAYPOINT 850
+#define IMC_SOIWAYPOINT 850
 //! SoiPlan identification number.
-#define DUNE_IMC_SOIPLAN 851
+#define IMC_SOIPLAN 851
 //! SoiCommand identification number.
-#define DUNE_IMC_SOICOMMAND 852
+#define IMC_SOICOMMAND 852
 //! SoiState identification number.
-#define DUNE_IMC_SOISTATE 853
+#define IMC_SOISTATE 853
 //! MessagePart identification number.
-#define DUNE_IMC_MESSAGEPART 877
+#define IMC_MESSAGEPART 877
 //! NeptusBlob identification number.
-#define DUNE_IMC_NEPTUSBLOB 888
+#define IMC_NEPTUSBLOB 888
 //! Aborted identification number.
-#define DUNE_IMC_ABORTED 889
+#define IMC_ABORTED 889
 //! UsblAngles identification number.
-#define DUNE_IMC_USBLANGLES 890
+#define IMC_USBLANGLES 890
 //! UsblPosition identification number.
-#define DUNE_IMC_USBLPOSITION 891
+#define IMC_USBLPOSITION 891
 //! UsblFix identification number.
-#define DUNE_IMC_USBLFIX 892
+#define IMC_USBLFIX 892
 //! ParametersXml identification number.
-#define DUNE_IMC_PARAMETERSXML 893
+#define IMC_PARAMETERSXML 893
 //! GetParametersXml identification number.
-#define DUNE_IMC_GETPARAMETERSXML 894
+#define IMC_GETPARAMETERSXML 894
 //! SetImageCoords identification number.
-#define DUNE_IMC_SETIMAGECOORDS 895
+#define IMC_SETIMAGECOORDS 895
 //! GetImageCoords identification number.
-#define DUNE_IMC_GETIMAGECOORDS 896
+#define IMC_GETIMAGECOORDS 896
 //! GetWorldCoordinates identification number.
-#define DUNE_IMC_GETWORLDCOORDINATES 897
+#define IMC_GETWORLDCOORDINATES 897
 //! UsblAnglesExtended identification number.
-#define DUNE_IMC_USBLANGLESEXTENDED 898
+#define IMC_USBLANGLESEXTENDED 898
 //! UsblPositionExtended identification number.
-#define DUNE_IMC_USBLPOSITIONEXTENDED 899
+#define IMC_USBLPOSITIONEXTENDED 899
 //! UsblFixExtended identification number.
-#define DUNE_IMC_USBLFIXEXTENDED 900
+#define IMC_USBLFIXEXTENDED 900
 //! UsblModem identification number.
-#define DUNE_IMC_USBLMODEM 901
+#define IMC_USBLMODEM 901
 //! UsblConfig identification number.
-#define DUNE_IMC_USBLCONFIG 902
+#define IMC_USBLCONFIG 902
 //! DissolvedOrganicMatter identification number.
-#define DUNE_IMC_DISSOLVEDORGANICMATTER 903
+#define IMC_DISSOLVEDORGANICMATTER 903
 //! OpticalBackscatter identification number.
-#define DUNE_IMC_OPTICALBACKSCATTER 904
+#define IMC_OPTICALBACKSCATTER 904
 //! Tachograph identification number.
-#define DUNE_IMC_TACHOGRAPH 905
+#define IMC_TACHOGRAPH 905
 //! ApmStatus identification number.
-#define DUNE_IMC_APMSTATUS 906
+#define IMC_APMSTATUS 906
 //! SadcReadings identification number.
-#define DUNE_IMC_SADCREADINGS 907
+#define IMC_SADCREADINGS 907
 //! DmsDetection identification number.
-#define DUNE_IMC_DMSDETECTION 908
+#define IMC_DMSDETECTION 908
 //! HomePosition identification number.
-#define DUNE_IMC_HOMEPOSITION 909
+#define IMC_HOMEPOSITION 909
 //! CurrentProfile identification number.
-#define DUNE_IMC_CURRENTPROFILE 1014
+#define IMC_CURRENTPROFILE 1014
 //! CurrentProfileCell identification number.
-#define DUNE_IMC_CURRENTPROFILECELL 1015
+#define IMC_CURRENTPROFILECELL 1015
 //! ADCPBeam identification number.
-#define DUNE_IMC_ADCPBEAM 1016
+#define IMC_ADCPBEAM 1016
 //! GpioState identification number.
-#define DUNE_IMC_GPIOSTATE 2000
+#define IMC_GPIOSTATE 2000
 //! GpioStateGet identification number.
-#define DUNE_IMC_GPIOSTATEGET 2001
+#define IMC_GPIOSTATEGET 2001
 //! GpioStateSet identification number.
-#define DUNE_IMC_GPIOSTATESET 2002
+#define IMC_GPIOSTATESET 2002
 //! ColoredDissolvedOrganicMatter identification number.
-#define DUNE_IMC_COLOREDDISSOLVEDORGANICMATTER 2003
+#define IMC_COLOREDDISSOLVEDORGANICMATTER 2003
 //! FluorescentDissolvedOrganicMatter identification number.
-#define DUNE_IMC_FLUORESCENTDISSOLVEDORGANICMATTER 2004
+#define IMC_FLUORESCENTDISSOLVEDORGANICMATTER 2004
 //! TotalMagIntensity identification number.
-#define DUNE_IMC_TOTALMAGINTENSITY 2006
+#define IMC_TOTALMAGINTENSITY 2006
 //! CommRestriction identification number.
-#define DUNE_IMC_COMMRESTRICTION 2010
+#define IMC_COMMRESTRICTION 2010
 
 #endif

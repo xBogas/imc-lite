@@ -33,7 +33,7 @@ from utils import utils
 class Macro:
     def __init__(self, name, value, desc):
         self._data = {}
-        self._data['name'] = 'DUNE_IMC_' + name
+        self._data['name'] = 'IMC_' + name
         self._data['value'] = value
         self._data['desc'] = desc
 

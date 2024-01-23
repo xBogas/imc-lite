@@ -55,7 +55,7 @@ def run_script(script, xml, dir, force):
 	dir_hpp = os.path.join(dir, 'include/IMC')
 	dir_cpp = os.path.join(dir, 'src/IMC')
 	args = ['python', script, '-x' + xml, dir_hpp, dir_cpp]
-	if force:
+	if 1:
 		args.append('--force')
 	subprocess.run(args)
 

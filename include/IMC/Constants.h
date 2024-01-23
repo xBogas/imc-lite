@@ -36,26 +36,26 @@
 #define IMC_CONSTANTS_HPP_INCLUDED_
 
 //! IMC version string.
-#define DUNE_IMC_CONST_VERSION "5.4.30"
+#define IMC_CONST_VERSION "5.4.30"
 //! Git repository information.
-#define DUNE_IMC_CONST_GIT_INFO "2023-10-19 867be70  (HEAD -> master, origin/master, origin/HEAD)"
+#define IMC_CONST_GIT_INFO "2023-10-19 867be70  (HEAD -> master, origin/master, origin/HEAD)"
 //! MD5 sum of XML specification file.
-#define DUNE_IMC_CONST_MD5 "762ef830be415e1c3e6f5b429829f51a"
+#define IMC_CONST_MD5 "762ef830be415e1c3e6f5b429829f51a"
 //! Synchronization number.
-#define DUNE_IMC_CONST_SYNC 0xFE54
+#define IMC_CONST_SYNC 0xFE54
 //! Reversed synchronization number.
-#define DUNE_IMC_CONST_SYNC_REV 0x54FE
+#define IMC_CONST_SYNC_REV 0x54FE
 //! Size of the header in bytes.
-#define DUNE_IMC_CONST_HEADER_SIZE 20
+#define IMC_CONST_HEADER_SIZE 20
 //! Size of the footer in bytes.
-#define DUNE_IMC_CONST_FOOTER_SIZE 2
+#define IMC_CONST_FOOTER_SIZE 2
 //! Identification number of the null message.
-#define DUNE_IMC_CONST_NULL_ID 65535
+#define IMC_CONST_NULL_ID 65535
 //! Maximum message data size.
-#define DUNE_IMC_CONST_MAX_SIZE 65535
+#define IMC_CONST_MAX_SIZE 65535
 //! Unknown entity identifier.
-#define DUNE_IMC_CONST_UNK_EID 255
+#define IMC_CONST_UNK_EID 255
 //! System entity identifier.
-#define DUNE_IMC_CONST_SYS_EID 0
+#define IMC_CONST_SYS_EID 0
 
 #endif
