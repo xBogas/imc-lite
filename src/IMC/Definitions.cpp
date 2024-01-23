@@ -33,7 +33,7 @@
 //***************************************************************************
 
 // IMC headers.
-#include "Definitions.h"
+#include "IMC/Definitions.h"
 
 namespace IMC
 {

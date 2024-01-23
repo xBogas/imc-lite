@@ -1,9 +1,9 @@
 #ifndef IMC_PARSERS_H_INCLUDED_
 #define IMC_PARSERS_H_INCLUDED_
 
-// Local headers
-#include "Header.h"
-#include "Message.h"
+// IMC headers.
+#include "IMC/Header.h"
+#include "IMC/Message.h"
 
 namespace IMC
 {

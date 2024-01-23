@@ -1,8 +1,8 @@
 #ifndef IMC_MESSAGE_H_INCLUDED_
 #define IMC_MESSAGE_H_INCLUDED_
 
-#include "Header.h"
-
+// IMC headers.
+#include "IMC/Header.h"
 
 namespace IMC
 {
@@ -177,8 +177,8 @@ namespace IMC
 		unsigned
 		getSerializationSize(void) const
 		{
-			return DUNE_IMC_CONST_HEADER_SIZE
-			+ DUNE_IMC_CONST_FOOTER_SIZE
+			return IMC_CONST_HEADER_SIZE
+			+ IMC_CONST_FOOTER_SIZE
 			+ getPayloadSerializationSize();
 		}
 

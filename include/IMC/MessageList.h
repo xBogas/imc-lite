@@ -2,8 +2,10 @@
 #define IMC_MESSAGE_LIST_HPP_INCLUDED_
 
 #include <vector>
-#include <Serialization.h>
-#include <Parsers.h>
+
+// IMC headers.
+#include "IMC/Serialization.h"
+#include "IMC/Parsers.h"
 
 namespace IMC
 {
@@ -202,7 +204,7 @@ namespace IMC
 			for (unsigned i = 0; i < m_list.size(); ++i)
 			{
 				if (m_list[i] == NULL)
-					bfr += IMC::serialize((uint16_t)DUNE_IMC_CONST_NULL_ID, bfr);
+					bfr += IMC::serialize((uint16_t)IMC_CONST_NULL_ID, bfr);
 				else
 				{
 					bfr += IMC::serialize(m_list[i]->getId(), bfr);
@@ -233,7 +235,7 @@ namespace IMC
 				memcpy(&id, ptr, sizeof(uint16_t));
 				ptr += sizeof(uint16_t);
 
-				if (id == DUNE_IMC_CONST_NULL_ID)
+				if (id == IMC_CONST_NULL_ID)
 				{
 					m_list.push_back(NULL);
 					continue;
@@ -268,7 +270,7 @@ namespace IMC
 				rev_memcpy(&id, ptr, sizeof(uint16_t));
 				ptr += sizeof(uint16_t);
 
-				if (id == DUNE_IMC_CONST_NULL_ID)
+				if (id == IMC_CONST_NULL_ID)
 				{
 					m_list.push_back(NULL);
 					continue;

@@ -1,7 +1,7 @@
 #include <cstdlib>
 #include <unordered_map>
-#include <Parsers.h>
-#include <Definitions.h>
+#include "IMC/Parsers.h"
+#include "IMC/Definitions.h"
 
 //TODO Implement this
 #define debug(...)
@@ -50,7 +50,7 @@ namespace IMC
 	static std::unordered_map<uint16_t, Constructor> constructors_by_id = {
 #define MESSAGE(id, type) \
 		{id, []()->Message* { return new type; }},
-#include "Factory.def"
+#include "IMC/Factory.def"
 	};
 
 	static uint16_t 
@@ -83,9 +83,9 @@ namespace IMC
 	{
 		// Received CRC
 		uint16_t r_crc = 0;
-		memcpy(&r_crc, bfr + DUNE_IMC_CONST_HEADER_SIZE + hdr.size, 2);
+		memcpy(&r_crc, bfr + IMC_CONST_HEADER_SIZE + hdr.size, 2);
 
-		uint16_t crc = compute_CRC16(bfr, DUNE_IMC_CONST_HEADER_SIZE + hdr.size);
+		uint16_t crc = compute_CRC16(bfr, IMC_CONST_HEADER_SIZE + hdr.size);
 
 		if (crc != r_crc)
 			return nullptr;
@@ -93,7 +93,7 @@ namespace IMC
 		Message* msg = produce(hdr.mgid);
 		if(msg)
 		{
-			msg->deserializeFields(bfr + DUNE_IMC_CONST_HEADER_SIZE, hdr.size);
+			msg->deserializeFields(bfr + IMC_CONST_HEADER_SIZE, hdr.size);
 
 			msg->setTimeStamp(hdr.timestamp);
 			msg->setSource(hdr.src);
@@ -110,7 +110,7 @@ namespace IMC
 	{
 		uint8_t* ptr = bfr;
 
-		ptr += IMC::serialize((uint16_t)DUNE_IMC_CONST_SYNC, ptr);
+		ptr += IMC::serialize((uint16_t)IMC_CONST_SYNC, ptr);
 		ptr += IMC::serialize(msg->getId(), ptr);
 		ptr += IMC::serialize((uint16_t)msg->getPayloadSerializationSize(), ptr);
 		fconv_t time;
@@ -121,7 +121,7 @@ namespace IMC
 		ptr += IMC::serialize((uint16_t)msg->getDestination(), ptr);
 		ptr += IMC::serialize(msg->getDestinationEntity(), ptr);
 
-		return DUNE_IMC_CONST_HEADER_SIZE;
+		return IMC_CONST_HEADER_SIZE;
 	}
 
 	Message*
@@ -136,7 +136,7 @@ namespace IMC
 		Header hdr;
 		parserHeader(hdr, bfr);
 
-		if (hdr.size > bfr_len - (DUNE_IMC_CONST_HEADER_SIZE + DUNE_IMC_CONST_FOOTER_SIZE))
+		if (hdr.size > bfr_len - (IMC_CONST_HEADER_SIZE + IMC_CONST_FOOTER_SIZE))
 			debug("ERR", "Buffer too short");
 
 		return parserPayload(hdr, bfr);
@@ -146,15 +146,15 @@ namespace IMC
 	serialize(const Message *msg, uint8_t *bfr, uint16_t bfr_len)
 	{
 		uint16_t size = msg->getSerializationSize();
-		if (size > DUNE_IMC_CONST_MAX_SIZE)
+		if (size > IMC_CONST_MAX_SIZE)
 			return -1;
 
 		uint8_t* ptr = bfr;
 		ptr += serializeHeader(msg, bfr);
 		msg->serializeFields(ptr);
 
-		uint16_t crc = compute_CRC16(bfr, size-DUNE_IMC_CONST_FOOTER_SIZE);
-		memcpy(bfr + (size-DUNE_IMC_CONST_FOOTER_SIZE), &crc, 2);
+		uint16_t crc = compute_CRC16(bfr, size-IMC_CONST_FOOTER_SIZE);
+		memcpy(bfr + (size-IMC_CONST_FOOTER_SIZE), &crc, 2);
 		return size;
 	}
 }

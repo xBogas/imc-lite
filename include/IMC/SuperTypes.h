@@ -35,9 +35,9 @@
 #ifndef IMC_SUPERTYPES_HPP_INCLUDED_
 #define IMC_SUPERTYPES_HPP_INCLUDED_
 
-// Local headers.
-#include "Header.h"
-#include "Message.h"
+// IMC headers.
+#include "IMC/Header.h"
+#include "IMC/Message.h"
 
 namespace IMC
 {

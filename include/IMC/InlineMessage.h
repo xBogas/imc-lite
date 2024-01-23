@@ -1,10 +1,11 @@
 #ifndef IMC_INLINE_MESSAGE_HPP_INCLUDED_
 #define IMC_INLINE_MESSAGE_HPP_INCLUDED_
 
-#include "Constants.h"
-#include "Message.h"
-#include "Serialization.h"
-#include "Parsers.h"
+// IMC headers.
+#include "IMC/Constants.h"
+#include "IMC/Message.h"
+#include "IMC/Serialization.h"
+#include "IMC/Parsers.h"
 
 namespace IMC
 {
@@ -153,7 +154,7 @@ namespace IMC
 		serialize(uint8_t* bfr) const
 		{
 			if (isNull())
-				bfr += IMC::serialize((uint16_t)DUNE_IMC_CONST_NULL_ID, bfr);
+				bfr += IMC::serialize((uint16_t)IMC_CONST_NULL_ID, bfr);
 			else
 			{
 				bfr += IMC::serialize(m_msg->getId(), bfr);
@@ -169,7 +170,7 @@ namespace IMC
 			uint16_t id = 0;
 			memcpy(&id, bfr, sizeof(uint16_t));
 
-			if (id == DUNE_IMC_CONST_NULL_ID)
+			if (id == IMC_CONST_NULL_ID)
 				return 2;
 
 			Type* m = (Type* )produce(id);
@@ -188,7 +189,7 @@ namespace IMC
 			uint16_t id = 0;
 			rev_memcpy(&id, bfr, sizeof(uint16_t));
 
-			if (id == DUNE_IMC_CONST_NULL_ID)
+			if (id == IMC_CONST_NULL_ID)
 				return 2;
 
 			Type* m = (Type* )produce(id);

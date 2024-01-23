@@ -447,7 +447,7 @@ def SuperTypes(root, dest_folder, xml_md5):
     Generate SuperTypes.h
     """
     f = File('SuperTypes.h', dest_folder, md5 = xml_md5)
-    f.add_local_headers('Header.h', 'Message.h')
+    f.add_imc_headers('Header.h', 'Message.h')
     for group in root.findall("message-groups/message-group"):
         f.append(comment('Super type %s' % group.get('name'), nl = ''))
         f.append('class %s: public Message\n{' % group.get('abbrev'))
@@ -461,7 +461,7 @@ def Definitions(root, consts, dir_hpp, dir_cpp, xml_md5):
     """
     hpp = File('Definitions.h', dir_hpp, md5 = xml_md5)
 
-    hpp.add_local_headers('Header.h', 'Message.h', 'Serialization.h',
+    hpp.add_imc_headers('Header.h', 'Message.h', 'Serialization.h',
                         'InlineMessage.h', 'MessageList.h')
 
     hpp.add_imc_headers('Enumerations.h', 'Bitfields.h',

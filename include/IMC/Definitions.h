@@ -35,17 +35,15 @@
 #ifndef IMC_DEFINITIONS_HPP_INCLUDED_
 #define IMC_DEFINITIONS_HPP_INCLUDED_
 
-// Local headers.
-#include "Header.h"
-#include "Message.h"
-#include "Serialization.h"
-#include "InlineMessage.h"
-#include "MessageList.h"
-
 // IMC headers.
-#include "Enumerations.h"
-#include "Bitfields.h"
-#include "SuperTypes.h"
+#include "IMC/Header.h"
+#include "IMC/Message.h"
+#include "IMC/Serialization.h"
+#include "IMC/InlineMessage.h"
+#include "IMC/MessageList.h"
+#include "IMC/Enumerations.h"
+#include "IMC/Bitfields.h"
+#include "IMC/SuperTypes.h"
 
 namespace IMC
 {

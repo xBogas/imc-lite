@@ -64,7 +64,7 @@ class File:
         self.isoc_hdrs += headers
 
     def add_imc_headers(self, *headers):
-        self.imc_hdrs += [h for h in headers]
+        self.imc_hdrs += ["IMC/" + h for h in headers]
 
     def add_local_headers(self, *headers):
         self.local_hdrs += headers

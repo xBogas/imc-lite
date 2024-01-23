@@ -4,8 +4,8 @@
 // C headers
 #include <stdint.h>
 
-// IMC generated headers
-#include "Constants.h"
+// IMC headers.
+#include "IMC/Constants.h"
 
 #define SIG_BITS_FP64 0x8000000000000000
 #define EXP_BITS_FP64 0x7FF0000000000000 // 0x7F8 ?
