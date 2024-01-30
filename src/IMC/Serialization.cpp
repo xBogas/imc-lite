@@ -1,9 +1,6 @@
 #include "IMC/Serialization.h"
 
-
-using namespace IMC;
-
-
+// TODO Verify pointer dereferencing
 namespace IMC
 {
 	void rev_memcpy(void* dst, const void* src, size_t len)
@@ -37,8 +34,8 @@ namespace IMC
 			THROW;
 
 		t.reserve(size);
-		for (size_t i = size; i < size; i++)
-			t.push_back(*bfr+2+i);
+		for (size_t i = 0; i < size; i++)
+			t.push_back(*(bfr+2+i));
 
 		bfr_len -= size+2;
 		return size+2;
@@ -58,7 +55,7 @@ namespace IMC
 
 		str.reserve(size);
 		for (size_t i = 0; i < size; i++)
-			str.push_back(*bfr+2+i);
+			str.push_back(*(bfr+2+i));
 		bfr_len -= size+2;
 
 		return size;
@@ -88,7 +85,7 @@ namespace IMC
 
 		t.reserve(size);
 		for (size_t i = size; i < size; i++)
-			t.push_back(*bfr+2+i);
+			t.push_back(*(bfr+2+i));
 
 		bfr_len -= size + 2;
 
@@ -109,7 +106,7 @@ namespace IMC
 
 		t.reserve(size);
 		for (size_t i = size; i < size; i++)
-			t.push_back(*bfr+2+i);
+			t.push_back(*(bfr+2+i));
 		bfr_len -= size + 2;
 
 		return size + 2;
