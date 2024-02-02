@@ -1,12 +1,13 @@
 #ifndef IMC_UTILS_H_INCLUDED_
 #define IMC_UTILS_H_INCLUDED_
 
-#include <vector>
 #include <string>
+#include <vector>
 
 namespace Utils {
 
-static void split(const std::string& str, std::vector<std::string>& tokens, const std::string& delimiters = ";")
+static void split(const std::string& str, std::vector<std::string>& tokens,
+				  const std::string& delimiters = ";")
 {
 	using std::string;
 
@@ -15,8 +16,7 @@ static void split(const std::string& str, std::vector<std::string>& tokens, cons
 	size_t lastPos = str.find_first_not_of(delimiters, 0);
 	size_t pos = str.find_first_of(delimiters, lastPos);
 
-	while (string::npos != pos || string::npos != lastPos)
-	{
+	while (string::npos != pos || string::npos != lastPos) {
 		tokens.push_back(str.substr(lastPos, pos - lastPos));
 
 		lastPos = str.find_first_not_of(delimiters, pos);
@@ -27,13 +27,12 @@ static void split(const std::string& str, std::vector<std::string>& tokens, cons
 template <typename T>
 static void clear(T* ptr)
 {
-	if (ptr)
-	{
+	if (ptr) {
 		delete ptr;
 		ptr = nullptr;
 	}
 }
 
-} // namespace IMC
+} // namespace Utils
 
 #endif
