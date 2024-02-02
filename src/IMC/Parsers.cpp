@@ -98,7 +98,13 @@ static uint16_t serializeHeader(const Message* msg, uint8_t* bfr)
 {
 	uint8_t* ptr = bfr;
 
-	ptr += IMC::serialize((uintcompute_CRC1616_t)msg->getSource(), ptr);
+	ptr += IMC::serialize((uint16_t)IMC_CONST_SYNC, ptr);
+	ptr += IMC::serialize(msg->getId(), ptr);
+	ptr += IMC::serialize((uint16_t)msg->getPayloadSerializationSize(), ptr);
+	fconv_t time;
+	time.data = msg->getTimeStamp();
+	ptr += IMC::serialize(to_fp64(time.bits), ptr);
+	ptr += IMC::serialize((uint16_t)msg->getSource(), ptr);
 	ptr += IMC::serialize(msg->getSourceEntity(), ptr);
 	ptr += IMC::serialize((uint16_t)msg->getDestination(), ptr);
 	ptr += IMC::serialize(msg->getDestinationEntity(), ptr);
