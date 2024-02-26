@@ -25,7 +25,7 @@ static void split(const std::string& str, std::vector<std::string>& tokens,
 }
 
 template <typename T>
-static void clear(T* ptr)
+static void clear(T& ptr)
 {
 	if (ptr) {
 		delete ptr;
