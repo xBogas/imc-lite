@@ -6,12 +6,15 @@
 
 #include "IMC.h"
 
-#define Debug(...) IMC::debug(__VA_ARGS__)
+#define Debug(str)	IMC::debug(str)
+#define DebugF(...) IMC::debugF(__VA_ARGS__)
 
 namespace IMC {
 
-void debug(const char* format, ...);
+void debug(const char* str);
+void debugF(const char* format, ...);
 
+// IMC Communication interface
 class CommsInterface {
 public:
 	struct EntityInfo {
@@ -67,7 +70,7 @@ public:
 	}
 
 	/**
-	 * Start IMC interface
+	 * Start IMC interface - PTP mode *blocking*
 	 * Wait for EntityList query
 	 * Send EntityList response with labels to reserve
 	 * Wait for reserved entity IDs
