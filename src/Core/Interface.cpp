@@ -12,12 +12,18 @@ class IMC::CommsInterface Interface;
 namespace IMC {
 
 // Print message to debug output
-void debug(const char* format, ...)
+void debug(const char* str)
 {
-	char str[100];
+	Interface.debug(str);
+}
+
+// Print message to debug output
+void debugF(const char* format,  ...)
+{
+	char str[64];
 	va_list args;
 	va_start(args, format);
-	vsprintf(str, format, args);
+	vsnprintf(str, 64, format, args);
 	va_end(args);
 
 	Interface.debug(str);
@@ -122,7 +128,7 @@ Message* CommsInterface::waitMessage(void)
 
 void CommsInterface::sendMessage(Message* msg)
 {
-	Debug("Sending message %d", msg->getId());
+	DebugF("Sending message %d", msg->getId());
 	uint8_t bfr[MAX_BFR_SIZE];
 	uint16_t size = IMC::serialize(msg, bfr, MAX_BFR_SIZE);
 	if (size == (uint16_t)-1)
@@ -143,7 +149,7 @@ bool CommsInterface::parseEntityList(IMC::Message* msg)
 	if (el->op != IMC::EntityList::OP_REPORT)
 		return false;
 
-	Debug("str: %s", el->list.c_str());
+	DebugF("str: %s", el->list.c_str());
 	// Parse entity IDs
 	std::vector<std::string> labels;
 
