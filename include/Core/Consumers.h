@@ -6,8 +6,6 @@
 
 #include "IMC.h"
 
-#include "Core/TaskQueue.h"
-
 // Just for registering consumers
 class Consumers {
 public:
