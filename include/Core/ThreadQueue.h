@@ -13,8 +13,11 @@ public:
 	// register thread in queue
 	void registerThread(Thread* thread);
 
-	// Get
-	Thread* getThread(void);
+	// Get Thread from queue
+	Thread* getThread(void)
+	{
+		return tsk_queue.pop();
+	}
 
 	// Push thread to queue
 	void push(Thread* tsk)
