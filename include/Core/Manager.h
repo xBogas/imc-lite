@@ -13,12 +13,32 @@ public:
 	~TaskManager(void)
 	{ }
 
+	// Register thread to task manager
 	void registerTask(Thread* task)
 	{
 		thr_queue.registerThread(task);
 	}
 
+	// Start task scheduler
 	void start(void);
+
+	// Check if task manager is running
+	bool isRunning(void)
+	{
+		return running;
+	}
+
+	// Pop thread from queue
+	Thread* popThread(void)
+	{
+		return thr_queue.getThread();
+	}
+
+	// Push thread to queue
+	void pushThread(Thread* thr)
+	{
+		thr_queue.push(thr);
+	}
 
 private:
 	// Thread queue
@@ -26,6 +46,8 @@ private:
 	// os Status
 	bool running = false;
 };
+
+void dispatch_thread(void*);
 
 extern class TaskManager Manager;
 
