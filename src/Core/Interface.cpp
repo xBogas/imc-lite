@@ -1,8 +1,11 @@
-#include <Arduino.h>
-
 #include "Core/Interface.h"
 #include "IMC.h"
 #include "Utils.h"
+
+#include "System/Time.h"
+#include "System/Error.h"
+
+#include <stdarg.h>
 
 #define MAX_BFR_SIZE 512
 #define IMC_TIMEOUT	 60000 // 60 seconds
@@ -18,7 +21,7 @@ void debug(const char* str)
 }
 
 // Print message to debug output
-void debugF(const char* format,  ...)
+void debugF(const char* format, ...)
 {
 	char str[64];
 	va_list args;
@@ -27,22 +30,6 @@ void debugF(const char* format,  ...)
 	va_end(args);
 
 	Interface.debug(str);
-}
-
-// Print error message
-// Start blinking red LED
-static void error(const char* str = nullptr)
-{
-	if (str != nullptr)
-		Debug(str);
-
-	digitalWrite(LED_GREEN, LOW);
-	while (1) {
-		digitalWrite(LED_RED, LOW);
-		delay(500);
-		digitalWrite(LED_RED, HIGH);
-		delay(500);
-	}
 }
 
 // Check if message is a valid EntityList query
@@ -110,9 +97,9 @@ void CommsInterface::reserveEntities(void)
 
 Message* CommsInterface::waitMessage(void)
 {
-	uint32_t start = millis();
+	uint32_t start = Clock::getMs();
 	uint8_t bfr[MAX_BFR_SIZE];
-	while (millis() - start < IMC_TIMEOUT) {
+	while (Clock::getMs() - start < IMC_TIMEOUT) {
 		int rv = reader(bfr, MAX_BFR_SIZE);
 		if (rv <= 0)
 			continue;
