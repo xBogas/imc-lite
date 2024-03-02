@@ -40,4 +40,5 @@ void Task::registerConsumer(uint16_t id, Consumer consumer)
 void Task::delay_ms(uint32_t ms)
 {
 	// TODO implement a delayed irq for queueing the task
+	// add_callback(dispatch_thread, this, ms);
 }
