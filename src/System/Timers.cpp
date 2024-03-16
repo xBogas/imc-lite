@@ -129,13 +129,13 @@ static void entry_point(void)
 {
 	struct callback* callable = pop_callback();
 	if (callable == NULL) {
-		Debug("Callack struct is null!");
+		Debug("Callback struct is null!");
 		timer.pause();
 		return;
 	}
 
 	if (callable->fp == NULL) {
-		Debug("Callack function pointer is null!");
+		Debug("Callback function pointer is null!");
 		timer.pause();
 		return;
 	}
@@ -215,41 +215,4 @@ void add_callback(void (*callback)(void*), void* args, uint32_t interval,
 
 	DebugF("Adding callback %s at %d ms", str, ts + interval);
 	push_callback(callback, args, ts + interval, str);
-
-	// print_arr();
-}
-
-void print_arr(void)
-{
-	Serial.println();
-	for (size_t i = 0; i < TIMER_POOL_SIZE; i++) {
-		struct callback* elem = heap.arr[i];
-
-		if (elem->name == NULL)
-			DebugF("Addr: %p, Index: %d, Time: %d", elem, i, elem->ts);
-		else
-			DebugF("Addr: %p, Index: %d, Time: %d, Name %s", elem, i, elem->ts,
-				   elem->name);
-	}
-	Serial.println();
-}
-
-#include <vector>
-
-void test_heap(void)
-{
-	Debug("Testing heap");
-
-	std::vector<struct callback*> vec;
-	struct callback* ptr = pop_callback();
-	while (ptr != NULL) {
-		vec.emplace_back(ptr);
-		ptr = pop_callback();
-	}
-
-	Debug("Printing orderred poped elements:");
-	for (size_t i = 0; i < vec.size(); i++) {
-		ptr = vec[i];
-		DebugF("Iter: %d, Name: %s, Time: %d", i, ptr->name, ptr->ts);
-	}
 }
