@@ -1,13 +1,21 @@
+// ****************************************************************
+// Copyright 2024 Universidade do Porto - Faculdade de Engenharia *
+// Laboratório de Sistemas e Tecnologia Subaquática (LSTS)        *
+// Departamento de Engenharia Electrotécnica e de Computadores    *
+// ****************************************************************
+// Author: João Bogas                                             *
+// ****************************************************************
+
 #include "System/Time.h"
 #include "Core/Interface.h"
 
-#include "stm32_def.h"
 #include "backup.h"
 #include "clock.h"
+#include "stm32_def.h"
 
 #include <time.h>
 
-static Clock* imc_rtc = Clock::getInstance();
+static Clock* imc_rtc /*  = Clock::getInstance() */;
 
 static RTC_HandleTypeDef rtc_handle = {0};
 
@@ -101,8 +109,8 @@ Clock::Clock(void)
 	// Configuration issue with APB bus
 	HAL_RTCEx_EnableBypassShadow(&rtc_handle);
 
-	DebugF("Set date: %d/%d/%d", CURRENT_DAY, CURRENT_MONTH, CURRENT_YEAR);
-	DebugF("Set time: %d:%d:%d", CURRENT_HOUR, CURRENT_MINUTE, CURRENT_SECOND);
+	debug("Set date: %d/%d/%d", CURRENT_DAY, CURRENT_MONTH, CURRENT_YEAR);
+	debug("Set time: %d:%d:%d", CURRENT_HOUR, CURRENT_MINUTE, CURRENT_SECOND);
 }
 
 Clock::~Clock(void)
@@ -149,7 +157,7 @@ void Clock::printTime(void)
 
 	char buf[128] = {0};
 	strftime(buf, sizeof(buf), "%a %Y-%m-%d %H:%M:%S", &time);
-	DebugF(buf);
+	debug(buf);
 }
 
 float Clock::getEpoch(void)
@@ -183,6 +191,9 @@ void Clock::busyWait(uint32_t ms)
 	while (getMs() - start < ms)
 		;
 }
+
+void Clock::add_alarm(uint32_t ms, void (*callback)(void*), void* args)
+{ }
 
 void Clock::updateDate(void)
 {

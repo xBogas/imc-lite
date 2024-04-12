@@ -1,3 +1,11 @@
+// ****************************************************************
+// Copyright 2024 Universidade do Porto - Faculdade de Engenharia *
+// Laboratório de Sistemas e Tecnologia Subaquática (LSTS)        *
+// Departamento de Engenharia Electrotécnica e de Computadores    *
+// ****************************************************************
+// Author: João Bogas                                             *
+// ****************************************************************
+
 #ifndef SYSTEM_TIME_H_INCLUDED_
 #define SYSTEM_TIME_H_INCLUDED_
 
@@ -23,6 +31,9 @@ public:
 
 	// Busy wait for ms milliseconds
 	static void busyWait(uint32_t ms);
+
+	// Add an alarm to be triggered after ms milliseconds
+	static void add_alarm(uint32_t ms, void (*callback)(void*), void* args);
 
 	//! Non-copyable
 	Clock(Clock&) = delete;
