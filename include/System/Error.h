@@ -13,6 +13,8 @@
 
 _BEGIN_STD_C
 
+void debug_init(void) __attribute__((constructor));
+
 /// @brief Print an error message and exit the program
 /// @param format The format string
 /// @param ... The arguments to the format string
@@ -22,6 +24,10 @@ void error(const char* format, ...);
 /// @param format The format string
 /// @param ... The arguments to the format string
 void debug(const char* format, ...);
+
+/// @brief Wait for user input
+/// @return The character read
+char debug_wait_input(void);
 
 _END_STD_C
 

@@ -9,12 +9,15 @@
 #include <Arduino.h>
 
 #include "System/Error.h"
-#include "System/Time.h"
+
+#include <stdarg.h>
+#include <stdio.h>
 
 _BEGIN_STD_C
 
 static const char* eof = "\r\n";
-static size_t eof_size = strlen(eof);
+static uint16_t eof_size = 2;
+UART_HandleTypeDef _debug;
 
 static void cycles_wait(uint32_t cycles)
 {
@@ -27,13 +30,9 @@ static void cycles_wait(uint32_t cycles)
 // Start blinking red LED
 static void fmt_error(const char* str)
 {
-	if (str != nullptr) {
-		UART_HandleTypeDef* handle = Serial.getHandle();
-		HAL_UART_AbortTransmit(handle);
-
-		HAL_UART_Transmit(handle, (const uint8_t*)str, strlen(str),
-						  HAL_MAX_DELAY);
-		HAL_UART_Transmit(handle, (const uint8_t*)eof, eof_size, HAL_MAX_DELAY);
+	if (str != NULL) {
+		HAL_UART_Transmit(&_debug, (uint8_t*)str, strlen(str), HAL_MAX_DELAY);
+		HAL_UART_Transmit(&_debug, (uint8_t*)eof, eof_size, HAL_MAX_DELAY);
 	}
 
 	// Enable DWT
@@ -51,9 +50,36 @@ static void fmt_error(const char* str)
 	}
 }
 
+void debug_init(void)
+{
+	__HAL_RCC_UART5_CLK_ENABLE();
+
+	// Config GPIO pins
+	pinmap_pinout(PB_8, PinMap_UART_RX);
+	pinmap_pinout(PB_9, PinMap_UART_TX);
+
+	_debug.Instance = UART5;
+	_debug.Init.BaudRate = 115200;
+	_debug.Init.WordLength = UART_WORDLENGTH_8B;
+	_debug.Init.StopBits = UART_STOPBITS_1;
+	_debug.Init.Parity = UART_PARITY_NONE;
+	_debug.Init.Mode = UART_MODE_TX_RX;
+	_debug.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+	_debug.Init.OverSampling = UART_OVERSAMPLING_16;
+	_debug.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+	_debug.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+
+	if (HAL_UART_Init(&_debug) != HAL_OK)
+		error("debug_init: HAL_UART_Init failed");
+
+	debug("debug_init: UART5 initialized");
+}
+
 void error(const char* str, ...)
 {
 	__disable_irq();
+	__DSB();
+	__ISB();
 
 	if (str == NULL)
 		fmt_error(NULL);
@@ -69,6 +95,8 @@ void error(const char* str, ...)
 
 void debug(const char* str, ...)
 {
+	// IRQ_LOCK();
+
 	if (str == NULL)
 		return;
 
@@ -78,14 +106,21 @@ void debug(const char* str, ...)
 	vsnprintf(buffer, 256, str, args);
 	va_end(args);
 
-	UART_HandleTypeDef* handle = Serial.getHandle();
-	HAL_UART_AbortTransmit(handle);
+	HAL_UART_Transmit(&_debug, (uint8_t*)buffer, strlen(buffer), HAL_MAX_DELAY);
+	HAL_UART_Transmit(&_debug, (uint8_t*)eof, eof_size, HAL_MAX_DELAY);
 
-	HAL_UART_Transmit(handle, (const uint8_t*)buffer, strlen(buffer),
-					  HAL_MAX_DELAY);
-	HAL_UART_Transmit(handle, (const uint8_t*)eof, eof_size, HAL_MAX_DELAY);
+	// IRQ_UNLOCK();
 }
 
+char debug_wait_input(void)
+{
+	char recv[4];
+	int rv = HAL_UART_Receive(&_debug, (uint8_t*)recv, 1, HAL_MAX_DELAY);
+	if (rv == HAL_OK)
+		return recv[0];
+
+	return 0;
+}
 
 void HardFault_Handler(void)
 {
