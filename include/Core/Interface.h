@@ -1,3 +1,11 @@
+// ****************************************************************
+// Copyright 2024 Universidade do Porto - Faculdade de Engenharia *
+// Laboratório de Sistemas e Tecnologia Subaquática (LSTS)        *
+// Departamento de Engenharia Electrotécnica e de Computadores    *
+// ****************************************************************
+// Author: João Bogas                                             *
+// ****************************************************************
+
 #ifndef IMC_CORE_INTERFACE_H_INCLUDED_
 #define IMC_CORE_INTERFACE_H_INCLUDED_
 
@@ -6,13 +14,7 @@
 
 #include "IMC.h"
 
-#define Debug(str)	IMC::debug(str)
-#define DebugF(...) IMC::debugF(__VA_ARGS__)
-
 namespace IMC {
-
-void debug(const char* str);
-void debugF(const char* format, ...);
 
 // IMC Communication interface
 class CommsInterface {
@@ -53,20 +55,6 @@ public:
 	{
 		if (func != nullptr)
 			writer = func;
-	}
-
-	// Set debug output function
-	void setDebug(int (*func)(const char*))
-	{
-		if (func != nullptr)
-			dbg = func;
-	}
-
-	// Debug function
-	void debug(const char* str)
-	{
-		if (dbg != nullptr)
-			dbg(str);
 	}
 
 	/**

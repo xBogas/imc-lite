@@ -1,9 +1,17 @@
+// ****************************************************************
+// Copyright 2024 Universidade do Porto - Faculdade de Engenharia *
+// Laboratório de Sistemas e Tecnologia Subaquática (LSTS)        *
+// Departamento de Engenharia Electrotécnica e de Computadores    *
+// ****************************************************************
+// Author: João Bogas                                             *
+// ****************************************************************
+
 #include "Core/Interface.h"
 #include "IMC.h"
 #include "Utils.h"
 
-#include "System/Time.h"
 #include "System/Error.h"
+#include "System/Time.h"
 
 #include <stdarg.h>
 
@@ -13,24 +21,6 @@
 class IMC::CommsInterface Interface;
 
 namespace IMC {
-
-// Print message to debug output
-void debug(const char* str)
-{
-	Interface.debug(str);
-}
-
-// Print message to debug output
-void debugF(const char* format, ...)
-{
-	char str[64];
-	va_list args;
-	va_start(args, format);
-	vsnprintf(str, 64, format, args);
-	va_end(args);
-
-	Interface.debug(str);
-}
 
 // Check if message is a valid EntityList query
 static bool parseQuery(IMC::Message* msg)
@@ -109,13 +99,13 @@ Message* CommsInterface::waitMessage(void)
 			return msg;
 	}
 
-	Debug("Timeout waiting for message");
+	debug("Timeout waiting for message");
 	return nullptr;
 }
 
 void CommsInterface::sendMessage(Message* msg)
 {
-	DebugF("Sending message %d", msg->getId());
+	debug("Sending message %d", msg->getId());
 	uint8_t bfr[MAX_BFR_SIZE];
 	uint16_t size = IMC::serialize(msg, bfr, MAX_BFR_SIZE);
 	if (size == (uint16_t)-1)
@@ -136,7 +126,7 @@ bool CommsInterface::parseEntityList(IMC::Message* msg)
 	if (el->op != IMC::EntityList::OP_REPORT)
 		return false;
 
-	DebugF("str: %s", el->list.c_str());
+	debug("str: %s", el->list.c_str());
 	// Parse entity IDs
 	std::vector<std::string> labels;
 
