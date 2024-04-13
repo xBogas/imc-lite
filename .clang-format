@@ -1,0 +1,41 @@
+# BasedOnStyle: LLVM
+---
+Language: Cpp
+
+DerivePointerAlignment: false
+PointerAlignment: Left
+
+UseTab: Always
+IndentWidth: 4
+TabWidth: 4
+# AlignConsecutiveDeclarations: true
+
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterFunction: true
+  SplitEmptyFunction: false
+
+IndentAccessModifiers: false
+AccessModifierOffset: -4
+
+IndentCaseLabels: false
+AlwaysBreakTemplateDeclarations: Yes
+PackConstructorInitializers: Never
+ConstructorInitializerIndentWidth: 2
+
+BinPackArguments: true
+BinPackParameters: true
+SpaceInEmptyBlock: true
+
+AllowShortFunctionsOnASingleLine: None
+RemoveBracesLLVM: true
+
+AlignConsecutiveMacros: AcrossEmptyLinesAndComments
+AlignEscapedNewlines: Right
+IndentPPDirectives: None
+
+IncludeCategories:
+  - Regex:           '^<.*>$'
+    Priority:        1
+  - Regex:           '^".*"$'
+    Priority:        10
