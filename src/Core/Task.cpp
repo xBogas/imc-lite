@@ -1,44 +1,57 @@
+// ****************************************************************
+// Copyright 2024 Universidade do Porto - Faculdade de Engenharia *
+// Laboratório de Sistemas e Tecnologia Subaquática (LSTS)        *
+// Departamento de Engenharia Electrotécnica e de Computadores    *
+// ****************************************************************
+// Author: João Bogas                                             *
+// ****************************************************************
+
 #include "Core/Task.h"
 #include "Core/Consumers.h"
 #include "Core/Interface.h"
 #include "Core/Manager.h"
 
-Task::Task(const char* name)
-  : Thread(THREAD_STACK_SIZE, name)
+#include "System/Time.h"
+#include "System/Timers.h"
+
+u32 Task::FLASH_PARAMS = FLASH_USER_ADDR;
+
+Task::Task(const char* name, uint16_t _prio)
+  : AbstractTask(name, _prio)
 {
-	m_name = name;
-	params.param = NULL;
-	params.next = NULL;
+	m_params.param = NULL;
+	m_params.next = NULL;
 
 	Interface.registerEntity(name);
-	Manager.registerTask(this);
+	// Manager.registerTask(this);
 }
 
-void Task::param(const char* label, void* variable)
+void Task::consume(const IMC::QueryEntityParameters* msg)
 {
-	if (!label || !variable)
+	IMC::EntityParameters params;
+	params.name = getName();
+
+	struct ParamList* ptr = &m_params;
+	while (ptr) {
+		IMC::EntityParameter p;
+		p.name = ptr->param->label;
+		p.value = ptr->param->value;
+
+		ptr = ptr->next;
+	}
+}
+
+void Task::consume(const IMC::SetEntityParameters* msg)
+{
+	if (msg->name != getName())
 		return;
 
-	void* ptr = malloc(sizeof(Param));
-
-	params.push_back((Param*)ptr);
+	// iterate through the parameters and set them
+	for (auto& i : msg->params)
+		m_params.setParam(i->name.c_str(), i->value);
 }
 
-// TODO
-void Task::consume(const IMC::QueryEntityParameters* msg)
-{ }
-
-// TODO
-void Task::consume(const IMC::SetEntityParameters* msg)
-{ }
-
-void Task::registerConsumer(uint16_t id, Consumer consumer)
+void Task::registerConsumer(uint16_t id, AbstractConsumer* consumer)
 {
 	Core.registerConsumer(id, consumer);
-}
-
-void Task::delay_ms(uint32_t ms)
-{
-	// TODO implement a delayed irq for queueing the task
-	// add_callback(dispatch_thread, this, ms);
 }
