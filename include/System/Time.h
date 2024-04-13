@@ -32,7 +32,6 @@ public:
 	// Busy wait for ms milliseconds
 	static void busyWait(uint32_t ms);
 
-	// Add an alarm to be triggered after ms milliseconds
 	static void add_alarm(uint32_t ms, void (*callback)(void*), void* args);
 
 	//! Non-copyable

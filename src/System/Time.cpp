@@ -109,8 +109,8 @@ Clock::Clock(void)
 	// Configuration issue with APB bus
 	HAL_RTCEx_EnableBypassShadow(&rtc_handle);
 
-	debug("Set date: %d/%d/%d", CURRENT_DAY, CURRENT_MONTH, CURRENT_YEAR);
-	debug("Set time: %d:%d:%d", CURRENT_HOUR, CURRENT_MINUTE, CURRENT_SECOND);
+	Debug("Set date: %d/%d/%d", CURRENT_DAY, CURRENT_MONTH, CURRENT_YEAR);
+	Debug("Set time: %d:%d:%d", CURRENT_HOUR, CURRENT_MINUTE, CURRENT_SECOND);
 }
 
 Clock::~Clock(void)
@@ -157,7 +157,7 @@ void Clock::printTime(void)
 
 	char buf[128] = {0};
 	strftime(buf, sizeof(buf), "%a %Y-%m-%d %H:%M:%S", &time);
-	debug(buf);
+	Debug(buf);
 }
 
 float Clock::getEpoch(void)
