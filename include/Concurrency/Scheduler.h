@@ -37,7 +37,13 @@ struct thread* sched_get_thr(void);
 
 /// @brief Add a thread to the scheduler
 /// @param th Thread to add
+/// @note This function is not thread safe
 void sched_push_thr(struct thread* th);
+
+/// @brief Add a thread to the scheduler
+/// @param th Thread to add
+/// @note This function is thread safe
+void sched_push_thr_safe(struct thread* th);
 
 /// @brief Dispatch a thread to run
 /// @note This function does not queue current thread
