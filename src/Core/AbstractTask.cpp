@@ -33,19 +33,12 @@ void task_wake_up(void* arg)
 	tsk->setState(TaskState::Running);
 
 	// If current thread is higher priority, add it to the queue
-	if (sched_get_thr()->priority >= tsk->priority) {
-		if (sched_is_locked())
-			error("Can't wake up thread while scheduler is locked.");
-
-		sched_lock();
-		sched_push_thr(tsk);
-		tsk->spew("[wakeup] push");
-		sched_unlock();
+	if (sched_get_thr()->priority < tsk->priority) {
+		sched_push_thr_safe(tsk);
 		return;
 	}
 
-	// sched_push_thr(sched_get_thr());
-	sched_dispatch(tsk, NULL);
+	sched_dispatch(tsk, sched_get_thr());
 }
 
 AbstractTask::AbstractTask(const char* name, uint32_t _prio)
@@ -69,9 +62,12 @@ void AbstractTask::delay_ms(uint32_t ms)
 	setState(TaskState::Waiting);
 	add_callback(task_wake_up, this, ms);
 
+	sched_yield(this);
+
+	// Enter low power mode //  while()
 	// Safeguard against early wakeups
 	while (state == TaskState::Waiting)
-		sched_yield(this);
+		error("Task %s woke up early", name);
 }
 
 void AbstractTask::spew(const char* fmt, ...)
@@ -80,7 +76,7 @@ void AbstractTask::spew(const char* fmt, ...)
 
 	va_list args;
 	va_start(args, fmt);
-	int rv = sprintf(buf, "[%s] - ", name);
+	int rv = sprintf(buf, "[%s:%d] - ", name, HAL_GetTick());
 	if (rv < 0)
 		return;
 
