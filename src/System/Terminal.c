@@ -11,6 +11,9 @@
 
 #include <Arduino.h>
 
+#include <stdarg.h>
+#include <stdio.h>
+
 _BEGIN_STD_C
 
 static bool panic = false;
@@ -88,16 +91,17 @@ void term_print(const char* str)
 
 	// if (HAL_UART_Transmit_DMA(&uart, (uint8_t*)str, strlen(str)) != HAL_OK)
 	// 	error("Failed to transmit data");
+
 	uint16_t len = strlen(str);
 	if (HAL_UART_Transmit(&uart, (uint8_t*)str, len, HAL_MAX_DELAY) != HAL_OK)
-		error("Failed to transmit data");
+		error("[Term] Failed to transmit data");
 
 	if (str[len - 1] != '\n') {
 		// if (HAL_UART_Transmit_DMA(&uart, (uint8_t*)"\n", 1) != HAL_OK)
 		// 	error("Failed to transmit data");
 
 		if (HAL_UART_Transmit(&uart, endl, endl_len, HAL_MAX_DELAY) != HAL_OK)
-			error("Failed to transmit data");
+			error("[Term] Failed to transmit data");
 	}
 	// HAL_Delay(2);
 
@@ -113,6 +117,21 @@ void term_panic(const char* str)
 
 	while (1)
 		;
+}
+
+void printk(const char* fmt, ...)
+{
+	if (panic)
+		return;
+
+	char buf[MAX_SPEW_SIZE] = {0};
+
+	va_list args;
+	va_start(args, fmt);
+	vsnprintf(buf, MAX_SPEW_SIZE, fmt, args);
+	va_end(args);
+
+	term_print(buf);
 }
 
 _END_STD_C

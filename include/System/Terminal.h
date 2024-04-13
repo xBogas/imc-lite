@@ -17,6 +17,11 @@ _BEGIN_STD_C
 void terminal_init(void) __attribute__((constructor));
 
 /// @brief Print a string to the terminal
+/// @param fmt Format string
+/// @param ... Arguments
+void printk(const char* fmt, ...);
+
+/// @brief Print a string to the terminal
 void term_print(const char* str);
 
 /// @brief Panic terminal message

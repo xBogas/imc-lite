@@ -6,6 +6,7 @@
 // Author: João Bogas                                             *
 // ****************************************************************
 
+#include "System/Flash.h"
 #include "Defines.h"
 #include "System/Flash.h"
 
@@ -92,7 +93,7 @@ void flash_erase_section(u32 section)
 	EraseInitStruct.NbSectors = 1;
 
 	u32 SectorError = 0;
-	if(HAL_FLASHEx_Erase(&EraseInitStruct, &SectorError) != HAL_OK)
+	if (HAL_FLASHEx_Erase(&EraseInitStruct, &SectorError) != HAL_OK)
 		debug("Flash erase failed");
 
 	HAL_FLASH_Lock();

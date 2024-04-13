@@ -19,7 +19,7 @@ _BEGIN_STD_C
 typedef u32 (*heap_fn)(void* elem);
 
 struct heap {
-	s16 size;
+	u16 size;
 	u16 capacity;
 	heap_fn cmp;
 	void** data;

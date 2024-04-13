@@ -11,6 +11,8 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+
 class Clock {
 public:
 	// Get instance of Clock
@@ -74,5 +76,7 @@ private:
 	struct Date _date;
 	struct Time _time;
 };
+
+#endif // __cplusplus
 
 #endif // CORE_TIME_H_INCLUDED_

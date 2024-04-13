@@ -31,6 +31,7 @@ static void cycles_wait(uint32_t cycles)
 static void fmt_error(const char* str)
 {
 	if (str != NULL) {
+		HAL_UART_Abort(&_debug);
 		HAL_UART_Transmit(&_debug, (uint8_t*)str, strlen(str), HAL_MAX_DELAY);
 		HAL_UART_Transmit(&_debug, (uint8_t*)eof, eof_size, HAL_MAX_DELAY);
 	}
@@ -78,6 +79,7 @@ void debug_init(void)
 void error(const char* str, ...)
 {
 	__disable_irq();
+	__disable_fault_irq();
 	__DSB();
 	__ISB();
 

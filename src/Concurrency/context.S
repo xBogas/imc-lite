@@ -69,6 +69,7 @@ PendSV_Handler:
     bx          lr                  // return
 
 // Super Visor Call handler
+/*
 .thumb_func
 .global SVC_Handler
 .type SVC_Handler, %function
@@ -86,6 +87,7 @@ svc_1:
     b.w leave_idle
 exit_SVC:
     bx          lr
+
 
 // Must be in interrupt mode
 .thumb_func
@@ -145,6 +147,7 @@ leave_idle:
     subs        r3, r3, #8          // Set r3 to sched address
     str         r2, [r3]            // Update running thread
     bx          lr                  // return
+*/
 
 .thumb_func
 .global idle_thread
