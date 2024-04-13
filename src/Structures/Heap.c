@@ -89,11 +89,6 @@ void heapify(struct heap* hp)
 
 void* heap_pop(struct heap* hp)
 {
-	if (hp->size < 0) {
-		debug("Heap size is negative!");
-		return NULL;
-	}
-
 	if (hp->size == 0)
 		return NULL;
 
