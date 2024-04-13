@@ -1,6 +1,16 @@
+// ****************************************************************
+// Copyright 2024 Universidade do Porto - Faculdade de Engenharia *
+// Laboratório de Sistemas e Tecnologia Subaquática (LSTS)        *
+// Departamento de Engenharia Electrotécnica e de Computadores    *
+// ****************************************************************
+// Author: João Bogas                                             *
+// ****************************************************************
+
 #include "System/Timers.h"
-#include "Core/Interface.h"
 #include "System/Error.h"
+#include "System/Terminal.h"
+
+#include "Concurrency/Scheduler.h"
 
 #include <Arduino.h>
 #include "stm32_def.h"
@@ -11,7 +21,7 @@
  */
 
 #ifndef TIMER_POOL_SIZE
-#	define TIMER_POOL_SIZE 10
+#define TIMER_POOL_SIZE 10
 #endif
 
 typedef void (*callable)(void*);
@@ -20,17 +30,17 @@ struct callback {
 	callable fp;
 	void* args;
 	uint32_t ts;
-	const char* name;
 };
 
-struct {
+// TODO: Export timers pool to a module
+struct timer_poll {
 	struct callback* arr[TIMER_POOL_SIZE];
-	struct callback test;
 	uint16_t size;
 	uint16_t capacity;
+	u8 lock;
 } heap;
 
-static HardwareTimer timer(TIM1);
+static HardwareTimer timer(TIM2);
 
 // Swap pointers
 static void swap(struct callback** a, struct callback** b)
@@ -56,19 +66,18 @@ static bool heap_is_full(void)
 /// @param fn function callback
 /// @param args arguments
 /// @param time absolute time in milliseconds
-/// @param name callback name
-static void push_callback(callable fn, void* args, uint32_t time,
-						  const char* name)
+static void push_callback(callable fn, void* args, uint32_t time)
 {
 	// Timer heap is full
-	if (heap.size == heap.capacity)
+	if (heap.size == heap.capacity) {
+		term_print("callbacks full");
 		return;
+	}
 
 	struct callback* elem = heap.arr[heap.size];
 	elem->fp = fn;
 	elem->args = args;
 	elem->ts = time;
-	elem->name = name;
 
 	int index = heap.size;
 	heap.size++;
@@ -127,15 +136,18 @@ static uint32_t peek_next_callback(void)
 
 static void entry_point(void)
 {
+	if (heap.lock)
+		error("Heap is locked!");
+
 	struct callback* callable = pop_callback();
 	if (callable == NULL) {
-		Debug("Callback struct is null!");
+		error("Callback struct is null!");
 		timer.pause();
 		return;
 	}
 
 	if (callable->fp == NULL) {
-		Debug("Callback function pointer is null!");
+		error("Callback function pointer is null!");
 		timer.pause();
 		return;
 	}
@@ -144,12 +156,13 @@ static void entry_point(void)
 	// timer.setOverflow(next * 1000, TimerFormat_t::MICROSEC_FORMAT);
 	uint32_t next = peek_next_callback();
 	if (next != 0) {
+		// debug("Next callback in %d ms", next - callable->ts);
 		timer.pause();
-		DebugF("Next callback in %d ms", next - callable->ts);
 		timer.setOverflow((next - callable->ts) * 1000,
 						  TimerFormat_t::MICROSEC_FORMAT);
 		timer.resume();
 	} else {
+		debug("No more callbacks");
 		timer.pause();
 		timer.refresh();
 	}
@@ -173,7 +186,6 @@ void init_timer_pool(void)
 		elem->fp = NULL;
 		elem->args = NULL;
 		elem->ts = 0;
-		elem->name = NULL;
 		heap.arr[i] = elem;
 	}
 
@@ -181,8 +193,7 @@ void init_timer_pool(void)
 	timer.setPreloadEnable(false);
 }
 
-void add_callback(void (*callback)(void*), void* args, uint32_t interval,
-				  const char* str)
+void add_callback(void (*callback)(void*), void* args, uint32_t interval)
 {
 	// Check remaining time in the current timer
 	// If it is less then interval
@@ -193,11 +204,15 @@ void add_callback(void (*callback)(void*), void* args, uint32_t interval,
 	// The timer overflow becomes interval
 	// Add the remaining time after the interval to the new timer
 
+	if (callback == NULL)
+		error("Callback function pointer is null!");
+
 	if (heap_is_full())
-		return;
+		error("Timer pool is full!");
 
 	uint32_t ts = millis();
 	uint32_t remaining = 0;
+
 	if (!timer.isRunning()) {
 		timer.setOverflow(interval * 1000, TimerFormat_t::MICROSEC_FORMAT);
 		timer.resume();
@@ -213,6 +228,13 @@ void add_callback(void (*callback)(void*), void* args, uint32_t interval,
 		}
 	}
 
-	DebugF("Adding callback %s at %d ms", str, ts + interval);
-	push_callback(callback, args, ts + interval, str);
+	IRQ_LOCK();
+	// sched_lock();
+
+	heap.lock = 1;
+	push_callback(callback, args, ts + interval);
+	heap.lock = 0;
+
+	// sched_unlock();
+	IRQ_UNLOCK();
 }
