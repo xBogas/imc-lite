@@ -15,33 +15,35 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-typedef unsigned char u8;
-typedef unsigned short u16;
-typedef unsigned int u32;
-typedef unsigned long long u64;
+typedef uint8_t	 u8;
+typedef uint16_t u16;
+typedef uint32_t u32;
+typedef uint64_t u64;
 
-typedef signed char s8;
-typedef signed short s16;
-typedef signed int s32;
-typedef signed long long s64;
+typedef int8_t	s8;
+typedef int16_t s16;
+typedef int32_t s32;
+typedef int64_t s64;
 
 #include "System/Error.h"
 
 #ifndef IMC_DEBUG
 
-#define ASSERT_ERR(condition, ...)                                             \
-	do {                                                                       \
-		if (condition) {                                                       \
-			error(__VA_ARGS__);                                                \
-		}                                                                      \
-	} while (0)
+// clang-format off
 
-#define ASSERT_DBG(condition, msg)                                             \
-	do {                                                                       \
-		if (condition)                                                         \
-			debug("Assertion \"%s\" failed at line %d in %s\n", msg, __LINE__, \
-				  __FILE__);                                                   \
-	} while (0)
+#define ASSERT_ERR(condition, ...)    \
+    do {                              \
+        if (condition)                \
+            error(__VA_ARGS__);       \
+    } while (0)
+
+#define ASSERT_DBG(condition, ...)    \
+    do {                              \
+        if (condition)                \
+            debug(__VA_ARGS__);       \
+    } while (0)
+
+// clang-format on
 
 #else
 
@@ -61,5 +63,21 @@ typedef signed long long s64;
 #define MAX_THREADS		10
 #define MAX_MUTEX_QUEUE 3
 #define MAX_SPEW_SIZE	256
+
+#define FLASH_USER_ADDR (0x081E0000)
+#define FLASH_USER_SECT FLASH_SECTOR_11
+#define FLASH_USER_SIZE (0x08200000 - 0x081E0000)
+
+#ifndef FLASH_USER_ADDR
+#error "FLASH_USER_ADDR not defined"
+#endif
+
+#ifndef FLASH_USER_SECT
+#error "FLASH_USER_SECT not defined"
+#endif
+
+#ifndef FLASH_USER_SIZE
+#error "FLASH_USER_SIZE not defined"
+#endif
 
 #endif // DEFINES_H_INCLUDED_
