@@ -1,3 +1,11 @@
+// ****************************************************************
+// Copyright 2024 Universidade do Porto - Faculdade de Engenharia *
+// Laboratório de Sistemas e Tecnologia Subaquática (LSTS)        *
+// Departamento de Engenharia Electrotécnica e de Computadores    *
+// ****************************************************************
+// Author: João Bogas                                             *
+// ****************************************************************
+
 #ifndef IMC_UTILS_H_INCLUDED_
 #define IMC_UTILS_H_INCLUDED_
 
@@ -35,4 +43,4 @@ static void clear(T& ptr)
 
 } // namespace Utils
 
-#endif
+#endif // IMC_UTILS_H_INCLUDED_
