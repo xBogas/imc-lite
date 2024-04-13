@@ -136,7 +136,7 @@ static uint32_t peek_next_callback(void)
 
 static void entry_point(void)
 {
-	if (heap.lock)
+	if (heap.lock) // Won't happen - checking while developing
 		error("Heap is locked!");
 
 	struct callback* callable = pop_callback();
@@ -156,13 +156,11 @@ static void entry_point(void)
 	// timer.setOverflow(next * 1000, TimerFormat_t::MICROSEC_FORMAT);
 	uint32_t next = peek_next_callback();
 	if (next != 0) {
-		// debug("Next callback in %d ms", next - callable->ts);
 		timer.pause();
 		timer.setOverflow((next - callable->ts) * 1000,
 						  TimerFormat_t::MICROSEC_FORMAT);
 		timer.resume();
 	} else {
-		debug("No more callbacks");
 		timer.pause();
 		timer.refresh();
 	}
