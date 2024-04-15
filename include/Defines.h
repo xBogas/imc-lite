@@ -58,6 +58,10 @@ typedef int64_t s64;
 #define IRQ_LOCK()		__disable_irq()
 #define IRQ_UNLOCK()	__enable_irq()
 
+// GCC implementation of likely and unlikely
+#define likely(x)		__builtin_expect(x, 1)
+#define unlikely(x)		__builtin_expect(x, 0)
+
 // System configuration
 
 #define MAX_THREADS		10
