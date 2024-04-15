@@ -128,7 +128,7 @@ struct thread* sched_pop(void)
 void sched_start(void)
 {
 	NVIC_SetPriority(SysTick_IRQn, 0x00);
-	NVIC_SetPriority(PendSV_IRQn, 0x01);
+	NVIC_SetPriority(PendSV_IRQn, 0xff);
 	NVIC_SetPriority(TIM2_IRQn, 0x02); // To dispatch threads
 
 	u32 prio = NVIC_GetPriority(SysTick_IRQn);
@@ -143,7 +143,6 @@ void sched_start(void)
 	prio = NVIC_GetPriority(DebugMonitor_IRQn);
 	printk("DebugMonitor priority: %d", prio);
 
-
 	struct thread* th = sched_pop();
 	ASSERT_ERR(th == NULL, "No threads registered in scheduler!");
 	th->in_queue = 0;
@@ -156,22 +155,11 @@ void sched_start(void)
 
 void osSystickHandler(void)
 {
-	// If context switch is already pending, return
-	if (SCB->ICSR & SCB_ICSR_PENDSVSET_Msk)
-		return;
-
 	// System tick handler
 	if (!sched.running)
 		return;
 
 	if (sched.lock)
-		return;
-
-	if (NVIC_GetPendingIRQ(TIM2_IRQn))
-		return;
-
-	// If a thread is being dispatched, return
-	if (NVIC_GetActive(TIM2_IRQn))
 		return;
 
 	struct thread* nxt = sched_pop();
@@ -228,14 +216,6 @@ void osSystickHandler(void)
 
 void sched_dispatch(struct thread* nxt, struct thread* cur)
 {
-	if (sched.lock)
-		error("Scheduler is locked");
-
-	// Check next thread priority
-	// Should lock scheduler
-	if (SCB->ICSR & SCB_ICSR_PENDSVSET_Msk)
-		error("PendSV is already set");
-
 	sched_lock();
 	if (nxt == cur) {
 		error("[dispatch] %s to same", cur->name);
@@ -256,10 +236,6 @@ void sched_dispatch(struct thread* nxt, struct thread* cur)
 		if (sched.current != cur) // This can't happen - can probably be removed
 			error("Current thread is not the same as the one dispatched");
 	}
-
-	if (SCB->ICSR & SCB_ICSR_PENDSVSET_Msk)
-		error("PendSV is already set"); // This can't happen - can probably be
-										// removed
 
 	// Trigger PendSV
 	__debug("[dispatch] %s to %s", sched.current->name, nxt->name);
