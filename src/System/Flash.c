@@ -14,36 +14,13 @@
 
 _BEGIN_STD_C
 
-struct flash_cb {
-	u32 start;
-	u32 end;
-	u32 ptr;
-	u16 size;
-	u16 section; // section to write
-	bool erased;
-};
-
-struct flash_cb _flash;
-
-void flash_init(void)
+u32 flash_write(u32 addr, const void* data, u16 bytes)
 {
-	_flash.start = FLASH_USER_ADDR;
-	_flash.end = 0x08200000;
-	_flash.ptr = _flash.start;
-	_flash.size = 0;
-	_flash.section = FLASH_SECTOR_11;
-	_flash.erased = false;
-}
-
-u32 flash_write(u32 addr, u8* data, u16 bytes)
-{
-	if (_flash.erased == false)
-		flash_erase_section(_flash.section);
-
+	u8* _data = (u8*)data;
 	HAL_FLASH_Unlock();
 
 	for (u16 i = 0; i < bytes; i++) {
-		u8 rv = HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, addr, data[i]);
+		u8 rv = HAL_FLASH_Program(FLASH_TYPEPROGRAM_BYTE, addr, _data[i]);
 		if (rv != HAL_OK) {
 			HAL_FLASH_Lock();
 			error("Flash write failed");
@@ -56,28 +33,13 @@ u32 flash_write(u32 addr, u8* data, u16 bytes)
 	return addr;
 }
 
-u32 flash_append(u8* data, u16 bytes)
-{
-	if ((_flash.ptr + bytes) > _flash.end)
-		error("Flash memory full %d + %d > %d", _flash.ptr, bytes, _flash.end);
-
-	u32 start = _flash.ptr;
-	u32 rv = flash_write(_flash.ptr, data, bytes);
-	if (rv == 0)
-		return rv;
-
-	_flash.ptr = rv;
-	_flash.size += bytes;
-
-	return start;
-}
-
-void flash_read(u32 addr, u8* bfr, u16 bytes)
+void flash_read(u32 addr, void* bfr, u16 bytes)
 {
 	u8* flash_ptr = (u8*)addr;
+	u8* bfr_ptr = (u8*)bfr;
 
 	for (u16 i = 0; i < bytes; i++)
-		bfr[i] = flash_ptr[i];
+		bfr_ptr[i] = flash_ptr[i];
 }
 
 void flash_erase_section(u32 section)
@@ -97,8 +59,6 @@ void flash_erase_section(u32 section)
 		debug("Flash erase failed");
 
 	HAL_FLASH_Lock();
-
-	_flash.erased = true;
 }
 
 _END_STD_C

@@ -13,27 +13,18 @@
 
 _BEGIN_STD_C
 
-/// @brief
-void flash_init(void) __attribute__((constructor));
+/// @brief Write to flash
+/// @param addr Address to write to     
+/// @param data Data to write
+/// @param bytes Number of bytes to write
+/// @return Address of the last byte written
+u32 flash_write(u32 addr, const void* data, u16 bytes);
 
-/// @brief
-/// @param addr
-/// @param data
-/// @param bytes
-/// @return
-u32 flash_write(u32 addr, u8* data, u16 bytes);
-
-/// @brief
-/// @param data
-/// @param bytes
-/// @return
-u32 flash_append(u8* data, u16 bytes);
-
-/// @brief
-/// @param addr
-/// @param bfr
-/// @param bytes
-void flash_read(u32 addr, u8* bfr, u16 bytes);
+/// @brief Read from flash
+/// @param addr Address to read from
+/// @param bfr Buffer to store the data
+/// @param bytes Number of bytes to read
+void flash_read(u32 addr, void* bfr, u16 bytes);
 
 /// @brief Erase a flash sector
 void flash_erase_section(u32 sector);
