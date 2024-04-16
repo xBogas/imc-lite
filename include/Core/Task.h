@@ -17,8 +17,6 @@
 #include "Consumers.h"
 #include "Parameters.h"
 
-#include "System/Flash.h"
-
 class Task : public AbstractTask {
 public:
 	Task(const char* name, uint16_t _prio = 1);
@@ -69,56 +67,52 @@ public:
 			loop();
 	}
 
-	virtual void setup(void) = 0;
-
-	virtual void loop(void) = 0;
-
-protected:
-	bool get_params(void)
+	bool loadParams(u8* bfr, uint16_t len)
 	{
-		BasicParam* ptr = m_params.param;
-		if (ptr == NULL) {
-			debug("m_params is empty");
-			return true;
-		}
-
 		// Read parameters from flash
-		u8 bfr[256];
-		u16 bytes;
+		ParamList* iter = &m_params;
+		while (iter) {
 
-		flash_read(FLASH_PARAMS, bfr, 256);
+			BasicParam* ptr = iter->param;
+			if (ptr == NULL)
+				break;
 
-		bytes = ptr->deserialize(bfr, 256);
+			u16 rv = ptr->deserialize(bfr, len);
+			if (rv != ptr->getSerilizationSize())
+				return false;
 
-		debug("Read %d bytes from flash", bytes);
-		if (bytes == 2) {
-			debug("No parameters found in flash");
-			return false;
+			debug("Read %s", ptr->label.c_str());
+			bfr += rv;
+			iter = iter->next;
 		}
-
-		debug("Read %s", ptr->label);
 
 		return true;
 	}
 
-	void save_params(void)
+	uint16_t saveParams(u8* bfr, u16 bfr_len)
 	{
-		// Save parameters to flash
-		BasicParam* ptr = m_params.param;
-		u8 bfr[256];
+		debug("Saving task %s parameters", getName());
+		ParamList* iter = &m_params;
 		u16 bytes = 0;
+		while (iter) {
+			BasicParam* ptr = iter->param;
+			if (ptr == NULL)
+				return bytes;
 
-		debug("Saving parameters %s", ptr->label);
+			debug("Saving %s param", ptr->label.c_str());
+			bytes += ptr->serialize(bfr + bytes);
+			iter = iter->next;
+		}
 
-		bytes = ptr->serialize(bfr);
-
-		debug("Writing %d bytes to flash", bytes);
-		flash_write(FLASH_PARAMS, bfr, bytes);
+		return bytes;
 	}
 
-private:
-	static u32 FLASH_PARAMS;
+protected:
+	virtual void setup(void) = 0;
 
+	virtual void loop(void) = 0;
+
+private:
 	// Task Parameters
 	struct ParamList m_params;
 };

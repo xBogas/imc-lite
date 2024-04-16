@@ -14,8 +14,6 @@
 #include "System/Time.h"
 #include "System/Timers.h"
 
-u32 Task::FLASH_PARAMS = FLASH_USER_ADDR;
-
 Task::Task(const char* name, uint16_t _prio)
   : AbstractTask(name, _prio)
 {
@@ -23,7 +21,7 @@ Task::Task(const char* name, uint16_t _prio)
 	m_params.next = NULL;
 
 	Interface.registerEntity(name);
-	// Manager.registerTask(this);
+	Manager.registerTask(this);
 }
 
 void Task::consume(const IMC::QueryEntityParameters* msg)
