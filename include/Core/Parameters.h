@@ -14,8 +14,9 @@
 
 #include <sstream>
 
-struct BasicParam {
-	const char* label;
+class BasicParam {
+public:
+	std::string label;
 	std::string value;
 
 	/// @brief Set the value of the variable
@@ -23,48 +24,60 @@ struct BasicParam {
 	/// @return true if successful, false otherwise
 	virtual bool set(const std::string& variable) = 0;
 
+	/// @brief Serialize the variable
+	/// @param bfr Buffer to serialize the variable
+	/// @return Size of the serialized variable
+	virtual u16 serializeVar(u8* bfr) = 0;
+
+	/// @brief Deserialize the variable
+	/// @param bfr Buffer to deserialize the variable
+	/// @param bfr_len Length of the buffer
+	virtual u16 deserializeVar(u8* bfr, u16& bfr_len) = 0;
+
+	/// @brief Get the size of the serialization
+	/// @return Number of bytes required to serialize the parameters
+	virtual u16 getSerilizationSizeVar(void) = 0;
+
+	/// @brief Get the size of the serialization
+	/// @return Number of bytes required to serialize the parameters
+	u16 getSerilizationSize(void)
+	{
+		u16 size = IMC::getSerializationSize(label);
+		size += IMC::getSerializationSize(value);
+		return size + getSerilizationSizeVar();
+	}
+
 	/// @brief Serialize the parameters
 	/// @param bfr Buffer to serialize the parameters
 	/// @return Size of the serialized parameters
 	u16 serialize(u8* bfr)
 	{
-		//TODO: Just serializing the label for now
-		if (label == NULL)
-			THROW("Label is NULL");
-
-		// Serialize const char* [size, label] with 2 bytes for size
-		u16 size = strlen(label);
-		memcpy(bfr, &size, sizeof(size));
-
-		bfr += sizeof(size);
-		memcpy(bfr, label, size);
-
-		return size + sizeof(size);
+		u16 size = IMC::serialize(label, bfr);
+		size += IMC::serialize(value, bfr + size);
+		return size + serializeVar(bfr + size);
 	}
 
 	/// @brief Deserialize the parameters
 	/// @param bfr Buffer to deserialize the parameters
 	/// @param bfr_len Length of the buffer
 	/// @return Size of the deserialized parameters
-	u16 deserialize(u8* bfr, u16 bfr_len)
+	u16 deserialize(u8* bfr, u16& bfr_len)
 	{
-		if (bfr_len < 2)
-			THROW("Buffer too short to deserialize string size");
+		if (bfr_len < getSerilizationSize())
+			return 0;
 
-		u16 size = 0;
-		memcpy(&size, bfr, 2);
+		label.clear();
+		value.clear();
 
-		if (bfr_len < size + 2)
-			THROW("Buffer too short to deserialize string");
-
-		memcpy((char*)label, bfr + 2, size);
-
-		return size + 2;
+		u16 size = IMC::deserialize(label, bfr, bfr_len);
+		size += IMC::deserialize(value, bfr + size, bfr_len);
+		return size + deserializeVar(bfr + size, bfr_len);
 	}
 };
 
 template <typename T>
-struct Param : public BasicParam {
+class Param : public BasicParam {
+public:
 	T& var;
 
 	Param(const char* str, T& variable)
@@ -94,6 +107,24 @@ struct Param : public BasicParam {
 			var = {};
 			error("Param [%s] failed conversion %s", label, str.c_str());
 		}
+	}
+
+	u16 serializeVar(u8* bfr) override
+	{
+		return IMC::serialize(var, bfr);
+	}
+
+	u16 deserializeVar(u8* bfr, u16& bfr_len) override
+	{
+		return IMC::deserialize(var, bfr, bfr_len);
+	}
+
+	u16 getSerilizationSizeVar(void) override
+	{
+		if constexpr (std::is_same<T, std::string>::value)
+			return IMC::getSerializationSize(var);
+		else
+			return sizeof(var);
 	}
 };
 
