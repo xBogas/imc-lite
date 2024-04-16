@@ -15,12 +15,14 @@
 #include <stdbool.h>
 #include <stdint.h>
 
-typedef uint8_t	 u8;
+// clang-format off
+
+typedef uint8_t  u8;
 typedef uint16_t u16;
 typedef uint32_t u32;
 typedef uint64_t u64;
 
-typedef int8_t	s8;
+typedef int8_t  s8;
 typedef int16_t s16;
 typedef int32_t s32;
 typedef int64_t s64;
@@ -29,17 +31,15 @@ typedef int64_t s64;
 
 #ifndef IMC_DEBUG
 
-// clang-format off
-
 #define ASSERT_ERR(condition, ...)    \
     do {                              \
-        if (condition)                \
+        if (!(condition))             \
             error(__VA_ARGS__);       \
     } while (0)
 
 #define ASSERT_DBG(condition, ...)    \
     do {                              \
-        if (condition)                \
+        if (!(condition))             \
             debug(__VA_ARGS__);       \
     } while (0)
 
@@ -50,7 +50,7 @@ typedef int64_t s64;
 #define ASSERT_ERR(condition, msg)
 #define ASSERT_DBG(condition, msg)
 
-#endif // NDEBUG
+#endif // IMC_DEBUG
 
 // Board definitions
 #include "stm32_def.h"
