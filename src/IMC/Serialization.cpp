@@ -19,6 +19,33 @@ void rev_memcpy(void* dst, const void* src, size_t len)
 		*__d-- = *__s++;
 }
 
+uint16_t serialize(const char* str, uint8_t* bfr)
+{
+	uint16_t size = strlen(str);
+	memcpy(bfr, &size, sizeof(size));
+	bfr += sizeof(size);
+	memcpy(bfr, str, size);
+	return size + sizeof(size);
+}
+
+uint16_t deserialize(char* str, const uint8_t* bfr, uint16_t& bfr_len)
+{
+	if (bfr_len < 2)
+		THROW("Buffer too short to deserialize string");
+
+	uint16_t size = 0;
+	memcpy(&size, bfr, 2);
+
+	if (bfr_len < size + 2)
+		THROW("Buffer too short to deserialize string");
+
+	memcpy(str, bfr + 2, size);
+	str[size] = '\0';
+	bfr_len -= size + 3;
+
+	return size + 3;
+}
+
 uint16_t serialize(const std::string& str, uint8_t* bfr)
 {
 	uint16_t size = str.size();
@@ -31,13 +58,14 @@ uint16_t serialize(const std::string& str, uint8_t* bfr)
 uint16_t deserialize(std::string& t, const uint8_t* bfr, uint16_t& bfr_len)
 {
 	if (bfr_len < 2)
-		THROW("Buffer too short to deserialize string");
+		THROW("Buffer too short to deserialize string %d < 2", bfr_len);
 
 	uint16_t size = 0;
 	memcpy(&size, bfr, 2);
+	debug("Deserializing string of size %d", size);
 
 	if (bfr_len < size + 2)
-		THROW("Buffer too short to deserialize string");
+		THROW("Buffer too short to deserialize string %d < %d", bfr_len, size + 2);
 
 	t.reserve(size);
 	for (size_t i = 0; i < size; i++)
