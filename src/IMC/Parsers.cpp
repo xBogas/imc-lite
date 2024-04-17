@@ -54,7 +54,7 @@ static std::unordered_map<uint16_t, Constructor> constructors_by_id = {
 #include "IMC/Factory.def"
 };
 
-static uint16_t compute_CRC16(const uint8_t* bfr, uint16_t bfr_len)
+uint16_t compute_CRC16(const uint8_t* bfr, uint16_t bfr_len)
 {
 	uint16_t crc = 0;
 	while (bfr_len--)
