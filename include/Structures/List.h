@@ -42,6 +42,14 @@ void list_append(struct list* l, void* elem);
 /// @return The element popped from the list.
 void* list_pop(struct list* l);
 
+/// @brief Get the size of the list.
+/// @param l The list to get the size of.
+/// @return The size of the list.
+static inline u32 list_size(struct list* l)
+{
+	return l->count;
+}
+
 _END_STD_C
 
 #endif // STRUCTURES_LIST_H_INCLUDED_
