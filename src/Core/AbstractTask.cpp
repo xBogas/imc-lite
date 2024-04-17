@@ -76,7 +76,7 @@ void AbstractTask::spew(const char* fmt, ...)
 
 	va_list args;
 	va_start(args, fmt);
-	int rv = sprintf(buf, "[%s:%d] - ", name, HAL_GetTick());
+	int rv = sprintf(buf, "[%s] - ", name);
 	if (rv < 0)
 		return;
 
