@@ -62,10 +62,10 @@ uint16_t deserialize(std::string& t, const uint8_t* bfr, uint16_t& bfr_len)
 
 	uint16_t size = 0;
 	memcpy(&size, bfr, 2);
-	debug("Deserializing string of size %d", size);
 
 	if (bfr_len < size + 2)
-		THROW("Buffer too short to deserialize string %d < %d", bfr_len, size + 2);
+		THROW("Buffer too short to deserialize string %d < %d", bfr_len,
+			  size + 2);
 
 	t.reserve(size);
 	for (size_t i = 0; i < size; i++)
