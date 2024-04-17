@@ -62,7 +62,7 @@ void AbstractTask::delay_ms(uint32_t ms)
 	setState(TaskState::Waiting);
 	add_callback(task_wake_up, this, ms);
 
-	sched_yield(this);
+	sched_yield();
 
 	// Enter low power mode //  while()
 	// Safeguard against early wakeups
