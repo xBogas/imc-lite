@@ -41,17 +41,17 @@
 
 namespace IMC
 {
-  //! Super type Maneuver.
+  /// Super type Maneuver.
   class Maneuver: public Message
   {
   };
 
-  //! Super type Control Command.
+  /// Super type Control Command.
   class ControlCommand: public Message
   {
   };
 
-  //! Super type RemoteData.
+  /// Super type RemoteData.
   class RemoteData: public Message
   {
   };

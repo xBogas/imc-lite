@@ -47,37 +47,37 @@
 
 namespace IMC
 {
-  //! Entity State.
+  /// Entity State.
   class EntityState: public Message
   {
   public:
-    //! State.
+    /// State.
     enum StateEnum
     {
-      //! Bootstrapping.
+      /// Bootstrapping.
       ESTA_BOOT = 0,
-      //! Normal Operation.
+      /// Normal Operation.
       ESTA_NORMAL = 1,
-      //! Fault.
+      /// Fault.
       ESTA_FAULT = 2,
-      //! Error.
+      /// Error.
       ESTA_ERROR = 3,
-      //! Failure.
+      /// Failure.
       ESTA_FAILURE = 4
     };
 
-    //! Flags.
+    /// Flags.
     enum FlagsBits
     {
-      //! Human Intervention Required.
+      /// Human Intervention Required.
       EFLA_HUMAN_INTERVENTION = 0x01
     };
 
-    //! State.
+    /// State.
     uint8_t state;
-    //! Flags.
+    /// Flags.
     uint8_t flags;
-    //! Complementary description.
+    /// Complementary description.
     std::string description;
 
     static uint16_t
@@ -137,7 +137,7 @@ namespace IMC
     }
   };
 
-  //! Query Entity State.
+  /// Query Entity State.
   class QueryEntityState: public Message
   {
   public:
@@ -190,19 +190,19 @@ namespace IMC
     }
   };
 
-  //! Entity Information.
+  /// Entity Information.
   class EntityInfo: public Message
   {
   public:
-    //! Entity Identifier.
+    /// Entity Identifier.
     uint8_t id;
-    //! Label.
+    /// Label.
     std::string label;
-    //! Component name.
+    /// Component name.
     std::string component;
-    //! Activation Time.
+    /// Activation Time.
     uint16_t act_time;
-    //! Deactivation Time.
+    /// Deactivation Time.
     uint16_t deact_time;
 
     static uint16_t
@@ -268,11 +268,11 @@ namespace IMC
     setSubId(uint16_t subid);
   };
 
-  //! Query Entity Information.
+  /// Query Entity Information.
   class QueryEntityInfo: public Message
   {
   public:
-    //! Entity Identifier.
+    /// Entity Identifier.
     uint8_t id;
 
     static uint16_t
@@ -332,22 +332,22 @@ namespace IMC
     setSubId(uint16_t subid);
   };
 
-  //! Entity List.
+  /// Entity List.
   class EntityList: public Message
   {
   public:
-    //! operation.
+    /// operation.
     enum operationEnum
     {
-      //! Report.
+      /// Report.
       OP_REPORT = 0,
-      //! Query.
+      /// Query.
       OP_QUERY = 1
     };
 
-    //! operation.
+    /// operation.
     uint8_t op;
-    //! list.
+    /// list.
     std::string list;
 
     static uint16_t
@@ -407,11 +407,11 @@ namespace IMC
     }
   };
 
-  //! CPU Usage.
+  /// CPU Usage.
   class CpuUsage: public Message
   {
   public:
-    //! Usage percentage.
+    /// Usage percentage.
     uint8_t value;
 
     static uint16_t
@@ -471,13 +471,13 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Transport Bindings.
+  /// Transport Bindings.
   class TransportBindings: public Message
   {
   public:
-    //! Consumer name.
+    /// Consumer name.
     std::string consumer;
-    //! Message Identifier.
+    /// Message Identifier.
     uint16_t message_id;
 
     static uint16_t
@@ -537,20 +537,20 @@ namespace IMC
     }
   };
 
-  //! Restart System.
+  /// Restart System.
   class RestartSystem: public Message
   {
   public:
-    //! Restart Type.
+    /// Restart Type.
     enum RestartTypeEnum
     {
-      //! Dune.
+      /// Dune.
       RSTYPE_DUNE = 1,
-      //! System.
+      /// System.
       RSTYPE_SYSTEM = 2
     };
 
-    //! Restart Type.
+    /// Restart Type.
     uint8_t type;
 
     static uint16_t
@@ -604,24 +604,24 @@ namespace IMC
     }
   };
 
-  //! Device Calibration Control.
+  /// Device Calibration Control.
   class DevCalibrationControl: public Message
   {
   public:
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Start.
+      /// Start.
       DCAL_START = 0,
-      //! Stop.
+      /// Stop.
       DCAL_STOP = 1,
-      //! Perform Next Calibration Step.
+      /// Perform Next Calibration Step.
       DCAL_STEP_NEXT = 2,
-      //! Perform Previous Calibration Step.
+      /// Perform Previous Calibration Step.
       DCAL_STEP_PREVIOUS = 3
     };
 
-    //! Operation.
+    /// Operation.
     uint8_t op;
 
     static uint16_t
@@ -675,32 +675,32 @@ namespace IMC
     }
   };
 
-  //! Device Calibration State.
+  /// Device Calibration State.
   class DevCalibrationState: public Message
   {
   public:
-    //! Flags.
+    /// Flags.
     enum FlagsBits
     {
-      //! Previous Step Not Supported.
+      /// Previous Step Not Supported.
       DCS_PREVIOUS_NOT_SUPPORTED = 0x01,
-      //! Next Step Not Supported.
+      /// Next Step Not Supported.
       DCS_NEXT_NOT_SUPPORTED = 0x02,
-      //! Waiting Device Calibration Control.
+      /// Waiting Device Calibration Control.
       DCS_WAITING_CONTROL = 0x04,
-      //! Calibration Error.
+      /// Calibration Error.
       DCS_ERROR = 0x08,
-      //! Calibration Procedure Completed.
+      /// Calibration Procedure Completed.
       DCS_COMPLETED = 0x10
     };
 
-    //! Total Steps.
+    /// Total Steps.
     uint8_t total_steps;
-    //! Current Step Number.
+    /// Current Step Number.
     uint8_t step_number;
-    //! Description.
+    /// Description.
     std::string step;
-    //! Flags.
+    /// Flags.
     uint8_t flags;
 
     static uint16_t
@@ -760,34 +760,34 @@ namespace IMC
     }
   };
 
-  //! Entity Activation State.
+  /// Entity Activation State.
   class EntityActivationState: public Message
   {
   public:
-    //! State.
+    /// State.
     enum StateEnum
     {
-      //! Entity is Inactive.
+      /// Entity is Inactive.
       EAS_INACTIVE = 0,
-      //! Entity is Active.
+      /// Entity is Active.
       EAS_ACTIVE = 1,
-      //! Activation in Progress.
+      /// Activation in Progress.
       EAS_ACT_IP = 2,
-      //! Activation Completed.
+      /// Activation Completed.
       EAS_ACT_DONE = 3,
-      //! Activation Failed.
+      /// Activation Failed.
       EAS_ACT_FAIL = 4,
-      //! Deactivation In Progress.
+      /// Deactivation In Progress.
       EAS_DEACT_IP = 5,
-      //! Deactivation Completed.
+      /// Deactivation Completed.
       EAS_DEACT_DONE = 6,
-      //! Deactivation Failed.
+      /// Deactivation Failed.
       EAS_DEACT_FAIL = 7
     };
 
-    //! State.
+    /// State.
     uint8_t state;
-    //! Error.
+    /// Error.
     std::string error;
 
     static uint16_t
@@ -847,7 +847,7 @@ namespace IMC
     }
   };
 
-  //! Query Entity Activation State.
+  /// Query Entity Activation State.
   class QueryEntityActivationState: public Message
   {
   public:
@@ -900,56 +900,56 @@ namespace IMC
     }
   };
 
-  //! Vehicle Operational Limits.
+  /// Vehicle Operational Limits.
   class VehicleOperationalLimits: public Message
   {
   public:
-    //! Action on the vehicle operational limits.
+    /// Action on the vehicle operational limits.
     enum ActiononthevehicleoperationallimitsEnum
     {
-      //! Request.
+      /// Request.
       OP_REQUEST = 0,
-      //! Set.
+      /// Set.
       OP_SET = 1,
-      //! Report.
+      /// Report.
       OP_REPORT = 2
     };
 
-    //! Action on the vehicle operational limits.
+    /// Action on the vehicle operational limits.
     uint8_t op;
-    //! Minimum speed.
+    /// Minimum speed.
     fp32_t speed_min;
-    //! Maximum speed.
+    /// Maximum speed.
     fp32_t speed_max;
-    //! Longitudinal maximum acceleration.
+    /// Longitudinal maximum acceleration.
     fp32_t long_accel;
-    //! Maximum MSL altitude.
+    /// Maximum MSL altitude.
     fp32_t alt_max_msl;
-    //! Maximum Dive Rate Speed Fraction.
+    /// Maximum Dive Rate Speed Fraction.
     fp32_t dive_fraction_max;
-    //! Maximum Climb Rate Speed Fraction.
+    /// Maximum Climb Rate Speed Fraction.
     fp32_t climb_fraction_max;
-    //! Bank limit.
+    /// Bank limit.
     fp32_t bank_max;
-    //! Bank rate limit.
+    /// Bank rate limit.
     fp32_t p_max;
-    //! Minimum pitch angle.
+    /// Minimum pitch angle.
     fp32_t pitch_min;
-    //! Maximum pitch angle.
+    /// Maximum pitch angle.
     fp32_t pitch_max;
-    //! Maximum pitch rate.
+    /// Maximum pitch rate.
     fp32_t q_max;
-    //! Minimum load factor.
+    /// Minimum load factor.
     fp32_t g_min;
-    //! Maximum load factor.
+    /// Maximum load factor.
     fp32_t g_max;
-    //! Maximum lateral load factor.
+    /// Maximum lateral load factor.
     fp32_t g_lat_max;
-    //! Minimum RPMs.
+    /// Minimum RPMs.
     fp32_t rpm_min;
-    //! Maximum RPMs.
+    /// Maximum RPMs.
     fp32_t rpm_max;
-    //! Maximum RPM rate.
+    /// Maximum RPM rate.
     fp32_t rpm_rate_max;
 
     static uint16_t
@@ -1003,11 +1003,11 @@ namespace IMC
     }
   };
 
-  //! Message List.
+  /// Message List.
   class MsgList: public Message
   {
   public:
-    //! Messages.
+    /// Messages.
     MessageList<Message> msgs;
 
     static uint16_t
@@ -1083,45 +1083,45 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Simulated State.
+  /// Simulated State.
   class SimulatedState: public Message
   {
   public:
-    //! Latitude (WGS-84).
+    /// Latitude (WGS-84).
     fp64_t lat;
-    //! Longitude (WGS-84).
+    /// Longitude (WGS-84).
     fp64_t lon;
-    //! Height (WGS-84).
+    /// Height (WGS-84).
     fp32_t height;
-    //! Offset north (m).
+    /// Offset north (m).
     fp32_t x;
-    //! Offset east (m).
+    /// Offset east (m).
     fp32_t y;
-    //! Offset down (m).
+    /// Offset down (m).
     fp32_t z;
-    //! Rotation over x axis.
+    /// Rotation over x axis.
     fp32_t phi;
-    //! Rotation over y axis.
+    /// Rotation over y axis.
     fp32_t theta;
-    //! Rotation over z axis.
+    /// Rotation over z axis.
     fp32_t psi;
-    //! Body-Fixed xx Linear Velocity.
+    /// Body-Fixed xx Linear Velocity.
     fp32_t u;
-    //! Body-Fixed yy Linear Velocity.
+    /// Body-Fixed yy Linear Velocity.
     fp32_t v;
-    //! Body-Fixed zz Linear Velocity.
+    /// Body-Fixed zz Linear Velocity.
     fp32_t w;
-    //! Angular Velocity in x.
+    /// Angular Velocity in x.
     fp32_t p;
-    //! Angular Velocity in y.
+    /// Angular Velocity in y.
     fp32_t q;
-    //! Angular Velocity in z.
+    /// Angular Velocity in z.
     fp32_t r;
-    //! Stream Velocity X (North).
+    /// Stream Velocity X (North).
     fp32_t svx;
-    //! Stream Velocity Y (East).
+    /// Stream Velocity Y (East).
     fp32_t svy;
-    //! Stream Velocity Z (Down).
+    /// Stream Velocity Z (Down).
     fp32_t svz;
 
     static uint16_t
@@ -1175,22 +1175,22 @@ namespace IMC
     }
   };
 
-  //! Leak Simulation.
+  /// Leak Simulation.
   class LeakSimulation: public Message
   {
   public:
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Leaks Off.
+      /// Leaks Off.
       LSIM_OFF = 0,
-      //! Leaks On.
+      /// Leaks On.
       LSIM_ON = 1
     };
 
-    //! Operation.
+    /// Operation.
     uint8_t op;
-    //! Leak Entities.
+    /// Leak Entities.
     std::string entities;
 
     static uint16_t
@@ -1250,26 +1250,26 @@ namespace IMC
     }
   };
 
-  //! Underwater Acoustics Simulation.
+  /// Underwater Acoustics Simulation.
   class UASimulation: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeEnum
     {
-      //! Data Transmission.
+      /// Data Transmission.
       UAS_DATA = 0,
-      //! Ping.
+      /// Ping.
       UAS_PING = 1,
-      //! Ping Reply.
+      /// Ping Reply.
       UAS_PING_REPLY = 2
     };
 
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! Transmission Speed.
+    /// Transmission Speed.
     uint16_t speed;
-    //! Data.
+    /// Data.
     std::vector<char> data;
 
     static uint16_t
@@ -1329,26 +1329,26 @@ namespace IMC
     }
   };
 
-  //! Dynamics Simulation Parameters.
+  /// Dynamics Simulation Parameters.
   class DynamicsSimParam: public Message
   {
   public:
-    //! Action on the Vehicle Simulation Parameters.
+    /// Action on the Vehicle Simulation Parameters.
     enum ActionontheVehicleSimulationParametersEnum
     {
-      //! Request.
+      /// Request.
       OP_REQUEST = 0,
-      //! Set.
+      /// Set.
       OP_SET = 1,
-      //! Report.
+      /// Report.
       OP_REPORT = 2
     };
 
-    //! Action on the Vehicle Simulation Parameters.
+    /// Action on the Vehicle Simulation Parameters.
     uint8_t op;
-    //! TAS to Longitudinal Acceleration Gain.
+    /// TAS to Longitudinal Acceleration Gain.
     fp32_t tas2acc_pgain;
-    //! Bank to Bank Rate Gain.
+    /// Bank to Bank Rate Gain.
     fp32_t bank2p_pgain;
 
     static uint16_t
@@ -1402,13 +1402,13 @@ namespace IMC
     }
   };
 
-  //! Storage Usage.
+  /// Storage Usage.
   class StorageUsage: public Message
   {
   public:
-    //! Available.
+    /// Available.
     uint32_t available;
-    //! Usage.
+    /// Usage.
     uint8_t value;
 
     static uint16_t
@@ -1468,30 +1468,30 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Cache Control.
+  /// Cache Control.
   class CacheControl: public Message
   {
   public:
-    //! Control Operation.
+    /// Control Operation.
     enum ControlOperationEnum
     {
-      //! Store.
+      /// Store.
       COP_STORE = 0,
-      //! Load.
+      /// Load.
       COP_LOAD = 1,
-      //! Clear.
+      /// Clear.
       COP_CLEAR = 2,
-      //! Copy Snapshot.
+      /// Copy Snapshot.
       COP_COPY = 3,
-      //! Snapshot Copy Complete.
+      /// Snapshot Copy Complete.
       COP_COPY_COMPLETE = 4
     };
 
-    //! Control Operation.
+    /// Control Operation.
     uint8_t op;
-    //! Snapshot destination.
+    /// Snapshot destination.
     std::string snapshot;
-    //! Message.
+    /// Message.
     InlineMessage<Message> message;
 
     static uint16_t
@@ -1567,30 +1567,30 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Logging Control.
+  /// Logging Control.
   class LoggingControl: public Message
   {
   public:
-    //! Control Operation.
+    /// Control Operation.
     enum ControlOperationEnum
     {
-      //! Request Start of Logging.
+      /// Request Start of Logging.
       COP_REQUEST_START = 0,
-      //! Logging Started.
+      /// Logging Started.
       COP_STARTED = 1,
-      //! Request Logging Stop.
+      /// Request Logging Stop.
       COP_REQUEST_STOP = 2,
-      //! Logging Stopped.
+      /// Logging Stopped.
       COP_STOPPED = 3,
-      //! Request Current Log Name.
+      /// Request Current Log Name.
       COP_REQUEST_CURRENT_NAME = 4,
-      //! Current Log Name.
+      /// Current Log Name.
       COP_CURRENT_NAME = 5
     };
 
-    //! Control Operation.
+    /// Control Operation.
     uint8_t op;
-    //! Log Label / Path.
+    /// Log Label / Path.
     std::string name;
 
     static uint16_t
@@ -1650,32 +1650,32 @@ namespace IMC
     }
   };
 
-  //! Log Book Entry.
+  /// Log Book Entry.
   class LogBookEntry: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeEnum
     {
-      //! Information.
+      /// Information.
       LBET_INFO = 0,
-      //! Warning.
+      /// Warning.
       LBET_WARNING = 1,
-      //! Error.
+      /// Error.
       LBET_ERROR = 2,
-      //! Critical.
+      /// Critical.
       LBET_CRITICAL = 3,
-      //! Debug.
+      /// Debug.
       LBET_DEBUG = 4
     };
 
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! Timestamp.
+    /// Timestamp.
     fp64_t htime;
-    //! Context.
+    /// Context.
     std::string context;
-    //! Text.
+    /// Text.
     std::string text;
 
     static uint16_t
@@ -1735,28 +1735,28 @@ namespace IMC
     }
   };
 
-  //! Log Book Control.
+  /// Log Book Control.
   class LogBookControl: public Message
   {
   public:
-    //! Command.
+    /// Command.
     enum CommandEnum
     {
-      //! Get.
+      /// Get.
       LBC_GET = 0,
-      //! Clear.
+      /// Clear.
       LBC_CLEAR = 1,
-      //! Get Errors.
+      /// Get Errors.
       LBC_GET_ERR = 2,
-      //! Reply.
+      /// Reply.
       LBC_REPLY = 3
     };
 
-    //! Command.
+    /// Command.
     uint8_t command;
-    //! Timestamp.
+    /// Timestamp.
     fp64_t htime;
-    //! Messages.
+    /// Messages.
     MessageList<LogBookEntry> msg;
 
     static uint16_t
@@ -1832,26 +1832,26 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Replay Control.
+  /// Replay Control.
   class ReplayControl: public Message
   {
   public:
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Start.
+      /// Start.
       ROP_START = 0,
-      //! Stop.
+      /// Stop.
       ROP_STOP = 1,
-      //! Pause.
+      /// Pause.
       ROP_PAUSE = 2,
-      //! Resume.
+      /// Resume.
       ROP_RESUME = 3
     };
 
-    //! Operation.
+    /// Operation.
     uint8_t op;
-    //! File To Replay.
+    /// File To Replay.
     std::string file;
 
     static uint16_t
@@ -1911,32 +1911,32 @@ namespace IMC
     }
   };
 
-  //! Clock Control.
+  /// Clock Control.
   class ClockControl: public Message
   {
   public:
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Execute Sync..
+      /// Execute Sync..
       COP_SYNC_EXEC = 0,
-      //! Request Sync..
+      /// Request Sync..
       COP_SYNC_REQUEST = 1,
-      //! Sync. Started.
+      /// Sync. Started.
       COP_SYNC_STARTED = 2,
-      //! Sync. done.
+      /// Sync. done.
       COP_SYNC_DONE = 3,
-      //! Set Timezone .
+      /// Set Timezone .
       COP_SET_TZ = 4,
-      //! Timezone Setup.
+      /// Timezone Setup.
       COP_SET_TZ_DONE = 5
     };
 
-    //! Operation.
+    /// Operation.
     uint8_t op;
-    //! Clock.
+    /// Clock.
     fp64_t clock;
-    //! Timezone.
+    /// Timezone.
     int8_t tz;
 
     static uint16_t
@@ -1990,15 +1990,15 @@ namespace IMC
     }
   };
 
-  //! Historic CTD.
+  /// Historic CTD.
   class HistoricCTD: public Message
   {
   public:
-    //! Conductivity.
+    /// Conductivity.
     fp32_t conductivity;
-    //! Temperature.
+    /// Temperature.
     fp32_t temperature;
-    //! Depth.
+    /// Depth.
     fp32_t depth;
 
     static uint16_t
@@ -2052,19 +2052,19 @@ namespace IMC
     }
   };
 
-  //! Historic Telemetry.
+  /// Historic Telemetry.
   class HistoricTelemetry: public Message
   {
   public:
-    //! Altitude.
+    /// Altitude.
     fp32_t altitude;
-    //! Roll.
+    /// Roll.
     uint16_t roll;
-    //! Pitch.
+    /// Pitch.
     uint16_t pitch;
-    //! Yaw.
+    /// Yaw.
     uint16_t yaw;
-    //! Speed.
+    /// Speed.
     int16_t speed;
 
     static uint16_t
@@ -2118,34 +2118,34 @@ namespace IMC
     }
   };
 
-  //! Historic Sonar Data.
+  /// Historic Sonar Data.
   class HistoricSonarData: public Message
   {
   public:
-    //! Encoding.
+    /// Encoding.
     enum EncodingEnum
     {
-      //! One Byte Per Pixel.
+      /// One Byte Per Pixel.
       ENC_ONE_BYTE_PER_PIXEL = 0,
-      //! PNG compressed image.
+      /// PNG compressed image.
       ENC_PNG = 1,
-      //! JPEG compressed image.
+      /// JPEG compressed image.
       ENC_JPEG = 2
     };
 
-    //! Altitude.
+    /// Altitude.
     fp32_t altitude;
-    //! Width.
+    /// Width.
     fp32_t width;
-    //! Length.
+    /// Length.
     fp32_t length;
-    //! Bearing.
+    /// Bearing.
     fp32_t bearing;
-    //! Pixels Per Line.
+    /// Pixels Per Line.
     int16_t pxl;
-    //! Encoding.
+    /// Encoding.
     uint8_t encoding;
-    //! SonarData.
+    /// SonarData.
     std::vector<char> sonar_data;
 
     static uint16_t
@@ -2205,22 +2205,22 @@ namespace IMC
     }
   };
 
-  //! Historic Event.
+  /// Historic Event.
   class HistoricEvent: public Message
   {
   public:
-    //! Event Type.
+    /// Event Type.
     enum EventTypeEnum
     {
-      //! Information.
+      /// Information.
       EVTYPE_INFO = 0,
-      //! Error.
+      /// Error.
       EVTYPE_ERROR = 1
     };
 
-    //! Event.
+    /// Event.
     std::string text;
-    //! Event Type.
+    /// Event Type.
     uint8_t type;
 
     static uint16_t
@@ -2280,13 +2280,13 @@ namespace IMC
     }
   };
 
-  //! Profile Sample.
+  /// Profile Sample.
   class ProfileSample: public Message
   {
   public:
-    //! Depth.
+    /// Depth.
     uint16_t depth;
-    //! Average.
+    /// Average.
     fp32_t avg;
 
     static uint16_t
@@ -2340,38 +2340,38 @@ namespace IMC
     }
   };
 
-  //! Vertical Profile.
+  /// Vertical Profile.
   class VerticalProfile: public Message
   {
   public:
-    //! Parameter.
+    /// Parameter.
     enum ParameterEnum
     {
-      //! Temperature.
+      /// Temperature.
       PROF_TEMPERATURE = 0,
-      //! Salinity.
+      /// Salinity.
       PROF_SALINITY = 1,
-      //! Conductivity.
+      /// Conductivity.
       PROF_CONDUCTIVITY = 2,
-      //! pH.
+      /// pH.
       PROF_PH = 3,
-      //! Redox.
+      /// Redox.
       PROF_REDOX = 4,
-      //! Chlorophyll.
+      /// Chlorophyll.
       PROF_CHLOROPHYLL = 5,
-      //! Turbidity.
+      /// Turbidity.
       PROF_TURBIDITY = 6
     };
 
-    //! Parameter.
+    /// Parameter.
     uint8_t parameter;
-    //! Number of Samples.
+    /// Number of Samples.
     uint8_t numsamples;
-    //! Samples.
+    /// Samples.
     MessageList<ProfileSample> samples;
-    //! Latitude.
+    /// Latitude.
     fp64_t lat;
-    //! Longitude.
+    /// Longitude.
     fp64_t lon;
 
     static uint16_t
@@ -2447,7 +2447,7 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Heartbeat.
+  /// Heartbeat.
   class Heartbeat: public Message
   {
   public:
@@ -2500,23 +2500,23 @@ namespace IMC
     }
   };
 
-  //! Announce.
+  /// Announce.
   class Announce: public Message
   {
   public:
-    //! System Name.
+    /// System Name.
     std::string sys_name;
-    //! System Type.
+    /// System Type.
     uint8_t sys_type;
-    //! Control Owner.
+    /// Control Owner.
     uint16_t owner;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Height WGS-84.
+    /// Height WGS-84.
     fp32_t height;
-    //! Services.
+    /// Services.
     std::string services;
 
     static uint16_t
@@ -2576,22 +2576,22 @@ namespace IMC
     }
   };
 
-  //! Announce Service.
+  /// Announce Service.
   class AnnounceService: public Message
   {
   public:
-    //! ServiceType.
+    /// ServiceType.
     enum ServiceTypeBits
     {
-      //! External.
+      /// External.
       SRV_TYPE_EXTERNAL = 0x01,
-      //! Local.
+      /// Local.
       SRV_TYPE_LOCAL = 0x02
     };
 
-    //! Service.
+    /// Service.
     std::string service;
-    //! ServiceType.
+    /// ServiceType.
     uint8_t service_type;
 
     static uint16_t
@@ -2651,11 +2651,11 @@ namespace IMC
     }
   };
 
-  //! Receive Signal Strength Information.
+  /// Receive Signal Strength Information.
   class RSSI: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -2715,11 +2715,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Voltage Standing Wave Ratio.
+  /// Voltage Standing Wave Ratio.
   class VSWR: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -2779,11 +2779,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Link Level.
+  /// Link Level.
   class LinkLevel: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -2843,15 +2843,15 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! SMS.
+  /// SMS.
   class Sms: public Message
   {
   public:
-    //! Number.
+    /// Number.
     std::string number;
-    //! Timeout.
+    /// Timeout.
     uint16_t timeout;
-    //! Contents.
+    /// Contents.
     std::string contents;
 
     static uint16_t
@@ -2911,17 +2911,17 @@ namespace IMC
     }
   };
 
-  //! SMS Transmit.
+  /// SMS Transmit.
   class SmsTx: public Message
   {
   public:
-    //! Sequence Number.
+    /// Sequence Number.
     uint32_t seq;
-    //! Destination.
+    /// Destination.
     std::string destination;
-    //! Timeout.
+    /// Timeout.
     uint16_t timeout;
-    //! Data.
+    /// Data.
     std::vector<char> data;
 
     static uint16_t
@@ -2981,13 +2981,13 @@ namespace IMC
     }
   };
 
-  //! SMS Receive.
+  /// SMS Receive.
   class SmsRx: public Message
   {
   public:
-    //! Source.
+    /// Source.
     std::string source;
-    //! Data.
+    /// Data.
     std::vector<char> data;
 
     static uint16_t
@@ -3047,34 +3047,34 @@ namespace IMC
     }
   };
 
-  //! SMS State.
+  /// SMS State.
   class SmsState: public Message
   {
   public:
-    //! State.
+    /// State.
     enum StateEnum
     {
-      //! Accepted.
+      /// Accepted.
       SMS_ACCEPTED = 0,
-      //! Rejected.
+      /// Rejected.
       SMS_REJECTED = 1,
-      //! Interrupted.
+      /// Interrupted.
       SMS_INTERRUPTED = 2,
-      //! Completed.
+      /// Completed.
       SMS_COMPLETED = 3,
-      //! Idle.
+      /// Idle.
       SMS_IDLE = 4,
-      //! Transmitting.
+      /// Transmitting.
       SMS_TRANSMITTING = 5,
-      //! Receiving.
+      /// Receiving.
       SMS_RECEIVING = 6
     };
 
-    //! Sequence Number.
+    /// Sequence Number.
     uint32_t seq;
-    //! State.
+    /// State.
     uint8_t state;
-    //! Error Message.
+    /// Error Message.
     std::string error;
 
     static uint16_t
@@ -3134,13 +3134,13 @@ namespace IMC
     }
   };
 
-  //! Text Message.
+  /// Text Message.
   class TextMessage: public Message
   {
   public:
-    //! Origin.
+    /// Origin.
     std::string origin;
-    //! Text.
+    /// Text.
     std::string text;
 
     static uint16_t
@@ -3200,19 +3200,19 @@ namespace IMC
     }
   };
 
-  //! Received Iridium Message.
+  /// Received Iridium Message.
   class IridiumMsgRx: public Message
   {
   public:
-    //! Origin Identifier.
+    /// Origin Identifier.
     std::string origin;
-    //! Timestamp.
+    /// Timestamp.
     fp64_t htime;
-    //! Latitude Reference.
+    /// Latitude Reference.
     fp64_t lat;
-    //! Longitude Reference.
+    /// Longitude Reference.
     fp64_t lon;
-    //! Data.
+    /// Data.
     std::vector<char> data;
 
     static uint16_t
@@ -3272,17 +3272,17 @@ namespace IMC
     }
   };
 
-  //! Transmit Iridium Message.
+  /// Transmit Iridium Message.
   class IridiumMsgTx: public Message
   {
   public:
-    //! Request Identifier.
+    /// Request Identifier.
     uint16_t req_id;
-    //! Time to live.
+    /// Time to live.
     uint16_t ttl;
-    //! Destination Identifier.
+    /// Destination Identifier.
     std::string destination;
-    //! Data.
+    /// Data.
     std::vector<char> data;
 
     static uint16_t
@@ -3342,32 +3342,32 @@ namespace IMC
     }
   };
 
-  //! Iridium Transmission Status.
+  /// Iridium Transmission Status.
   class IridiumTxStatus: public Message
   {
   public:
-    //! Status Code.
+    /// Status Code.
     enum StatusCodeEnum
     {
-      //! Successfull transmission.
+      /// Successfull transmission.
       TXSTATUS_OK = 1,
-      //! Error while trying to transmit message.
+      /// Error while trying to transmit message.
       TXSTATUS_ERROR = 2,
-      //! Message has been queued for transmission.
+      /// Message has been queued for transmission.
       TXSTATUS_QUEUED = 3,
-      //! Message is currently being transmitted.
+      /// Message is currently being transmitted.
       TXSTATUS_TRANSMIT = 4,
-      //! Message's TTL has expired. Transmition cancelled..
+      /// Message's TTL has expired. Transmition cancelled..
       TXSTATUS_EXPIRED = 5,
-      //! No more messages to be transmitted or received..
+      /// No more messages to be transmitted or received..
       TXSTATUS_EMPTY = 6
     };
 
-    //! Request Identifier.
+    /// Request Identifier.
     uint16_t req_id;
-    //! Status Code.
+    /// Status Code.
     uint8_t status;
-    //! Status Text.
+    /// Status Text.
     std::string text;
 
     static uint16_t
@@ -3427,13 +3427,13 @@ namespace IMC
     }
   };
 
-  //! Group Membership State.
+  /// Group Membership State.
   class GroupMembershipState: public Message
   {
   public:
-    //! Group Name.
+    /// Group Name.
     std::string group_name;
-    //! Communication Links Assertion.
+    /// Communication Links Assertion.
     uint32_t links;
 
     static uint16_t
@@ -3493,32 +3493,32 @@ namespace IMC
     }
   };
 
-  //! System Group.
+  /// System Group.
   class SystemGroup: public Message
   {
   public:
-    //! Group List Action.
+    /// Group List Action.
     enum GroupListActionEnum
     {
-      //! Disband.
+      /// Disband.
       OP_Dis = 0,
-      //! Set.
+      /// Set.
       OP_Set = 1,
-      //! Request.
+      /// Request.
       OP_Req = 2,
-      //! Change.
+      /// Change.
       OP_Chg = 3,
-      //! Report.
+      /// Report.
       OP_Rep = 4,
-      //! Force.
+      /// Force.
       OP_Frc = 5
     };
 
-    //! Group Name.
+    /// Group Name.
     std::string groupname;
-    //! Group List Action.
+    /// Group List Action.
     uint8_t action;
-    //! Systems Name List.
+    /// Systems Name List.
     std::string grouplist;
 
     static uint16_t
@@ -3578,13 +3578,13 @@ namespace IMC
     }
   };
 
-  //! Link Latency.
+  /// Link Latency.
   class LinkLatency: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
-    //! Communications Source System ID.
+    /// Communications Source System ID.
     uint16_t sys_src;
 
     static uint16_t
@@ -3644,13 +3644,13 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Extended Receive Signal Strength Information.
+  /// Extended Receive Signal Strength Information.
   class ExtendedRSSI: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
-    //! RSSI Units.
+    /// RSSI Units.
     uint8_t units;
 
     static uint16_t
@@ -3710,17 +3710,17 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Historic Data Series.
+  /// Historic Data Series.
   class HistoricData: public Message
   {
   public:
-    //! Base Latitude.
+    /// Base Latitude.
     fp32_t base_lat;
-    //! Base Longitude.
+    /// Base Longitude.
     fp32_t base_lon;
-    //! Base Timestamp.
+    /// Base Timestamp.
     fp32_t base_time;
-    //! Data.
+    /// Data.
     MessageList<RemoteData> data;
 
     static uint16_t
@@ -3796,17 +3796,17 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Compressed Historic Data Series.
+  /// Compressed Historic Data Series.
   class CompressedHistory: public Message
   {
   public:
-    //! Base Latitude.
+    /// Base Latitude.
     fp32_t base_lat;
-    //! Base Longitude.
+    /// Base Longitude.
     fp32_t base_lon;
-    //! Base Timestamp.
+    /// Base Timestamp.
     fp32_t base_time;
-    //! Data.
+    /// Data.
     std::vector<char> data;
 
     static uint16_t
@@ -3866,23 +3866,23 @@ namespace IMC
     }
   };
 
-  //! Historic Data Sample.
+  /// Historic Data Sample.
   class HistoricSample: public RemoteData
   {
   public:
-    //! Original System Id.
+    /// Original System Id.
     uint16_t sys_id;
-    //! Priority.
+    /// Priority.
     int8_t priority;
-    //! X offset.
+    /// X offset.
     int16_t x;
-    //! Y offset.
+    /// Y offset.
     int16_t y;
-    //! Z offset.
+    /// Z offset.
     int16_t z;
-    //! Time offset.
+    /// Time offset.
     int16_t t;
-    //! Data Sample.
+    /// Data Sample.
     InlineMessage<Message> sample;
 
     static uint16_t
@@ -3958,28 +3958,28 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Historic Data Query.
+  /// Historic Data Query.
   class HistoricDataQuery: public Message
   {
   public:
-    //! Request Type.
+    /// Request Type.
     enum RequestTypeEnum
     {
-      //! Query.
+      /// Query.
       HRTYPE_QUERY = 1,
-      //! Reply.
+      /// Reply.
       HRTYPE_REPLY = 2,
-      //! Clear.
+      /// Clear.
       HRTYPE_CLEAR = 3
     };
 
-    //! Request Id.
+    /// Request Id.
     uint16_t req_id;
-    //! Request Type.
+    /// Request Type.
     uint8_t type;
-    //! Maximum Size.
+    /// Maximum Size.
     uint16_t max_size;
-    //! Data.
+    /// Data.
     InlineMessage<HistoricData> data;
 
     static uint16_t
@@ -4055,17 +4055,17 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Remote Command.
+  /// Remote Command.
   class RemoteCommand: public RemoteData
   {
   public:
-    //! Original Source.
+    /// Original Source.
     uint16_t original_source;
-    //! Destination.
+    /// Destination.
     uint16_t destination;
-    //! Timeout.
+    /// Timeout.
     fp64_t timeout;
-    //! Command.
+    /// Command.
     InlineMessage<Message> cmd;
 
     static uint16_t
@@ -4141,52 +4141,52 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Communication Systems Query.
+  /// Communication Systems Query.
   class CommSystemsQuery: public Message
   {
   public:
-    //! Model.
+    /// Model.
     enum ModelEnum
     {
-      //! unknown.
+      /// unknown.
       CIQ_UNKNOWN = 0x00,
-      //! 3DR.
+      /// 3DR.
       CIQ_M3DR = 0x01,
-      //! RDFXXXxPtP.
+      /// RDFXXXxPtP.
       CIQ_RDFXXXXPTP = 0x02
     };
 
-    //! Type.
+    /// Type.
     enum TypeBits
     {
-      //! Query Systems.
+      /// Query Systems.
       CIQ_QUERY = 0x01,
-      //! Reply.
+      /// Reply.
       CIQ_REPLY = 0x02
     };
 
-    //! Communication Interface.
+    /// Communication Interface.
     enum CommunicationInterfaceBits
     {
-      //! Acoustic.
+      /// Acoustic.
       CIQ_ACOUSTIC = 0x01,
-      //! Satellite.
+      /// Satellite.
       CIQ_SATELLITE = 0x02,
-      //! GSM.
+      /// GSM.
       CIQ_GSM = 0x04,
-      //! Mobile.
+      /// Mobile.
       CIQ_MOBILE = 0x08,
-      //! Radio.
+      /// Radio.
       CIQ_RADIO = 0x10
     };
 
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! Communication Interface.
+    /// Communication Interface.
     uint16_t comm_interface;
-    //! Model.
+    /// Model.
     uint16_t model;
-    //! System List.
+    /// System List.
     std::string list;
 
     static uint16_t
@@ -4246,83 +4246,83 @@ namespace IMC
     }
   };
 
-  //! Telemetry Message.
+  /// Telemetry Message.
   class TelemetryMsg: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeEnum
     {
-      //! Tx.
+      /// Tx.
       TM_TX = 0x01,
-      //! Rx.
+      /// Rx.
       TM_RX = 0x02,
-      //! TxStatus.
+      /// TxStatus.
       TM_TXSTATUS = 0x03
     };
 
-    //! Code.
+    /// Code.
     enum CodeEnum
     {
-      //! Code unknown.
+      /// Code unknown.
       TM_CODE_UNK = 0x00,
-      //! Code Report.
+      /// Code Report.
       TM_CODE_REPORT = 0x01,
-      //! Code IMC.
+      /// Code IMC.
       TM_CODE_IMC = 0x02,
-      //! Code raw.
+      /// Code raw.
       TM_CODE_RAW = 0x03
     };
 
-    //! Status.
+    /// Status.
     enum StatusEnum
     {
-      //! Does not apply.
+      /// Does not apply.
       TM_NONE = 0x00,
-      //! Successfull transmission.
+      /// Successfull transmission.
       TM_DONE = 1,
-      //! Error while trying to transmit message.
+      /// Error while trying to transmit message.
       TM_FAILED = 2,
-      //! Message has been queued for transmission.
+      /// Message has been queued for transmission.
       TM_QUEUED = 3,
-      //! Message is currently being transmitted.
+      /// Message is currently being transmitted.
       TM_TRANSMIT = 4,
-      //! Message's TTL has expired. Transmition cancelled.
+      /// Message's TTL has expired. Transmition cancelled.
       TM_EXPIRED = 5,
-      //! No more messages to be transmitted or received.
+      /// No more messages to be transmitted or received.
       TM_EMPTY = 6,
-      //! Invalid address.
+      /// Invalid address.
       TM_INV_ADDR = 7,
-      //! Invalid transmission size.
+      /// Invalid transmission size.
       TM_INV_SIZE = 8
     };
 
-    //! Acknowledge.
+    /// Acknowledge.
     enum AcknowledgeBits
     {
-      //! Not acknowledge.
+      /// Not acknowledge.
       TM_NAK = 0x00,
-      //! acknowledge.
+      /// acknowledge.
       TM_AK = 0x01
     };
 
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! Request Identifier.
+    /// Request Identifier.
     uint32_t req_id;
-    //! Time to live.
+    /// Time to live.
     uint16_t ttl;
-    //! Code.
+    /// Code.
     uint8_t code;
-    //! Destination Identifier.
+    /// Destination Identifier.
     std::string destination;
-    //! Source Identifier.
+    /// Source Identifier.
     std::string source;
-    //! Acknowledge.
+    /// Acknowledge.
     uint8_t acknowledge;
-    //! Status.
+    /// Status.
     uint8_t status;
-    //! Data.
+    /// Data.
     std::vector<char> data;
 
     static uint16_t
@@ -4382,13 +4382,13 @@ namespace IMC
     }
   };
 
-  //! LBL Range.
+  /// LBL Range.
   class LblRange: public Message
   {
   public:
-    //! Beacon Identification Number.
+    /// Beacon Identification Number.
     uint8_t id;
-    //! Range.
+    /// Range.
     fp32_t range;
 
     static uint16_t
@@ -4448,23 +4448,23 @@ namespace IMC
     setSubId(uint16_t subid);
   };
 
-  //! LBL Beacon Configuration.
+  /// LBL Beacon Configuration.
   class LblBeacon: public Message
   {
   public:
-    //! Beacon Name.
+    /// Beacon Name.
     std::string beacon;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Depth.
+    /// Depth.
     fp32_t depth;
-    //! Interrogation channel.
+    /// Interrogation channel.
     uint8_t query_channel;
-    //! Reply channel.
+    /// Reply channel.
     uint8_t reply_channel;
-    //! Transponder delay.
+    /// Transponder delay.
     uint8_t transponder_delay;
 
     static uint16_t
@@ -4524,24 +4524,24 @@ namespace IMC
     }
   };
 
-  //! LBL Configuration.
+  /// LBL Configuration.
   class LblConfig: public Message
   {
   public:
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Set LBL Configuration.
+      /// Set LBL Configuration.
       OP_SET_CFG = 0,
-      //! Retrieve LBL Configuration.
+      /// Retrieve LBL Configuration.
       OP_GET_CFG = 1,
-      //! Reply to a GET command.
+      /// Reply to a GET command.
       OP_CUR_CFG = 2
     };
 
-    //! Operation.
+    /// Operation.
     uint8_t op;
-    //! Beacons.
+    /// Beacons.
     MessageList<LblBeacon> beacons;
 
     static uint16_t
@@ -4617,11 +4617,11 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Acoustic Message.
+  /// Acoustic Message.
   class AcousticMessage: public Message
   {
   public:
-    //! Message to send.
+    /// Message to send.
     InlineMessage<Message> message;
 
     static uint16_t
@@ -4697,42 +4697,42 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Simulated Acoustic Message.
+  /// Simulated Acoustic Message.
   class SimAcousticMessage: public Message
   {
   public:
-    //! Flags.
+    /// Flags.
     enum FlagsBits
     {
-      //! Acknowledgement.
+      /// Acknowledgement.
       SAM_ACK = 0x01,
-      //! Delayed.
+      /// Delayed.
       SAM_DELAYED = 0x02,
-      //! Reply.
+      /// Reply.
       SAM_REPLY = 0x03
     };
 
-    //! Latitude.
+    /// Latitude.
     fp64_t lat;
-    //! Longitude.
+    /// Longitude.
     fp64_t lon;
-    //! Depth.
+    /// Depth.
     fp32_t depth;
-    //! Sentence.
+    /// Sentence.
     std::string sentence;
-    //! Transmission Time.
+    /// Transmission Time.
     fp64_t txtime;
-    //! Modem Type.
+    /// Modem Type.
     std::string modem_type;
-    //! Source system.
+    /// Source system.
     std::string sys_src;
-    //! Sequence Id.
+    /// Sequence Id.
     uint16_t seq;
-    //! Destination System.
+    /// Destination System.
     std::string sys_dst;
-    //! Flags.
+    /// Flags.
     uint8_t flags;
-    //! Data.
+    /// Data.
     std::vector<char> data;
 
     static uint16_t
@@ -4792,60 +4792,60 @@ namespace IMC
     }
   };
 
-  //! Acoustic Operation.
+  /// Acoustic Operation.
   class AcousticOperation: public Message
   {
   public:
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Abort.
+      /// Abort.
       AOP_ABORT = 0,
-      //! Abort in Progress.
+      /// Abort in Progress.
       AOP_ABORT_IP = 1,
-      //! Abort Timeout.
+      /// Abort Timeout.
       AOP_ABORT_TIMEOUT = 2,
-      //! Abort Acknowledged.
+      /// Abort Acknowledged.
       AOP_ABORT_ACKED = 3,
-      //! Range Request.
+      /// Range Request.
       AOP_RANGE = 4,
-      //! Range in Progress.
+      /// Range in Progress.
       AOP_RANGE_IP = 5,
-      //! Range Timeout.
+      /// Range Timeout.
       AOP_RANGE_TIMEOUT = 6,
-      //! Range Received.
+      /// Range Received.
       AOP_RANGE_RECVED = 7,
-      //! Modem is Busy.
+      /// Modem is Busy.
       AOP_BUSY = 8,
-      //! Unsupported operation.
+      /// Unsupported operation.
       AOP_UNSUPPORTED = 9,
-      //! Transducer Not Detected.
+      /// Transducer Not Detected.
       AOP_NO_TXD = 10,
-      //! Send Message.
+      /// Send Message.
       AOP_MSG = 11,
-      //! Message Send -- Queued.
+      /// Message Send -- Queued.
       AOP_MSG_QUEUED = 12,
-      //! Message Send -- In progress.
+      /// Message Send -- In progress.
       AOP_MSG_IP = 13,
-      //! Message Send -- Done.
+      /// Message Send -- Done.
       AOP_MSG_DONE = 14,
-      //! Message Send -- Failure.
+      /// Message Send -- Failure.
       AOP_MSG_FAILURE = 15,
-      //! Send Short Message.
+      /// Send Short Message.
       AOP_MSG_SHORT = 16,
-      //! Initiate Reverse Range.
+      /// Initiate Reverse Range.
       AOP_REVERSE_RANGE = 17,
-      //! Forced Abort.
+      /// Forced Abort.
       AOP_FORCED_ABORT = 18
     };
 
-    //! Operation.
+    /// Operation.
     uint8_t op;
-    //! System.
+    /// System.
     std::string system;
-    //! Range.
+    /// Range.
     fp32_t range;
-    //! Message To Send.
+    /// Message To Send.
     InlineMessage<Message> msg;
 
     static uint16_t
@@ -4921,7 +4921,7 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Acoustic Systems Query.
+  /// Acoustic Systems Query.
   class AcousticSystemsQuery: public Message
   {
   public:
@@ -4974,11 +4974,11 @@ namespace IMC
     }
   };
 
-  //! Acoustic Systems.
+  /// Acoustic Systems.
   class AcousticSystems: public Message
   {
   public:
-    //! System List.
+    /// System List.
     std::string list;
 
     static uint16_t
@@ -5038,15 +5038,15 @@ namespace IMC
     }
   };
 
-  //! Acoustic Link Quality.
+  /// Acoustic Link Quality.
   class AcousticLink: public Message
   {
   public:
-    //! Peer Name.
+    /// Peer Name.
     std::string peer;
-    //! Received Signal Strength Indicator.
+    /// Received Signal Strength Indicator.
     fp32_t rssi;
-    //! Signal Integrity Level.
+    /// Signal Integrity Level.
     uint16_t integrity;
 
     static uint16_t
@@ -5106,36 +5106,36 @@ namespace IMC
     }
   };
 
-  //! Acoustic Transmission Request.
+  /// Acoustic Transmission Request.
   class AcousticRequest: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeEnum
     {
-      //! Abort.
+      /// Abort.
       TYPE_ABORT = 0,
-      //! Range.
+      /// Range.
       TYPE_RANGE = 1,
-      //! Reverse Range.
+      /// Reverse Range.
       TYPE_REVERSE_RANGE = 2,
-      //! Message.
+      /// Message.
       TYPE_MSG = 3,
-      //! Raw.
+      /// Raw.
       TYPE_RAW = 4
     };
 
-    //! Request Identifier.
+    /// Request Identifier.
     uint16_t req_id;
-    //! Destination System.
+    /// Destination System.
     std::string destination;
-    //! Timeout.
+    /// Timeout.
     fp64_t timeout;
-    //! Range.
+    /// Range.
     fp32_t range;
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! Message To Send.
+    /// Message To Send.
     InlineMessage<Message> msg;
 
     static uint16_t
@@ -5211,57 +5211,57 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Acoustic Transmission Status.
+  /// Acoustic Transmission Status.
   class AcousticStatus: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeEnum
     {
-      //! Abort.
+      /// Abort.
       TYPE_ABORT = 0,
-      //! Range.
+      /// Range.
       TYPE_RANGE = 1,
-      //! Reverse Range.
+      /// Reverse Range.
       TYPE_REVERSE_RANGE = 2,
-      //! Message.
+      /// Message.
       TYPE_MSG = 3,
-      //! Raw.
+      /// Raw.
       TYPE_RAW = 4
     };
 
-    //! Status.
+    /// Status.
     enum StatusEnum
     {
-      //! Queued.
+      /// Queued.
       STATUS_QUEUED = 0,
-      //! In Progress.
+      /// In Progress.
       STATUS_IN_PROGRESS = 1,
-      //! Sent.
+      /// Sent.
       STATUS_SENT = 2,
-      //! Range Received.
+      /// Range Received.
       STATUS_RANGE_RECEIVED = 3,
-      //! Delivered.
+      /// Delivered.
       STATUS_DELIVERED = 4,
-      //! Busy.
+      /// Busy.
       STATUS_BUSY = 100,
-      //! Input Error.
+      /// Input Error.
       STATUS_INPUT_FAILURE = 101,
-      //! Error trying to send acoustic text.
+      /// Error trying to send acoustic text.
       STATUS_ERROR = 102,
-      //! Message Type is not defined or is unsupported.
+      /// Message Type is not defined or is unsupported.
       STATUS_UNSUPPORTED = 666
     };
 
-    //! Request Identifier.
+    /// Request Identifier.
     uint16_t req_id;
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! Status.
+    /// Status.
     uint8_t status;
-    //! Information.
+    /// Information.
     std::string info;
-    //! Range.
+    /// Range.
     fp32_t range;
 
     static uint16_t
@@ -5321,22 +5321,22 @@ namespace IMC
     }
   };
 
-  //! Acoustic Release Request.
+  /// Acoustic Release Request.
   class AcousticRelease: public Message
   {
   public:
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Open.
+      /// Open.
       AROP_OPEN = 0,
-      //! Close.
+      /// Close.
       AROP_CLOSE = 1
     };
 
-    //! System.
+    /// System.
     std::string system;
-    //! Operation.
+    /// Operation.
     uint8_t op;
 
     static uint16_t
@@ -5396,11 +5396,11 @@ namespace IMC
     }
   };
 
-  //! Revolutions Per Minute.
+  /// Revolutions Per Minute.
   class Rpm: public Message
   {
   public:
-    //! Value.
+    /// Value.
     int16_t value;
 
     static uint16_t
@@ -5460,11 +5460,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Voltage.
+  /// Voltage.
   class Voltage: public Message
   {
   public:
-    //! Measured Voltage Value.
+    /// Measured Voltage Value.
     fp32_t value;
 
     static uint16_t
@@ -5524,11 +5524,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Current.
+  /// Current.
   class Current: public Message
   {
   public:
-    //! Measured Current Value.
+    /// Measured Current Value.
     fp32_t value;
 
     static uint16_t
@@ -5588,79 +5588,79 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! GPS Fix.
+  /// GPS Fix.
   class GpsFix: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeEnum
     {
-      //! Stand Alone.
+      /// Stand Alone.
       GFT_STANDALONE = 0x00,
-      //! Differential.
+      /// Differential.
       GFT_DIFFERENTIAL = 0x01,
-      //! Dead Reckoning.
+      /// Dead Reckoning.
       GFT_DEAD_RECKONING = 0x02,
-      //! Manual Input.
+      /// Manual Input.
       GFT_MANUAL_INPUT = 0x03,
-      //! Simulation.
+      /// Simulation.
       GFT_SIMULATION = 0x04
     };
 
-    //! Validity.
+    /// Validity.
     enum ValidityBits
     {
-      //! Valid Date.
+      /// Valid Date.
       GFV_VALID_DATE = 0x0001,
-      //! Valid Time.
+      /// Valid Time.
       GFV_VALID_TIME = 0x0002,
-      //! Valid Position.
+      /// Valid Position.
       GFV_VALID_POS = 0x0004,
-      //! Valid Course Over Ground.
+      /// Valid Course Over Ground.
       GFV_VALID_COG = 0x0008,
-      //! Valid Speed Over Ground.
+      /// Valid Speed Over Ground.
       GFV_VALID_SOG = 0x0010,
-      //! Valid Horizontal Accuracy Estimate.
+      /// Valid Horizontal Accuracy Estimate.
       GFV_VALID_HACC = 0x0020,
-      //! Valid Vertical Accuracy Estimate.
+      /// Valid Vertical Accuracy Estimate.
       GFV_VALID_VACC = 0x0040,
-      //! Valid Horizontal Dilution of Precision.
+      /// Valid Horizontal Dilution of Precision.
       GFV_VALID_HDOP = 0x0080,
-      //! Valid Vertical Dilution of Precision.
+      /// Valid Vertical Dilution of Precision.
       GFV_VALID_VDOP = 0x0100
     };
 
-    //! Validity.
+    /// Validity.
     uint16_t validity;
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! UTC Year.
+    /// UTC Year.
     uint16_t utc_year;
-    //! UTC Month.
+    /// UTC Month.
     uint8_t utc_month;
-    //! UTC Day.
+    /// UTC Day.
     uint8_t utc_day;
-    //! UTC Time of Fix.
+    /// UTC Time of Fix.
     fp32_t utc_time;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Height above WGS-84 ellipsoid.
+    /// Height above WGS-84 ellipsoid.
     fp32_t height;
-    //! Number of Satellites.
+    /// Number of Satellites.
     uint8_t satellites;
-    //! Course Over Ground.
+    /// Course Over Ground.
     fp32_t cog;
-    //! Speed Over Ground.
+    /// Speed Over Ground.
     fp32_t sog;
-    //! Horizontal Dilution of Precision.
+    /// Horizontal Dilution of Precision.
     fp32_t hdop;
-    //! Vertical Dilution of Precision.
+    /// Vertical Dilution of Precision.
     fp32_t vdop;
-    //! Horizontal Accuracy Estimate.
+    /// Horizontal Accuracy Estimate.
     fp32_t hacc;
-    //! Vertical Accuracy Estimate.
+    /// Vertical Accuracy Estimate.
     fp32_t vacc;
 
     static uint16_t
@@ -5714,19 +5714,19 @@ namespace IMC
     }
   };
 
-  //! Euler Angles.
+  /// Euler Angles.
   class EulerAngles: public Message
   {
   public:
-    //! Device Time.
+    /// Device Time.
     fp64_t time;
-    //! Roll Angle.
+    /// Roll Angle.
     fp64_t phi;
-    //! Pitch Angle.
+    /// Pitch Angle.
     fp64_t theta;
-    //! Yaw Angle (True).
+    /// Yaw Angle (True).
     fp64_t psi;
-    //! Yaw Angle (Magnetic).
+    /// Yaw Angle (Magnetic).
     fp64_t psi_magnetic;
 
     static uint16_t
@@ -5780,19 +5780,19 @@ namespace IMC
     }
   };
 
-  //! Euler Angles Delta.
+  /// Euler Angles Delta.
   class EulerAnglesDelta: public Message
   {
   public:
-    //! Device Time.
+    /// Device Time.
     fp64_t time;
-    //! X.
+    /// X.
     fp64_t x;
-    //! Y.
+    /// Y.
     fp64_t y;
-    //! Z.
+    /// Z.
     fp64_t z;
-    //! Timestep.
+    /// Timestep.
     fp32_t timestep;
 
     static uint16_t
@@ -5846,17 +5846,17 @@ namespace IMC
     }
   };
 
-  //! Angular Velocity.
+  /// Angular Velocity.
   class AngularVelocity: public Message
   {
   public:
-    //! Device Time.
+    /// Device Time.
     fp64_t time;
-    //! X.
+    /// X.
     fp64_t x;
-    //! Y.
+    /// Y.
     fp64_t y;
-    //! Z.
+    /// Z.
     fp64_t z;
 
     static uint16_t
@@ -5910,17 +5910,17 @@ namespace IMC
     }
   };
 
-  //! Acceleration.
+  /// Acceleration.
   class Acceleration: public Message
   {
   public:
-    //! Device Time.
+    /// Device Time.
     fp64_t time;
-    //! X.
+    /// X.
     fp64_t x;
-    //! Y.
+    /// Y.
     fp64_t y;
-    //! Z.
+    /// Z.
     fp64_t z;
 
     static uint16_t
@@ -5974,17 +5974,17 @@ namespace IMC
     }
   };
 
-  //! Magnetic Field.
+  /// Magnetic Field.
   class MagneticField: public Message
   {
   public:
-    //! Device Time.
+    /// Device Time.
     fp64_t time;
-    //! X.
+    /// X.
     fp64_t x;
-    //! Y.
+    /// Y.
     fp64_t y;
-    //! Z.
+    /// Z.
     fp64_t z;
 
     static uint16_t
@@ -6038,28 +6038,28 @@ namespace IMC
     }
   };
 
-  //! Ground Velocity.
+  /// Ground Velocity.
   class GroundVelocity: public Message
   {
   public:
-    //! Validity.
+    /// Validity.
     enum ValidityBits
     {
-      //! X component is valid.
+      /// X component is valid.
       VAL_VEL_X = 0x01,
-      //! Y component is valid.
+      /// Y component is valid.
       VAL_VEL_Y = 0x02,
-      //! Z component is valid.
+      /// Z component is valid.
       VAL_VEL_Z = 0x04
     };
 
-    //! Validity.
+    /// Validity.
     uint8_t validity;
-    //! X.
+    /// X.
     fp64_t x;
-    //! Y.
+    /// Y.
     fp64_t y;
-    //! Z.
+    /// Z.
     fp64_t z;
 
     static uint16_t
@@ -6113,28 +6113,28 @@ namespace IMC
     }
   };
 
-  //! Water Velocity.
+  /// Water Velocity.
   class WaterVelocity: public Message
   {
   public:
-    //! Validity.
+    /// Validity.
     enum ValidityBits
     {
-      //! X component is valid.
+      /// X component is valid.
       VAL_VEL_X = 0x01,
-      //! Y component is valid.
+      /// Y component is valid.
       VAL_VEL_Y = 0x02,
-      //! Z component is valid.
+      /// Z component is valid.
       VAL_VEL_Z = 0x04
     };
 
-    //! Validity.
+    /// Validity.
     uint8_t validity;
-    //! X.
+    /// X.
     fp64_t x;
-    //! Y.
+    /// Y.
     fp64_t y;
-    //! Z.
+    /// Z.
     fp64_t z;
 
     static uint16_t
@@ -6188,17 +6188,17 @@ namespace IMC
     }
   };
 
-  //! Velocity Delta.
+  /// Velocity Delta.
   class VelocityDelta: public Message
   {
   public:
-    //! Device Time.
+    /// Device Time.
     fp64_t time;
-    //! X.
+    /// X.
     fp64_t x;
-    //! Y.
+    /// Y.
     fp64_t y;
-    //! Z.
+    /// Z.
     fp64_t z;
 
     static uint16_t
@@ -6252,21 +6252,21 @@ namespace IMC
     }
   };
 
-  //! Device State.
+  /// Device State.
   class DeviceState: public Message
   {
   public:
-    //! Device Position - X.
+    /// Device Position - X.
     fp32_t x;
-    //! Device Position - Y.
+    /// Device Position - Y.
     fp32_t y;
-    //! Device Position - Z.
+    /// Device Position - Z.
     fp32_t z;
-    //! Device Rotation - X.
+    /// Device Rotation - X.
     fp32_t phi;
-    //! Device Rotation - Y.
+    /// Device Rotation - Y.
     fp32_t theta;
-    //! Device Rotation - Z.
+    /// Device Rotation - Z.
     fp32_t psi;
 
     static uint16_t
@@ -6320,13 +6320,13 @@ namespace IMC
     }
   };
 
-  //! Beam Configuration.
+  /// Beam Configuration.
   class BeamConfig: public Message
   {
   public:
-    //! Beam Width.
+    /// Beam Width.
     fp32_t beam_width;
-    //! Beam Height.
+    /// Beam Height.
     fp32_t beam_height;
 
     static uint16_t
@@ -6380,26 +6380,26 @@ namespace IMC
     }
   };
 
-  //! Distance.
+  /// Distance.
   class Distance: public Message
   {
   public:
-    //! Validity.
+    /// Validity.
     enum ValidityEnum
     {
-      //! Invalid.
+      /// Invalid.
       DV_INVALID = 0,
-      //! Valid.
+      /// Valid.
       DV_VALID = 1
     };
 
-    //! Validity.
+    /// Validity.
     uint8_t validity;
-    //! Location.
+    /// Location.
     MessageList<DeviceState> location;
-    //! Beam Configuration.
+    /// Beam Configuration.
     MessageList<BeamConfig> beam_config;
-    //! Measured Distance.
+    /// Measured Distance.
     fp32_t value;
 
     static uint16_t
@@ -6481,11 +6481,11 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Temperature.
+  /// Temperature.
   class Temperature: public Message
   {
   public:
-    //! Measured Temperature.
+    /// Measured Temperature.
     fp32_t value;
 
     static uint16_t
@@ -6545,11 +6545,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Pressure.
+  /// Pressure.
   class Pressure: public Message
   {
   public:
-    //! Measured Pressure.
+    /// Measured Pressure.
     fp64_t value;
 
     static uint16_t
@@ -6609,11 +6609,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Depth.
+  /// Depth.
   class Depth: public Message
   {
   public:
-    //! Measured Depth.
+    /// Measured Depth.
     fp32_t value;
 
     static uint16_t
@@ -6673,11 +6673,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Depth Offset.
+  /// Depth Offset.
   class DepthOffset: public Message
   {
   public:
-    //! Measured Offset.
+    /// Measured Offset.
     fp32_t value;
 
     static uint16_t
@@ -6737,11 +6737,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Sound Speed.
+  /// Sound Speed.
   class SoundSpeed: public Message
   {
   public:
-    //! Computed Sound Speed.
+    /// Computed Sound Speed.
     fp32_t value;
 
     static uint16_t
@@ -6801,11 +6801,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Water Density.
+  /// Water Density.
   class WaterDensity: public Message
   {
   public:
-    //! Computed Water Density.
+    /// Computed Water Density.
     fp32_t value;
 
     static uint16_t
@@ -6865,11 +6865,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Conductivity.
+  /// Conductivity.
   class Conductivity: public Message
   {
   public:
-    //! Measured Conductivity.
+    /// Measured Conductivity.
     fp32_t value;
 
     static uint16_t
@@ -6929,11 +6929,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Salinity.
+  /// Salinity.
   class Salinity: public Message
   {
   public:
-    //! Measured Salinity.
+    /// Measured Salinity.
     fp32_t value;
 
     static uint16_t
@@ -6993,15 +6993,15 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Wind Speed.
+  /// Wind Speed.
   class WindSpeed: public Message
   {
   public:
-    //! Direction.
+    /// Direction.
     fp32_t direction;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Turbulence.
+    /// Turbulence.
     fp32_t turbulence;
 
     static uint16_t
@@ -7055,11 +7055,11 @@ namespace IMC
     }
   };
 
-  //! Relative Humidity.
+  /// Relative Humidity.
   class RelativeHumidity: public Message
   {
   public:
-    //! Relative Humidity Value.
+    /// Relative Humidity Value.
     fp32_t value;
 
     static uint16_t
@@ -7119,11 +7119,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Device Data (Text).
+  /// Device Data (Text).
   class DevDataText: public Message
   {
   public:
-    //! Value.
+    /// Value.
     std::string value;
 
     static uint16_t
@@ -7183,11 +7183,11 @@ namespace IMC
     }
   };
 
-  //! Device Data (Binary).
+  /// Device Data (Binary).
   class DevDataBinary: public Message
   {
   public:
-    //! Value.
+    /// Value.
     std::vector<char> value;
 
     static uint16_t
@@ -7247,11 +7247,11 @@ namespace IMC
     }
   };
 
-  //! Force.
+  /// Force.
   class Force: public Message
   {
   public:
-    //! Measured Force.
+    /// Measured Force.
     fp32_t value;
 
     static uint16_t
@@ -7311,36 +7311,36 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Sonar Data.
+  /// Sonar Data.
   class SonarData: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeEnum
     {
-      //! Sidescan.
+      /// Sidescan.
       ST_SIDESCAN = 0,
-      //! Echo Sounder.
+      /// Echo Sounder.
       ST_ECHOSOUNDER = 1,
-      //! Multibeam.
+      /// Multibeam.
       ST_MULTIBEAM = 2
     };
 
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! Frequency.
+    /// Frequency.
     uint32_t frequency;
-    //! Minimum Range.
+    /// Minimum Range.
     uint16_t min_range;
-    //! Maximum Range.
+    /// Maximum Range.
     uint16_t max_range;
-    //! Bits Per Data Point.
+    /// Bits Per Data Point.
     uint8_t bits_per_point;
-    //! Scaling Factor.
+    /// Scaling Factor.
     fp32_t scale_factor;
-    //! Beam Configuration.
+    /// Beam Configuration.
     MessageList<BeamConfig> beam_config;
-    //! Data.
+    /// Data.
     std::vector<char> data;
 
     static uint16_t
@@ -7416,7 +7416,7 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Pulse.
+  /// Pulse.
   class Pulse: public Message
   {
   public:
@@ -7469,20 +7469,20 @@ namespace IMC
     }
   };
 
-  //! Pulse Detection Control.
+  /// Pulse Detection Control.
   class PulseDetectionControl: public Message
   {
   public:
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Pulse Detection OFF.
+      /// Pulse Detection OFF.
       POP_OFF = 0,
-      //! Pulse Detection ON.
+      /// Pulse Detection ON.
       POP_ON = 1
     };
 
-    //! Operation.
+    /// Operation.
     uint8_t op;
 
     static uint16_t
@@ -7536,15 +7536,15 @@ namespace IMC
     }
   };
 
-  //! Fuel Level.
+  /// Fuel Level.
   class FuelLevel: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
-    //! Confidence Level.
+    /// Confidence Level.
     fp32_t confidence;
-    //! Operation Modes.
+    /// Operation Modes.
     std::string opmodes;
 
     static uint16_t
@@ -7610,39 +7610,39 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! GPS Navigation Data.
+  /// GPS Navigation Data.
   class GpsNavData: public Message
   {
   public:
-    //! GPS Millisecond Time of Week.
+    /// GPS Millisecond Time of Week.
     uint32_t itow;
-    //! Latitude.
+    /// Latitude.
     fp64_t lat;
-    //! Longitude.
+    /// Longitude.
     fp64_t lon;
-    //! Height above ellipsoid.
+    /// Height above ellipsoid.
     fp32_t height_ell;
-    //! Height above sea level.
+    /// Height above sea level.
     fp32_t height_sea;
-    //! Horizontal Accuracy Estimate.
+    /// Horizontal Accuracy Estimate.
     fp32_t hacc;
-    //! Vertical Accuracy Estimate.
+    /// Vertical Accuracy Estimate.
     fp32_t vacc;
-    //! NED North Velocity.
+    /// NED North Velocity.
     fp32_t vel_n;
-    //! NED East Velocity.
+    /// NED East Velocity.
     fp32_t vel_e;
-    //! NED Down Velocity.
+    /// NED Down Velocity.
     fp32_t vel_d;
-    //! Speed (3D).
+    /// Speed (3D).
     fp32_t speed;
-    //! Ground Speed (2D).
+    /// Ground Speed (2D).
     fp32_t gspeed;
-    //! Heading (2D).
+    /// Heading (2D).
     fp32_t heading;
-    //! Speed Accuracy Estimate.
+    /// Speed Accuracy Estimate.
     fp32_t sacc;
-    //! Course / Heading Accuracy Estimate.
+    /// Course / Heading Accuracy Estimate.
     fp32_t cacc;
 
     static uint16_t
@@ -7696,13 +7696,13 @@ namespace IMC
     }
   };
 
-  //! Servo Position.
+  /// Servo Position.
   class ServoPosition: public Message
   {
   public:
-    //! Identifier.
+    /// Identifier.
     uint8_t id;
-    //! Position.
+    /// Position.
     fp32_t value;
 
     static uint16_t
@@ -7768,20 +7768,20 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Data Sanity.
+  /// Data Sanity.
   class DataSanity: public Message
   {
   public:
-    //! Sanity.
+    /// Sanity.
     enum SanityEnum
     {
-      //! Sane.
+      /// Sane.
       DS_SANE = 0,
-      //! Not Sane.
+      /// Not Sane.
       DS_NOT_SANE = 1
     };
 
-    //! Sanity.
+    /// Sanity.
     uint8_t sane;
 
     static uint16_t
@@ -7835,11 +7835,11 @@ namespace IMC
     }
   };
 
-  //! Rhodamine Dye.
+  /// Rhodamine Dye.
   class RhodamineDye: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -7899,11 +7899,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Crude Oil.
+  /// Crude Oil.
   class CrudeOil: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -7963,11 +7963,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Fine Oil.
+  /// Fine Oil.
   class FineOil: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -8027,11 +8027,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Turbidity.
+  /// Turbidity.
   class Turbidity: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -8091,11 +8091,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Chlorophyll.
+  /// Chlorophyll.
   class Chlorophyll: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -8155,11 +8155,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Fluorescein.
+  /// Fluorescein.
   class Fluorescein: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -8219,11 +8219,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Phycocyanin.
+  /// Phycocyanin.
   class Phycocyanin: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -8283,11 +8283,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Phycoerythrin.
+  /// Phycoerythrin.
   class Phycoerythrin: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -8347,65 +8347,65 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! GPS Fix RTK.
+  /// GPS Fix RTK.
   class GpsFixRtk: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeEnum
     {
-      //! None.
+      /// None.
       RTK_NONE = 0x00,
-      //! Obs.
+      /// Obs.
       RTK_OBS = 0x01,
-      //! Float.
+      /// Float.
       RTK_FLOAT = 0x02,
-      //! Fixed.
+      /// Fixed.
       RTK_FIXED = 0x03
     };
 
-    //! Validity.
+    /// Validity.
     enum ValidityBits
     {
-      //! Valid Time.
+      /// Valid Time.
       RFV_VALID_TIME = 0x0001,
-      //! Valid Base LLH.
+      /// Valid Base LLH.
       RFV_VALID_BASE = 0x0002,
-      //! Valid Position.
+      /// Valid Position.
       RFV_VALID_POS = 0x0004,
-      //! Valid Velocity.
+      /// Valid Velocity.
       RFV_VALID_VEL = 0x0008
     };
 
-    //! Validity.
+    /// Validity.
     uint16_t validity;
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! GPS Time of Week.
+    /// GPS Time of Week.
     uint32_t tow;
-    //! Base Latitude WGS-84.
+    /// Base Latitude WGS-84.
     fp64_t base_lat;
-    //! Base Longitude WGS-84.
+    /// Base Longitude WGS-84.
     fp64_t base_lon;
-    //! Base Height above WGS-84 ellipsoid.
+    /// Base Height above WGS-84 ellipsoid.
     fp32_t base_height;
-    //! Position North.
+    /// Position North.
     fp32_t n;
-    //! Position East.
+    /// Position East.
     fp32_t e;
-    //! Position Down.
+    /// Position Down.
     fp32_t d;
-    //! Velocity North.
+    /// Velocity North.
     fp32_t v_n;
-    //! Velocity East.
+    /// Velocity East.
     fp32_t v_e;
-    //! Velocity Down.
+    /// Velocity Down.
     fp32_t v_d;
-    //! Number of Satellites.
+    /// Number of Satellites.
     uint8_t satellites;
-    //! IAR Hypotheses.
+    /// IAR Hypotheses.
     uint16_t iar_hyp;
-    //! IAR Ratio.
+    /// IAR Ratio.
     fp32_t iar_ratio;
 
     static uint16_t
@@ -8459,49 +8459,49 @@ namespace IMC
     }
   };
 
-  //! Estimated State.
+  /// Estimated State.
   class EstimatedState: public Message
   {
   public:
-    //! Latitude (WGS-84).
+    /// Latitude (WGS-84).
     fp64_t lat;
-    //! Longitude (WGS-84).
+    /// Longitude (WGS-84).
     fp64_t lon;
-    //! Height (WGS-84).
+    /// Height (WGS-84).
     fp32_t height;
-    //! Offset north.
+    /// Offset north.
     fp32_t x;
-    //! Offset east.
+    /// Offset east.
     fp32_t y;
-    //! Offset down.
+    /// Offset down.
     fp32_t z;
-    //! Rotation over x axis.
+    /// Rotation over x axis.
     fp32_t phi;
-    //! Rotation over y axis.
+    /// Rotation over y axis.
     fp32_t theta;
-    //! Rotation over z axis.
+    /// Rotation over z axis.
     fp32_t psi;
-    //! Body-Fixed xx Velocity.
+    /// Body-Fixed xx Velocity.
     fp32_t u;
-    //! Body-Fixed yy Velocity.
+    /// Body-Fixed yy Velocity.
     fp32_t v;
-    //! Body-Fixed zz Velocity.
+    /// Body-Fixed zz Velocity.
     fp32_t w;
-    //! Ground Velocity X (North).
+    /// Ground Velocity X (North).
     fp32_t vx;
-    //! Ground Velocity Y (East).
+    /// Ground Velocity Y (East).
     fp32_t vy;
-    //! Ground Velocity Z (Down).
+    /// Ground Velocity Z (Down).
     fp32_t vz;
-    //! Angular Velocity in x.
+    /// Angular Velocity in x.
     fp32_t p;
-    //! Angular Velocity in y.
+    /// Angular Velocity in y.
     fp32_t q;
-    //! Angular Velocity in z.
+    /// Angular Velocity in z.
     fp32_t r;
-    //! Depth.
+    /// Depth.
     fp32_t depth;
-    //! Altitude.
+    /// Altitude.
     fp32_t alt;
 
     static uint16_t
@@ -8555,24 +8555,24 @@ namespace IMC
     }
   };
 
-  //! External Navigation Data.
+  /// External Navigation Data.
   class ExternalNavData: public Message
   {
   public:
-    //! Nav Data Type.
+    /// Nav Data Type.
     enum NavDataTypeEnum
     {
-      //! Full State.
+      /// Full State.
       EXTNAV_FULL = 0,
-      //! Attitude Heading Reference System Only.
+      /// Attitude Heading Reference System Only.
       EXTNAV_AHRS = 1,
-      //! Position Reference System only.
+      /// Position Reference System only.
       EXTNAV_POSREF = 2
     };
 
-    //! Estimated State.
+    /// Estimated State.
     InlineMessage<EstimatedState> state;
-    //! Nav Data Type.
+    /// Nav Data Type.
     uint8_t type;
 
     static uint16_t
@@ -8648,11 +8648,11 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Dissolved Oxygen.
+  /// Dissolved Oxygen.
   class DissolvedOxygen: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -8712,11 +8712,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Air Saturation.
+  /// Air Saturation.
   class AirSaturation: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -8776,11 +8776,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Throttle.
+  /// Throttle.
   class Throttle: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp64_t value;
 
     static uint16_t
@@ -8840,11 +8840,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! pH.
+  /// pH.
   class PH: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -8904,11 +8904,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Redox Potential.
+  /// Redox Potential.
   class Redox: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -8968,28 +8968,28 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Camera Zoom.
+  /// Camera Zoom.
   class CameraZoom: public Message
   {
   public:
-    //! Action.
+    /// Action.
     enum ActionEnum
     {
-      //! Reset Zoom.
+      /// Reset Zoom.
       ACTION_ZOOM_RESET = 0,
-      //! Zoom In.
+      /// Zoom In.
       ACTION_ZOOM_IN = 1,
-      //! Zoom Out.
+      /// Zoom Out.
       ACTION_ZOOM_OUT = 2,
-      //! Stop Zooming.
+      /// Stop Zooming.
       ACTION_ZOOM_STOP = 3
     };
 
-    //! Camera Number.
+    /// Camera Number.
     uint8_t id;
-    //! Absolute Zoom Level.
+    /// Absolute Zoom Level.
     uint8_t zoom;
-    //! Action.
+    /// Action.
     uint8_t action;
 
     static uint16_t
@@ -9049,13 +9049,13 @@ namespace IMC
     setSubId(uint16_t subid);
   };
 
-  //! Set Thruster Actuation.
+  /// Set Thruster Actuation.
   class SetThrusterActuation: public Message
   {
   public:
-    //! Thruster Number.
+    /// Thruster Number.
     uint8_t id;
-    //! Actuation Value.
+    /// Actuation Value.
     fp32_t value;
 
     static uint16_t
@@ -9121,13 +9121,13 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Set Servo Position.
+  /// Set Servo Position.
   class SetServoPosition: public Message
   {
   public:
-    //! Identifier.
+    /// Identifier.
     uint8_t id;
-    //! Position.
+    /// Position.
     fp32_t value;
 
     static uint16_t
@@ -9193,13 +9193,13 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Set Control Surface Deflection.
+  /// Set Control Surface Deflection.
   class SetControlSurfaceDeflection: public Message
   {
   public:
-    //! Identifier.
+    /// Identifier.
     uint8_t id;
-    //! Angle.
+    /// Angle.
     fp32_t angle;
 
     static uint16_t
@@ -9259,22 +9259,22 @@ namespace IMC
     setSubId(uint16_t subid);
   };
 
-  //! Remote Actions Request.
+  /// Remote Actions Request.
   class RemoteActionsRequest: public Message
   {
   public:
-    //! operation.
+    /// operation.
     enum operationEnum
     {
-      //! Report.
+      /// Report.
       OP_REPORT = 0,
-      //! Query.
+      /// Query.
       OP_QUERY = 1
     };
 
-    //! operation.
+    /// operation.
     uint8_t op;
-    //! Actions.
+    /// Actions.
     std::string actions;
 
     static uint16_t
@@ -9334,11 +9334,11 @@ namespace IMC
     }
   };
 
-  //! Remote Actions.
+  /// Remote Actions.
   class RemoteActions: public Message
   {
   public:
-    //! Actions.
+    /// Actions.
     std::string actions;
 
     static uint16_t
@@ -9398,13 +9398,13 @@ namespace IMC
     }
   };
 
-  //! Button Event.
+  /// Button Event.
   class ButtonEvent: public Message
   {
   public:
-    //! Button.
+    /// Button.
     uint8_t button;
-    //! Value.
+    /// Value.
     uint8_t value;
 
     static uint16_t
@@ -9464,28 +9464,28 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! LCD Control.
+  /// LCD Control.
   class LcdControl: public Message
   {
   public:
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Turn off display.
+      /// Turn off display.
       OP_TURN_OFF = 0,
-      //! Turn on display.
+      /// Turn on display.
       OP_TURN_ON = 1,
-      //! Clear display.
+      /// Clear display.
       OP_CLEAR = 2,
-      //! Write Line #0.
+      /// Write Line #0.
       OP_WRITE0 = 3,
-      //! Write Line #1.
+      /// Write Line #1.
       OP_WRITE1 = 4
     };
 
-    //! Operation.
+    /// Operation.
     uint8_t op;
-    //! Text.
+    /// Text.
     std::string text;
 
     static uint16_t
@@ -9545,34 +9545,34 @@ namespace IMC
     }
   };
 
-  //! Power Operation.
+  /// Power Operation.
   class PowerOperation: public Message
   {
   public:
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Power Down.
+      /// Power Down.
       POP_PWR_DOWN = 0,
-      //! Power Down in Progress.
+      /// Power Down in Progress.
       POP_PWR_DOWN_IP = 1,
-      //! Power Down Aborted.
+      /// Power Down Aborted.
       POP_PWR_DOWN_ABORTED = 2,
-      //! Schedule Power Down.
+      /// Schedule Power Down.
       POP_SCHED_PWR_DOWN = 3,
-      //! Power Up.
+      /// Power Up.
       POP_PWR_UP = 4,
-      //! Power Up in Progress.
+      /// Power Up in Progress.
       POP_PWR_UP_IP = 5,
-      //! Schedule Power Up.
+      /// Schedule Power Up.
       POP_SCHED_PWR_UP = 6
     };
 
-    //! Operation.
+    /// Operation.
     uint8_t op;
-    //! Time Remaining.
+    /// Time Remaining.
     fp32_t time_remain;
-    //! Scheduled Time.
+    /// Scheduled Time.
     fp64_t sched_time;
 
     static uint16_t
@@ -9626,36 +9626,36 @@ namespace IMC
     }
   };
 
-  //! Power Channel Control.
+  /// Power Channel Control.
   class PowerChannelControl: public Message
   {
   public:
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Turn Off.
+      /// Turn Off.
       PCC_OP_TURN_OFF = 0,
-      //! Turn On.
+      /// Turn On.
       PCC_OP_TURN_ON = 1,
-      //! Toggle.
+      /// Toggle.
       PCC_OP_TOGGLE = 2,
-      //! Schedule Turn On.
+      /// Schedule Turn On.
       PCC_OP_SCHED_ON = 3,
-      //! Schedule Turn Off.
+      /// Schedule Turn Off.
       PCC_OP_SCHED_OFF = 4,
-      //! Reset Schedules.
+      /// Reset Schedules.
       PCC_OP_SCHED_RESET = 5,
-      //! Save Current State.
+      /// Save Current State.
       PCC_OP_SAVE = 6,
-      //! Restart.
+      /// Restart.
       PCC_OP_RESTART = 7
     };
 
-    //! Channel Name.
+    /// Channel Name.
     std::string name;
-    //! Operation.
+    /// Operation.
     uint8_t op;
-    //! Scheduled Time.
+    /// Scheduled Time.
     fp64_t sched_time;
 
     static uint16_t
@@ -9715,7 +9715,7 @@ namespace IMC
     }
   };
 
-  //! Query Power Channel State.
+  /// Query Power Channel State.
   class QueryPowerChannelState: public Message
   {
   public:
@@ -9768,22 +9768,22 @@ namespace IMC
     }
   };
 
-  //! Power Channel State.
+  /// Power Channel State.
   class PowerChannelState: public Message
   {
   public:
-    //! State.
+    /// State.
     enum StateEnum
     {
-      //! Off.
+      /// Off.
       PCS_OFF = 0,
-      //! On.
+      /// On.
       PCS_ON = 1
     };
 
-    //! Name.
+    /// Name.
     std::string name;
-    //! State.
+    /// State.
     uint8_t state;
 
     static uint16_t
@@ -9843,13 +9843,13 @@ namespace IMC
     }
   };
 
-  //! LED Brightness.
+  /// LED Brightness.
   class LedBrightness: public Message
   {
   public:
-    //! Name.
+    /// Name.
     std::string name;
-    //! Value.
+    /// Value.
     uint8_t value;
 
     static uint16_t
@@ -9915,11 +9915,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Query LED Brightness.
+  /// Query LED Brightness.
   class QueryLedBrightness: public Message
   {
   public:
-    //! Name.
+    /// Name.
     std::string name;
 
     static uint16_t
@@ -9979,13 +9979,13 @@ namespace IMC
     }
   };
 
-  //! Set LED Brightness.
+  /// Set LED Brightness.
   class SetLedBrightness: public Message
   {
   public:
-    //! Name.
+    /// Name.
     std::string name;
-    //! Value.
+    /// Value.
     uint8_t value;
 
     static uint16_t
@@ -10051,15 +10051,15 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Set PWM.
+  /// Set PWM.
   class SetPWM: public Message
   {
   public:
-    //! Channel Identifier.
+    /// Channel Identifier.
     uint8_t id;
-    //! Period.
+    /// Period.
     uint32_t period;
-    //! Duty Cycle.
+    /// Duty Cycle.
     uint32_t duty_cycle;
 
     static uint16_t
@@ -10119,15 +10119,15 @@ namespace IMC
     setSubId(uint16_t subid);
   };
 
-  //! PWM.
+  /// PWM.
   class PWM: public Message
   {
   public:
-    //! Channel Identifier.
+    /// Channel Identifier.
     uint8_t id;
-    //! Period.
+    /// Period.
     uint32_t period;
-    //! Duty Cycle.
+    /// Duty Cycle.
     uint32_t duty_cycle;
 
     static uint16_t
@@ -10187,15 +10187,15 @@ namespace IMC
     setSubId(uint16_t subid);
   };
 
-  //! Estimated Stream Velocity.
+  /// Estimated Stream Velocity.
   class EstimatedStreamVelocity: public Message
   {
   public:
-    //! X component (North).
+    /// X component (North).
     fp64_t x;
-    //! Y component (East).
+    /// Y component (East).
     fp64_t y;
-    //! Z component (Down).
+    /// Z component (Down).
     fp64_t z;
 
     static uint16_t
@@ -10249,11 +10249,11 @@ namespace IMC
     }
   };
 
-  //! Indicated Speed.
+  /// Indicated Speed.
   class IndicatedSpeed: public Message
   {
   public:
-    //! Measured speed.
+    /// Measured speed.
     fp64_t value;
 
     static uint16_t
@@ -10313,11 +10313,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! True Speed.
+  /// True Speed.
   class TrueSpeed: public Message
   {
   public:
-    //! Estimated value.
+    /// Estimated value.
     fp64_t value;
 
     static uint16_t
@@ -10377,37 +10377,37 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Navigation Uncertainty.
+  /// Navigation Uncertainty.
   class NavigationUncertainty: public Message
   {
   public:
-    //! Variance - x Position.
+    /// Variance - x Position.
     fp32_t x;
-    //! Variance - y Position.
+    /// Variance - y Position.
     fp32_t y;
-    //! Variance - z Position.
+    /// Variance - z Position.
     fp32_t z;
-    //! Variance - Roll.
+    /// Variance - Roll.
     fp32_t phi;
-    //! Variance - Pitch.
+    /// Variance - Pitch.
     fp32_t theta;
-    //! Variance - Yaw.
+    /// Variance - Yaw.
     fp32_t psi;
-    //! Variance - Gyro. Roll Rate.
+    /// Variance - Gyro. Roll Rate.
     fp32_t p;
-    //! Variance - Gyro. Pitch Rate.
+    /// Variance - Gyro. Pitch Rate.
     fp32_t q;
-    //! Variance - Gyro. Yaw Rate.
+    /// Variance - Gyro. Yaw Rate.
     fp32_t r;
-    //! Variance - Body-Fixed xx Velocity.
+    /// Variance - Body-Fixed xx Velocity.
     fp32_t u;
-    //! Variance - Body-Fixed yy Velocity.
+    /// Variance - Body-Fixed yy Velocity.
     fp32_t v;
-    //! Variance - Body-Fixed ww Velocity.
+    /// Variance - Body-Fixed ww Velocity.
     fp32_t w;
-    //! Variance - Yaw Bias.
+    /// Variance - Yaw Bias.
     fp32_t bias_psi;
-    //! Variance - Gyro. Yaw Rate Bias.
+    /// Variance - Gyro. Yaw Rate Bias.
     fp32_t bias_r;
 
     static uint16_t
@@ -10461,27 +10461,27 @@ namespace IMC
     }
   };
 
-  //! Navigation Data.
+  /// Navigation Data.
   class NavigationData: public Message
   {
   public:
-    //! Yaw Bias.
+    /// Yaw Bias.
     fp32_t bias_psi;
-    //! Gyro. Yaw Rate Bias.
+    /// Gyro. Yaw Rate Bias.
     fp32_t bias_r;
-    //! Course Over Ground.
+    /// Course Over Ground.
     fp32_t cog;
-    //! Continuous Yaw.
+    /// Continuous Yaw.
     fp32_t cyaw;
-    //! GPS Rejection Filter Level.
+    /// GPS Rejection Filter Level.
     fp32_t lbl_rej_level;
-    //! LBL Rejection Filter Level.
+    /// LBL Rejection Filter Level.
     fp32_t gps_rej_level;
-    //! Variance - Custom Variable X.
+    /// Variance - Custom Variable X.
     fp32_t custom_x;
-    //! Variance - Custom Variable Y.
+    /// Variance - Custom Variable Y.
     fp32_t custom_y;
-    //! Variance - Custom Variable Z.
+    /// Variance - Custom Variable Z.
     fp32_t custom_z;
 
     static uint16_t
@@ -10535,28 +10535,28 @@ namespace IMC
     }
   };
 
-  //! GPS Fix Rejection.
+  /// GPS Fix Rejection.
   class GpsFixRejection: public Message
   {
   public:
-    //! Reason.
+    /// Reason.
     enum ReasonEnum
     {
-      //! Above Threshold.
+      /// Above Threshold.
       RR_ABOVE_THRESHOLD = 0,
-      //! Invalid Fix.
+      /// Invalid Fix.
       RR_INVALID = 1,
-      //! Above Maximum HDOP.
+      /// Above Maximum HDOP.
       RR_ABOVE_MAX_HDOP = 2,
-      //! Above Maximum HACC.
+      /// Above Maximum HACC.
       RR_ABOVE_MAX_HACC = 3,
-      //! Lost Validity Bit.
+      /// Lost Validity Bit.
       RR_LOST_VAL_BIT = 4
     };
 
-    //! UTC Time of Fix.
+    /// UTC Time of Fix.
     fp32_t utc_time;
-    //! Reason.
+    /// Reason.
     uint8_t reason;
 
     static uint16_t
@@ -10610,30 +10610,30 @@ namespace IMC
     }
   };
 
-  //! LBL Range Acceptance.
+  /// LBL Range Acceptance.
   class LblRangeAcceptance: public Message
   {
   public:
-    //! Acceptance.
+    /// Acceptance.
     enum AcceptanceEnum
     {
-      //! Accepted.
+      /// Accepted.
       RR_ACCEPTED = 0,
-      //! Rejected - Above Threshold.
+      /// Rejected - Above Threshold.
       RR_ABOVE_THRESHOLD = 1,
-      //! Rejected - Singular Point.
+      /// Rejected - Singular Point.
       RR_SINGULAR = 2,
-      //! Rejected - Not Enough Information.
+      /// Rejected - Not Enough Information.
       RR_NO_INFO = 3,
-      //! Rejected - Vehicle At Surface.
+      /// Rejected - Vehicle At Surface.
       RR_AT_SURFACE = 4
     };
 
-    //! Beacon Identification Number.
+    /// Beacon Identification Number.
     uint8_t id;
-    //! Range.
+    /// Range.
     fp32_t range;
-    //! Acceptance.
+    /// Acceptance.
     uint8_t acceptance;
 
     static uint16_t
@@ -10693,39 +10693,39 @@ namespace IMC
     setSubId(uint16_t subid);
   };
 
-  //! DVL Rejection.
+  /// DVL Rejection.
   class DvlRejection: public Message
   {
   public:
-    //! Reason.
+    /// Reason.
     enum ReasonEnum
     {
-      //! Innovation Threshold - X.
+      /// Innovation Threshold - X.
       RR_INNOV_THRESHOLD_X = 0,
-      //! Innovation Threshold - Y.
+      /// Innovation Threshold - Y.
       RR_INNOV_THRESHOLD_Y = 1,
-      //! Absolute Threshold - X.
+      /// Absolute Threshold - X.
       RR_ABS_THRESHOLD_X = 2,
-      //! Absolute Threshold - Y.
+      /// Absolute Threshold - Y.
       RR_ABS_THRESHOLD_Y = 3
     };
 
-    //! Type of velocity.
+    /// Type of velocity.
     enum TypeofvelocityBits
     {
-      //! Ground velocity.
+      /// Ground velocity.
       TYPE_GV = 0x01,
-      //! Water velocity.
+      /// Water velocity.
       TYPE_WV = 0x02
     };
 
-    //! Type of velocity.
+    /// Type of velocity.
     uint8_t type;
-    //! Reason.
+    /// Reason.
     uint8_t reason;
-    //! Value.
+    /// Value.
     fp32_t value;
-    //! Timestep.
+    /// Timestep.
     fp32_t timestep;
 
     static uint16_t
@@ -10785,21 +10785,21 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! LBL Beacon Position Estimate.
+  /// LBL Beacon Position Estimate.
   class LblEstimate: public Message
   {
   public:
-    //! LBL Beacon Configuration.
+    /// LBL Beacon Configuration.
     InlineMessage<LblBeacon> beacon;
-    //! North position.
+    /// North position.
     fp32_t x;
-    //! East position.
+    /// East position.
     fp32_t y;
-    //! North position variance.
+    /// North position variance.
     fp32_t var_x;
-    //! East position variance.
+    /// East position variance.
     fp32_t var_y;
-    //! Distance.
+    /// Distance.
     fp32_t distance;
 
     static uint16_t
@@ -10875,32 +10875,32 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Alignment State.
+  /// Alignment State.
   class AlignmentState: public Message
   {
   public:
-    //! State.
+    /// State.
     enum StateEnum
     {
-      //! Not Aligned.
+      /// Not Aligned.
       AS_NOT_ALIGNED = 0,
-      //! Aligned.
+      /// Aligned.
       AS_ALIGNED = 1,
-      //! Not Supported.
+      /// Not Supported.
       AS_NOT_SUPPORTED = 2,
-      //! Aligning.
+      /// Aligning.
       AS_ALIGNING = 3,
-      //! Wrong Medium.
+      /// Wrong Medium.
       AS_WRONG_MEDIUM = 4,
-      //! Coarse Alignment.
+      /// Coarse Alignment.
       AS_COARSE_ALIGNMENT = 5,
-      //! Fine Alignment.
+      /// Fine Alignment.
       AS_FINE_ALIGNMENT = 6,
-      //! System Ready.
+      /// System Ready.
       AS_SYSTEM_READY = 7
     };
 
-    //! State.
+    /// State.
     uint8_t state;
 
     static uint16_t
@@ -10954,15 +10954,15 @@ namespace IMC
     }
   };
 
-  //! GroupStreamVelocity.
+  /// GroupStreamVelocity.
   class GroupStreamVelocity: public Message
   {
   public:
-    //! X component (North).
+    /// X component (North).
     fp64_t x;
-    //! Y component (East).
+    /// Y component (East).
     fp64_t y;
-    //! Z component (Down).
+    /// Z component (Down).
     fp64_t z;
 
     static uint16_t
@@ -11016,15 +11016,15 @@ namespace IMC
     }
   };
 
-  //! Airflow.
+  /// Airflow.
   class Airflow: public Message
   {
   public:
-    //! Airspeed.
+    /// Airspeed.
     fp32_t va;
-    //! Angle of attack.
+    /// Angle of attack.
     fp32_t aoa;
-    //! Sideslip angle.
+    /// Sideslip angle.
     fp32_t ssa;
 
     static uint16_t
@@ -11078,11 +11078,11 @@ namespace IMC
     }
   };
 
-  //! Desired Heading.
+  /// Desired Heading.
   class DesiredHeading: public ControlCommand
   {
   public:
-    //! Value.
+    /// Value.
     fp64_t value;
 
     static uint16_t
@@ -11142,13 +11142,13 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Desired Z.
+  /// Desired Z.
   class DesiredZ: public ControlCommand
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
 
     static uint16_t
@@ -11208,13 +11208,13 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Desired Speed.
+  /// Desired Speed.
   class DesiredSpeed: public ControlCommand
   {
   public:
-    //! Value.
+    /// Value.
     fp64_t value;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
 
     static uint16_t
@@ -11274,11 +11274,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Desired Roll.
+  /// Desired Roll.
   class DesiredRoll: public ControlCommand
   {
   public:
-    //! Value.
+    /// Value.
     fp64_t value;
 
     static uint16_t
@@ -11338,11 +11338,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Desired Pitch.
+  /// Desired Pitch.
   class DesiredPitch: public ControlCommand
   {
   public:
-    //! Value.
+    /// Value.
     fp64_t value;
 
     static uint16_t
@@ -11402,11 +11402,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Desired Vertical Rate.
+  /// Desired Vertical Rate.
   class DesiredVerticalRate: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp64_t value;
 
     static uint16_t
@@ -11466,56 +11466,56 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Desired Path.
+  /// Desired Path.
   class DesiredPath: public ControlCommand
   {
   public:
-    //! Flags.
+    /// Flags.
     enum FlagsBits
     {
-      //! Start Point.
+      /// Start Point.
       FL_START = 0x01,
-      //! Direct.
+      /// Direct.
       FL_DIRECT = 0x02,
-      //! No Altitude/Depth control.
+      /// No Altitude/Depth control.
       FL_NO_Z = 0x04,
-      //! 3D Tracking.
+      /// 3D Tracking.
       FL_3DTRACK = 0x08,
-      //! Counter-Clockwise loiter.
+      /// Counter-Clockwise loiter.
       FL_CCLOCKW = 0x10,
-      //! Loiter from current position.
+      /// Loiter from current position.
       FL_LOITER_CURR = 0x20,
-      //! Takeoff.
+      /// Takeoff.
       FL_TAKEOFF = 0x40,
-      //! Land.
+      /// Land.
       FL_LAND = 0x80
     };
 
-    //! Path Reference.
+    /// Path Reference.
     uint32_t path_ref;
-    //! Start Point -- Latitude WGS-84.
+    /// Start Point -- Latitude WGS-84.
     fp64_t start_lat;
-    //! Start Point -- WGS-84 Longitude.
+    /// Start Point -- WGS-84 Longitude.
     fp64_t start_lon;
-    //! Start Point -- Z Reference.
+    /// Start Point -- Z Reference.
     fp32_t start_z;
-    //! Start Point -- Z Units.
+    /// Start Point -- Z Units.
     uint8_t start_z_units;
-    //! End Point -- WGS84 Latitude.
+    /// End Point -- WGS84 Latitude.
     fp64_t end_lat;
-    //! End Point -- WGS-84 Longitude.
+    /// End Point -- WGS-84 Longitude.
     fp64_t end_lon;
-    //! End Point -- Z Reference.
+    /// End Point -- Z Reference.
     fp32_t end_z;
-    //! End Point -- Z Units.
+    /// End Point -- Z Units.
     uint8_t end_z_units;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Loiter -- Radius.
+    /// Loiter -- Radius.
     fp32_t lradius;
-    //! Flags.
+    /// Flags.
     uint8_t flags;
 
     static uint16_t
@@ -11569,40 +11569,40 @@ namespace IMC
     }
   };
 
-  //! Desired Control.
+  /// Desired Control.
   class DesiredControl: public Message
   {
   public:
-    //! Flags.
+    /// Flags.
     enum FlagsBits
     {
-      //! Value of X is meaningful.
+      /// Value of X is meaningful.
       FL_X = 0x01,
-      //! Value of Y is meaningful.
+      /// Value of Y is meaningful.
       FL_Y = 0x02,
-      //! Value of Z is meaningful.
+      /// Value of Z is meaningful.
       FL_Z = 0x04,
-      //! Value of K is meaningful.
+      /// Value of K is meaningful.
       FL_K = 0x08,
-      //! Value of M is meaningful.
+      /// Value of M is meaningful.
       FL_M = 0x10,
-      //! Value of N is meaningful.
+      /// Value of N is meaningful.
       FL_N = 0x20
     };
 
-    //! Force along the x axis.
+    /// Force along the x axis.
     fp64_t x;
-    //! Force along the y axis.
+    /// Force along the y axis.
     fp64_t y;
-    //! Force along the z axis.
+    /// Force along the z axis.
     fp64_t z;
-    //! Torque about the x axis.
+    /// Torque about the x axis.
     fp64_t k;
-    //! Torque about the y axis.
+    /// Torque about the y axis.
     fp64_t m;
-    //! Torque about the z axis.
+    /// Torque about the z axis.
     fp64_t n;
-    //! Flags.
+    /// Flags.
     uint8_t flags;
 
     static uint16_t
@@ -11656,11 +11656,11 @@ namespace IMC
     }
   };
 
-  //! Desired Heading Rate.
+  /// Desired Heading Rate.
   class DesiredHeadingRate: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp64_t value;
 
     static uint16_t
@@ -11720,40 +11720,40 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Desired Velocity.
+  /// Desired Velocity.
   class DesiredVelocity: public Message
   {
   public:
-    //! Flags.
+    /// Flags.
     enum FlagsBits
     {
-      //! Value of u is meaningful.
+      /// Value of u is meaningful.
       FL_SURGE = 0x01,
-      //! Value of v is meaningful.
+      /// Value of v is meaningful.
       FL_SWAY = 0x02,
-      //! Value of w is meaningful.
+      /// Value of w is meaningful.
       FL_HEAVE = 0x04,
-      //! Value of p is meaningful.
+      /// Value of p is meaningful.
       FL_ROLL = 0x08,
-      //! Value of q is meaningful.
+      /// Value of q is meaningful.
       FL_PITCH = 0x10,
-      //! Value of r is meaningful.
+      /// Value of r is meaningful.
       FL_YAW = 0x20
     };
 
-    //! Desired Linear Speed in xx.
+    /// Desired Linear Speed in xx.
     fp64_t u;
-    //! Desired Linear Speed in yy.
+    /// Desired Linear Speed in yy.
     fp64_t v;
-    //! Desired Linear Speed in zz.
+    /// Desired Linear Speed in zz.
     fp64_t w;
-    //! Desired Angular Speed in xx.
+    /// Desired Angular Speed in xx.
     fp64_t p;
-    //! Desired Angular Speed in yy.
+    /// Desired Angular Speed in yy.
     fp64_t q;
-    //! Desired Angular Speed in zz.
+    /// Desired Angular Speed in zz.
     fp64_t r;
-    //! Flags.
+    /// Flags.
     uint8_t flags;
 
     static uint16_t
@@ -11807,62 +11807,62 @@ namespace IMC
     }
   };
 
-  //! Path Control State.
+  /// Path Control State.
   class PathControlState: public Message
   {
   public:
-    //! Flags.
+    /// Flags.
     enum FlagsBits
     {
-      //! Near Endpoint.
+      /// Near Endpoint.
       FL_NEAR = 0x01,
-      //! Loitering.
+      /// Loitering.
       FL_LOITERING = 0x02,
-      //! No Altitude/Depth control.
+      /// No Altitude/Depth control.
       FL_NO_Z = 0x04,
-      //! 3D Tracking.
+      /// 3D Tracking.
       FL_3DTRACK = 0x08,
-      //! Counter-Clockwise loiter.
+      /// Counter-Clockwise loiter.
       FL_CCLOCKW = 0x10
     };
 
-    //! Path Reference.
+    /// Path Reference.
     uint32_t path_ref;
-    //! Start Point -- Latitude WGS-84.
+    /// Start Point -- Latitude WGS-84.
     fp64_t start_lat;
-    //! Start Point -- WGS-84 Longitude.
+    /// Start Point -- WGS-84 Longitude.
     fp64_t start_lon;
-    //! Start Point -- Z Reference.
+    /// Start Point -- Z Reference.
     fp32_t start_z;
-    //! Start Point -- Z Units.
+    /// Start Point -- Z Units.
     uint8_t start_z_units;
-    //! End Point -- Latitude WGS-84.
+    /// End Point -- Latitude WGS-84.
     fp64_t end_lat;
-    //! End Point -- WGS-84 Longitude.
+    /// End Point -- WGS-84 Longitude.
     fp64_t end_lon;
-    //! End Point -- Z Reference.
+    /// End Point -- Z Reference.
     fp32_t end_z;
-    //! End Point -- Z Units.
+    /// End Point -- Z Units.
     uint8_t end_z_units;
-    //! Loiter -- Radius.
+    /// Loiter -- Radius.
     fp32_t lradius;
-    //! Flags.
+    /// Flags.
     uint8_t flags;
-    //! Along Track Position.
+    /// Along Track Position.
     fp32_t x;
-    //! Cross Track Position.
+    /// Cross Track Position.
     fp32_t y;
-    //! Vertical Track Position.
+    /// Vertical Track Position.
     fp32_t z;
-    //! Along Track Velocity.
+    /// Along Track Velocity.
     fp32_t vx;
-    //! Cross Track Velocity.
+    /// Cross Track Velocity.
     fp32_t vy;
-    //! Vertical Track Velocity.
+    /// Vertical Track Velocity.
     fp32_t vz;
-    //! Course Error.
+    /// Course Error.
     fp32_t course_error;
-    //! Estimated Time to Arrival (ETA).
+    /// Estimated Time to Arrival (ETA).
     uint16_t eta;
 
     static uint16_t
@@ -11916,15 +11916,15 @@ namespace IMC
     }
   };
 
-  //! Allocated Control Torques.
+  /// Allocated Control Torques.
   class AllocatedControlTorques: public Message
   {
   public:
-    //! Torque about the x axis.
+    /// Torque about the x axis.
     fp64_t k;
-    //! Torque about the y axis.
+    /// Torque about the y axis.
     fp64_t m;
-    //! Torque about the x axis.
+    /// Torque about the x axis.
     fp64_t n;
 
     static uint16_t
@@ -11978,17 +11978,17 @@ namespace IMC
     }
   };
 
-  //! Control Parcel.
+  /// Control Parcel.
   class ControlParcel: public Message
   {
   public:
-    //! Proportional Parcel.
+    /// Proportional Parcel.
     fp32_t p;
-    //! Integrative Parcel.
+    /// Integrative Parcel.
     fp32_t i;
-    //! Derivative Parcel.
+    /// Derivative Parcel.
     fp32_t d;
-    //! Anti-Windup Parcel.
+    /// Anti-Windup Parcel.
     fp32_t a;
 
     static uint16_t
@@ -12042,22 +12042,22 @@ namespace IMC
     }
   };
 
-  //! Brake.
+  /// Brake.
   class Brake: public Message
   {
   public:
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Stop Braking.
+      /// Stop Braking.
       OP_STOP = 0,
-      //! Start Braking.
+      /// Start Braking.
       OP_START = 1,
-      //! Revert Actuation.
+      /// Revert Actuation.
       OP_REVERT = 2
     };
 
-    //! Operation.
+    /// Operation.
     uint8_t op;
 
     static uint16_t
@@ -12111,52 +12111,52 @@ namespace IMC
     }
   };
 
-  //! Desired Linear State.
+  /// Desired Linear State.
   class DesiredLinearState: public Message
   {
   public:
-    //! Flags.
+    /// Flags.
     enum FlagsBits
     {
-      //! Value of x is meaningful.
+      /// Value of x is meaningful.
       FL_X = 0x0001,
-      //! Value of y is meaningful.
+      /// Value of y is meaningful.
       FL_Y = 0x0002,
-      //! Value of z is meaningful.
+      /// Value of z is meaningful.
       FL_Z = 0x0004,
-      //! Value of vx is meaningful.
+      /// Value of vx is meaningful.
       FL_VX = 0x0008,
-      //! Value of vy is meaningful.
+      /// Value of vy is meaningful.
       FL_VY = 0x0010,
-      //! Value of vz is meaningful.
+      /// Value of vz is meaningful.
       FL_VZ = 0x0020,
-      //! Value of ax is meaningful.
+      /// Value of ax is meaningful.
       FL_AX = 0x0040,
-      //! Value of ay is meaningful.
+      /// Value of ay is meaningful.
       FL_AY = 0x0080,
-      //! Value of az is meaningful.
+      /// Value of az is meaningful.
       FL_AZ = 0x0100
     };
 
-    //! Desired pos in xx.
+    /// Desired pos in xx.
     fp64_t x;
-    //! Desired pos in yy.
+    /// Desired pos in yy.
     fp64_t y;
-    //! Desired pos in zz.
+    /// Desired pos in zz.
     fp64_t z;
-    //! Desired Linear Speed in xx.
+    /// Desired Linear Speed in xx.
     fp64_t vx;
-    //! Desired Linear Speed in yy.
+    /// Desired Linear Speed in yy.
     fp64_t vy;
-    //! Desired Linear Speed in zz.
+    /// Desired Linear Speed in zz.
     fp64_t vz;
-    //! Desired Linear Acceleration in xx.
+    /// Desired Linear Acceleration in xx.
     fp64_t ax;
-    //! Desired Linear Acceleration in yy.
+    /// Desired Linear Acceleration in yy.
     fp64_t ay;
-    //! Desired Linear Acceleration in zz.
+    /// Desired Linear Acceleration in zz.
     fp64_t az;
-    //! Flags.
+    /// Flags.
     uint16_t flags;
 
     static uint16_t
@@ -12210,11 +12210,11 @@ namespace IMC
     }
   };
 
-  //! Desired Throttle.
+  /// Desired Throttle.
   class DesiredThrottle: public ControlCommand
   {
   public:
-    //! Value.
+    /// Value.
     fp64_t value;
 
     static uint16_t
@@ -12274,31 +12274,31 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Goto Maneuver.
+  /// Goto Maneuver.
   class Goto: public Maneuver
   {
   public:
-    //! Timeout.
+    /// Timeout.
     uint16_t timeout;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Roll.
+    /// Roll.
     fp64_t roll;
-    //! Pitch.
+    /// Pitch.
     fp64_t pitch;
-    //! Yaw.
+    /// Yaw.
     fp64_t yaw;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -12358,42 +12358,42 @@ namespace IMC
     }
   };
 
-  //! PopUp Maneuver.
+  /// PopUp Maneuver.
   class PopUp: public Maneuver
   {
   public:
-    //! Flags.
+    /// Flags.
     enum FlagsBits
     {
-      //! Start from current position.
+      /// Start from current position.
       FLG_CURR_POS = 0x01,
-      //! Wait at surface.
+      /// Wait at surface.
       FLG_WAIT_AT_SURFACE = 0x02,
-      //! Station keeping.
+      /// Station keeping.
       FLG_STATION_KEEP = 0x04
     };
 
-    //! Timeout.
+    /// Timeout.
     uint16_t timeout;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Duration.
+    /// Duration.
     uint16_t duration;
-    //! Radius.
+    /// Radius.
     fp32_t radius;
-    //! Flags.
+    /// Flags.
     uint8_t flags;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -12453,11 +12453,11 @@ namespace IMC
     }
   };
 
-  //! Teleoperation Maneuver.
+  /// Teleoperation Maneuver.
   class Teleoperation: public Maneuver
   {
   public:
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -12517,65 +12517,65 @@ namespace IMC
     }
   };
 
-  //! Loiter Maneuver.
+  /// Loiter Maneuver.
   class Loiter: public Maneuver
   {
   public:
-    //! Loiter Type.
+    /// Loiter Type.
     enum LoiterTypeEnum
     {
-      //! Default.
+      /// Default.
       LT_DEFAULT = 0,
-      //! Circular.
+      /// Circular.
       LT_CIRCULAR = 1,
-      //! Race track.
+      /// Race track.
       LT_RACETRACK = 2,
-      //! Figure 8.
+      /// Figure 8.
       LT_EIGHT = 3,
-      //! Hover.
+      /// Hover.
       LT_HOVER = 4
     };
 
-    //! Direction.
+    /// Direction.
     enum DirectionEnum
     {
-      //! Vehicle Dependent.
+      /// Vehicle Dependent.
       LD_VDEP = 0,
-      //! Clockwise.
+      /// Clockwise.
       LD_CLOCKW = 1,
-      //! Counter Clockwise.
+      /// Counter Clockwise.
       LD_CCLOCKW = 2,
-      //! Into the wind/current.
+      /// Into the wind/current.
       LD_IWINDCURR = 3
     };
 
-    //! Timeout.
+    /// Timeout.
     uint16_t timeout;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Duration.
+    /// Duration.
     uint16_t duration;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Loiter Type.
+    /// Loiter Type.
     uint8_t type;
-    //! Radius.
+    /// Radius.
     fp32_t radius;
-    //! Length.
+    /// Length.
     fp32_t length;
-    //! Bearing.
+    /// Bearing.
     fp64_t bearing;
-    //! Direction.
+    /// Direction.
     uint8_t direction;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -12635,13 +12635,13 @@ namespace IMC
     }
   };
 
-  //! Idle Maneuver.
+  /// Idle Maneuver.
   class IdleManeuver: public Maneuver
   {
   public:
-    //! Duration.
+    /// Duration.
     uint16_t duration;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -12701,15 +12701,15 @@ namespace IMC
     }
   };
 
-  //! Low Level Control Maneuver.
+  /// Low Level Control Maneuver.
   class LowLevelControl: public Maneuver
   {
   public:
-    //! Control.
+    /// Control.
     InlineMessage<ControlCommand> control;
-    //! Duration.
+    /// Duration.
     uint16_t duration;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -12785,50 +12785,50 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Rows Maneuver.
+  /// Rows Maneuver.
   class Rows: public Maneuver
   {
   public:
-    //! Flags.
+    /// Flags.
     enum FlagsBits
     {
-      //! Square Curve.
+      /// Square Curve.
       FLG_SQUARE_CURVE = 0x0001,
-      //! First Curve Right.
+      /// First Curve Right.
       FLG_CURVE_RIGHT = 0x0002
     };
 
-    //! Timeout.
+    /// Timeout.
     uint16_t timeout;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Bearing.
+    /// Bearing.
     fp64_t bearing;
-    //! Cross Angle.
+    /// Cross Angle.
     fp64_t cross_angle;
-    //! Width.
+    /// Width.
     fp32_t width;
-    //! Length.
+    /// Length.
     fp32_t length;
-    //! Horizontal Step.
+    /// Horizontal Step.
     fp32_t hstep;
-    //! Curve Offset.
+    /// Curve Offset.
     uint8_t coff;
-    //! Alternation Parameter.
+    /// Alternation Parameter.
     uint8_t alternation;
-    //! Flags.
+    /// Flags.
     uint8_t flags;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -12888,15 +12888,15 @@ namespace IMC
     }
   };
 
-  //! Path Point.
+  /// Path Point.
   class PathPoint: public Message
   {
   public:
-    //! North Offset (m).
+    /// North Offset (m).
     fp32_t x;
-    //! East Offset (m).
+    /// East Offset (m).
     fp32_t y;
-    //! Down Offset (m).
+    /// Down Offset (m).
     fp32_t z;
 
     static uint16_t
@@ -12950,27 +12950,27 @@ namespace IMC
     }
   };
 
-  //! Follow Path Maneuver.
+  /// Follow Path Maneuver.
   class FollowPath: public Maneuver
   {
   public:
-    //! Timeout.
+    /// Timeout.
     uint16_t timeout;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Path Points.
+    /// Path Points.
     MessageList<PathPoint> points;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -13046,29 +13046,29 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Yo-Yo Maneuver.
+  /// Yo-Yo Maneuver.
   class YoYo: public Maneuver
   {
   public:
-    //! Timeout.
+    /// Timeout.
     uint16_t timeout;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Amplitude.
+    /// Amplitude.
     fp32_t amplitude;
-    //! Pitch Angle.
+    /// Pitch Angle.
     fp32_t pitch;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -13128,7 +13128,7 @@ namespace IMC
     }
   };
 
-  //! Teleoperation Done.
+  /// Teleoperation Done.
   class TeleoperationDone: public Message
   {
   public:
@@ -13181,27 +13181,27 @@ namespace IMC
     }
   };
 
-  //! Station Keeping.
+  /// Station Keeping.
   class StationKeeping: public Maneuver
   {
   public:
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Radius.
+    /// Radius.
     fp32_t radius;
-    //! Duration.
+    /// Duration.
     uint16_t duration;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -13261,40 +13261,40 @@ namespace IMC
     }
   };
 
-  //! Elevator Maneuver.
+  /// Elevator Maneuver.
   class Elevator: public Maneuver
   {
   public:
-    //! Flags.
+    /// Flags.
     enum FlagsBits
     {
-      //! Start from current position.
+      /// Start from current position.
       FLG_CURR_POS = 0x01
     };
 
-    //! Timeout.
+    /// Timeout.
     uint16_t timeout;
-    //! Flags.
+    /// Flags.
     uint8_t flags;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Start Point -- Z Reference.
+    /// Start Point -- Z Reference.
     fp32_t start_z;
-    //! Start Point -- Z Units.
+    /// Start Point -- Z Units.
     uint8_t start_z_units;
-    //! End Point -- Z Reference.
+    /// End Point -- Z Reference.
     fp32_t end_z;
-    //! End Point -- Z Units.
+    /// End Point -- Z Units.
     uint8_t end_z_units;
-    //! Radius.
+    /// Radius.
     fp32_t radius;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -13354,17 +13354,17 @@ namespace IMC
     }
   };
 
-  //! Trajectory Point.
+  /// Trajectory Point.
   class TrajectoryPoint: public Message
   {
   public:
-    //! North Offset (m).
+    /// North Offset (m).
     fp32_t x;
-    //! East Offset (m).
+    /// East Offset (m).
     fp32_t y;
-    //! Down Offset (m).
+    /// Down Offset (m).
     fp32_t z;
-    //! Time Offset (s).
+    /// Time Offset (s).
     fp32_t t;
 
     static uint16_t
@@ -13418,27 +13418,27 @@ namespace IMC
     }
   };
 
-  //! Follow Trajectory.
+  /// Follow Trajectory.
   class FollowTrajectory: public Maneuver
   {
   public:
-    //! Timeout.
+    /// Timeout.
     uint16_t timeout;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Trajectory Points.
+    /// Trajectory Points.
     MessageList<TrajectoryPoint> points;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -13514,15 +13514,15 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Custom Maneuver.
+  /// Custom Maneuver.
   class CustomManeuver: public Maneuver
   {
   public:
-    //! Timeout.
+    /// Timeout.
     uint16_t timeout;
-    //! Maneuver Name.
+    /// Maneuver Name.
     std::string name;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -13582,17 +13582,17 @@ namespace IMC
     }
   };
 
-  //! Vehicle Formation Participant.
+  /// Vehicle Formation Participant.
   class VehicleFormationParticipant: public Message
   {
   public:
-    //! ID (IMC address).
+    /// ID (IMC address).
     uint16_t vid;
-    //! Formation offset -- Along-track.
+    /// Formation offset -- Along-track.
     fp32_t off_x;
-    //! Formation offset -- Cross-track.
+    /// Formation offset -- Cross-track.
     fp32_t off_y;
-    //! Formation offset -- Depth/Altitude.
+    /// Formation offset -- Depth/Altitude.
     fp32_t off_z;
 
     static uint16_t
@@ -13646,29 +13646,29 @@ namespace IMC
     }
   };
 
-  //! Vehicle Formation.
+  /// Vehicle Formation.
   class VehicleFormation: public Maneuver
   {
   public:
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Trajectory Points.
+    /// Trajectory Points.
     MessageList<TrajectoryPoint> points;
-    //! Formation Participants.
+    /// Formation Participants.
     MessageList<VehicleFormationParticipant> participants;
-    //! Start Time.
+    /// Start Time.
     fp64_t start_time;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -13744,7 +13744,7 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Stop Maneuver.
+  /// Stop Maneuver.
   class StopManeuver: public Message
   {
   public:
@@ -13797,11 +13797,11 @@ namespace IMC
     }
   };
 
-  //! Register Maneuver.
+  /// Register Maneuver.
   class RegisterManeuver: public Message
   {
   public:
-    //! Maneuver ID.
+    /// Maneuver ID.
     uint16_t mid;
 
     static uint16_t
@@ -13855,28 +13855,28 @@ namespace IMC
     }
   };
 
-  //! Maneuver Control State.
+  /// Maneuver Control State.
   class ManeuverControlState: public Message
   {
   public:
-    //! State.
+    /// State.
     enum StateEnum
     {
-      //! Maneuver in progress.
+      /// Maneuver in progress.
       MCS_EXECUTING = 0,
-      //! Maneuver completed.
+      /// Maneuver completed.
       MCS_DONE = 1,
-      //! Maneuver error.
+      /// Maneuver error.
       MCS_ERROR = 2,
-      //! Maneuver stopped.
+      /// Maneuver stopped.
       MCS_STOPPED = 3
     };
 
-    //! State.
+    /// State.
     uint8_t state;
-    //! Completion Time.
+    /// Completion Time.
     uint16_t eta;
-    //! Info.
+    /// Info.
     std::string info;
 
     static uint16_t
@@ -13936,25 +13936,25 @@ namespace IMC
     }
   };
 
-  //! Follow System.
+  /// Follow System.
   class FollowSystem: public Message
   {
   public:
-    //! System To Follow.
+    /// System To Follow.
     uint16_t system;
-    //! Duration.
+    /// Duration.
     uint16_t duration;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Offset -- X.
+    /// Offset -- X.
     fp32_t x;
-    //! Offset -- Y.
+    /// Offset -- Y.
     fp32_t y;
-    //! Coordinate -- Z.
+    /// Coordinate -- Z.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
 
     static uint16_t
@@ -14008,25 +14008,25 @@ namespace IMC
     }
   };
 
-  //! Communications Relay.
+  /// Communications Relay.
   class CommsRelay: public Maneuver
   {
   public:
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Duration.
+    /// Duration.
     uint16_t duration;
-    //! System A.
+    /// System A.
     uint16_t sys_a;
-    //! System B.
+    /// System B.
     uint16_t sys_b;
-    //! Move threshold.
+    /// Move threshold.
     fp32_t move_threshold;
 
     static uint16_t
@@ -14080,13 +14080,13 @@ namespace IMC
     }
   };
 
-  //! Polygon Vertex.
+  /// Polygon Vertex.
   class PolygonVertex: public Message
   {
   public:
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
 
     static uint16_t
@@ -14140,25 +14140,25 @@ namespace IMC
     }
   };
 
-  //! Cover Area.
+  /// Cover Area.
   class CoverArea: public Maneuver
   {
   public:
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Polygon.
+    /// Polygon.
     MessageList<PolygonVertex> polygon;
-    //! CustomParameters.
+    /// CustomParameters.
     std::string custom;
 
     static uint16_t
@@ -14234,48 +14234,48 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Compass Calibration Maneuver.
+  /// Compass Calibration Maneuver.
   class CompassCalibration: public Maneuver
   {
   public:
-    //! Direction.
+    /// Direction.
     enum DirectionEnum
     {
-      //! Vehicle Dependent.
+      /// Vehicle Dependent.
       LD_VDEP = 0,
-      //! Clockwise.
+      /// Clockwise.
       LD_CLOCKW = 1,
-      //! Counter Clockwise.
+      /// Counter Clockwise.
       LD_CCLOCKW = 2,
-      //! Into the wind/current.
+      /// Into the wind/current.
       LD_IWINDCURR = 3
     };
 
-    //! Timeout.
+    /// Timeout.
     uint16_t timeout;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Pitch.
+    /// Pitch.
     fp32_t pitch;
-    //! Amplitude.
+    /// Amplitude.
     fp32_t amplitude;
-    //! Duration.
+    /// Duration.
     uint16_t duration;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Radius.
+    /// Radius.
     fp32_t radius;
-    //! Direction.
+    /// Direction.
     uint8_t direction;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -14335,28 +14335,28 @@ namespace IMC
     }
   };
 
-  //! Formation Parameters.
+  /// Formation Parameters.
   class FormationParameters: public Message
   {
   public:
-    //! Formation Reference Frame.
+    /// Formation Reference Frame.
     enum FormationReferenceFrameEnum
     {
-      //! Earth Fixed.
+      /// Earth Fixed.
       OP_EARTH_FIXED = 0,
-      //! Path Fixed.
+      /// Path Fixed.
       OP_PATH_FIXED = 1,
-      //! Path Curved.
+      /// Path Curved.
       OP_PATH_CURVED = 2
     };
 
-    //! Formation Name.
+    /// Formation Name.
     std::string formation_name;
-    //! Formation Reference Frame.
+    /// Formation Reference Frame.
     uint8_t reference_frame;
-    //! Formation Participants.
+    /// Formation Participants.
     MessageList<VehicleFormationParticipant> participants;
-    //! Custom settings for formation.
+    /// Custom settings for formation.
     std::string custom;
 
     static uint16_t
@@ -14432,37 +14432,37 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Formation Plan Execution.
+  /// Formation Plan Execution.
   class FormationPlanExecution: public Maneuver
   {
   public:
-    //! Target Group Name.
+    /// Target Group Name.
     std::string group_name;
-    //! Formation Name.
+    /// Formation Name.
     std::string formation_name;
-    //! Formation Plan ID.
+    /// Formation Plan ID.
     std::string plan_id;
-    //! Plan Description.
+    /// Plan Description.
     std::string description;
-    //! Formation Leader Flight Airspeed.
+    /// Formation Leader Flight Airspeed.
     fp32_t leader_speed;
-    //! Formation leader flight bank limit.
+    /// Formation leader flight bank limit.
     fp32_t leader_bank_lim;
-    //! Position mismatch limit.
+    /// Position mismatch limit.
     fp32_t pos_sim_err_lim;
-    //! Position mismatch threshold.
+    /// Position mismatch threshold.
     fp32_t pos_sim_err_wrn;
-    //! Position mismatch time-out.
+    /// Position mismatch time-out.
     uint16_t pos_sim_err_timeout;
-    //! Convergence threshold.
+    /// Convergence threshold.
     fp32_t converg_max;
-    //! Convergence time-out.
+    /// Convergence time-out.
     uint16_t converg_timeout;
-    //! Communications time-out.
+    /// Communications time-out.
     uint16_t comms_timeout;
-    //! Turbulence limit.
+    /// Turbulence limit.
     fp32_t turb_lim;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -14522,19 +14522,19 @@ namespace IMC
     }
   };
 
-  //! Follow Reference Maneuver.
+  /// Follow Reference Maneuver.
   class FollowReference: public Maneuver
   {
   public:
-    //! Controlling Source.
+    /// Controlling Source.
     uint16_t control_src;
-    //! Controlling Entity.
+    /// Controlling Entity.
     uint8_t control_ent;
-    //! Reference Update Timeout.
+    /// Reference Update Timeout.
     fp32_t timeout;
-    //! Loiter Radius.
+    /// Loiter Radius.
     fp32_t loiter_radius;
-    //! Altitude Interval.
+    /// Altitude Interval.
     fp32_t altitude_interval;
 
     static uint16_t
@@ -14588,40 +14588,40 @@ namespace IMC
     }
   };
 
-  //! Reference To Follow.
+  /// Reference To Follow.
   class Reference: public Message
   {
   public:
-    //! Flags.
+    /// Flags.
     enum FlagsBits
     {
-      //! Use Location Reference.
+      /// Use Location Reference.
       FLAG_LOCATION = 0x01,
-      //! Use Speed Reference.
+      /// Use Speed Reference.
       FLAG_SPEED = 0x02,
-      //! Use Z Reference.
+      /// Use Z Reference.
       FLAG_Z = 0x04,
-      //! Use Radius Reference.
+      /// Use Radius Reference.
       FLAG_RADIUS = 0x08,
-      //! Use this Reference as Start Position for PathControler.
+      /// Use this Reference as Start Position for PathControler.
       FLAG_START_POINT = 0x10,
-      //! Use Current Position as Start Position for PathControler.
+      /// Use Current Position as Start Position for PathControler.
       FLAG_DIRECT = 0x20,
-      //! Flag Maneuver Completion.
+      /// Flag Maneuver Completion.
       FLAG_MANDONE = 0x80
     };
 
-    //! Flags.
+    /// Flags.
     uint8_t flags;
-    //! Speed Reference.
+    /// Speed Reference.
     InlineMessage<DesiredSpeed> speed;
-    //! Z Reference.
+    /// Z Reference.
     InlineMessage<DesiredZ> z;
-    //! Latitude Reference.
+    /// Latitude Reference.
     fp64_t lat;
-    //! Longitude Reference.
+    /// Longitude Reference.
     fp64_t lon;
-    //! Radius.
+    /// Radius.
     fp32_t radius;
 
     static uint16_t
@@ -14697,51 +14697,51 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Follow Reference State.
+  /// Follow Reference State.
   class FollowRefState: public Message
   {
   public:
-    //! State.
+    /// State.
     enum StateEnum
     {
-      //! Waiting for first reference.
+      /// Waiting for first reference.
       FR_WAIT = 1,
-      //! Going towards received reference.
+      /// Going towards received reference.
       FR_GOTO = 2,
-      //! Loitering after arriving at the reference.
+      /// Loitering after arriving at the reference.
       FR_LOITER = 3,
-      //! Hovering after arriving at the reference.
+      /// Hovering after arriving at the reference.
       FR_HOVER = 4,
-      //! Moving in z after arriving at the target cylinder.
+      /// Moving in z after arriving at the target cylinder.
       FR_ELEVATOR = 5,
-      //! Controlling system timed out.
+      /// Controlling system timed out.
       FR_TIMEOUT = 6
     };
 
-    //! Proximity.
+    /// Proximity.
     enum ProximityBits
     {
-      //! Far from the destination.
+      /// Far from the destination.
       PROX_FAR = 0x01,
-      //! Near in the horizontal plane.
+      /// Near in the horizontal plane.
       PROX_XY_NEAR = 0x02,
-      //! Near in the vertical plane.
+      /// Near in the vertical plane.
       PROX_Z_NEAR = 0x04,
-      //! Unreachable in the horizontal plane.
+      /// Unreachable in the horizontal plane.
       PROX_XY_UNREACHABLE = 0x08,
-      //! Unreachable in the vertical plane.
+      /// Unreachable in the vertical plane.
       PROX_Z_UNREACHABLE = 0x10
     };
 
-    //! Controlling Source.
+    /// Controlling Source.
     uint16_t control_src;
-    //! Controlling Entity.
+    /// Controlling Entity.
     uint8_t control_ent;
-    //! Reference.
+    /// Reference.
     InlineMessage<Reference> reference;
-    //! State.
+    /// State.
     uint8_t state;
-    //! Proximity.
+    /// Proximity.
     uint8_t proximity;
 
     static uint16_t
@@ -14817,53 +14817,53 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Relative State.
+  /// Relative State.
   class RelativeState: public Message
   {
   public:
-    //! System Identifier.
+    /// System Identifier.
     std::string s_id;
-    //! Distance.
+    /// Distance.
     fp32_t dist;
-    //! Position Error.
+    /// Position Error.
     fp32_t err;
-    //! Control Importance.
+    /// Control Importance.
     fp32_t ctrl_imp;
-    //! Relative Direction X (North).
+    /// Relative Direction X (North).
     fp32_t rel_dir_x;
-    //! Relative Direction Y (East).
+    /// Relative Direction Y (East).
     fp32_t rel_dir_y;
-    //! Relative Direction Z (Down).
+    /// Relative Direction Z (Down).
     fp32_t rel_dir_z;
-    //! X Position Error (North).
+    /// X Position Error (North).
     fp32_t err_x;
-    //! Y Position Error (East).
+    /// Y Position Error (East).
     fp32_t err_y;
-    //! Z Position Error (Down).
+    /// Z Position Error (Down).
     fp32_t err_z;
-    //! X Position Error In Relative Frame (North).
+    /// X Position Error In Relative Frame (North).
     fp32_t rf_err_x;
-    //! Y Position Error In Relative Frame (East).
+    /// Y Position Error In Relative Frame (East).
     fp32_t rf_err_y;
-    //! Z Position Error In Relative Frame (Down).
+    /// Z Position Error In Relative Frame (Down).
     fp32_t rf_err_z;
-    //! X Velocity Error In Relative Frame (North).
+    /// X Velocity Error In Relative Frame (North).
     fp32_t rf_err_vx;
-    //! Y Velocity Error In Relative Frame (East).
+    /// Y Velocity Error In Relative Frame (East).
     fp32_t rf_err_vy;
-    //! Z Velocity Error In Relative Frame (Down).
+    /// Z Velocity Error In Relative Frame (Down).
     fp32_t rf_err_vz;
-    //! X Convergence Deviation (North).
+    /// X Convergence Deviation (North).
     fp32_t ss_x;
-    //! Y Convergence Deviation (East).
+    /// Y Convergence Deviation (East).
     fp32_t ss_y;
-    //! Z Convergence Deviation (Down).
+    /// Z Convergence Deviation (Down).
     fp32_t ss_z;
-    //! X Virtual Error (North).
+    /// X Virtual Error (North).
     fp32_t virt_err_x;
-    //! Y Virtual Error (East).
+    /// Y Virtual Error (East).
     fp32_t virt_err_y;
-    //! Z Virtual Error (Down).
+    /// Z Virtual Error (Down).
     fp32_t virt_err_z;
 
     static uint16_t
@@ -14923,47 +14923,47 @@ namespace IMC
     }
   };
 
-  //! Formation Monitoring Data.
+  /// Formation Monitoring Data.
   class FormationMonitor: public Message
   {
   public:
-    //! Commanded X Acceleration (North).
+    /// Commanded X Acceleration (North).
     fp32_t ax_cmd;
-    //! Commanded Y Acceleration (East).
+    /// Commanded Y Acceleration (East).
     fp32_t ay_cmd;
-    //! Commanded Z Acceleration (Down).
+    /// Commanded Z Acceleration (Down).
     fp32_t az_cmd;
-    //! Desired X Acceleration (North).
+    /// Desired X Acceleration (North).
     fp32_t ax_des;
-    //! Desired Y Acceleration (East).
+    /// Desired Y Acceleration (East).
     fp32_t ay_des;
-    //! Desired Z Acceleration (Down).
+    /// Desired Z Acceleration (Down).
     fp32_t az_des;
-    //! X Virtual Error (North).
+    /// X Virtual Error (North).
     fp32_t virt_err_x;
-    //! Y Virtual Error (East).
+    /// Y Virtual Error (East).
     fp32_t virt_err_y;
-    //! Z Virtual Error (Down).
+    /// Z Virtual Error (Down).
     fp32_t virt_err_z;
-    //! X Sliding Surface Feedback (North).
+    /// X Sliding Surface Feedback (North).
     fp32_t surf_fdbk_x;
-    //! Y Sliding Surface Feedback (East).
+    /// Y Sliding Surface Feedback (East).
     fp32_t surf_fdbk_y;
-    //! Z Sliding Surface Feedback (Down).
+    /// Z Sliding Surface Feedback (Down).
     fp32_t surf_fdbk_z;
-    //! X Uncertainty Compensation (North).
+    /// X Uncertainty Compensation (North).
     fp32_t surf_unkn_x;
-    //! Y Uncertainty Compensation (East).
+    /// Y Uncertainty Compensation (East).
     fp32_t surf_unkn_y;
-    //! Z Uncertainty Compensation (Down).
+    /// Z Uncertainty Compensation (Down).
     fp32_t surf_unkn_z;
-    //! X Convergence Deviation (North).
+    /// X Convergence Deviation (North).
     fp32_t ss_x;
-    //! Y Convergence Deviation (East).
+    /// Y Convergence Deviation (East).
     fp32_t ss_y;
-    //! Z Convergence Deviation (Down).
+    /// Z Convergence Deviation (Down).
     fp32_t ss_z;
-    //! Relative State.
+    /// Relative State.
     MessageList<RelativeState> rel_state;
 
     static uint16_t
@@ -15039,28 +15039,28 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Dislodge Maneuver.
+  /// Dislodge Maneuver.
   class Dislodge: public Maneuver
   {
   public:
-    //! Direction.
+    /// Direction.
     enum DirectionEnum
     {
-      //! Let the vehicle decide.
+      /// Let the vehicle decide.
       DIR_AUTO = 0,
-      //! Attempt to move forward.
+      /// Attempt to move forward.
       DIR_FORWARD = 1,
-      //! Attempt to move backward.
+      /// Attempt to move backward.
       DIR_BACKWARD = 2
     };
 
-    //! Timeout.
+    /// Timeout.
     uint16_t timeout;
-    //! RPM.
+    /// RPM.
     fp32_t rpm;
-    //! Direction.
+    /// Direction.
     uint8_t direction;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -15120,86 +15120,86 @@ namespace IMC
     }
   };
 
-  //! Formation.
+  /// Formation.
   class Formation: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeEnum
     {
-      //! Request.
+      /// Request.
       FC_REQUEST = 0,
-      //! Report.
+      /// Report.
       FC_REPORT = 1
     };
 
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Start.
+      /// Start.
       OP_START = 0,
-      //! Stop.
+      /// Stop.
       OP_STOP = 1,
-      //! Ready.
+      /// Ready.
       OP_READY = 2,
-      //! Executing.
+      /// Executing.
       OP_EXECUTING = 3,
-      //! Failure.
+      /// Failure.
       OP_FAILURE = 4
     };
 
-    //! Formation Reference Frame.
+    /// Formation Reference Frame.
     enum FormationReferenceFrameEnum
     {
-      //! Earth Fixed.
+      /// Earth Fixed.
       OP_EARTH_FIXED = 0,
-      //! Path Fixed.
+      /// Path Fixed.
       OP_PATH_FIXED = 1,
-      //! Path Curved.
+      /// Path Curved.
       OP_PATH_CURVED = 2
     };
 
-    //! Formation Name.
+    /// Formation Name.
     std::string formation_name;
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! Operation.
+    /// Operation.
     uint8_t op;
-    //! Target Group Name.
+    /// Target Group Name.
     std::string group_name;
-    //! Formation Plan ID.
+    /// Formation Plan ID.
     std::string plan_id;
-    //! Plan Description.
+    /// Plan Description.
     std::string description;
-    //! Formation Reference Frame.
+    /// Formation Reference Frame.
     uint8_t reference_frame;
-    //! Formation Participants.
+    /// Formation Participants.
     MessageList<VehicleFormationParticipant> participants;
-    //! Formation Leader Bank Limit.
+    /// Formation Leader Bank Limit.
     fp32_t leader_bank_lim;
-    //! Formation Leader Minimum Speed.
+    /// Formation Leader Minimum Speed.
     fp32_t leader_speed_min;
-    //! Formation Leader Maximum Speed.
+    /// Formation Leader Maximum Speed.
     fp32_t leader_speed_max;
-    //! Formation Leader Minimum Altitude.
+    /// Formation Leader Minimum Altitude.
     fp32_t leader_alt_min;
-    //! Formation Leader Maximum Altitude.
+    /// Formation Leader Maximum Altitude.
     fp32_t leader_alt_max;
-    //! Position mismatch limit.
+    /// Position mismatch limit.
     fp32_t pos_sim_err_lim;
-    //! Position mismatch threshold.
+    /// Position mismatch threshold.
     fp32_t pos_sim_err_wrn;
-    //! Position mismatch time-out.
+    /// Position mismatch time-out.
     uint16_t pos_sim_err_timeout;
-    //! Convergence threshold.
+    /// Convergence threshold.
     fp32_t converg_max;
-    //! Convergence time-out.
+    /// Convergence time-out.
     uint16_t converg_timeout;
-    //! Communications time-out.
+    /// Communications time-out.
     uint16_t comms_timeout;
-    //! Turbulence limit.
+    /// Turbulence limit.
     fp32_t turb_lim;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -15275,25 +15275,25 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Launch Maneuver.
+  /// Launch Maneuver.
   class Launch: public Maneuver
   {
   public:
-    //! Timeout.
+    /// Timeout.
     uint16_t timeout;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -15353,25 +15353,25 @@ namespace IMC
     }
   };
 
-  //! Drop Maneuver.
+  /// Drop Maneuver.
   class Drop: public Maneuver
   {
   public:
-    //! Timeout.
+    /// Timeout.
     uint16_t timeout;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -15431,36 +15431,36 @@ namespace IMC
     }
   };
 
-  //! Scheduled Goto.
+  /// Scheduled Goto.
   class ScheduledGoto: public Maneuver
   {
   public:
-    //! Delayed Behavior.
+    /// Delayed Behavior.
     enum DelayedBehaviorEnum
     {
-      //! Resume.
+      /// Resume.
       DBEH_RESUME = 0,
-      //! Skip.
+      /// Skip.
       DBEH_SKIP = 1,
-      //! Fail.
+      /// Fail.
       DBEH_FAIL = 2
     };
 
-    //! Time of arrival.
+    /// Time of arrival.
     fp64_t arrival_time;
-    //! Destination Latitude WGS-84.
+    /// Destination Latitude WGS-84.
     fp64_t lat;
-    //! Destination Longitude WGS-84.
+    /// Destination Longitude WGS-84.
     fp64_t lon;
-    //! Destination Z Reference.
+    /// Destination Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Travel Z Reference.
+    /// Travel Z Reference.
     fp32_t travel_z;
-    //! Travel Z Units.
+    /// Travel Z Units.
     uint8_t travel_z_units;
-    //! Delayed Behavior.
+    /// Delayed Behavior.
     uint8_t delayed;
 
     static uint16_t
@@ -15514,50 +15514,50 @@ namespace IMC
     }
   };
 
-  //! Rows Coverage.
+  /// Rows Coverage.
   class RowsCoverage: public Maneuver
   {
   public:
-    //! Flags.
+    /// Flags.
     enum FlagsBits
     {
-      //! Square Curve.
+      /// Square Curve.
       FLG_SQUARE_CURVE = 0x01,
-      //! First Curve Right.
+      /// First Curve Right.
       FLG_CURVE_RIGHT = 0x02
     };
 
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Bearing.
+    /// Bearing.
     fp64_t bearing;
-    //! Cross Angle.
+    /// Cross Angle.
     fp64_t cross_angle;
-    //! Width.
+    /// Width.
     fp32_t width;
-    //! Length.
+    /// Length.
     fp32_t length;
-    //! Curve Offset.
+    /// Curve Offset.
     uint8_t coff;
-    //! Angular Aperture.
+    /// Angular Aperture.
     fp32_t angaperture;
-    //! Range.
+    /// Range.
     uint16_t range;
-    //! Overlap.
+    /// Overlap.
     uint8_t overlap;
-    //! Flags.
+    /// Flags.
     uint8_t flags;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -15617,31 +15617,31 @@ namespace IMC
     }
   };
 
-  //! Sample Maneuver.
+  /// Sample Maneuver.
   class Sample: public Maneuver
   {
   public:
-    //! Timeout.
+    /// Timeout.
     uint16_t timeout;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Syringe0.
+    /// Syringe0.
     uint8_t syringe0;
-    //! Syringe1.
+    /// Syringe1.
     uint8_t syringe1;
-    //! Syringe2.
+    /// Syringe2.
     uint8_t syringe2;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -15701,7 +15701,7 @@ namespace IMC
     }
   };
 
-  //! Image Tracking.
+  /// Image Tracking.
   class ImageTracking: public Maneuver
   {
   public:
@@ -15754,25 +15754,25 @@ namespace IMC
     }
   };
 
-  //! Takeoff Maneuver.
+  /// Takeoff Maneuver.
   class Takeoff: public Maneuver
   {
   public:
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Pitch Angle.
+    /// Pitch Angle.
     fp32_t takeoff_pitch;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -15832,31 +15832,31 @@ namespace IMC
     }
   };
 
-  //! Land Maneuver.
+  /// Land Maneuver.
   class Land: public Maneuver
   {
   public:
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Abort Z Reference.
+    /// Abort Z Reference.
     fp32_t abort_z;
-    //! Bearing.
+    /// Bearing.
     fp64_t bearing;
-    //! Glide Slope.
+    /// Glide Slope.
     uint8_t glide_slope;
-    //! Glide Slope Altitude.
+    /// Glide Slope Altitude.
     fp32_t glide_slope_alt;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -15916,44 +15916,44 @@ namespace IMC
     }
   };
 
-  //! Autonomous Section.
+  /// Autonomous Section.
   class AutonomousSection: public Maneuver
   {
   public:
-    //! Enforced Limits.
+    /// Enforced Limits.
     enum EnforcedLimitsBits
     {
-      //! Maximum Depth Limit.
+      /// Maximum Depth Limit.
       ENFORCE_DEPTH = 0x01,
-      //! Minimum Altitude Limit.
+      /// Minimum Altitude Limit.
       ENFORCE_ALTITUDE = 0x02,
-      //! Time Limit.
+      /// Time Limit.
       ENFORCE_TIMEOUT = 0x04,
-      //! Polygonal Area Limits.
+      /// Polygonal Area Limits.
       ENFORCE_AREA2D = 0x08
     };
 
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Enforced Limits.
+    /// Enforced Limits.
     uint8_t limits;
-    //! Maximum depth.
+    /// Maximum depth.
     fp64_t max_depth;
-    //! Minimum altitude.
+    /// Minimum altitude.
     fp64_t min_alt;
-    //! Time Limit.
+    /// Time Limit.
     fp64_t time_limit;
-    //! Area Limits.
+    /// Area Limits.
     MessageList<PolygonVertex> area_limits;
-    //! Controller.
+    /// Controller.
     std::string controller;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -16029,25 +16029,25 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Follow Point Maneuver.
+  /// Follow Point Maneuver.
   class FollowPoint: public Maneuver
   {
   public:
-    //! Source To Follow.
+    /// Source To Follow.
     std::string target;
-    //! Maximum Speed.
+    /// Maximum Speed.
     fp32_t max_speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z.
+    /// Z.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -16107,21 +16107,21 @@ namespace IMC
     }
   };
 
-  //! Alignment Maneuver.
+  /// Alignment Maneuver.
   class Alignment: public Maneuver
   {
   public:
-    //! Timeout.
+    /// Timeout.
     uint16_t timeout;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -16181,40 +16181,40 @@ namespace IMC
     }
   };
 
-  //! Station Keeping Extended.
+  /// Station Keeping Extended.
   class StationKeepingExtended: public Maneuver
   {
   public:
-    //! Flags.
+    /// Flags.
     enum FlagsBits
     {
-      //! Keep safe behaviour.
+      /// Keep safe behaviour.
       FLG_KEEP_SAFE = 0x01
     };
 
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Radius.
+    /// Radius.
     fp32_t radius;
-    //! Duration.
+    /// Duration.
     uint16_t duration;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! PopUp Period.
+    /// PopUp Period.
     uint16_t popup_period;
-    //! PopUp Duration.
+    /// PopUp Duration.
     uint16_t popup_duration;
-    //! Flags.
+    /// Flags.
     uint8_t flags;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -16274,7 +16274,7 @@ namespace IMC
     }
   };
 
-  //! Maneuver Done.
+  /// Maneuver Done.
   class ManeuverDone: public Message
   {
   public:
@@ -16327,40 +16327,40 @@ namespace IMC
     }
   };
 
-  //! Magnetometer Maneuver.
+  /// Magnetometer Maneuver.
   class Magnetometer: public Maneuver
   {
   public:
-    //! Direction.
+    /// Direction.
     enum DirectionEnum
     {
-      //! Clockwise First.
+      /// Clockwise First.
       MD_CLOCKW_FIRST = 0,
-      //! Counter Clockwise First.
+      /// Counter Clockwise First.
       MD_CCLOCKW_FIRST = 1
     };
 
-    //! Timeout.
+    /// Timeout.
     uint16_t timeout;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Speed Units.
+    /// Speed Units.
     uint8_t speed_units;
-    //! Bearing.
+    /// Bearing.
     fp64_t bearing;
-    //! Width.
+    /// Width.
     fp32_t width;
-    //! Direction.
+    /// Direction.
     uint8_t direction;
-    //! Custom settings for maneuver.
+    /// Custom settings for maneuver.
     std::string custom;
 
     static uint16_t
@@ -16420,53 +16420,53 @@ namespace IMC
     }
   };
 
-  //! Vehicle State.
+  /// Vehicle State.
   class VehicleState: public Message
   {
   public:
-    //! Operation Mode.
+    /// Operation Mode.
     enum OperationModeEnum
     {
-      //! Service.
+      /// Service.
       VS_SERVICE = 0,
-      //! Calibration.
+      /// Calibration.
       VS_CALIBRATION = 1,
-      //! Error.
+      /// Error.
       VS_ERROR = 2,
-      //! Maneuver.
+      /// Maneuver.
       VS_MANEUVER = 3,
-      //! External Control.
+      /// External Control.
       VS_EXTERNAL = 4,
-      //! Boot.
+      /// Boot.
       VS_BOOT = 5
     };
 
-    //! Flags.
+    /// Flags.
     enum FlagsBits
     {
-      //! Maneuver Done.
+      /// Maneuver Done.
       VFLG_MANEUVER_DONE = 0x01
     };
 
-    //! Operation Mode.
+    /// Operation Mode.
     uint8_t op_mode;
-    //! Errors -- Count.
+    /// Errors -- Count.
     uint8_t error_count;
-    //! Errors -- Entities.
+    /// Errors -- Entities.
     std::string error_ents;
-    //! Maneuver -- Type.
+    /// Maneuver -- Type.
     uint16_t maneuver_type;
-    //! Maneuver -- Start Time.
+    /// Maneuver -- Start Time.
     fp64_t maneuver_stime;
-    //! Maneuver -- ETA.
+    /// Maneuver -- ETA.
     uint16_t maneuver_eta;
-    //! Control Loops.
+    /// Control Loops.
     uint32_t control_loops;
-    //! Flags.
+    /// Flags.
     uint8_t flags;
-    //! Last Error -- Description.
+    /// Last Error -- Description.
     std::string last_error;
-    //! Last Error -- Time.
+    /// Last Error -- Time.
     fp64_t last_error_time;
 
     static uint16_t
@@ -16526,47 +16526,47 @@ namespace IMC
     }
   };
 
-  //! Vehicle Command.
+  /// Vehicle Command.
   class VehicleCommand: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeEnum
     {
-      //! Request.
+      /// Request.
       VC_REQUEST = 0,
-      //! Reply -- Success.
+      /// Reply -- Success.
       VC_SUCCESS = 1,
-      //! Reply -- In Progress.
+      /// Reply -- In Progress.
       VC_IN_PROGRESS = 2,
-      //! Reply -- Failure.
+      /// Reply -- Failure.
       VC_FAILURE = 3
     };
 
-    //! Command.
+    /// Command.
     enum CommandEnum
     {
-      //! Execute Maneuver.
+      /// Execute Maneuver.
       VC_EXEC_MANEUVER = 0,
-      //! Stop Maneuver.
+      /// Stop Maneuver.
       VC_STOP_MANEUVER = 1,
-      //! Start Calibration.
+      /// Start Calibration.
       VC_START_CALIBRATION = 2,
-      //! Stop Calibration.
+      /// Stop Calibration.
       VC_STOP_CALIBRATION = 3
     };
 
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! Request ID.
+    /// Request ID.
     uint16_t request_id;
-    //! Command.
+    /// Command.
     uint8_t command;
-    //! Maneuver.
+    /// Maneuver.
     InlineMessage<Maneuver> maneuver;
-    //! Calibration Time.
+    /// Calibration Time.
     uint16_t calib_time;
-    //! Info.
+    /// Info.
     std::string info;
 
     static uint16_t
@@ -16642,28 +16642,28 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Monitor Entity State.
+  /// Monitor Entity State.
   class MonitorEntityState: public Message
   {
   public:
-    //! Command.
+    /// Command.
     enum CommandEnum
     {
-      //! Reset to defaults.
+      /// Reset to defaults.
       MES_RESET = 0,
-      //! Enable Monitoring.
+      /// Enable Monitoring.
       MES_ENABLE = 1,
-      //! Disable Monitoring.
+      /// Disable Monitoring.
       MES_DISABLE = 2,
-      //! Enable Monitoring (exclusive - disables all others).
+      /// Enable Monitoring (exclusive - disables all others).
       MES_ENABLE_EXCLUSIVE = 3,
-      //! Status Report.
+      /// Status Report.
       MES_STATUS = 4
     };
 
-    //! Command.
+    /// Command.
     uint8_t command;
-    //! Entity Names.
+    /// Entity Names.
     std::string entities;
 
     static uint16_t
@@ -16723,25 +16723,25 @@ namespace IMC
     }
   };
 
-  //! Entity Monitoring State.
+  /// Entity Monitoring State.
   class EntityMonitoringState: public Message
   {
   public:
-    //! Entities monitored - Count.
+    /// Entities monitored - Count.
     uint8_t mcount;
-    //! Entities monitored - Names.
+    /// Entities monitored - Names.
     std::string mnames;
-    //! Entities with errors - Count.
+    /// Entities with errors - Count.
     uint8_t ecount;
-    //! Entities with errors - Names.
+    /// Entities with errors - Names.
     std::string enames;
-    //! Entities with critical errors - Count.
+    /// Entities with critical errors - Count.
     uint8_t ccount;
-    //! Entities with critical errors - Names.
+    /// Entities with critical errors - Names.
     std::string cnames;
-    //! Last Error -- Description.
+    /// Last Error -- Description.
     std::string last_error;
-    //! Last Error -- Time.
+    /// Last Error -- Time.
     fp64_t last_error_time;
 
     static uint16_t
@@ -16801,33 +16801,33 @@ namespace IMC
     }
   };
 
-  //! Operational Limits.
+  /// Operational Limits.
   class OperationalLimits: public Message
   {
   public:
-    //! Field Indicator Mask.
+    /// Field Indicator Mask.
     uint8_t mask;
-    //! Maximum Depth.
+    /// Maximum Depth.
     fp32_t max_depth;
-    //! Minimum Altitude.
+    /// Minimum Altitude.
     fp32_t min_altitude;
-    //! Maximum Altitude.
+    /// Maximum Altitude.
     fp32_t max_altitude;
-    //! Minimum Speed.
+    /// Minimum Speed.
     fp32_t min_speed;
-    //! Maximum Speed.
+    /// Maximum Speed.
     fp32_t max_speed;
-    //! Maximum Vertical Rate.
+    /// Maximum Vertical Rate.
     fp32_t max_vrate;
-    //! Area -- WGS-84 Latitude.
+    /// Area -- WGS-84 Latitude.
     fp64_t lat;
-    //! Area -- WGS-84 Longitude.
+    /// Area -- WGS-84 Longitude.
     fp64_t lon;
-    //! Area -- Orientation.
+    /// Area -- Orientation.
     fp32_t orientation;
-    //! Area -- Width.
+    /// Area -- Width.
     fp32_t width;
-    //! Area -- Length.
+    /// Area -- Length.
     fp32_t length;
 
     static uint16_t
@@ -16881,7 +16881,7 @@ namespace IMC
     }
   };
 
-  //! Get Operational Limits.
+  /// Get Operational Limits.
   class GetOperationalLimits: public Message
   {
   public:
@@ -16934,11 +16934,11 @@ namespace IMC
     }
   };
 
-  //! Calibration.
+  /// Calibration.
   class Calibration: public Message
   {
   public:
-    //! Duration.
+    /// Duration.
     uint16_t duration;
 
     static uint16_t
@@ -16992,24 +16992,24 @@ namespace IMC
     }
   };
 
-  //! Control Loops.
+  /// Control Loops.
   class ControlLoops: public Message
   {
   public:
-    //! Enable.
+    /// Enable.
     enum EnableEnum
     {
-      //! Disable.
+      /// Disable.
       CL_DISABLE = 0,
-      //! Enable.
+      /// Enable.
       CL_ENABLE = 1
     };
 
-    //! Enable.
+    /// Enable.
     uint8_t enable;
-    //! Control Loop Mask.
+    /// Control Loop Mask.
     uint32_t mask;
-    //! Scope Time Reference.
+    /// Scope Time Reference.
     uint32_t scope_ref;
 
     static uint16_t
@@ -17063,26 +17063,26 @@ namespace IMC
     }
   };
 
-  //! Vehicle Medium.
+  /// Vehicle Medium.
   class VehicleMedium: public Message
   {
   public:
-    //! Medium.
+    /// Medium.
     enum MediumEnum
     {
-      //! Ground.
+      /// Ground.
       VM_GROUND = 0,
-      //! Air.
+      /// Air.
       VM_AIR = 1,
-      //! Water.
+      /// Water.
       VM_WATER = 2,
-      //! Underwater.
+      /// Underwater.
       VM_UNDERWATER = 3,
-      //! Unknown.
+      /// Unknown.
       VM_UNKNOWN = 4
     };
 
-    //! Medium.
+    /// Medium.
     uint8_t medium;
 
     static uint16_t
@@ -17136,26 +17136,26 @@ namespace IMC
     }
   };
 
-  //! Collision.
+  /// Collision.
   class Collision: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeBits
     {
-      //! X-axis.
+      /// X-axis.
       CD_X = 0x01,
-      //! Y-axis.
+      /// Y-axis.
       CD_Y = 0x02,
-      //! Z-axis.
+      /// Z-axis.
       CD_Z = 0x04,
-      //! Impact.
+      /// Impact.
       CD_IMPACT = 0x08
     };
 
-    //! Collision value.
+    /// Collision value.
     fp32_t value;
-    //! Type.
+    /// Type.
     uint8_t type;
 
     static uint16_t
@@ -17215,50 +17215,50 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Formation Tracking State.
+  /// Formation Tracking State.
   class FormState: public Message
   {
   public:
-    //! Position Mismatch Monitor.
+    /// Position Mismatch Monitor.
     enum PositionMismatchMonitorEnum
     {
-      //! Ok.
+      /// Ok.
       POS_OK = 0,
-      //! Warning threshold.
+      /// Warning threshold.
       POS_WRN = 1,
-      //! Limit threshold.
+      /// Limit threshold.
       POS_LIM = 2
     };
 
-    //! Communications Monitor.
+    /// Communications Monitor.
     enum CommunicationsMonitorEnum
     {
-      //! Ok.
+      /// Ok.
       COMMS_OK = 0,
-      //! Timeout.
+      /// Timeout.
       COMMS_TIMEOUT = 1
     };
 
-    //! Convergence.
+    /// Convergence.
     enum ConvergenceEnum
     {
-      //! Ok.
+      /// Ok.
       CONV_OK = 0,
-      //! Timeout.
+      /// Timeout.
       CONV_TIMEOUT = 1
     };
 
-    //! Position Mismatch.
+    /// Position Mismatch.
     fp32_t possimerr;
-    //! Convergence.
+    /// Convergence.
     fp32_t converg;
-    //! Stream Turbulence.
+    /// Stream Turbulence.
     fp32_t turbulence;
-    //! Position Mismatch Monitor.
+    /// Position Mismatch Monitor.
     uint8_t possimmon;
-    //! Communications Monitor.
+    /// Communications Monitor.
     uint8_t commmon;
-    //! Convergence.
+    /// Convergence.
     uint8_t convergmon;
 
     static uint16_t
@@ -17312,24 +17312,24 @@ namespace IMC
     }
   };
 
-  //! Autopilot Mode.
+  /// Autopilot Mode.
   class AutopilotMode: public Message
   {
   public:
-    //! Autonomy Level.
+    /// Autonomy Level.
     enum AutonomyLevelEnum
     {
-      //! Manual.
+      /// Manual.
       AL_MANUAL = 0,
-      //! Assisted.
+      /// Assisted.
       AL_ASSISTED = 1,
-      //! Auto.
+      /// Auto.
       AL_AUTO = 2
     };
 
-    //! Autonomy Level.
+    /// Autonomy Level.
     uint8_t autonomy;
-    //! Mode.
+    /// Mode.
     std::string mode;
 
     static uint16_t
@@ -17389,72 +17389,72 @@ namespace IMC
     }
   };
 
-  //! Formation Tracking State.
+  /// Formation Tracking State.
   class FormationState: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeEnum
     {
-      //! Request.
+      /// Request.
       FC_REQUEST = 0,
-      //! Report.
+      /// Report.
       FC_REPORT = 1
     };
 
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Start.
+      /// Start.
       OP_START = 0,
-      //! Stop.
+      /// Stop.
       OP_STOP = 1
     };
 
-    //! Position Mismatch Monitor.
+    /// Position Mismatch Monitor.
     enum PositionMismatchMonitorEnum
     {
-      //! Ok.
+      /// Ok.
       POS_OK = 0,
-      //! Warning threshold.
+      /// Warning threshold.
       POS_WRN = 1,
-      //! Limit threshold.
+      /// Limit threshold.
       POS_LIM = 2
     };
 
-    //! Communications Monitor.
+    /// Communications Monitor.
     enum CommunicationsMonitorEnum
     {
-      //! Ok.
+      /// Ok.
       COMMS_OK = 0,
-      //! Timeout.
+      /// Timeout.
       COMMS_TIMEOUT = 1
     };
 
-    //! Convergence.
+    /// Convergence.
     enum ConvergenceEnum
     {
-      //! Ok.
+      /// Ok.
       CONV_OK = 0,
-      //! Timeout.
+      /// Timeout.
       CONV_TIMEOUT = 1
     };
 
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! Operation.
+    /// Operation.
     uint8_t op;
-    //! Position Mismatch.
+    /// Position Mismatch.
     fp32_t possimerr;
-    //! Convergence.
+    /// Convergence.
     fp32_t converg;
-    //! Stream Turbulence.
+    /// Stream Turbulence.
     fp32_t turbulence;
-    //! Position Mismatch Monitor.
+    /// Position Mismatch Monitor.
     uint8_t possimmon;
-    //! Communications Monitor.
+    /// Communications Monitor.
     uint8_t commmon;
-    //! Convergence.
+    /// Convergence.
     uint8_t convergmon;
 
     static uint16_t
@@ -17508,49 +17508,49 @@ namespace IMC
     }
   };
 
-  //! Report Control.
+  /// Report Control.
   class ReportControl: public Message
   {
   public:
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Request Start of Reports.
+      /// Request Start of Reports.
       OP_REQUEST_START = 0,
-      //! Report Started.
+      /// Report Started.
       OP_STARTED = 1,
-      //! Request Stop of Reports.
+      /// Request Stop of Reports.
       OP_REQUEST_STOP = 2,
-      //! Report Stopped.
+      /// Report Stopped.
       OP_STOPPED = 3,
-      //! Request Single Reports.
+      /// Request Single Reports.
       OP_REQUEST_REPORT = 4,
-      //! Single Report Sent.
+      /// Single Report Sent.
       OP_REPORT_SENT = 5
     };
 
-    //! Communication Interface.
+    /// Communication Interface.
     enum CommunicationInterfaceBits
     {
-      //! Acoustic.
+      /// Acoustic.
       CI_ACOUSTIC = 0x01,
-      //! Satellite.
+      /// Satellite.
       CI_SATELLITE = 0x02,
-      //! GSM.
+      /// GSM.
       CI_GSM = 0x04,
-      //! Mobile.
+      /// Mobile.
       CI_MOBILE = 0x08,
-      //! Radio.
+      /// Radio.
       CI_RADIO = 0x10
     };
 
-    //! Operation.
+    /// Operation.
     uint8_t op;
-    //! Communication Interface.
+    /// Communication Interface.
     uint8_t comm_interface;
-    //! Period.
+    /// Period.
     uint16_t period;
-    //! Destination System.
+    /// Destination System.
     std::string sys_dst;
 
     static uint16_t
@@ -17610,29 +17610,29 @@ namespace IMC
     }
   };
 
-  //! State Report.
+  /// State Report.
   class StateReport: public Message
   {
   public:
-    //! Time Stamp.
+    /// Time Stamp.
     uint32_t stime;
-    //! Latitude.
+    /// Latitude.
     fp32_t latitude;
-    //! Longitude.
+    /// Longitude.
     fp32_t longitude;
-    //! Altitude.
+    /// Altitude.
     uint16_t altitude;
-    //! Depth.
+    /// Depth.
     uint16_t depth;
-    //! Heading.
+    /// Heading.
     uint16_t heading;
-    //! Speed.
+    /// Speed.
     int16_t speed;
-    //! Fuel.
+    /// Fuel.
     int8_t fuel;
-    //! Execution State.
+    /// Execution State.
     int8_t exec_state;
-    //! Plan Checksum.
+    /// Plan Checksum.
     uint16_t plan_checksum;
 
     static uint16_t
@@ -17686,61 +17686,61 @@ namespace IMC
     }
   };
 
-  //! Transmission Request.
+  /// Transmission Request.
   class TransmissionRequest: public Message
   {
   public:
-    //! Communication Mean.
+    /// Communication Mean.
     enum CommunicationMeanEnum
     {
-      //! WiFi.
+      /// WiFi.
       CMEAN_WIFI = 0,
-      //! Acoustic.
+      /// Acoustic.
       CMEAN_ACOUSTIC = 1,
-      //! Satellite.
+      /// Satellite.
       CMEAN_SATELLITE = 2,
-      //! GSM.
+      /// GSM.
       CMEAN_GSM = 3,
-      //! Any.
+      /// Any.
       CMEAN_ANY = 4,
-      //! All.
+      /// All.
       CMEAN_ALL = 5
     };
 
-    //! Data Mode.
+    /// Data Mode.
     enum DataModeEnum
     {
-      //! Inline Message.
+      /// Inline Message.
       DMODE_INLINEMSG = 0,
-      //! Text.
+      /// Text.
       DMODE_TEXT = 1,
-      //! Raw Data.
+      /// Raw Data.
       DMODE_RAW = 2,
-      //! Abort.
+      /// Abort.
       DMODE_ABORT = 3,
-      //! Range.
+      /// Range.
       DMODE_RANGE = 4,
-      //! Reverse Range.
+      /// Reverse Range.
       DMODE_REVERSE_RANGE = 5
     };
 
-    //! Request Identifier.
+    /// Request Identifier.
     uint16_t req_id;
-    //! Communication Mean.
+    /// Communication Mean.
     uint8_t comm_mean;
-    //! Destination System.
+    /// Destination System.
     std::string destination;
-    //! Deadline.
+    /// Deadline.
     fp64_t deadline;
-    //! Range.
+    /// Range.
     fp32_t range;
-    //! Data Mode.
+    /// Data Mode.
     uint8_t data_mode;
-    //! Message Data.
+    /// Message Data.
     InlineMessage<Message> msg_data;
-    //! Text Data.
+    /// Text Data.
     std::string txt_data;
-    //! Raw Data.
+    /// Raw Data.
     std::vector<char> raw_data;
 
     static uint16_t
@@ -17816,38 +17816,38 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Transmission Status.
+  /// Transmission Status.
   class TransmissionStatus: public Message
   {
   public:
-    //! Status.
+    /// Status.
     enum StatusEnum
     {
-      //! In progress.
+      /// In progress.
       TSTAT_IN_PROGRESS = 0,
-      //! Sent.
+      /// Sent.
       TSTAT_SENT = 1,
-      //! Delivered.
+      /// Delivered.
       TSTAT_DELIVERED = 51,
-      //! Delivery is unknown.
+      /// Delivery is unknown.
       TSTAT_MAYBE_DELIVERED = 52,
-      //! Range received.
+      /// Range received.
       TSTAT_RANGE_RECEIVED = 60,
-      //! Input Error.
+      /// Input Error.
       TSTAT_INPUT_FAILURE = 101,
-      //! Temporary Error.
+      /// Temporary Error.
       TSTAT_TEMPORARY_FAILURE = 102,
-      //! Permanent Failure.
+      /// Permanent Failure.
       TSTAT_PERMANENT_FAILURE = 103
     };
 
-    //! Request Identifier.
+    /// Request Identifier.
     uint16_t req_id;
-    //! Status.
+    /// Status.
     uint8_t status;
-    //! Range.
+    /// Range.
     fp32_t range;
-    //! Information.
+    /// Information.
     std::string info;
 
     static uint16_t
@@ -17907,17 +17907,17 @@ namespace IMC
     }
   };
 
-  //! SMS Transmission Request.
+  /// SMS Transmission Request.
   class SmsRequest: public Message
   {
   public:
-    //! Request Identifier.
+    /// Request Identifier.
     uint16_t req_id;
-    //! Destination.
+    /// Destination.
     std::string destination;
-    //! Timeout.
+    /// Timeout.
     fp64_t timeout;
-    //! SMS Text.
+    /// SMS Text.
     std::string sms_text;
 
     static uint16_t
@@ -17977,28 +17977,28 @@ namespace IMC
     }
   };
 
-  //! SMS Transmission Status.
+  /// SMS Transmission Status.
   class SmsStatus: public Message
   {
   public:
-    //! Status.
+    /// Status.
     enum StatusEnum
     {
-      //! Queued.
+      /// Queued.
       SMSSTAT_QUEUED = 0,
-      //! Sent.
+      /// Sent.
       SMSSTAT_SENT = 1,
-      //! Input Error.
+      /// Input Error.
       SMSSTAT_INPUT_FAILURE = 101,
-      //! Error trying to send sms.
+      /// Error trying to send sms.
       SMSSTAT_ERROR = 102
     };
 
-    //! Request Identifier.
+    /// Request Identifier.
     uint16_t req_id;
-    //! Status.
+    /// Status.
     uint8_t status;
-    //! Information.
+    /// Information.
     std::string info;
 
     static uint16_t
@@ -18058,26 +18058,26 @@ namespace IMC
     }
   };
 
-  //! VTOL State.
+  /// VTOL State.
   class VtolState: public Message
   {
   public:
-    //! State.
+    /// State.
     enum StateEnum
     {
-      //! Undefined.
+      /// Undefined.
       VTOL_STATE_UNDEFINED = 0,
-      //! Transition to Fixed-Wing.
+      /// Transition to Fixed-Wing.
       VTOL_STATE_TRANSITION_TO_FW = 1,
-      //! Transition to MultiCopter.
+      /// Transition to MultiCopter.
       VTOL_STATE_TRANSITION_TO_MC = 2,
-      //! MutiCopter.
+      /// MutiCopter.
       VTOL_STATE_MC = 3,
-      //! Fixed-Wing.
+      /// Fixed-Wing.
       VTOL_STATE_FW = 4
     };
 
-    //! State.
+    /// State.
     uint8_t state;
 
     static uint16_t
@@ -18131,20 +18131,20 @@ namespace IMC
     }
   };
 
-  //! Arming State.
+  /// Arming State.
   class ArmingState: public Message
   {
   public:
-    //! State.
+    /// State.
     enum StateEnum
     {
-      //! Armed.
+      /// Armed.
       MOTORS_ARMED = 0,
-      //! Disarmed.
+      /// Disarmed.
       MOTORS_DISARMED = 1
     };
 
-    //! State.
+    /// State.
     uint8_t state;
 
     static uint16_t
@@ -18198,17 +18198,17 @@ namespace IMC
     }
   };
 
-  //! TCP Transmission Request.
+  /// TCP Transmission Request.
   class TCPRequest: public Message
   {
   public:
-    //! Request Identifier.
+    /// Request Identifier.
     uint16_t req_id;
-    //! Destination.
+    /// Destination.
     std::string destination;
-    //! Timeout.
+    /// Timeout.
     fp64_t timeout;
-    //! Message Data.
+    /// Message Data.
     InlineMessage<Message> msg_data;
 
     static uint16_t
@@ -18284,32 +18284,32 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! TCP Transmission Status.
+  /// TCP Transmission Status.
   class TCPStatus: public Message
   {
   public:
-    //! Status.
+    /// Status.
     enum StatusEnum
     {
-      //! Queued.
+      /// Queued.
       TCPSTAT_QUEUED = 0,
-      //! Sent.
+      /// Sent.
       TCPSTAT_SENT = 1,
-      //! Input Error.
+      /// Input Error.
       TCPSTAT_INPUT_FAILURE = 100,
-      //! Host Unknown.
+      /// Host Unknown.
       TCPSTAT_HOST_UNKNOWN = 101,
-      //! Can't Connect.
+      /// Can't Connect.
       TCPSTAT_CANT_CONNECT = 102,
-      //! Error trying to send sms.
+      /// Error trying to send sms.
       TCPSTAT_ERROR = 103
     };
 
-    //! Request Identifier.
+    /// Request Identifier.
     uint16_t req_id;
-    //! Status.
+    /// Status.
     uint8_t status;
-    //! Information.
+    /// Information.
     std::string info;
 
     static uint16_t
@@ -18369,42 +18369,42 @@ namespace IMC
     }
   };
 
-  //! Asset Report .
+  /// Asset Report .
   class AssetReport: public Message
   {
   public:
-    //! Medium.
+    /// Medium.
     enum MediumEnum
     {
-      //! WiFi.
+      /// WiFi.
       RM_WIFI = 1,
-      //! Satellite.
+      /// Satellite.
       RM_SATELLITE = 2,
-      //! Acoustic.
+      /// Acoustic.
       RM_ACOUSTIC = 3,
-      //! SMS.
+      /// SMS.
       RM_SMS = 4
     };
 
-    //! Asset Name.
+    /// Asset Name.
     std::string name;
-    //! Report Timestamp.
+    /// Report Timestamp.
     fp64_t report_time;
-    //! Medium.
+    /// Medium.
     uint8_t medium;
-    //! Latitude.
+    /// Latitude.
     fp64_t lat;
-    //! Longitude.
+    /// Longitude.
     fp64_t lon;
-    //! Depth.
+    /// Depth.
     fp32_t depth;
-    //! Altitude.
+    /// Altitude.
     fp32_t alt;
-    //! Speed Over Ground.
+    /// Speed Over Ground.
     fp32_t sog;
-    //! Course Over Ground.
+    /// Course Over Ground.
     fp32_t cog;
-    //! Additional Info.
+    /// Additional Info.
     MessageList<Message> msgs;
 
     static uint16_t
@@ -18480,7 +18480,7 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Abort.
+  /// Abort.
   class Abort: public Message
   {
   public:
@@ -18533,41 +18533,41 @@ namespace IMC
     }
   };
 
-  //! Plan Variable.
+  /// Plan Variable.
   class PlanVariable: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeEnum
     {
-      //! Boolean.
+      /// Boolean.
       PVT_BOOLEAN = 0,
-      //! Number.
+      /// Number.
       PVT_NUMBER = 1,
-      //! Text.
+      /// Text.
       PVT_TEXT = 2,
-      //! Message.
+      /// Message.
       PVT_MESSAGE = 3
     };
 
-    //! Access Type.
+    /// Access Type.
     enum AccessTypeEnum
     {
-      //! Input.
+      /// Input.
       PVA_INPUT = 0,
-      //! Output.
+      /// Output.
       PVA_OUTPUT = 1,
-      //! Local.
+      /// Local.
       PVA_LOCAL = 2
     };
 
-    //! Name.
+    /// Name.
     std::string name;
-    //! Value.
+    /// Value.
     std::string value;
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! Access Type.
+    /// Access Type.
     uint8_t access;
 
     static uint16_t
@@ -18627,17 +18627,17 @@ namespace IMC
     }
   };
 
-  //! Plan Maneuver.
+  /// Plan Maneuver.
   class PlanManeuver: public Message
   {
   public:
-    //! Maneuver ID.
+    /// Maneuver ID.
     std::string maneuver_id;
-    //! Maneuver Specification.
+    /// Maneuver Specification.
     InlineMessage<Maneuver> data;
-    //! Start Actions.
+    /// Start Actions.
     MessageList<Message> start_actions;
-    //! End Actions.
+    /// End Actions.
     MessageList<Message> end_actions;
 
     static uint16_t
@@ -18713,17 +18713,17 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Plan Transition.
+  /// Plan Transition.
   class PlanTransition: public Message
   {
   public:
-    //! Source.
+    /// Source.
     std::string source_man;
-    //! Destination Maneuver Name.
+    /// Destination Maneuver Name.
     std::string dest_man;
-    //! Transition conditions.
+    /// Transition conditions.
     std::string conditions;
-    //! Transition actions.
+    /// Transition actions.
     MessageList<Message> actions;
 
     static uint16_t
@@ -18799,27 +18799,27 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Plan Specification.
+  /// Plan Specification.
   class PlanSpecification: public Message
   {
   public:
-    //! Plan ID.
+    /// Plan ID.
     std::string plan_id;
-    //! Plan Description.
+    /// Plan Description.
     std::string description;
-    //! Namespace.
+    /// Namespace.
     std::string vnamespace;
-    //! Plan Variables.
+    /// Plan Variables.
     MessageList<PlanVariable> variables;
-    //! Starting maneuver.
+    /// Starting maneuver.
     std::string start_man_id;
-    //! Maneuvers.
+    /// Maneuvers.
     MessageList<PlanManeuver> maneuvers;
-    //! Transitions.
+    /// Transitions.
     MessageList<PlanTransition> transitions;
-    //! Start Actions.
+    /// Start Actions.
     MessageList<Message> start_actions;
-    //! End Actions.
+    /// End Actions.
     MessageList<Message> end_actions;
 
     static uint16_t
@@ -18895,30 +18895,30 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Emergency Control.
+  /// Emergency Control.
   class EmergencyControl: public Message
   {
   public:
-    //! Command.
+    /// Command.
     enum CommandEnum
     {
-      //! Enable.
+      /// Enable.
       ECTL_ENABLE = 0,
-      //! Disable.
+      /// Disable.
       ECTL_DISABLE = 1,
-      //! Start.
+      /// Start.
       ECTL_START = 2,
-      //! Stop.
+      /// Stop.
       ECTL_STOP = 3,
-      //! Query.
+      /// Query.
       ECTL_QUERY = 4,
-      //! Set Plan.
+      /// Set Plan.
       ECTL_SET_PLAN = 5
     };
 
-    //! Command.
+    /// Command.
     uint8_t command;
-    //! Plan Specification.
+    /// Plan Specification.
     InlineMessage<PlanSpecification> plan;
 
     static uint16_t
@@ -18994,32 +18994,32 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Emergency Control State.
+  /// Emergency Control State.
   class EmergencyControlState: public Message
   {
   public:
-    //! State.
+    /// State.
     enum StateEnum
     {
-      //! Not Configured.
+      /// Not Configured.
       ECS_NOT_CONFIGURED = 0,
-      //! Disabled.
+      /// Disabled.
       ECS_DISABLED = 1,
-      //! Enabled.
+      /// Enabled.
       ECS_ENABLED = 2,
-      //! Armed.
+      /// Armed.
       ECS_ARMED = 3,
-      //! Active.
+      /// Active.
       ECS_ACTIVE = 4,
-      //! Stopping.
+      /// Stopping.
       ECS_STOPPING = 5
     };
 
-    //! State.
+    /// State.
     uint8_t state;
-    //! Plan Id.
+    /// Plan Id.
     std::string plan_id;
-    //! Communications Level.
+    /// Communications Level.
     uint8_t comm_level;
 
     static uint16_t
@@ -19079,55 +19079,55 @@ namespace IMC
     }
   };
 
-  //! Plan DB.
+  /// Plan DB.
   class PlanDB: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeEnum
     {
-      //! Request.
+      /// Request.
       DBT_REQUEST = 0,
-      //! Reply -- Success.
+      /// Reply -- Success.
       DBT_SUCCESS = 1,
-      //! Reply -- Failure.
+      /// Reply -- Failure.
       DBT_FAILURE = 2,
-      //! Reply -- In Progress.
+      /// Reply -- In Progress.
       DBT_IN_PROGRESS = 3
     };
 
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Set Plan.
+      /// Set Plan.
       DBOP_SET = 0,
-      //! Delete Plan.
+      /// Delete Plan.
       DBOP_DEL = 1,
-      //! Get Plan.
+      /// Get Plan.
       DBOP_GET = 2,
-      //! Get Plan Info.
+      /// Get Plan Info.
       DBOP_GET_INFO = 3,
-      //! Clear Database.
+      /// Clear Database.
       DBOP_CLEAR = 4,
-      //! Get Database State (Simple).
+      /// Get Database State (Simple).
       DBOP_GET_STATE = 5,
-      //! Get Database State (Detailed).
+      /// Get Database State (Detailed).
       DBOP_GET_DSTATE = 6,
-      //! Boot Notification.
+      /// Boot Notification.
       DBOP_BOOT = 7
     };
 
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! Operation.
+    /// Operation.
     uint8_t op;
-    //! Request ID.
+    /// Request ID.
     uint16_t request_id;
-    //! Plan ID.
+    /// Plan ID.
     std::string plan_id;
-    //! Argument.
+    /// Argument.
     InlineMessage<Message> arg;
-    //! Complementary Information.
+    /// Complementary Information.
     std::string info;
 
     static uint16_t
@@ -19203,21 +19203,21 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Plan DB Information.
+  /// Plan DB Information.
   class PlanDBInformation: public Message
   {
   public:
-    //! Plan ID.
+    /// Plan ID.
     std::string plan_id;
-    //! Plan Size.
+    /// Plan Size.
     uint16_t plan_size;
-    //! Last Changed -- Time.
+    /// Last Changed -- Time.
     fp64_t change_time;
-    //! Last Change -- Source Address.
+    /// Last Change -- Source Address.
     uint16_t change_sid;
-    //! Last Change -- Source Name.
+    /// Last Change -- Source Name.
     std::string change_sname;
-    //! MD5.
+    /// MD5.
     std::vector<char> md5;
 
     static uint16_t
@@ -19277,23 +19277,23 @@ namespace IMC
     }
   };
 
-  //! Plan DB State.
+  /// Plan DB State.
   class PlanDBState: public Message
   {
   public:
-    //! Plan -- Count.
+    /// Plan -- Count.
     uint16_t plan_count;
-    //! Plan -- Size of all plans.
+    /// Plan -- Size of all plans.
     uint32_t plan_size;
-    //! Last Change -- Time.
+    /// Last Change -- Time.
     fp64_t change_time;
-    //! Last Change -- Source Address.
+    /// Last Change -- Source Address.
     uint16_t change_sid;
-    //! Last Change -- Source Name.
+    /// Last Change -- Source Name.
     std::string change_sname;
-    //! MD5.
+    /// MD5.
     std::vector<char> md5;
-    //! Plan info.
+    /// Plan info.
     MessageList<PlanDBInformation> plans_info;
 
     static uint16_t
@@ -19369,58 +19369,58 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Plan Control.
+  /// Plan Control.
   class PlanControl: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeEnum
     {
-      //! Request.
+      /// Request.
       PC_REQUEST = 0,
-      //! Reply -- Success.
+      /// Reply -- Success.
       PC_SUCCESS = 1,
-      //! Reply -- Failure.
+      /// Reply -- Failure.
       PC_FAILURE = 2,
-      //! Reply -- In Progress.
+      /// Reply -- In Progress.
       PC_IN_PROGRESS = 3
     };
 
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Start Plan.
+      /// Start Plan.
       PC_START = 0,
-      //! Stop Plan.
+      /// Stop Plan.
       PC_STOP = 1,
-      //! Load Plan.
+      /// Load Plan.
       PC_LOAD = 2,
-      //! Get Plan.
+      /// Get Plan.
       PC_GET = 3
     };
 
-    //! Flags.
+    /// Flags.
     enum FlagsBits
     {
-      //! Calibrate Vehicle.
+      /// Calibrate Vehicle.
       FLG_CALIBRATE = 0x0001,
-      //! Ignore Errors.
+      /// Ignore Errors.
       FLG_IGNORE_ERRORS = 0x0002
     };
 
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! Operation.
+    /// Operation.
     uint8_t op;
-    //! Request ID.
+    /// Request ID.
     uint16_t request_id;
-    //! Plan Identifier.
+    /// Plan Identifier.
     std::string plan_id;
-    //! Flags.
+    /// Flags.
     uint16_t flags;
-    //! Request/Reply Argument.
+    /// Request/Reply Argument.
     InlineMessage<Message> arg;
-    //! Complementary Info.
+    /// Complementary Info.
     std::string info;
 
     static uint16_t
@@ -19496,49 +19496,49 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Plan Control State.
+  /// Plan Control State.
   class PlanControlState: public Message
   {
   public:
-    //! State.
+    /// State.
     enum StateEnum
     {
-      //! Blocked.
+      /// Blocked.
       PCS_BLOCKED = 0,
-      //! Ready.
+      /// Ready.
       PCS_READY = 1,
-      //! Initializing.
+      /// Initializing.
       PCS_INITIALIZING = 2,
-      //! Executing.
+      /// Executing.
       PCS_EXECUTING = 3
     };
 
-    //! Last Plan Outcome.
+    /// Last Plan Outcome.
     enum LastPlanOutcomeEnum
     {
-      //! None.
+      /// None.
       LPO_NONE = 0,
-      //! Success.
+      /// Success.
       LPO_SUCCESS = 1,
-      //! Failure.
+      /// Failure.
       LPO_FAILURE = 2
     };
 
-    //! State.
+    /// State.
     uint8_t state;
-    //! Plan -- ID.
+    /// Plan -- ID.
     std::string plan_id;
-    //! Plan -- ETA.
+    /// Plan -- ETA.
     int32_t plan_eta;
-    //! Plan -- Progress.
+    /// Plan -- Progress.
     fp32_t plan_progress;
-    //! Maneuver -- ID.
+    /// Maneuver -- ID.
     std::string man_id;
-    //! Maneuver -- Type.
+    /// Maneuver -- Type.
     uint16_t man_type;
-    //! Maneuver -- ETA.
+    /// Maneuver -- ETA.
     int32_t man_eta;
-    //! Last Plan Outcome.
+    /// Last Plan Outcome.
     uint8_t last_outcome;
 
     static uint16_t
@@ -19598,37 +19598,37 @@ namespace IMC
     }
   };
 
-  //! Plan Generation.
+  /// Plan Generation.
   class PlanGeneration: public Message
   {
   public:
-    //! Command.
+    /// Command.
     enum CommandEnum
     {
-      //! Generate.
+      /// Generate.
       CMD_GENERATE = 0,
-      //! Execute.
+      /// Execute.
       CMD_EXECUTE = 1
     };
 
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Request.
+      /// Request.
       OP_REQUEST = 0,
-      //! Error.
+      /// Error.
       OP_ERROR = 1,
-      //! Success.
+      /// Success.
       OP_SUCCESS = 2
     };
 
-    //! Command.
+    /// Command.
     uint8_t cmd;
-    //! Operation.
+    /// Operation.
     uint8_t op;
-    //! Plan Identifier.
+    /// Plan Identifier.
     std::string plan_id;
-    //! Parameters.
+    /// Parameters.
     std::string params;
 
     static uint16_t
@@ -19688,60 +19688,60 @@ namespace IMC
     }
   };
 
-  //! Leader State.
+  /// Leader State.
   class LeaderState: public Message
   {
   public:
-    //! Action on the leader state.
+    /// Action on the leader state.
     enum ActionontheleaderstateEnum
     {
-      //! Request.
+      /// Request.
       OP_REQUEST = 0,
-      //! Set.
+      /// Set.
       OP_SET = 1,
-      //! Report.
+      /// Report.
       OP_REPORT = 2
     };
 
-    //! Group Name.
+    /// Group Name.
     std::string group_name;
-    //! Action on the leader state.
+    /// Action on the leader state.
     uint8_t op;
-    //! Latitude (WGS-84).
+    /// Latitude (WGS-84).
     fp64_t lat;
-    //! Longitude (WGS-84).
+    /// Longitude (WGS-84).
     fp64_t lon;
-    //! Height (WGS-84).
+    /// Height (WGS-84).
     fp32_t height;
-    //! Offset north.
+    /// Offset north.
     fp32_t x;
-    //! Offset east.
+    /// Offset east.
     fp32_t y;
-    //! Offset down.
+    /// Offset down.
     fp32_t z;
-    //! Rotation over x axis.
+    /// Rotation over x axis.
     fp32_t phi;
-    //! Rotation over y axis.
+    /// Rotation over y axis.
     fp32_t theta;
-    //! Rotation over z axis.
+    /// Rotation over z axis.
     fp32_t psi;
-    //! Ground Velocity X (North).
+    /// Ground Velocity X (North).
     fp32_t vx;
-    //! Ground Velocity Y (East).
+    /// Ground Velocity Y (East).
     fp32_t vy;
-    //! Ground Velocity Z (Down).
+    /// Ground Velocity Z (Down).
     fp32_t vz;
-    //! Angular Velocity in x.
+    /// Angular Velocity in x.
     fp32_t p;
-    //! Angular Velocity in y.
+    /// Angular Velocity in y.
     fp32_t q;
-    //! Angular Velocity in z.
+    /// Angular Velocity in z.
     fp32_t r;
-    //! Stream Velocity X (North).
+    /// Stream Velocity X (North).
     fp32_t svx;
-    //! Stream Velocity Y (East).
+    /// Stream Velocity Y (East).
     fp32_t svy;
-    //! Stream Velocity Z (Down).
+    /// Stream Velocity Z (Down).
     fp32_t svz;
 
     static uint16_t
@@ -19801,49 +19801,49 @@ namespace IMC
     }
   };
 
-  //! Plan Statistics.
+  /// Plan Statistics.
   class PlanStatistics: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeEnum
     {
-      //! Before Plan.
+      /// Before Plan.
       TP_PREPLAN = 0,
-      //! During Plan.
+      /// During Plan.
       TP_INPLAN = 1,
-      //! After Plan.
+      /// After Plan.
       TP_POSTPLAN = 2
     };
 
-    //! Properties.
+    /// Properties.
     enum PropertiesBits
     {
-      //! Basic Plan.
+      /// Basic Plan.
       PRP_BASIC = 0x00,
-      //! Nonlinear.
+      /// Nonlinear.
       PRP_NONLINEAR = 0x01,
-      //! Infinite.
+      /// Infinite.
       PRP_INFINITE = 0x02,
-      //! Cyclical.
+      /// Cyclical.
       PRP_CYCLICAL = 0x04,
-      //! All.
+      /// All.
       PRP_ALL = 0x07
     };
 
-    //! Plan Identifier.
+    /// Plan Identifier.
     std::string plan_id;
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! Properties.
+    /// Properties.
     uint8_t properties;
-    //! Durations.
+    /// Durations.
     std::string durations;
-    //! Distances.
+    /// Distances.
     std::string distances;
-    //! Actions.
+    /// Actions.
     std::string actions;
-    //! Fuel.
+    /// Fuel.
     std::string fuel;
 
     static uint16_t
@@ -19903,42 +19903,42 @@ namespace IMC
     }
   };
 
-  //! Reported State.
+  /// Reported State.
   class ReportedState: public Message
   {
   public:
-    //! Source Type.
+    /// Source Type.
     enum SourceTypeEnum
     {
-      //! Wi-Fi.
+      /// Wi-Fi.
       STYPE_WI_FI = 0,
-      //! Tracker.
+      /// Tracker.
       STYPE_TRACKER = 1,
-      //! SMS.
+      /// SMS.
       STYPE_SMS = 2,
-      //! Acoustic Modem.
+      /// Acoustic Modem.
       STYPE_ACOUSTIC_MODEM = 3,
-      //! Unknown source.
+      /// Unknown source.
       STYPE_UNKNOWN = 254
     };
 
-    //! Latitude.
+    /// Latitude.
     fp64_t lat;
-    //! Longitude.
+    /// Longitude.
     fp64_t lon;
-    //! Depth.
+    /// Depth.
     fp64_t depth;
-    //! Roll.
+    /// Roll.
     fp64_t roll;
-    //! Pitch.
+    /// Pitch.
     fp64_t pitch;
-    //! Yaw.
+    /// Yaw.
     fp64_t yaw;
-    //! Reception Time.
+    /// Reception Time.
     fp64_t rcp_time;
-    //! System Identifier.
+    /// System Identifier.
     std::string sid;
-    //! Source Type.
+    /// Source Type.
     uint8_t s_type;
 
     static uint16_t
@@ -19998,23 +19998,23 @@ namespace IMC
     }
   };
 
-  //! Remote Sensor Info.
+  /// Remote Sensor Info.
   class RemoteSensorInfo: public Message
   {
   public:
-    //! Id.
+    /// Id.
     std::string id;
-    //! Class.
+    /// Class.
     std::string sensor_class;
-    //! Latitude.
+    /// Latitude.
     fp64_t lat;
-    //! Longitude.
+    /// Longitude.
     fp64_t lon;
-    //! Altitude.
+    /// Altitude.
     fp32_t alt;
-    //! Heading.
+    /// Heading.
     fp32_t heading;
-    //! Custom Data.
+    /// Custom Data.
     std::string data;
 
     static uint16_t
@@ -20074,15 +20074,15 @@ namespace IMC
     }
   };
 
-  //! MapPoint.
+  /// MapPoint.
   class MapPoint: public Message
   {
   public:
-    //! Latitude.
+    /// Latitude.
     fp64_t lat;
-    //! Longitude.
+    /// Longitude.
     fp64_t lon;
-    //! Altitude.
+    /// Altitude.
     fp32_t alt;
 
     static uint16_t
@@ -20136,40 +20136,40 @@ namespace IMC
     }
   };
 
-  //! Map Feature.
+  /// Map Feature.
   class MapFeature: public Message
   {
   public:
-    //! FeatureType.
+    /// FeatureType.
     enum FeatureTypeEnum
     {
-      //! Point of Interest.
+      /// Point of Interest.
       FTYPE_POI = 0,
-      //! Filled Polygon.
+      /// Filled Polygon.
       FTYPE_FILLEDPOLY = 1,
-      //! Countoured Polygon.
+      /// Countoured Polygon.
       FTYPE_CONTOUREDPOLY = 2,
-      //! Line.
+      /// Line.
       FTYPE_LINE = 3,
-      //! Transponder.
+      /// Transponder.
       FTYPE_TRANSPONDER = 4,
-      //! Start Location.
+      /// Start Location.
       FTYPE_STARTLOC = 5,
-      //! Home Reference.
+      /// Home Reference.
       FTYPE_HOMEREF = 6
     };
 
-    //! Identifier.
+    /// Identifier.
     std::string id;
-    //! FeatureType.
+    /// FeatureType.
     uint8_t feature_type;
-    //! RedComponent.
+    /// RedComponent.
     uint8_t rgb_red;
-    //! GreenComponent.
+    /// GreenComponent.
     uint8_t rgb_green;
-    //! BlueComponent.
+    /// BlueComponent.
     uint8_t rgb_blue;
-    //! Feature.
+    /// Feature.
     MessageList<MapPoint> feature;
 
     static uint16_t
@@ -20245,13 +20245,13 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Map.
+  /// Map.
   class Map: public Message
   {
   public:
-    //! Identifier.
+    /// Identifier.
     std::string id;
-    //! Features.
+    /// Features.
     MessageList<MapFeature> features;
 
     static uint16_t
@@ -20327,38 +20327,38 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! CCU Event.
+  /// CCU Event.
   class CcuEvent: public Message
   {
   public:
-    //! Event Type.
+    /// Event Type.
     enum EventTypeEnum
     {
-      //! Log Book Entry Added.
+      /// Log Book Entry Added.
       EVT_LOG_ENTRY = 1,
-      //! Plan Added.
+      /// Plan Added.
       EVT_PLAN_ADDED = 2,
-      //! Plan Removed.
+      /// Plan Removed.
       EVT_PLAN_REMOVED = 3,
-      //! Plan Changed.
+      /// Plan Changed.
       EVT_PLAN_CHANGED = 4,
-      //! Map feature added.
+      /// Map feature added.
       EVT_MAP_FEATURE_ADDED = 5,
-      //! Map feature removed.
+      /// Map feature removed.
       EVT_MAP_FEATURE_REMOVED = 6,
-      //! Map feature changed.
+      /// Map feature changed.
       EVT_MAP_FEATURE_CHANGED = 7,
-      //! The sender is now teleoperating the vehicle.
+      /// The sender is now teleoperating the vehicle.
       EVT_TELEOPERATION_STARTED = 8,
-      //! The sender stopped teleoperating the vehicle.
+      /// The sender stopped teleoperating the vehicle.
       EVT_TELEOPERATION_ENDED = 9
     };
 
-    //! Event Type.
+    /// Event Type.
     uint8_t type;
-    //! Identifier.
+    /// Identifier.
     std::string id;
-    //! Additional Data.
+    /// Additional Data.
     InlineMessage<Message> arg;
 
     static uint16_t
@@ -20434,13 +20434,13 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Vehicle Links.
+  /// Vehicle Links.
   class VehicleLinks: public Message
   {
   public:
-    //! Local Name.
+    /// Local Name.
     std::string localname;
-    //! Active Links.
+    /// Active Links.
     MessageList<Announce> links;
 
     static uint16_t
@@ -20516,15 +20516,15 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! TREX Observation.
+  /// TREX Observation.
   class TrexObservation: public Message
   {
   public:
-    //! Timeline.
+    /// Timeline.
     std::string timeline;
-    //! Predicate.
+    /// Predicate.
     std::string predicate;
-    //! Attributes.
+    /// Attributes.
     std::string attributes;
 
     static uint16_t
@@ -20584,32 +20584,32 @@ namespace IMC
     }
   };
 
-  //! TREX Command.
+  /// TREX Command.
   class TrexCommand: public Message
   {
   public:
-    //! Command.
+    /// Command.
     enum CommandEnum
     {
-      //! Disable TREX.
+      /// Disable TREX.
       OP_DISABLE = 0,
-      //! Enable TREX.
+      /// Enable TREX.
       OP_ENABLE = 1,
-      //! Post Goal.
+      /// Post Goal.
       OP_POST_GOAL = 2,
-      //! Recall Goal.
+      /// Recall Goal.
       OP_RECALL_GOAL = 3,
-      //! Request current plan.
+      /// Request current plan.
       OP_REQUEST_PLAN = 4,
-      //! Report current plan.
+      /// Report current plan.
       OP_REPORT_PLAN = 5
     };
 
-    //! Command.
+    /// Command.
     uint8_t command;
-    //! Goal Id.
+    /// Goal Id.
     std::string goal_id;
-    //! Goal XML.
+    /// Goal XML.
     std::string goal_xml;
 
     static uint16_t
@@ -20669,32 +20669,32 @@ namespace IMC
     }
   };
 
-  //! TREX Attribute.
+  /// TREX Attribute.
   class TrexAttribute: public Message
   {
   public:
-    //! Attribute type.
+    /// Attribute type.
     enum AttributetypeEnum
     {
-      //! Boolean Domain.
+      /// Boolean Domain.
       TYPE_BOOL = 1,
-      //! Integer Domain.
+      /// Integer Domain.
       TYPE_INT = 2,
-      //! Float Domain.
+      /// Float Domain.
       TYPE_FLOAT = 3,
-      //! String Domain.
+      /// String Domain.
       TYPE_STRING = 4,
-      //! Enumerated Domain.
+      /// Enumerated Domain.
       TYPE_ENUM = 5
     };
 
-    //! Attribute Name.
+    /// Attribute Name.
     std::string name;
-    //! Attribute type.
+    /// Attribute type.
     uint8_t attr_type;
-    //! Minimum.
+    /// Minimum.
     std::string min;
-    //! Maximum.
+    /// Maximum.
     std::string max;
 
     static uint16_t
@@ -20754,15 +20754,15 @@ namespace IMC
     }
   };
 
-  //! TREX Token.
+  /// TREX Token.
   class TrexToken: public Message
   {
   public:
-    //! Timeline.
+    /// Timeline.
     std::string timeline;
-    //! Predicate.
+    /// Predicate.
     std::string predicate;
-    //! Attributes.
+    /// Attributes.
     MessageList<TrexAttribute> attributes;
 
     static uint16_t
@@ -20838,30 +20838,30 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! TREX Operation.
+  /// TREX Operation.
   class TrexOperation: public Message
   {
   public:
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Post Token.
+      /// Post Token.
       OP_POST_TOKEN = 1,
-      //! Post Goal.
+      /// Post Goal.
       OP_POST_GOAL = 2,
-      //! Recall Goal.
+      /// Recall Goal.
       OP_RECALL_GOAL = 3,
-      //! Request current plan.
+      /// Request current plan.
       OP_REQUEST_PLAN = 4,
-      //! Report current plan.
+      /// Report current plan.
       OP_REPORT_PLAN = 5
     };
 
-    //! Operation.
+    /// Operation.
     uint8_t op;
-    //! Goal Id.
+    /// Goal Id.
     std::string goal_id;
-    //! Token.
+    /// Token.
     InlineMessage<TrexToken> token;
 
     static uint16_t
@@ -20937,13 +20937,13 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! TREX Plan.
+  /// TREX Plan.
   class TrexPlan: public Message
   {
   public:
-    //! Reactor name.
+    /// Reactor name.
     std::string reactor;
-    //! Tokens.
+    /// Tokens.
     MessageList<TrexToken> tokens;
 
     static uint16_t
@@ -21019,13 +21019,13 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Event.
+  /// Event.
   class Event: public Message
   {
   public:
-    //! Topic.
+    /// Topic.
     std::string topic;
-    //! Data.
+    /// Data.
     std::string data;
 
     static uint16_t
@@ -21085,13 +21085,13 @@ namespace IMC
     }
   };
 
-  //! Compressed Image.
+  /// Compressed Image.
   class CompressedImage: public Message
   {
   public:
-    //! Frame Id.
+    /// Frame Id.
     uint8_t frameid;
-    //! Data.
+    /// Data.
     std::vector<char> data;
 
     static uint16_t
@@ -21151,17 +21151,17 @@ namespace IMC
     }
   };
 
-  //! Image Transmission Settings.
+  /// Image Transmission Settings.
   class ImageTxSettings: public Message
   {
   public:
-    //! Frames Per Second.
+    /// Frames Per Second.
     uint8_t fps;
-    //! Quality.
+    /// Quality.
     uint8_t quality;
-    //! Repetitions.
+    /// Repetitions.
     uint8_t reps;
-    //! Target Size.
+    /// Target Size.
     uint8_t tsize;
 
     static uint16_t
@@ -21215,19 +21215,19 @@ namespace IMC
     }
   };
 
-  //! Remote State.
+  /// Remote State.
   class RemoteState: public Message
   {
   public:
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp32_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp32_t lon;
-    //! Depth.
+    /// Depth.
     uint8_t depth;
-    //! Speed.
+    /// Speed.
     fp32_t speed;
-    //! Heading.
+    /// Heading.
     fp32_t psi;
 
     static uint16_t
@@ -21281,23 +21281,23 @@ namespace IMC
     }
   };
 
-  //! Target.
+  /// Target.
   class Target: public Message
   {
   public:
-    //! Label.
+    /// Label.
     std::string label;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Course Over Ground.
+    /// Course Over Ground.
     fp32_t cog;
-    //! Speed Over Ground.
+    /// Speed Over Ground.
     fp32_t sog;
 
     static uint16_t
@@ -21357,13 +21357,13 @@ namespace IMC
     }
   };
 
-  //! EntityParameter.
+  /// EntityParameter.
   class EntityParameter: public Message
   {
   public:
-    //! Name.
+    /// Name.
     std::string name;
-    //! Value.
+    /// Value.
     std::string value;
 
     static uint16_t
@@ -21423,13 +21423,13 @@ namespace IMC
     }
   };
 
-  //! EntityParameters.
+  /// EntityParameters.
   class EntityParameters: public Message
   {
   public:
-    //! Entity Name.
+    /// Entity Name.
     std::string name;
-    //! Parameters.
+    /// Parameters.
     MessageList<EntityParameter> params;
 
     static uint16_t
@@ -21505,15 +21505,15 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! QueryEntityParameters.
+  /// QueryEntityParameters.
   class QueryEntityParameters: public Message
   {
   public:
-    //! Entity Name.
+    /// Entity Name.
     std::string name;
-    //! Visibility.
+    /// Visibility.
     std::string visibility;
-    //! Scope.
+    /// Scope.
     std::string scope;
 
     static uint16_t
@@ -21573,13 +21573,13 @@ namespace IMC
     }
   };
 
-  //! SetEntityParameters.
+  /// SetEntityParameters.
   class SetEntityParameters: public Message
   {
   public:
-    //! Entity Name.
+    /// Entity Name.
     std::string name;
-    //! Parameters.
+    /// Parameters.
     MessageList<EntityParameter> params;
 
     static uint16_t
@@ -21655,11 +21655,11 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! SaveEntityParameters.
+  /// SaveEntityParameters.
   class SaveEntityParameters: public Message
   {
   public:
-    //! Entity Name.
+    /// Entity Name.
     std::string name;
 
     static uint16_t
@@ -21719,11 +21719,11 @@ namespace IMC
     }
   };
 
-  //! Create Session.
+  /// Create Session.
   class CreateSession: public Message
   {
   public:
-    //! Session Timeout.
+    /// Session Timeout.
     uint32_t timeout;
 
     static uint16_t
@@ -21777,11 +21777,11 @@ namespace IMC
     }
   };
 
-  //! Close Session.
+  /// Close Session.
   class CloseSession: public Message
   {
   public:
-    //! Session Identifier.
+    /// Session Identifier.
     uint32_t sessid;
 
     static uint16_t
@@ -21835,13 +21835,13 @@ namespace IMC
     }
   };
 
-  //! Session Subscription.
+  /// Session Subscription.
   class SessionSubscription: public Message
   {
   public:
-    //! Session Identifier.
+    /// Session Identifier.
     uint32_t sessid;
-    //! Messages to subscribe.
+    /// Messages to subscribe.
     std::string messages;
 
     static uint16_t
@@ -21901,11 +21901,11 @@ namespace IMC
     }
   };
 
-  //! Session Keep-Alive.
+  /// Session Keep-Alive.
   class SessionKeepAlive: public Message
   {
   public:
-    //! Session Identifier.
+    /// Session Identifier.
     uint32_t sessid;
 
     static uint16_t
@@ -21959,22 +21959,22 @@ namespace IMC
     }
   };
 
-  //! Session Status.
+  /// Session Status.
   class SessionStatus: public Message
   {
   public:
-    //! Status.
+    /// Status.
     enum StatusEnum
     {
-      //! Established.
+      /// Established.
       STATUS_ESTABLISHED = 1,
-      //! Closed.
+      /// Closed.
       STATUS_CLOSED = 2
     };
 
-    //! Session Identifier.
+    /// Session Identifier.
     uint32_t sessid;
-    //! Status.
+    /// Status.
     uint8_t status;
 
     static uint16_t
@@ -22028,11 +22028,11 @@ namespace IMC
     }
   };
 
-  //! Push Entity Parameters.
+  /// Push Entity Parameters.
   class PushEntityParameters: public Message
   {
   public:
-    //! Entity Name.
+    /// Entity Name.
     std::string name;
 
     static uint16_t
@@ -22092,11 +22092,11 @@ namespace IMC
     }
   };
 
-  //! Pop Entity Parameters.
+  /// Pop Entity Parameters.
   class PopEntityParameters: public Message
   {
   public:
-    //! Entity Name.
+    /// Entity Name.
     std::string name;
 
     static uint16_t
@@ -22156,22 +22156,22 @@ namespace IMC
     }
   };
 
-  //! I/O Event.
+  /// I/O Event.
   class IoEvent: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeEnum
     {
-      //! Input Available.
+      /// Input Available.
       IOV_TYPE_INPUT = 1,
-      //! Input Error.
+      /// Input Error.
       IOV_TYPE_INPUT_ERROR = 2
     };
 
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! Error Message.
+    /// Error Message.
     std::string error;
 
     static uint16_t
@@ -22231,28 +22231,28 @@ namespace IMC
     }
   };
 
-  //! UamTxFrame.
+  /// UamTxFrame.
   class UamTxFrame: public Message
   {
   public:
-    //! Flags.
+    /// Flags.
     enum FlagsBits
     {
-      //! Acknowledgement.
+      /// Acknowledgement.
       UTF_ACK = 0x01,
-      //! Delayed.
+      /// Delayed.
       UTF_DELAYED = 0x02,
-      //! Forced.
+      /// Forced.
       UTF_FORCED = 0x04
     };
 
-    //! Sequence Id.
+    /// Sequence Id.
     uint16_t seq;
-    //! Destination System.
+    /// Destination System.
     std::string sys_dst;
-    //! Flags.
+    /// Flags.
     uint8_t flags;
-    //! Data.
+    /// Data.
     std::vector<char> data;
 
     static uint16_t
@@ -22312,26 +22312,26 @@ namespace IMC
     }
   };
 
-  //! UamRxFrame.
+  /// UamRxFrame.
   class UamRxFrame: public Message
   {
   public:
-    //! Flags.
+    /// Flags.
     enum FlagsBits
     {
-      //! Promiscuous.
+      /// Promiscuous.
       URF_PROMISCUOUS = 0x01,
-      //! Delayed.
+      /// Delayed.
       URF_DELAYED = 0x02
     };
 
-    //! Source System.
+    /// Source System.
     std::string sys_src;
-    //! Destination System.
+    /// Destination System.
     std::string sys_dst;
-    //! Flags.
+    /// Flags.
     uint8_t flags;
-    //! Data.
+    /// Data.
     std::vector<char> data;
 
     static uint16_t
@@ -22391,40 +22391,40 @@ namespace IMC
     }
   };
 
-  //! UamTxStatus.
+  /// UamTxStatus.
   class UamTxStatus: public Message
   {
   public:
-    //! Value.
+    /// Value.
     enum ValueEnum
     {
-      //! Transmission Completed.
+      /// Transmission Completed.
       UTS_DONE = 0,
-      //! Transmission Failed.
+      /// Transmission Failed.
       UTS_FAILED = 1,
-      //! Transmission Canceled.
+      /// Transmission Canceled.
       UTS_CANCELED = 2,
-      //! Modem is busy.
+      /// Modem is busy.
       UTS_BUSY = 3,
-      //! Invalid address.
+      /// Invalid address.
       UTS_INV_ADDR = 4,
-      //! In Progress.
+      /// In Progress.
       UTS_IP = 5,
-      //! Unsupported operation.
+      /// Unsupported operation.
       UTS_UNSUPPORTED = 6,
-      //! Invalid transmission size.
+      /// Invalid transmission size.
       UTS_INV_SIZE = 7,
-      //! Message has been sent.
+      /// Message has been sent.
       UTS_SENT = 8,
-      //! Message has been acknowledged by the destination.
+      /// Message has been acknowledged by the destination.
       UTS_DELIVERED = 9
     };
 
-    //! Sequence Id.
+    /// Sequence Id.
     uint16_t seq;
-    //! Value.
+    /// Value.
     uint8_t value;
-    //! Error Message.
+    /// Error Message.
     std::string error;
 
     static uint16_t
@@ -22490,15 +22490,15 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! UamRxRange.
+  /// UamRxRange.
   class UamRxRange: public Message
   {
   public:
-    //! Sequence Id.
+    /// Sequence Id.
     uint16_t seq;
-    //! System.
+    /// System.
     std::string sys;
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -22564,15 +22564,15 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! UamTxRange.
+  /// UamTxRange.
   class UamTxRange: public Message
   {
   public:
-    //! Sequence Id.
+    /// Sequence Id.
     uint16_t seq;
-    //! Destination System.
+    /// Destination System.
     std::string sys_dst;
-    //! Timeout.
+    /// Timeout.
     fp32_t timeout;
 
     static uint16_t
@@ -22632,32 +22632,32 @@ namespace IMC
     }
   };
 
-  //! Formation Control Parameters.
+  /// Formation Control Parameters.
   class FormCtrlParam: public Message
   {
   public:
-    //! Action.
+    /// Action.
     enum ActionEnum
     {
-      //! Request.
+      /// Request.
       OP_REQ = 0,
-      //! Set.
+      /// Set.
       OP_SET = 1,
-      //! Report.
+      /// Report.
       OP_REP = 2
     };
 
-    //! Action.
+    /// Action.
     uint8_t action;
-    //! Longitudinal Gain.
+    /// Longitudinal Gain.
     fp32_t longain;
-    //! Lateral Gain.
+    /// Lateral Gain.
     fp32_t latgain;
-    //! Boundary Layer Thickness.
+    /// Boundary Layer Thickness.
     uint32_t bondthick;
-    //! Leader Gain.
+    /// Leader Gain.
     fp32_t leadgain;
-    //! Deconfliction Gain.
+    /// Deconfliction Gain.
     fp32_t deconflgain;
 
     static uint16_t
@@ -22711,15 +22711,15 @@ namespace IMC
     }
   };
 
-  //! Formation Evaluation Data.
+  /// Formation Evaluation Data.
   class FormationEval: public Message
   {
   public:
-    //! Mean position error.
+    /// Mean position error.
     fp32_t err_mean;
-    //! Absolute minimum distance.
+    /// Absolute minimum distance.
     fp32_t dist_min_abs;
-    //! Mean minimum distance.
+    /// Mean minimum distance.
     fp32_t dist_min_mean;
 
     static uint16_t
@@ -22773,42 +22773,42 @@ namespace IMC
     }
   };
 
-  //! Formation Control Parameters.
+  /// Formation Control Parameters.
   class FormationControlParams: public Message
   {
   public:
-    //! Action.
+    /// Action.
     enum ActionEnum
     {
-      //! Request.
+      /// Request.
       OP_REQ = 0,
-      //! Set.
+      /// Set.
       OP_SET = 1,
-      //! Report.
+      /// Report.
       OP_REP = 2
     };
 
-    //! Action.
+    /// Action.
     uint8_t action;
-    //! Longitudinal Gain.
+    /// Longitudinal Gain.
     fp32_t lon_gain;
-    //! Lateral Gain.
+    /// Lateral Gain.
     fp32_t lat_gain;
-    //! Boundary Layer Thickness.
+    /// Boundary Layer Thickness.
     fp32_t bond_thick;
-    //! Leader Gain.
+    /// Leader Gain.
     fp32_t lead_gain;
-    //! Deconfliction Gain.
+    /// Deconfliction Gain.
     fp32_t deconfl_gain;
-    //! Acceleration Switch Gain.
+    /// Acceleration Switch Gain.
     fp32_t accel_switch_gain;
-    //! Safety Distance.
+    /// Safety Distance.
     fp32_t safe_dist;
-    //! Deconfliction Offset.
+    /// Deconfliction Offset.
     fp32_t deconflict_offset;
-    //! Acceleration Safety Margin.
+    /// Acceleration Safety Margin.
     fp32_t accel_safe_margin;
-    //! Maximum Longitudinal Acceleration.
+    /// Maximum Longitudinal Acceleration.
     fp32_t accel_lim_x;
 
     static uint16_t
@@ -22862,49 +22862,49 @@ namespace IMC
     }
   };
 
-  //! Formation Evaluation Data.
+  /// Formation Evaluation Data.
   class FormationEvaluation: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeEnum
     {
-      //! Request.
+      /// Request.
       FC_REQUEST = 0,
-      //! Report.
+      /// Report.
       FC_REPORT = 1
     };
 
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Start.
+      /// Start.
       OP_START = 0,
-      //! Stop.
+      /// Stop.
       OP_STOP = 1,
-      //! Ready.
+      /// Ready.
       OP_READY = 2,
-      //! Executing.
+      /// Executing.
       OP_EXECUTING = 3,
-      //! Failure.
+      /// Failure.
       OP_FAILURE = 4
     };
 
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! Operation.
+    /// Operation.
     uint8_t op;
-    //! Mean Position Error.
+    /// Mean Position Error.
     fp32_t err_mean;
-    //! Absolute Minimum Distance.
+    /// Absolute Minimum Distance.
     fp32_t dist_min_abs;
-    //! Mean Minimum Distance.
+    /// Mean Minimum Distance.
     fp32_t dist_min_mean;
-    //! Mean Roll Rate.
+    /// Mean Roll Rate.
     fp32_t roll_rate_mean;
-    //! Evaluation Time.
+    /// Evaluation Time.
     fp32_t time;
-    //! Formation Control Parameters.
+    /// Formation Control Parameters.
     InlineMessage<FormationControlParams> controlparams;
 
     static uint16_t
@@ -22980,17 +22980,17 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! SOI Waypoint.
+  /// SOI Waypoint.
   class SoiWaypoint: public Message
   {
   public:
-    //! Latitude.
+    /// Latitude.
     fp32_t lat;
-    //! Longitude.
+    /// Longitude.
     fp32_t lon;
-    //! Time Of Arrival.
+    /// Time Of Arrival.
     uint32_t eta;
-    //! Duration.
+    /// Duration.
     uint16_t duration;
 
     static uint16_t
@@ -23044,13 +23044,13 @@ namespace IMC
     }
   };
 
-  //! SOI Plan.
+  /// SOI Plan.
   class SoiPlan: public Message
   {
   public:
-    //! Plan Identifier.
+    /// Plan Identifier.
     uint16_t plan_id;
-    //! Waypoints.
+    /// Waypoints.
     MessageList<SoiWaypoint> waypoints;
 
     static uint16_t
@@ -23126,47 +23126,47 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! SOI Command.
+  /// SOI Command.
   class SoiCommand: public Message
   {
   public:
-    //! Type.
+    /// Type.
     enum TypeEnum
     {
-      //! Request.
+      /// Request.
       SOITYPE_REQUEST = 1,
-      //! Success.
+      /// Success.
       SOITYPE_SUCCESS = 2,
-      //! Error.
+      /// Error.
       SOITYPE_ERROR = 3
     };
 
-    //! Command.
+    /// Command.
     enum CommandEnum
     {
-      //! Execute Plan.
+      /// Execute Plan.
       SOICMD_EXEC = 1,
-      //! Stop Execution.
+      /// Stop Execution.
       SOICMD_STOP = 2,
-      //! Set Parameters.
+      /// Set Parameters.
       SOICMD_SET_PARAMS = 3,
-      //! Get Parameters.
+      /// Get Parameters.
       SOICMD_GET_PARAMS = 4,
-      //! Get Plan.
+      /// Get Plan.
       SOICMD_GET_PLAN = 5,
-      //! Resume Execution.
+      /// Resume Execution.
       SOICMD_RESUME = 6
     };
 
-    //! Type.
+    /// Type.
     uint8_t type;
-    //! Command.
+    /// Command.
     uint8_t command;
-    //! Settings.
+    /// Settings.
     std::string settings;
-    //! Plan.
+    /// Plan.
     InlineMessage<SoiPlan> plan;
-    //! Extra Information.
+    /// Extra Information.
     std::string info;
 
     static uint16_t
@@ -23242,28 +23242,28 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! SOI State.
+  /// SOI State.
   class SoiState: public Message
   {
   public:
-    //! State.
+    /// State.
     enum StateEnum
     {
-      //! Executing.
+      /// Executing.
       SOISTATE_EXEC = 1,
-      //! Idle.
+      /// Idle.
       SOISTATE_IDLE = 2,
-      //! Inactive.
+      /// Inactive.
       SOISTATE_INACTIVE = 3
     };
 
-    //! State.
+    /// State.
     uint8_t state;
-    //! Plan Identifier.
+    /// Plan Identifier.
     uint16_t plan_id;
-    //! Waypoint Identifier.
+    /// Waypoint Identifier.
     uint8_t wpt_id;
-    //! Settings Checksum.
+    /// Settings Checksum.
     uint16_t settings_chk;
 
     static uint16_t
@@ -23317,17 +23317,17 @@ namespace IMC
     }
   };
 
-  //! Message Fragment.
+  /// Message Fragment.
   class MessagePart: public Message
   {
   public:
-    //! Transmission Unique Id.
+    /// Transmission Unique Id.
     uint8_t uid;
-    //! Fragment Number.
+    /// Fragment Number.
     uint8_t frag_number;
-    //! Total Number of fragments.
+    /// Total Number of fragments.
     uint8_t num_frags;
-    //! Fragment Data.
+    /// Fragment Data.
     std::vector<char> data;
 
     static uint16_t
@@ -23387,13 +23387,13 @@ namespace IMC
     }
   };
 
-  //! Neptus Blob.
+  /// Neptus Blob.
   class NeptusBlob: public Message
   {
   public:
-    //! ContentType.
+    /// ContentType.
     std::string content_type;
-    //! Content.
+    /// Content.
     std::vector<char> content;
 
     static uint16_t
@@ -23453,7 +23453,7 @@ namespace IMC
     }
   };
 
-  //! Aborted.
+  /// Aborted.
   class Aborted: public Message
   {
   public:
@@ -23506,15 +23506,15 @@ namespace IMC
     }
   };
 
-  //! USBL Angles.
+  /// USBL Angles.
   class UsblAngles: public Message
   {
   public:
-    //! Target.
+    /// Target.
     uint16_t target;
-    //! Bearing.
+    /// Bearing.
     fp32_t bearing;
-    //! Elevation.
+    /// Elevation.
     fp32_t elevation;
 
     static uint16_t
@@ -23568,17 +23568,17 @@ namespace IMC
     }
   };
 
-  //! USBL Position.
+  /// USBL Position.
   class UsblPosition: public Message
   {
   public:
-    //! Target.
+    /// Target.
     uint16_t target;
-    //! X.
+    /// X.
     fp32_t x;
-    //! Y.
+    /// Y.
     fp32_t y;
-    //! Z.
+    /// Z.
     fp32_t z;
 
     static uint16_t
@@ -23632,19 +23632,19 @@ namespace IMC
     }
   };
 
-  //! USBL Fix.
+  /// USBL Fix.
   class UsblFix: public Message
   {
   public:
-    //! Target.
+    /// Target.
     uint16_t target;
-    //! Latitude (WGS-84).
+    /// Latitude (WGS-84).
     fp64_t lat;
-    //! Longitude (WGS-84).
+    /// Longitude (WGS-84).
     fp64_t lon;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
 
     static uint16_t
@@ -23698,13 +23698,13 @@ namespace IMC
     }
   };
 
-  //! Parameters XML.
+  /// Parameters XML.
   class ParametersXml: public Message
   {
   public:
-    //! Locale.
+    /// Locale.
     std::string locale;
-    //! Configuration Data.
+    /// Configuration Data.
     std::vector<char> config;
 
     static uint16_t
@@ -23764,7 +23764,7 @@ namespace IMC
     }
   };
 
-  //! Get Parameters XML.
+  /// Get Parameters XML.
   class GetParametersXml: public Message
   {
   public:
@@ -23817,15 +23817,15 @@ namespace IMC
     }
   };
 
-  //! Set Image Coordinates.
+  /// Set Image Coordinates.
   class SetImageCoords: public Message
   {
   public:
-    //! Camera Identifier.
+    /// Camera Identifier.
     uint8_t camid;
-    //! X.
+    /// X.
     uint16_t x;
-    //! Y.
+    /// Y.
     uint16_t y;
 
     static uint16_t
@@ -23879,15 +23879,15 @@ namespace IMC
     }
   };
 
-  //! Get Image Coordinates.
+  /// Get Image Coordinates.
   class GetImageCoords: public Message
   {
   public:
-    //! Camera Identifier.
+    /// Camera Identifier.
     uint8_t camid;
-    //! X.
+    /// X.
     uint16_t x;
-    //! Y.
+    /// Y.
     uint16_t y;
 
     static uint16_t
@@ -23941,21 +23941,21 @@ namespace IMC
     }
   };
 
-  //! Get World Coordinates.
+  /// Get World Coordinates.
   class GetWorldCoordinates: public Message
   {
   public:
-    //! Tracking.
+    /// Tracking.
     uint8_t tracking;
-    //! Latitude.
+    /// Latitude.
     fp64_t lat;
-    //! Longitude.
+    /// Longitude.
     fp64_t lon;
-    //! X.
+    /// X.
     fp32_t x;
-    //! Y.
+    /// Y.
     fp32_t y;
-    //! Z.
+    /// Z.
     fp32_t z;
 
     static uint16_t
@@ -24009,27 +24009,27 @@ namespace IMC
     }
   };
 
-  //! USBL Angles Extended.
+  /// USBL Angles Extended.
   class UsblAnglesExtended: public Message
   {
   public:
-    //! Target.
+    /// Target.
     std::string target;
-    //! Local Bearing.
+    /// Local Bearing.
     fp32_t lbearing;
-    //! Local Elevation.
+    /// Local Elevation.
     fp32_t lelevation;
-    //! Bearing.
+    /// Bearing.
     fp32_t bearing;
-    //! Elevation.
+    /// Elevation.
     fp32_t elevation;
-    //! Roll Angle.
+    /// Roll Angle.
     fp32_t phi;
-    //! Pitch Angle.
+    /// Pitch Angle.
     fp32_t theta;
-    //! Yaw Angle.
+    /// Yaw Angle.
     fp32_t psi;
-    //! Accuracy.
+    /// Accuracy.
     fp32_t accuracy;
 
     static uint16_t
@@ -24089,31 +24089,31 @@ namespace IMC
     }
   };
 
-  //! USBL Position Extended.
+  /// USBL Position Extended.
   class UsblPositionExtended: public Message
   {
   public:
-    //! Target.
+    /// Target.
     std::string target;
-    //! X.
+    /// X.
     fp32_t x;
-    //! Y.
+    /// Y.
     fp32_t y;
-    //! Z.
+    /// Z.
     fp32_t z;
-    //! N.
+    /// N.
     fp32_t n;
-    //! E.
+    /// E.
     fp32_t e;
-    //! D.
+    /// D.
     fp32_t d;
-    //! Roll Angle.
+    /// Roll Angle.
     fp32_t phi;
-    //! Pitch Angle.
+    /// Pitch Angle.
     fp32_t theta;
-    //! Yaw Angle.
+    /// Yaw Angle.
     fp32_t psi;
-    //! Accuracy.
+    /// Accuracy.
     fp32_t accuracy;
 
     static uint16_t
@@ -24173,21 +24173,21 @@ namespace IMC
     }
   };
 
-  //! USBL Fix Extended.
+  /// USBL Fix Extended.
   class UsblFixExtended: public Message
   {
   public:
-    //! Target.
+    /// Target.
     std::string target;
-    //! Latitude (WGS-84).
+    /// Latitude (WGS-84).
     fp64_t lat;
-    //! Longitude (WGS-84).
+    /// Longitude (WGS-84).
     fp64_t lon;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Accuracy.
+    /// Accuracy.
     fp32_t accuracy;
 
     static uint16_t
@@ -24247,19 +24247,19 @@ namespace IMC
     }
   };
 
-  //! USBL Modem Configuration.
+  /// USBL Modem Configuration.
   class UsblModem: public Message
   {
   public:
-    //! Modem Name.
+    /// Modem Name.
     std::string name;
-    //! Latitude WGS-84.
+    /// Latitude WGS-84.
     fp64_t lat;
-    //! Longitude WGS-84.
+    /// Longitude WGS-84.
     fp64_t lon;
-    //! Z Reference.
+    /// Z Reference.
     fp32_t z;
-    //! Z Units.
+    /// Z Units.
     uint8_t z_units;
 
     static uint16_t
@@ -24319,24 +24319,24 @@ namespace IMC
     }
   };
 
-  //! USBL Configuration.
+  /// USBL Configuration.
   class UsblConfig: public Message
   {
   public:
-    //! Operation.
+    /// Operation.
     enum OperationEnum
     {
-      //! Set LBL Configuration.
+      /// Set LBL Configuration.
       OP_SET_CFG = 0,
-      //! Retrieve LBL Configuration.
+      /// Retrieve LBL Configuration.
       OP_GET_CFG = 1,
-      //! Reply to a GET command.
+      /// Reply to a GET command.
       OP_CUR_CFG = 2
     };
 
-    //! Operation.
+    /// Operation.
     uint8_t op;
-    //! Modems.
+    /// Modems.
     MessageList<UsblModem> modems;
 
     static uint16_t
@@ -24412,22 +24412,22 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Dissolved Organic Matter.
+  /// Dissolved Organic Matter.
   class DissolvedOrganicMatter: public Message
   {
   public:
-    //! Type of measurement.
+    /// Type of measurement.
     enum TypeofmeasurementEnum
     {
-      //! Colored.
+      /// Colored.
       DT_COLORED = 0,
-      //! Fluorescent.
+      /// Fluorescent.
       DT_FLUORESCENT = 1
     };
 
-    //! Value.
+    /// Value.
     fp32_t value;
-    //! Type of measurement.
+    /// Type of measurement.
     uint8_t type;
 
     static uint16_t
@@ -24487,11 +24487,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Optical Backscattering Coefficient.
+  /// Optical Backscattering Coefficient.
   class OpticalBackscatter: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -24551,41 +24551,41 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Tachograph.
+  /// Tachograph.
   class Tachograph: public Message
   {
   public:
-    //! Last Service Timestamp.
+    /// Last Service Timestamp.
     fp64_t timestamp_last_service;
-    //! Time - Next Service.
+    /// Time - Next Service.
     fp32_t time_next_service;
-    //! Time Motor - Next Service.
+    /// Time Motor - Next Service.
     fp32_t time_motor_next_service;
-    //! Time Idle - Ground.
+    /// Time Idle - Ground.
     fp32_t time_idle_ground;
-    //! Time Idle - Air.
+    /// Time Idle - Air.
     fp32_t time_idle_air;
-    //! Time Idle - Water.
+    /// Time Idle - Water.
     fp32_t time_idle_water;
-    //! Time Idle - Underwater.
+    /// Time Idle - Underwater.
     fp32_t time_idle_underwater;
-    //! Time Idle - Unknown.
+    /// Time Idle - Unknown.
     fp32_t time_idle_unknown;
-    //! Time Motor - Ground.
+    /// Time Motor - Ground.
     fp32_t time_motor_ground;
-    //! Time Motor - Air.
+    /// Time Motor - Air.
     fp32_t time_motor_air;
-    //! Time Motor - Water.
+    /// Time Motor - Water.
     fp32_t time_motor_water;
-    //! Time Motor - Underwater.
+    /// Time Motor - Underwater.
     fp32_t time_motor_underwater;
-    //! Time Motor - Unknown.
+    /// Time Motor - Unknown.
     fp32_t time_motor_unknown;
-    //! Recorded RPMs - Minimum.
+    /// Recorded RPMs - Minimum.
     int16_t rpm_min;
-    //! Recorded RPMs - Maximum.
+    /// Recorded RPMs - Maximum.
     int16_t rpm_max;
-    //! Recorded Depth - Maximum.
+    /// Recorded Depth - Maximum.
     fp32_t depth_max;
 
     static uint16_t
@@ -24639,34 +24639,34 @@ namespace IMC
     }
   };
 
-  //! APM Status.
+  /// APM Status.
   class ApmStatus: public Message
   {
   public:
-    //! Severity.
+    /// Severity.
     enum SeverityEnum
     {
-      //! Emergency.
+      /// Emergency.
       APM_EMERGENCY = 0,
-      //! Alert.
+      /// Alert.
       APM_ALERT = 1,
-      //! Critical.
+      /// Critical.
       APM_CRITICAL = 2,
-      //! Error.
+      /// Error.
       APM_ERROR = 3,
-      //! Warning.
+      /// Warning.
       APM_WARNING = 4,
-      //! Notice.
+      /// Notice.
       APM_NOTICE = 5,
-      //! Info.
+      /// Info.
       APM_INFO = 6,
-      //! Debug.
+      /// Debug.
       APM_DEBUG = 7
     };
 
-    //! Severity.
+    /// Severity.
     uint8_t severity;
-    //! Text.
+    /// Text.
     std::string text;
 
     static uint16_t
@@ -24726,26 +24726,26 @@ namespace IMC
     }
   };
 
-  //! SADC Readings.
+  /// SADC Readings.
   class SadcReadings: public Message
   {
   public:
-    //! Gain.
+    /// Gain.
     enum GainEnum
     {
-      //! x1.
+      /// x1.
       GAIN_X1 = 0,
-      //! x10.
+      /// x10.
       GAIN_X10 = 1,
-      //! x100.
+      /// x100.
       GAIN_X100 = 2
     };
 
-    //! Channel.
+    /// Channel.
     int8_t channel;
-    //! Value.
+    /// Value.
     int32_t value;
-    //! Gain.
+    /// Gain.
     uint8_t gain;
 
     static uint16_t
@@ -24805,41 +24805,41 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! DMS Detection.
+  /// DMS Detection.
   class DmsDetection: public Message
   {
   public:
-    //! Channel 1.
+    /// Channel 1.
     fp32_t ch01;
-    //! Channel 2.
+    /// Channel 2.
     fp32_t ch02;
-    //! Channel 3.
+    /// Channel 3.
     fp32_t ch03;
-    //! Channel 4.
+    /// Channel 4.
     fp32_t ch04;
-    //! Channel 5.
+    /// Channel 5.
     fp32_t ch05;
-    //! Channel 6.
+    /// Channel 6.
     fp32_t ch06;
-    //! Channel 7.
+    /// Channel 7.
     fp32_t ch07;
-    //! Channel 8.
+    /// Channel 8.
     fp32_t ch08;
-    //! Channel 9.
+    /// Channel 9.
     fp32_t ch09;
-    //! Channel 10.
+    /// Channel 10.
     fp32_t ch10;
-    //! Channel 11.
+    /// Channel 11.
     fp32_t ch11;
-    //! Channel 12.
+    /// Channel 12.
     fp32_t ch12;
-    //! Channel 13.
+    /// Channel 13.
     fp32_t ch13;
-    //! Channel 14.
+    /// Channel 14.
     fp32_t ch14;
-    //! Channel 15.
+    /// Channel 15.
     fp32_t ch15;
-    //! Channel 16.
+    /// Channel 16.
     fp32_t ch16;
 
     static uint16_t
@@ -24893,30 +24893,30 @@ namespace IMC
     }
   };
 
-  //! Home Position.
+  /// Home Position.
   class HomePosition: public Message
   {
   public:
-    //! Action on the vehicle home position.
+    /// Action on the vehicle home position.
     enum ActiononthevehiclehomepositionEnum
     {
-      //! Set.
+      /// Set.
       OP_SET = 1,
-      //! Report.
+      /// Report.
       OP_REPORT = 2
     };
 
-    //! Action on the vehicle home position.
+    /// Action on the vehicle home position.
     uint8_t op;
-    //! Latitude (WGS-84).
+    /// Latitude (WGS-84).
     fp64_t lat;
-    //! Longitude (WGS-84).
+    /// Longitude (WGS-84).
     fp64_t lon;
-    //! Height (WGS-84).
+    /// Height (WGS-84).
     fp32_t height;
-    //! Depth.
+    /// Depth.
     fp32_t depth;
-    //! Altitude.
+    /// Altitude.
     fp32_t alt;
 
     static uint16_t
@@ -24970,15 +24970,15 @@ namespace IMC
     }
   };
 
-  //! ADCP Beam Measurements.
+  /// ADCP Beam Measurements.
   class ADCPBeam: public Message
   {
   public:
-    //! Water Velocity.
+    /// Water Velocity.
     fp32_t vel;
-    //! Amplitude.
+    /// Amplitude.
     fp32_t amp;
-    //! Correlation.
+    /// Correlation.
     uint8_t cor;
 
     static uint16_t
@@ -25032,13 +25032,13 @@ namespace IMC
     }
   };
 
-  //! Current Profile Cell.
+  /// Current Profile Cell.
   class CurrentProfileCell: public Message
   {
   public:
-    //! Cell Position.
+    /// Cell Position.
     fp32_t cell_position;
-    //! Beams Measurements.
+    /// Beams Measurements.
     MessageList<ADCPBeam> beams;
 
     static uint16_t
@@ -25114,28 +25114,28 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! Current Profile.
+  /// Current Profile.
   class CurrentProfile: public Message
   {
   public:
-    //! Coordinate System.
+    /// Coordinate System.
     enum CoordinateSystemBits
     {
-      //! xyz.
+      /// xyz.
       UTF_XYZ = 0x01,
-      //! ned.
+      /// ned.
       UTF_NED = 0x02,
-      //! beams.
+      /// beams.
       UTF_BEAMS = 0x04
     };
 
-    //! Number of Beams.
+    /// Number of Beams.
     uint8_t nbeams;
-    //! Number of Cells.
+    /// Number of Cells.
     uint8_t ncells;
-    //! Coordinate System.
+    /// Coordinate System.
     uint8_t coord_sys;
-    //! Profile.
+    /// Profile.
     MessageList<CurrentProfileCell> profile;
 
     static uint16_t
@@ -25211,13 +25211,13 @@ namespace IMC
     setDestinationEntityNested(uint8_t value__);
   };
 
-  //! GPIO State.
+  /// GPIO State.
   class GpioState: public Message
   {
   public:
-    //! Name.
+    /// Name.
     std::string name;
-    //! Value.
+    /// Value.
     uint8_t value;
 
     static uint16_t
@@ -25283,11 +25283,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Get GPIO State.
+  /// Get GPIO State.
   class GpioStateGet: public Message
   {
   public:
-    //! Name.
+    /// Name.
     std::string name;
 
     static uint16_t
@@ -25347,13 +25347,13 @@ namespace IMC
     }
   };
 
-  //! Set GPIO State.
+  /// Set GPIO State.
   class GpioStateSet: public Message
   {
   public:
-    //! Name.
+    /// Name.
     std::string name;
-    //! Value.
+    /// Value.
     uint8_t value;
 
     static uint16_t
@@ -25419,11 +25419,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Colored Dissolved Organic Matter.
+  /// Colored Dissolved Organic Matter.
   class ColoredDissolvedOrganicMatter: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -25483,11 +25483,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Fluorescent Dissolved Organic Matter.
+  /// Fluorescent Dissolved Organic Matter.
   class FluorescentDissolvedOrganicMatter: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp32_t value;
 
     static uint16_t
@@ -25547,11 +25547,11 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Total Magnetic Field Intensity.
+  /// Total Magnetic Field Intensity.
   class TotalMagIntensity: public Message
   {
   public:
-    //! Value.
+    /// Value.
     fp64_t value;
 
     static uint16_t
@@ -25611,26 +25611,26 @@ namespace IMC
     setValueFP(fp64_t val);
   };
 
-  //! Communication Restriction.
+  /// Communication Restriction.
   class CommRestriction: public Message
   {
   public:
-    //! Restricted Communication Means.
+    /// Restricted Communication Means.
     enum RestrictedCommunicationMeansBits
     {
-      //! Satellite.
+      /// Satellite.
       MEAN_SATELLITE = 0x01,
-      //! Acoustic.
+      /// Acoustic.
       MEAN_ACOUSTIC = 0x02,
-      //! WiFi.
+      /// WiFi.
       MEAN_WIFI = 0x04,
-      //! GSM.
+      /// GSM.
       MEAN_GSM = 0x08
     };
 
-    //! Restricted Communication Means.
+    /// Restricted Communication Means.
     uint8_t restriction;
-    //! Reason.
+    /// Reason.
     std::string reason;
 
     static uint16_t

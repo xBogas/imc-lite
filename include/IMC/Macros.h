@@ -35,663 +35,663 @@
 #ifndef IMC_MACROS_HPP_INCLUDED_
 #define IMC_MACROS_HPP_INCLUDED_
 
-//! EntityState identification number.
+/// EntityState identification number.
 #define IMC_ENTITYSTATE 1
-//! QueryEntityState identification number.
+/// QueryEntityState identification number.
 #define IMC_QUERYENTITYSTATE 2
-//! EntityInfo identification number.
+/// EntityInfo identification number.
 #define IMC_ENTITYINFO 3
-//! QueryEntityInfo identification number.
+/// QueryEntityInfo identification number.
 #define IMC_QUERYENTITYINFO 4
-//! EntityList identification number.
+/// EntityList identification number.
 #define IMC_ENTITYLIST 5
-//! CpuUsage identification number.
+/// CpuUsage identification number.
 #define IMC_CPUUSAGE 7
-//! TransportBindings identification number.
+/// TransportBindings identification number.
 #define IMC_TRANSPORTBINDINGS 8
-//! RestartSystem identification number.
+/// RestartSystem identification number.
 #define IMC_RESTARTSYSTEM 9
-//! DevCalibrationControl identification number.
+/// DevCalibrationControl identification number.
 #define IMC_DEVCALIBRATIONCONTROL 12
-//! DevCalibrationState identification number.
+/// DevCalibrationState identification number.
 #define IMC_DEVCALIBRATIONSTATE 13
-//! EntityActivationState identification number.
+/// EntityActivationState identification number.
 #define IMC_ENTITYACTIVATIONSTATE 14
-//! QueryEntityActivationState identification number.
+/// QueryEntityActivationState identification number.
 #define IMC_QUERYENTITYACTIVATIONSTATE 15
-//! VehicleOperationalLimits identification number.
+/// VehicleOperationalLimits identification number.
 #define IMC_VEHICLEOPERATIONALLIMITS 16
-//! MsgList identification number.
+/// MsgList identification number.
 #define IMC_MSGLIST 20
-//! SimulatedState identification number.
+/// SimulatedState identification number.
 #define IMC_SIMULATEDSTATE 50
-//! LeakSimulation identification number.
+/// LeakSimulation identification number.
 #define IMC_LEAKSIMULATION 51
-//! UASimulation identification number.
+/// UASimulation identification number.
 #define IMC_UASIMULATION 52
-//! DynamicsSimParam identification number.
+/// DynamicsSimParam identification number.
 #define IMC_DYNAMICSSIMPARAM 53
-//! StorageUsage identification number.
+/// StorageUsage identification number.
 #define IMC_STORAGEUSAGE 100
-//! CacheControl identification number.
+/// CacheControl identification number.
 #define IMC_CACHECONTROL 101
-//! LoggingControl identification number.
+/// LoggingControl identification number.
 #define IMC_LOGGINGCONTROL 102
-//! LogBookEntry identification number.
+/// LogBookEntry identification number.
 #define IMC_LOGBOOKENTRY 103
-//! LogBookControl identification number.
+/// LogBookControl identification number.
 #define IMC_LOGBOOKCONTROL 104
-//! ReplayControl identification number.
+/// ReplayControl identification number.
 #define IMC_REPLAYCONTROL 105
-//! ClockControl identification number.
+/// ClockControl identification number.
 #define IMC_CLOCKCONTROL 106
-//! HistoricCTD identification number.
+/// HistoricCTD identification number.
 #define IMC_HISTORICCTD 107
-//! HistoricTelemetry identification number.
+/// HistoricTelemetry identification number.
 #define IMC_HISTORICTELEMETRY 108
-//! HistoricSonarData identification number.
+/// HistoricSonarData identification number.
 #define IMC_HISTORICSONARDATA 109
-//! HistoricEvent identification number.
+/// HistoricEvent identification number.
 #define IMC_HISTORICEVENT 110
-//! VerticalProfile identification number.
+/// VerticalProfile identification number.
 #define IMC_VERTICALPROFILE 111
-//! ProfileSample identification number.
+/// ProfileSample identification number.
 #define IMC_PROFILESAMPLE 112
-//! Heartbeat identification number.
+/// Heartbeat identification number.
 #define IMC_HEARTBEAT 150
-//! Announce identification number.
+/// Announce identification number.
 #define IMC_ANNOUNCE 151
-//! AnnounceService identification number.
+/// AnnounceService identification number.
 #define IMC_ANNOUNCESERVICE 152
-//! RSSI identification number.
+/// RSSI identification number.
 #define IMC_RSSI 153
-//! VSWR identification number.
+/// VSWR identification number.
 #define IMC_VSWR 154
-//! LinkLevel identification number.
+/// LinkLevel identification number.
 #define IMC_LINKLEVEL 155
-//! Sms identification number.
+/// Sms identification number.
 #define IMC_SMS 156
-//! SmsTx identification number.
+/// SmsTx identification number.
 #define IMC_SMSTX 157
-//! SmsRx identification number.
+/// SmsRx identification number.
 #define IMC_SMSRX 158
-//! SmsState identification number.
+/// SmsState identification number.
 #define IMC_SMSSTATE 159
-//! TextMessage identification number.
+/// TextMessage identification number.
 #define IMC_TEXTMESSAGE 160
-//! IridiumMsgRx identification number.
+/// IridiumMsgRx identification number.
 #define IMC_IRIDIUMMSGRX 170
-//! IridiumMsgTx identification number.
+/// IridiumMsgTx identification number.
 #define IMC_IRIDIUMMSGTX 171
-//! IridiumTxStatus identification number.
+/// IridiumTxStatus identification number.
 #define IMC_IRIDIUMTXSTATUS 172
-//! GroupMembershipState identification number.
+/// GroupMembershipState identification number.
 #define IMC_GROUPMEMBERSHIPSTATE 180
-//! SystemGroup identification number.
+/// SystemGroup identification number.
 #define IMC_SYSTEMGROUP 181
-//! LinkLatency identification number.
+/// LinkLatency identification number.
 #define IMC_LINKLATENCY 182
-//! ExtendedRSSI identification number.
+/// ExtendedRSSI identification number.
 #define IMC_EXTENDEDRSSI 183
-//! HistoricData identification number.
+/// HistoricData identification number.
 #define IMC_HISTORICDATA 184
-//! CompressedHistory identification number.
+/// CompressedHistory identification number.
 #define IMC_COMPRESSEDHISTORY 185
-//! HistoricSample identification number.
+/// HistoricSample identification number.
 #define IMC_HISTORICSAMPLE 186
-//! HistoricDataQuery identification number.
+/// HistoricDataQuery identification number.
 #define IMC_HISTORICDATAQUERY 187
-//! RemoteCommand identification number.
+/// RemoteCommand identification number.
 #define IMC_REMOTECOMMAND 188
-//! CommSystemsQuery identification number.
+/// CommSystemsQuery identification number.
 #define IMC_COMMSYSTEMSQUERY 189
-//! TelemetryMsg identification number.
+/// TelemetryMsg identification number.
 #define IMC_TELEMETRYMSG 190
-//! LblRange identification number.
+/// LblRange identification number.
 #define IMC_LBLRANGE 200
-//! LblBeacon identification number.
+/// LblBeacon identification number.
 #define IMC_LBLBEACON 202
-//! LblConfig identification number.
+/// LblConfig identification number.
 #define IMC_LBLCONFIG 203
-//! AcousticMessage identification number.
+/// AcousticMessage identification number.
 #define IMC_ACOUSTICMESSAGE 206
-//! SimAcousticMessage identification number.
+/// SimAcousticMessage identification number.
 #define IMC_SIMACOUSTICMESSAGE 207
-//! AcousticOperation identification number.
+/// AcousticOperation identification number.
 #define IMC_ACOUSTICOPERATION 211
-//! AcousticSystemsQuery identification number.
+/// AcousticSystemsQuery identification number.
 #define IMC_ACOUSTICSYSTEMSQUERY 212
-//! AcousticSystems identification number.
+/// AcousticSystems identification number.
 #define IMC_ACOUSTICSYSTEMS 213
-//! AcousticLink identification number.
+/// AcousticLink identification number.
 #define IMC_ACOUSTICLINK 214
-//! AcousticRequest identification number.
+/// AcousticRequest identification number.
 #define IMC_ACOUSTICREQUEST 215
-//! AcousticStatus identification number.
+/// AcousticStatus identification number.
 #define IMC_ACOUSTICSTATUS 216
-//! AcousticRelease identification number.
+/// AcousticRelease identification number.
 #define IMC_ACOUSTICRELEASE 217
-//! Rpm identification number.
+/// Rpm identification number.
 #define IMC_RPM 250
-//! Voltage identification number.
+/// Voltage identification number.
 #define IMC_VOLTAGE 251
-//! Current identification number.
+/// Current identification number.
 #define IMC_CURRENT 252
-//! GpsFix identification number.
+/// GpsFix identification number.
 #define IMC_GPSFIX 253
-//! EulerAngles identification number.
+/// EulerAngles identification number.
 #define IMC_EULERANGLES 254
-//! EulerAnglesDelta identification number.
+/// EulerAnglesDelta identification number.
 #define IMC_EULERANGLESDELTA 255
-//! AngularVelocity identification number.
+/// AngularVelocity identification number.
 #define IMC_ANGULARVELOCITY 256
-//! Acceleration identification number.
+/// Acceleration identification number.
 #define IMC_ACCELERATION 257
-//! MagneticField identification number.
+/// MagneticField identification number.
 #define IMC_MAGNETICFIELD 258
-//! GroundVelocity identification number.
+/// GroundVelocity identification number.
 #define IMC_GROUNDVELOCITY 259
-//! WaterVelocity identification number.
+/// WaterVelocity identification number.
 #define IMC_WATERVELOCITY 260
-//! VelocityDelta identification number.
+/// VelocityDelta identification number.
 #define IMC_VELOCITYDELTA 261
-//! Distance identification number.
+/// Distance identification number.
 #define IMC_DISTANCE 262
-//! Temperature identification number.
+/// Temperature identification number.
 #define IMC_TEMPERATURE 263
-//! Pressure identification number.
+/// Pressure identification number.
 #define IMC_PRESSURE 264
-//! Depth identification number.
+/// Depth identification number.
 #define IMC_DEPTH 265
-//! DepthOffset identification number.
+/// DepthOffset identification number.
 #define IMC_DEPTHOFFSET 266
-//! SoundSpeed identification number.
+/// SoundSpeed identification number.
 #define IMC_SOUNDSPEED 267
-//! WaterDensity identification number.
+/// WaterDensity identification number.
 #define IMC_WATERDENSITY 268
-//! Conductivity identification number.
+/// Conductivity identification number.
 #define IMC_CONDUCTIVITY 269
-//! Salinity identification number.
+/// Salinity identification number.
 #define IMC_SALINITY 270
-//! WindSpeed identification number.
+/// WindSpeed identification number.
 #define IMC_WINDSPEED 271
-//! RelativeHumidity identification number.
+/// RelativeHumidity identification number.
 #define IMC_RELATIVEHUMIDITY 272
-//! DevDataText identification number.
+/// DevDataText identification number.
 #define IMC_DEVDATATEXT 273
-//! DevDataBinary identification number.
+/// DevDataBinary identification number.
 #define IMC_DEVDATABINARY 274
-//! Force identification number.
+/// Force identification number.
 #define IMC_FORCE 275
-//! SonarData identification number.
+/// SonarData identification number.
 #define IMC_SONARDATA 276
-//! Pulse identification number.
+/// Pulse identification number.
 #define IMC_PULSE 277
-//! PulseDetectionControl identification number.
+/// PulseDetectionControl identification number.
 #define IMC_PULSEDETECTIONCONTROL 278
-//! FuelLevel identification number.
+/// FuelLevel identification number.
 #define IMC_FUELLEVEL 279
-//! GpsNavData identification number.
+/// GpsNavData identification number.
 #define IMC_GPSNAVDATA 280
-//! ServoPosition identification number.
+/// ServoPosition identification number.
 #define IMC_SERVOPOSITION 281
-//! DeviceState identification number.
+/// DeviceState identification number.
 #define IMC_DEVICESTATE 282
-//! BeamConfig identification number.
+/// BeamConfig identification number.
 #define IMC_BEAMCONFIG 283
-//! DataSanity identification number.
+/// DataSanity identification number.
 #define IMC_DATASANITY 284
-//! RhodamineDye identification number.
+/// RhodamineDye identification number.
 #define IMC_RHODAMINEDYE 285
-//! CrudeOil identification number.
+/// CrudeOil identification number.
 #define IMC_CRUDEOIL 286
-//! FineOil identification number.
+/// FineOil identification number.
 #define IMC_FINEOIL 287
-//! Turbidity identification number.
+/// Turbidity identification number.
 #define IMC_TURBIDITY 288
-//! Chlorophyll identification number.
+/// Chlorophyll identification number.
 #define IMC_CHLOROPHYLL 289
-//! Fluorescein identification number.
+/// Fluorescein identification number.
 #define IMC_FLUORESCEIN 290
-//! Phycocyanin identification number.
+/// Phycocyanin identification number.
 #define IMC_PHYCOCYANIN 291
-//! Phycoerythrin identification number.
+/// Phycoerythrin identification number.
 #define IMC_PHYCOERYTHRIN 292
-//! GpsFixRtk identification number.
+/// GpsFixRtk identification number.
 #define IMC_GPSFIXRTK 293
-//! ExternalNavData identification number.
+/// ExternalNavData identification number.
 #define IMC_EXTERNALNAVDATA 294
-//! DissolvedOxygen identification number.
+/// DissolvedOxygen identification number.
 #define IMC_DISSOLVEDOXYGEN 295
-//! AirSaturation identification number.
+/// AirSaturation identification number.
 #define IMC_AIRSATURATION 296
-//! Throttle identification number.
+/// Throttle identification number.
 #define IMC_THROTTLE 297
-//! PH identification number.
+/// PH identification number.
 #define IMC_PH 298
-//! Redox identification number.
+/// Redox identification number.
 #define IMC_REDOX 299
-//! CameraZoom identification number.
+/// CameraZoom identification number.
 #define IMC_CAMERAZOOM 300
-//! SetThrusterActuation identification number.
+/// SetThrusterActuation identification number.
 #define IMC_SETTHRUSTERACTUATION 301
-//! SetServoPosition identification number.
+/// SetServoPosition identification number.
 #define IMC_SETSERVOPOSITION 302
-//! SetControlSurfaceDeflection identification number.
+/// SetControlSurfaceDeflection identification number.
 #define IMC_SETCONTROLSURFACEDEFLECTION 303
-//! RemoteActionsRequest identification number.
+/// RemoteActionsRequest identification number.
 #define IMC_REMOTEACTIONSREQUEST 304
-//! RemoteActions identification number.
+/// RemoteActions identification number.
 #define IMC_REMOTEACTIONS 305
-//! ButtonEvent identification number.
+/// ButtonEvent identification number.
 #define IMC_BUTTONEVENT 306
-//! LcdControl identification number.
+/// LcdControl identification number.
 #define IMC_LCDCONTROL 307
-//! PowerOperation identification number.
+/// PowerOperation identification number.
 #define IMC_POWEROPERATION 308
-//! PowerChannelControl identification number.
+/// PowerChannelControl identification number.
 #define IMC_POWERCHANNELCONTROL 309
-//! QueryPowerChannelState identification number.
+/// QueryPowerChannelState identification number.
 #define IMC_QUERYPOWERCHANNELSTATE 310
-//! PowerChannelState identification number.
+/// PowerChannelState identification number.
 #define IMC_POWERCHANNELSTATE 311
-//! LedBrightness identification number.
+/// LedBrightness identification number.
 #define IMC_LEDBRIGHTNESS 312
-//! QueryLedBrightness identification number.
+/// QueryLedBrightness identification number.
 #define IMC_QUERYLEDBRIGHTNESS 313
-//! SetLedBrightness identification number.
+/// SetLedBrightness identification number.
 #define IMC_SETLEDBRIGHTNESS 314
-//! SetPWM identification number.
+/// SetPWM identification number.
 #define IMC_SETPWM 315
-//! PWM identification number.
+/// PWM identification number.
 #define IMC_PWM 316
-//! EstimatedState identification number.
+/// EstimatedState identification number.
 #define IMC_ESTIMATEDSTATE 350
-//! EstimatedStreamVelocity identification number.
+/// EstimatedStreamVelocity identification number.
 #define IMC_ESTIMATEDSTREAMVELOCITY 351
-//! IndicatedSpeed identification number.
+/// IndicatedSpeed identification number.
 #define IMC_INDICATEDSPEED 352
-//! TrueSpeed identification number.
+/// TrueSpeed identification number.
 #define IMC_TRUESPEED 353
-//! NavigationUncertainty identification number.
+/// NavigationUncertainty identification number.
 #define IMC_NAVIGATIONUNCERTAINTY 354
-//! NavigationData identification number.
+/// NavigationData identification number.
 #define IMC_NAVIGATIONDATA 355
-//! GpsFixRejection identification number.
+/// GpsFixRejection identification number.
 #define IMC_GPSFIXREJECTION 356
-//! LblRangeAcceptance identification number.
+/// LblRangeAcceptance identification number.
 #define IMC_LBLRANGEACCEPTANCE 357
-//! DvlRejection identification number.
+/// DvlRejection identification number.
 #define IMC_DVLREJECTION 358
-//! LblEstimate identification number.
+/// LblEstimate identification number.
 #define IMC_LBLESTIMATE 360
-//! AlignmentState identification number.
+/// AlignmentState identification number.
 #define IMC_ALIGNMENTSTATE 361
-//! GroupStreamVelocity identification number.
+/// GroupStreamVelocity identification number.
 #define IMC_GROUPSTREAMVELOCITY 362
-//! Airflow identification number.
+/// Airflow identification number.
 #define IMC_AIRFLOW 363
-//! DesiredHeading identification number.
+/// DesiredHeading identification number.
 #define IMC_DESIREDHEADING 400
-//! DesiredZ identification number.
+/// DesiredZ identification number.
 #define IMC_DESIREDZ 401
-//! DesiredSpeed identification number.
+/// DesiredSpeed identification number.
 #define IMC_DESIREDSPEED 402
-//! DesiredRoll identification number.
+/// DesiredRoll identification number.
 #define IMC_DESIREDROLL 403
-//! DesiredPitch identification number.
+/// DesiredPitch identification number.
 #define IMC_DESIREDPITCH 404
-//! DesiredVerticalRate identification number.
+/// DesiredVerticalRate identification number.
 #define IMC_DESIREDVERTICALRATE 405
-//! DesiredPath identification number.
+/// DesiredPath identification number.
 #define IMC_DESIREDPATH 406
-//! DesiredControl identification number.
+/// DesiredControl identification number.
 #define IMC_DESIREDCONTROL 407
-//! DesiredHeadingRate identification number.
+/// DesiredHeadingRate identification number.
 #define IMC_DESIREDHEADINGRATE 408
-//! DesiredVelocity identification number.
+/// DesiredVelocity identification number.
 #define IMC_DESIREDVELOCITY 409
-//! PathControlState identification number.
+/// PathControlState identification number.
 #define IMC_PATHCONTROLSTATE 410
-//! AllocatedControlTorques identification number.
+/// AllocatedControlTorques identification number.
 #define IMC_ALLOCATEDCONTROLTORQUES 411
-//! ControlParcel identification number.
+/// ControlParcel identification number.
 #define IMC_CONTROLPARCEL 412
-//! Brake identification number.
+/// Brake identification number.
 #define IMC_BRAKE 413
-//! DesiredLinearState identification number.
+/// DesiredLinearState identification number.
 #define IMC_DESIREDLINEARSTATE 414
-//! DesiredThrottle identification number.
+/// DesiredThrottle identification number.
 #define IMC_DESIREDTHROTTLE 415
-//! Goto identification number.
+/// Goto identification number.
 #define IMC_GOTO 450
-//! PopUp identification number.
+/// PopUp identification number.
 #define IMC_POPUP 451
-//! Teleoperation identification number.
+/// Teleoperation identification number.
 #define IMC_TELEOPERATION 452
-//! Loiter identification number.
+/// Loiter identification number.
 #define IMC_LOITER 453
-//! IdleManeuver identification number.
+/// IdleManeuver identification number.
 #define IMC_IDLEMANEUVER 454
-//! LowLevelControl identification number.
+/// LowLevelControl identification number.
 #define IMC_LOWLEVELCONTROL 455
-//! Rows identification number.
+/// Rows identification number.
 #define IMC_ROWS 456
-//! FollowPath identification number.
+/// FollowPath identification number.
 #define IMC_FOLLOWPATH 457
-//! PathPoint identification number.
+/// PathPoint identification number.
 #define IMC_PATHPOINT 458
-//! YoYo identification number.
+/// YoYo identification number.
 #define IMC_YOYO 459
-//! TeleoperationDone identification number.
+/// TeleoperationDone identification number.
 #define IMC_TELEOPERATIONDONE 460
-//! StationKeeping identification number.
+/// StationKeeping identification number.
 #define IMC_STATIONKEEPING 461
-//! Elevator identification number.
+/// Elevator identification number.
 #define IMC_ELEVATOR 462
-//! FollowTrajectory identification number.
+/// FollowTrajectory identification number.
 #define IMC_FOLLOWTRAJECTORY 463
-//! TrajectoryPoint identification number.
+/// TrajectoryPoint identification number.
 #define IMC_TRAJECTORYPOINT 464
-//! CustomManeuver identification number.
+/// CustomManeuver identification number.
 #define IMC_CUSTOMMANEUVER 465
-//! VehicleFormation identification number.
+/// VehicleFormation identification number.
 #define IMC_VEHICLEFORMATION 466
-//! VehicleFormationParticipant identification number.
+/// VehicleFormationParticipant identification number.
 #define IMC_VEHICLEFORMATIONPARTICIPANT 467
-//! StopManeuver identification number.
+/// StopManeuver identification number.
 #define IMC_STOPMANEUVER 468
-//! RegisterManeuver identification number.
+/// RegisterManeuver identification number.
 #define IMC_REGISTERMANEUVER 469
-//! ManeuverControlState identification number.
+/// ManeuverControlState identification number.
 #define IMC_MANEUVERCONTROLSTATE 470
-//! FollowSystem identification number.
+/// FollowSystem identification number.
 #define IMC_FOLLOWSYSTEM 471
-//! CommsRelay identification number.
+/// CommsRelay identification number.
 #define IMC_COMMSRELAY 472
-//! CoverArea identification number.
+/// CoverArea identification number.
 #define IMC_COVERAREA 473
-//! PolygonVertex identification number.
+/// PolygonVertex identification number.
 #define IMC_POLYGONVERTEX 474
-//! CompassCalibration identification number.
+/// CompassCalibration identification number.
 #define IMC_COMPASSCALIBRATION 475
-//! FormationParameters identification number.
+/// FormationParameters identification number.
 #define IMC_FORMATIONPARAMETERS 476
-//! FormationPlanExecution identification number.
+/// FormationPlanExecution identification number.
 #define IMC_FORMATIONPLANEXECUTION 477
-//! FollowReference identification number.
+/// FollowReference identification number.
 #define IMC_FOLLOWREFERENCE 478
-//! Reference identification number.
+/// Reference identification number.
 #define IMC_REFERENCE 479
-//! FollowRefState identification number.
+/// FollowRefState identification number.
 #define IMC_FOLLOWREFSTATE 480
-//! FormationMonitor identification number.
+/// FormationMonitor identification number.
 #define IMC_FORMATIONMONITOR 481
-//! RelativeState identification number.
+/// RelativeState identification number.
 #define IMC_RELATIVESTATE 482
-//! Dislodge identification number.
+/// Dislodge identification number.
 #define IMC_DISLODGE 483
-//! Formation identification number.
+/// Formation identification number.
 #define IMC_FORMATION 484
-//! Launch identification number.
+/// Launch identification number.
 #define IMC_LAUNCH 485
-//! Drop identification number.
+/// Drop identification number.
 #define IMC_DROP 486
-//! ScheduledGoto identification number.
+/// ScheduledGoto identification number.
 #define IMC_SCHEDULEDGOTO 487
-//! RowsCoverage identification number.
+/// RowsCoverage identification number.
 #define IMC_ROWSCOVERAGE 488
-//! Sample identification number.
+/// Sample identification number.
 #define IMC_SAMPLE 489
-//! ImageTracking identification number.
+/// ImageTracking identification number.
 #define IMC_IMAGETRACKING 490
-//! Takeoff identification number.
+/// Takeoff identification number.
 #define IMC_TAKEOFF 491
-//! Land identification number.
+/// Land identification number.
 #define IMC_LAND 492
-//! AutonomousSection identification number.
+/// AutonomousSection identification number.
 #define IMC_AUTONOMOUSSECTION 493
-//! FollowPoint identification number.
+/// FollowPoint identification number.
 #define IMC_FOLLOWPOINT 494
-//! Alignment identification number.
+/// Alignment identification number.
 #define IMC_ALIGNMENT 495
-//! StationKeepingExtended identification number.
+/// StationKeepingExtended identification number.
 #define IMC_STATIONKEEPINGEXTENDED 496
-//! ManeuverDone identification number.
+/// ManeuverDone identification number.
 #define IMC_MANEUVERDONE 497
-//! Magnetometer identification number.
+/// Magnetometer identification number.
 #define IMC_MAGNETOMETER 499
-//! VehicleState identification number.
+/// VehicleState identification number.
 #define IMC_VEHICLESTATE 500
-//! VehicleCommand identification number.
+/// VehicleCommand identification number.
 #define IMC_VEHICLECOMMAND 501
-//! MonitorEntityState identification number.
+/// MonitorEntityState identification number.
 #define IMC_MONITORENTITYSTATE 502
-//! EntityMonitoringState identification number.
+/// EntityMonitoringState identification number.
 #define IMC_ENTITYMONITORINGSTATE 503
-//! OperationalLimits identification number.
+/// OperationalLimits identification number.
 #define IMC_OPERATIONALLIMITS 504
-//! GetOperationalLimits identification number.
+/// GetOperationalLimits identification number.
 #define IMC_GETOPERATIONALLIMITS 505
-//! Calibration identification number.
+/// Calibration identification number.
 #define IMC_CALIBRATION 506
-//! ControlLoops identification number.
+/// ControlLoops identification number.
 #define IMC_CONTROLLOOPS 507
-//! VehicleMedium identification number.
+/// VehicleMedium identification number.
 #define IMC_VEHICLEMEDIUM 508
-//! Collision identification number.
+/// Collision identification number.
 #define IMC_COLLISION 509
-//! FormState identification number.
+/// FormState identification number.
 #define IMC_FORMSTATE 510
-//! AutopilotMode identification number.
+/// AutopilotMode identification number.
 #define IMC_AUTOPILOTMODE 511
-//! FormationState identification number.
+/// FormationState identification number.
 #define IMC_FORMATIONSTATE 512
-//! ReportControl identification number.
+/// ReportControl identification number.
 #define IMC_REPORTCONTROL 513
-//! StateReport identification number.
+/// StateReport identification number.
 #define IMC_STATEREPORT 514
-//! TransmissionRequest identification number.
+/// TransmissionRequest identification number.
 #define IMC_TRANSMISSIONREQUEST 515
-//! TransmissionStatus identification number.
+/// TransmissionStatus identification number.
 #define IMC_TRANSMISSIONSTATUS 516
-//! SmsRequest identification number.
+/// SmsRequest identification number.
 #define IMC_SMSREQUEST 517
-//! SmsStatus identification number.
+/// SmsStatus identification number.
 #define IMC_SMSSTATUS 518
-//! VtolState identification number.
+/// VtolState identification number.
 #define IMC_VTOLSTATE 519
-//! ArmingState identification number.
+/// ArmingState identification number.
 #define IMC_ARMINGSTATE 520
-//! TCPRequest identification number.
+/// TCPRequest identification number.
 #define IMC_TCPREQUEST 521
-//! TCPStatus identification number.
+/// TCPStatus identification number.
 #define IMC_TCPSTATUS 522
-//! AssetReport identification number.
+/// AssetReport identification number.
 #define IMC_ASSETREPORT 525
-//! Abort identification number.
+/// Abort identification number.
 #define IMC_ABORT 550
-//! PlanSpecification identification number.
+/// PlanSpecification identification number.
 #define IMC_PLANSPECIFICATION 551
-//! PlanManeuver identification number.
+/// PlanManeuver identification number.
 #define IMC_PLANMANEUVER 552
-//! PlanTransition identification number.
+/// PlanTransition identification number.
 #define IMC_PLANTRANSITION 553
-//! EmergencyControl identification number.
+/// EmergencyControl identification number.
 #define IMC_EMERGENCYCONTROL 554
-//! EmergencyControlState identification number.
+/// EmergencyControlState identification number.
 #define IMC_EMERGENCYCONTROLSTATE 555
-//! PlanDB identification number.
+/// PlanDB identification number.
 #define IMC_PLANDB 556
-//! PlanDBState identification number.
+/// PlanDBState identification number.
 #define IMC_PLANDBSTATE 557
-//! PlanDBInformation identification number.
+/// PlanDBInformation identification number.
 #define IMC_PLANDBINFORMATION 558
-//! PlanControl identification number.
+/// PlanControl identification number.
 #define IMC_PLANCONTROL 559
-//! PlanControlState identification number.
+/// PlanControlState identification number.
 #define IMC_PLANCONTROLSTATE 560
-//! PlanVariable identification number.
+/// PlanVariable identification number.
 #define IMC_PLANVARIABLE 561
-//! PlanGeneration identification number.
+/// PlanGeneration identification number.
 #define IMC_PLANGENERATION 562
-//! LeaderState identification number.
+/// LeaderState identification number.
 #define IMC_LEADERSTATE 563
-//! PlanStatistics identification number.
+/// PlanStatistics identification number.
 #define IMC_PLANSTATISTICS 564
-//! ReportedState identification number.
+/// ReportedState identification number.
 #define IMC_REPORTEDSTATE 600
-//! RemoteSensorInfo identification number.
+/// RemoteSensorInfo identification number.
 #define IMC_REMOTESENSORINFO 601
-//! Map identification number.
+/// Map identification number.
 #define IMC_MAP 602
-//! MapFeature identification number.
+/// MapFeature identification number.
 #define IMC_MAPFEATURE 603
-//! MapPoint identification number.
+/// MapPoint identification number.
 #define IMC_MAPPOINT 604
-//! CcuEvent identification number.
+/// CcuEvent identification number.
 #define IMC_CCUEVENT 606
-//! VehicleLinks identification number.
+/// VehicleLinks identification number.
 #define IMC_VEHICLELINKS 650
-//! TrexObservation identification number.
+/// TrexObservation identification number.
 #define IMC_TREXOBSERVATION 651
-//! TrexCommand identification number.
+/// TrexCommand identification number.
 #define IMC_TREXCOMMAND 652
-//! TrexOperation identification number.
+/// TrexOperation identification number.
 #define IMC_TREXOPERATION 655
-//! TrexAttribute identification number.
+/// TrexAttribute identification number.
 #define IMC_TREXATTRIBUTE 656
-//! TrexToken identification number.
+/// TrexToken identification number.
 #define IMC_TREXTOKEN 657
-//! TrexPlan identification number.
+/// TrexPlan identification number.
 #define IMC_TREXPLAN 658
-//! Event identification number.
+/// Event identification number.
 #define IMC_EVENT 660
-//! CompressedImage identification number.
+/// CompressedImage identification number.
 #define IMC_COMPRESSEDIMAGE 702
-//! ImageTxSettings identification number.
+/// ImageTxSettings identification number.
 #define IMC_IMAGETXSETTINGS 703
-//! RemoteState identification number.
+/// RemoteState identification number.
 #define IMC_REMOTESTATE 750
-//! Target identification number.
+/// Target identification number.
 #define IMC_TARGET 800
-//! EntityParameter identification number.
+/// EntityParameter identification number.
 #define IMC_ENTITYPARAMETER 801
-//! EntityParameters identification number.
+/// EntityParameters identification number.
 #define IMC_ENTITYPARAMETERS 802
-//! QueryEntityParameters identification number.
+/// QueryEntityParameters identification number.
 #define IMC_QUERYENTITYPARAMETERS 803
-//! SetEntityParameters identification number.
+/// SetEntityParameters identification number.
 #define IMC_SETENTITYPARAMETERS 804
-//! SaveEntityParameters identification number.
+/// SaveEntityParameters identification number.
 #define IMC_SAVEENTITYPARAMETERS 805
-//! CreateSession identification number.
+/// CreateSession identification number.
 #define IMC_CREATESESSION 806
-//! CloseSession identification number.
+/// CloseSession identification number.
 #define IMC_CLOSESESSION 807
-//! SessionSubscription identification number.
+/// SessionSubscription identification number.
 #define IMC_SESSIONSUBSCRIPTION 808
-//! SessionKeepAlive identification number.
+/// SessionKeepAlive identification number.
 #define IMC_SESSIONKEEPALIVE 809
-//! SessionStatus identification number.
+/// SessionStatus identification number.
 #define IMC_SESSIONSTATUS 810
-//! PushEntityParameters identification number.
+/// PushEntityParameters identification number.
 #define IMC_PUSHENTITYPARAMETERS 811
-//! PopEntityParameters identification number.
+/// PopEntityParameters identification number.
 #define IMC_POPENTITYPARAMETERS 812
-//! IoEvent identification number.
+/// IoEvent identification number.
 #define IMC_IOEVENT 813
-//! UamTxFrame identification number.
+/// UamTxFrame identification number.
 #define IMC_UAMTXFRAME 814
-//! UamRxFrame identification number.
+/// UamRxFrame identification number.
 #define IMC_UAMRXFRAME 815
-//! UamTxStatus identification number.
+/// UamTxStatus identification number.
 #define IMC_UAMTXSTATUS 816
-//! UamRxRange identification number.
+/// UamRxRange identification number.
 #define IMC_UAMRXRANGE 817
-//! UamTxRange identification number.
+/// UamTxRange identification number.
 #define IMC_UAMTXRANGE 818
-//! FormCtrlParam identification number.
+/// FormCtrlParam identification number.
 #define IMC_FORMCTRLPARAM 820
-//! FormationEval identification number.
+/// FormationEval identification number.
 #define IMC_FORMATIONEVAL 821
-//! FormationControlParams identification number.
+/// FormationControlParams identification number.
 #define IMC_FORMATIONCONTROLPARAMS 822
-//! FormationEvaluation identification number.
+/// FormationEvaluation identification number.
 #define IMC_FORMATIONEVALUATION 823
-//! SoiWaypoint identification number.
+/// SoiWaypoint identification number.
 #define IMC_SOIWAYPOINT 850
-//! SoiPlan identification number.
+/// SoiPlan identification number.
 #define IMC_SOIPLAN 851
-//! SoiCommand identification number.
+/// SoiCommand identification number.
 #define IMC_SOICOMMAND 852
-//! SoiState identification number.
+/// SoiState identification number.
 #define IMC_SOISTATE 853
-//! MessagePart identification number.
+/// MessagePart identification number.
 #define IMC_MESSAGEPART 877
-//! NeptusBlob identification number.
+/// NeptusBlob identification number.
 #define IMC_NEPTUSBLOB 888
-//! Aborted identification number.
+/// Aborted identification number.
 #define IMC_ABORTED 889
-//! UsblAngles identification number.
+/// UsblAngles identification number.
 #define IMC_USBLANGLES 890
-//! UsblPosition identification number.
+/// UsblPosition identification number.
 #define IMC_USBLPOSITION 891
-//! UsblFix identification number.
+/// UsblFix identification number.
 #define IMC_USBLFIX 892
-//! ParametersXml identification number.
+/// ParametersXml identification number.
 #define IMC_PARAMETERSXML 893
-//! GetParametersXml identification number.
+/// GetParametersXml identification number.
 #define IMC_GETPARAMETERSXML 894
-//! SetImageCoords identification number.
+/// SetImageCoords identification number.
 #define IMC_SETIMAGECOORDS 895
-//! GetImageCoords identification number.
+/// GetImageCoords identification number.
 #define IMC_GETIMAGECOORDS 896
-//! GetWorldCoordinates identification number.
+/// GetWorldCoordinates identification number.
 #define IMC_GETWORLDCOORDINATES 897
-//! UsblAnglesExtended identification number.
+/// UsblAnglesExtended identification number.
 #define IMC_USBLANGLESEXTENDED 898
-//! UsblPositionExtended identification number.
+/// UsblPositionExtended identification number.
 #define IMC_USBLPOSITIONEXTENDED 899
-//! UsblFixExtended identification number.
+/// UsblFixExtended identification number.
 #define IMC_USBLFIXEXTENDED 900
-//! UsblModem identification number.
+/// UsblModem identification number.
 #define IMC_USBLMODEM 901
-//! UsblConfig identification number.
+/// UsblConfig identification number.
 #define IMC_USBLCONFIG 902
-//! DissolvedOrganicMatter identification number.
+/// DissolvedOrganicMatter identification number.
 #define IMC_DISSOLVEDORGANICMATTER 903
-//! OpticalBackscatter identification number.
+/// OpticalBackscatter identification number.
 #define IMC_OPTICALBACKSCATTER 904
-//! Tachograph identification number.
+/// Tachograph identification number.
 #define IMC_TACHOGRAPH 905
-//! ApmStatus identification number.
+/// ApmStatus identification number.
 #define IMC_APMSTATUS 906
-//! SadcReadings identification number.
+/// SadcReadings identification number.
 #define IMC_SADCREADINGS 907
-//! DmsDetection identification number.
+/// DmsDetection identification number.
 #define IMC_DMSDETECTION 908
-//! HomePosition identification number.
+/// HomePosition identification number.
 #define IMC_HOMEPOSITION 909
-//! CurrentProfile identification number.
+/// CurrentProfile identification number.
 #define IMC_CURRENTPROFILE 1014
-//! CurrentProfileCell identification number.
+/// CurrentProfileCell identification number.
 #define IMC_CURRENTPROFILECELL 1015
-//! ADCPBeam identification number.
+/// ADCPBeam identification number.
 #define IMC_ADCPBEAM 1016
-//! GpioState identification number.
+/// GpioState identification number.
 #define IMC_GPIOSTATE 2000
-//! GpioStateGet identification number.
+/// GpioStateGet identification number.
 #define IMC_GPIOSTATEGET 2001
-//! GpioStateSet identification number.
+/// GpioStateSet identification number.
 #define IMC_GPIOSTATESET 2002
-//! ColoredDissolvedOrganicMatter identification number.
+/// ColoredDissolvedOrganicMatter identification number.
 #define IMC_COLOREDDISSOLVEDORGANICMATTER 2003
-//! FluorescentDissolvedOrganicMatter identification number.
+/// FluorescentDissolvedOrganicMatter identification number.
 #define IMC_FLUORESCENTDISSOLVEDORGANICMATTER 2004
-//! TotalMagIntensity identification number.
+/// TotalMagIntensity identification number.
 #define IMC_TOTALMAGINTENSITY 2006
-//! CommRestriction identification number.
+/// CommRestriction identification number.
 #define IMC_COMMRESTRICTION 2010
 
 #endif

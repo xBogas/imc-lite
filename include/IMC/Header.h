@@ -66,23 +66,23 @@ static uint64_t to_fp64(const uint32_t var)
 }
 
 namespace IMC {
-//! Header format.
+/// Header format.
 struct Header {
-	//! Synchronization Number.
+	/// Synchronization Number.
 	uint16_t sync;
-	//! Message Identification Number.
+	/// Message Identification Number.
 	uint16_t mgid;
-	//! Message size.
+	/// Message size.
 	uint16_t size;
-	//! Source Address.
+	/// Source Address.
 	uint16_t src;
-	//! Destination Address.
+	/// Destination Address.
 	uint16_t dst;
-	//! Source Entity.
+	/// Source Entity.
 	uint8_t src_ent;
-	//! Destination Entity.
+	/// Destination Entity.
 	uint8_t dst_ent;
-	//! Time stamp.
+	/// Time stamp.
 	fp64_t timestamp;
 };
 } // namespace IMC

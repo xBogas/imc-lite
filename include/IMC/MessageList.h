@@ -16,44 +16,44 @@
 #include "IMC/Serialization.h"
 
 namespace IMC {
-//! Message list.
+/// Message list.
 template <typename Type>
 class MessageList {
 public:
 	typedef typename std::vector<Type*>::const_iterator const_iterator;
 
-	//! Default constructor.
+	/// Default constructor.
 	MessageList(void)
 	  : m_parent(NULL)
 	{ }
 
-	//! Copy constructor. Copy the contents of other to this
-	//! instance.
-	//! @param[in] other message.
+	/// Copy constructor. Copy the contents of other to this
+	/// instance.
+	/// @param[in] other message.
 	MessageList(const MessageList& other)
 	  : m_parent(NULL)
 	{
 		copy(other);
 	}
 
-	//! Default destructor.
+	/// Default destructor.
 	~MessageList(void)
 	{
 		clear();
 	}
 
-	//! Set the parent of the message list. This object will be used
-	//! to synchronize the header fields of the messages in the
-	//! list.
-	//! @param[in] parent message list parent.
+	/// Set the parent of the message list. This object will be used
+	/// to synchronize the header fields of the messages in the
+	/// list.
+	/// @param[in] parent message list parent.
 	void setParent(const Message* parent)
 	{
 		m_parent = parent;
 	}
 
-	//! All the elements of the list are deleted: their destructors
-	//! are called, and then they are removed from the vector
-	//! container, leaving the container with a size of 0.
+	/// All the elements of the list are deleted: their destructors
+	/// are called, and then they are removed from the vector
+	/// container, leaving the container with a size of 0.
 	void clear(void)
 	{
 		for (unsigned i = 0; i < m_list.size(); i++) {
@@ -65,40 +65,40 @@ public:
 		m_list.clear();
 	}
 
-	//! Retrieve the number of elements in this list.
-	//! @return number of elements in the list.
+	/// Retrieve the number of elements in this list.
+	/// @return number of elements in the list.
 	size_t size(void) const
 	{
 		return m_list.size();
 	}
 
-	//! Return an iterator referring to the first element in the
-	//! list container.
-	//! @return iterator.
+	/// Return an iterator referring to the first element in the
+	/// list container.
+	/// @return iterator.
 	const_iterator begin(void) const
 	{
 		return m_list.begin();
 	}
 
-	//! Returns an iterator referring to the past-the-end element in
-	//! the list container.
-	//! @return iterator.
+	/// Returns an iterator referring to the past-the-end element in
+	/// the list container.
+	/// @return iterator.
 	const_iterator end(void) const
 	{
 		return m_list.end();
 	}
 
-	//! Check if the list is empty.
-	//! @return true if the list is empty.
+	/// Check if the list is empty.
+	/// @return true if the list is empty.
 	bool empty(void) const
 	{
 		return m_list.empty();
 	}
 
-	//! Add a new element at the end of the list, after its current
-	//! last element. The content of this new element is initialized
-	//! to a copy of 'msg'.
-	//! @param[in] msg message.
+	/// Add a new element at the end of the list, after its current
+	/// last element. The content of this new element is initialized
+	/// to a copy of 'msg'.
+	/// @param[in] msg message.
 	void push_back(const Type& msg)
 	{
 		Type* p_msg = (Type*)msg.clone();
@@ -109,10 +109,10 @@ public:
 		m_list.push_back(p_msg);
 	}
 
-	//! Add a new element at the end of the list, after its current
-	//! last element. The content of this new element is initialized
-	//! to 'msg'.
-	//! @param[in] msg pointer to message.
+	/// Add a new element at the end of the list, after its current
+	/// last element. The content of this new element is initialized
+	/// to 'msg'.
+	/// @param[in] msg pointer to message.
 	void push_back(const Type* msg)
 	{
 		if (msg == NULL) {
@@ -123,8 +123,8 @@ public:
 		push_back(*msg);
 	}
 
-	//! Retrieve the amount of bytes needed to serialize the object.
-	//! @return amount of bytes needed for serialization.
+	/// Retrieve the amount of bytes needed to serialize the object.
+	/// @return amount of bytes needed for serialization.
 	unsigned getSerializationSize(void) const
 	{
 		int nbytes = 2;
@@ -139,19 +139,19 @@ public:
 		return nbytes;
 	}
 
-	//! Assignment operator. Replace the contents of 'this' instance
-	//! with the contents of 'other'.
-	//! @param[in] other message.
-	//! @return reference to this object.
+	/// Assignment operator. Replace the contents of 'this' instance
+	/// with the contents of 'other'.
+	/// @param[in] other message.
+	/// @return reference to this object.
 	MessageList& operator=(const MessageList& other)
 	{
 		copy(other);
 		return *this;
 	}
 
-	//! Compare two instances for equality.
-	//! @param[in] other object to compare.
-	//! @return true if objects are equal, false otherwise.
+	/// Compare two instances for equality.
+	/// @param[in] other object to compare.
+	/// @return true if objects are equal, false otherwise.
 	bool operator==(const MessageList& other) const
 	{
 		if (size() != other.size())
@@ -171,17 +171,17 @@ public:
 		return true;
 	}
 
-	//! Compare two instances for inequality.
-	//! @param[in] other object to compare.
-	//! @return true if objects are not equal, false otherwise.
+	/// Compare two instances for inequality.
+	/// @param[in] other object to compare.
+	/// @return true if objects are not equal, false otherwise.
 	inline bool operator!=(const MessageList& other) const
 	{
 		return !(*this == other);
 	}
 
-	//! Serialize instance.
-	//! @param[in] bfr buffer.
-	//! @return amount of bytes used.
+	/// Serialize instance.
+	/// @param[in] bfr buffer.
+	/// @return amount of bytes used.
 	uint16_t serialize(uint8_t* bfr) const
 	{
 		uint16_t n_msg = m_list.size();
@@ -199,10 +199,10 @@ public:
 		return getSerializationSize();
 	}
 
-	//! Deserialize message from byte buffer.
-	//! @param[in] bfr buffer.
-	//! @param[in] bfr_len buffer size.
-	//! @return amount of deserialized bytes.
+	/// Deserialize message from byte buffer.
+	/// @param[in] bfr buffer.
+	/// @param[in] bfr_len buffer size.
+	/// @return amount of deserialized bytes.
 	uint16_t deserialize(const uint8_t* bfr, uint16_t& bfr_len)
 	{
 		const uint8_t* ptr = bfr;
@@ -320,9 +320,9 @@ public:
 	}
 
 private:
-	//! Parent message.
+	/// Parent message.
 	const Message* m_parent;
-	//! List of messages.
+	/// List of messages.
 	std::vector<Type*> m_list;
 
 	void synchronizeHeader(Type* msg)

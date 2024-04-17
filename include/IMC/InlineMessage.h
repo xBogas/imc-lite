@@ -118,7 +118,7 @@ public:
 		return m_msg;
 	}
 
-	//! Assignment operator.
+	/// Assignment operator.
 	InlineMessage& operator=(const InlineMessage& other)
 	{
 		clear();
@@ -191,13 +191,13 @@ public:
 	}
 
 private:
-	//! Parent message.
+	/// Parent message.
 	const Message* m_parent;
-	//! Inlined message.
+	/// Inlined message.
 	Type* m_msg;
 
-	//! Replace current message.
-	//! @param[in] msg message.
+	/// Replace current message.
+	/// @param[in] msg message.
 	void replace(Type* msg)
 	{
 		clear();

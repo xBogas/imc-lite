@@ -37,63 +37,63 @@
 
 namespace IMC
 {
-  //! Control Loops Mask.
+  /// Control Loops Mask.
   enum CLoopsMask
   {
-    //! None.
+    /// None.
     CL_NONE = 0x00000000,
-    //! Path Control.
+    /// Path Control.
     CL_PATH = 0x00000001,
-    //! Teleoperation Control.
+    /// Teleoperation Control.
     CL_TELEOPERATION = 0x00000002,
-    //! Altitude Control.
+    /// Altitude Control.
     CL_ALTITUDE = 0x00000004,
-    //! Depth Control.
+    /// Depth Control.
     CL_DEPTH = 0x00000008,
-    //! Roll Control.
+    /// Roll Control.
     CL_ROLL = 0x00000010,
-    //! Pitch Control.
+    /// Pitch Control.
     CL_PITCH = 0x00000020,
-    //! Yaw Control.
+    /// Yaw Control.
     CL_YAW = 0x00000040,
-    //! Speed Control.
+    /// Speed Control.
     CL_SPEED = 0x00000080,
-    //! Yaw Rate Control.
+    /// Yaw Rate Control.
     CL_YAW_RATE = 0x00000100,
-    //! Vertical Rate Control.
+    /// Vertical Rate Control.
     CL_VERTICAL_RATE = 0x00000200,
-    //! Torque Control.
+    /// Torque Control.
     CL_TORQUE = 0x00000400,
-    //! Force Control.
+    /// Force Control.
     CL_FORCE = 0x00000800,
-    //! Velocity Control.
+    /// Velocity Control.
     CL_VELOCITY = 0x00001000,
-    //! Throttle Control.
+    /// Throttle Control.
     CL_THROTTLE = 0x00002000,
-    //! Unspecified External Control.
+    /// Unspecified External Control.
     CL_EXTERNAL = 0x40000000,
-    //! Non-overridable control.
+    /// Non-overridable control.
     CL_NO_OVERRIDE = 0x80000000,
-    //! All.
+    /// All.
     CL_ALL = 0xFFFFFFFF
   };
 
-  //! Operational Limits Mask.
+  /// Operational Limits Mask.
   enum OpLimitsMask
   {
-    //! Maximum Depth.
+    /// Maximum Depth.
     OPL_MAX_DEPTH = 0x01,
-    //! Minimum Altitude.
+    /// Minimum Altitude.
     OPL_MIN_ALT = 0x02,
-    //! Maximum Altitude.
+    /// Maximum Altitude.
     OPL_MAX_ALT = 0x04,
-    //! Minimum Speed.
+    /// Minimum Speed.
     OPL_MIN_SPEED = 0x08,
-    //! Maximum Speed.
+    /// Maximum Speed.
     OPL_MAX_SPEED = 0x10,
-    //! Maximum Vertical Rate.
+    /// Maximum Vertical Rate.
     OPL_MAX_VRATE = 0x20,
-    //! Operation Area.
+    /// Operation Area.
     OPL_AREA = 0x40
   };
 }

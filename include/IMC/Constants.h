@@ -35,27 +35,27 @@
 #ifndef IMC_CONSTANTS_HPP_INCLUDED_
 #define IMC_CONSTANTS_HPP_INCLUDED_
 
-//! IMC version string.
+/// IMC version string.
 #define IMC_CONST_VERSION "5.4.30"
-//! Git repository information.
+/// Git repository information.
 #define IMC_CONST_GIT_INFO "2023-10-19 867be70  (HEAD -> master, origin/master, origin/HEAD)"
-//! MD5 sum of XML specification file.
+/// MD5 sum of XML specification file.
 #define IMC_CONST_MD5 "762ef830be415e1c3e6f5b429829f51a"
-//! Synchronization number.
+/// Synchronization number.
 #define IMC_CONST_SYNC 0xFE54
-//! Reversed synchronization number.
+/// Reversed synchronization number.
 #define IMC_CONST_SYNC_REV 0x54FE
-//! Size of the header in bytes.
+/// Size of the header in bytes.
 #define IMC_CONST_HEADER_SIZE 20
-//! Size of the footer in bytes.
+/// Size of the footer in bytes.
 #define IMC_CONST_FOOTER_SIZE 2
-//! Identification number of the null message.
+/// Identification number of the null message.
 #define IMC_CONST_NULL_ID 65535
-//! Maximum message data size.
+/// Maximum message data size.
 #define IMC_CONST_MAX_SIZE 65535
-//! Unknown entity identifier.
+/// Unknown entity identifier.
 #define IMC_CONST_UNK_EID 255
-//! System entity identifier.
+/// System entity identifier.
 #define IMC_CONST_SYS_EID 0
 
 #endif

@@ -37,90 +37,90 @@
 
 namespace IMC
 {
-  //! Boolean Value.
+  /// Boolean Value.
   enum Boolean
   {
-    //! False.
+    /// False.
     BOOL_FALSE = 0,
-    //! True.
+    /// True.
     BOOL_TRUE = 1
   };
 
-  //! Controlled Mode.
+  /// Controlled Mode.
   enum ControlledMode
   {
-    //! Relinquish / Handoff Control.
+    /// Relinquish / Handoff Control.
     CTLMD_RELINQUISH_HANDOFF_CTL = 0,
-    //! Request Control.
+    /// Request Control.
     CTLMD_REQUEST_CTL = 1,
-    //! Override Control.
+    /// Override Control.
     CTLMD_OVERRIDE_CTL = 2
   };
 
-  //! Speed Units.
+  /// Speed Units.
   enum SpeedUnits
   {
-    //! Meters per second.
+    /// Meters per second.
     SUNITS_METERS_PS = 0,
-    //! RPM.
+    /// RPM.
     SUNITS_RPM = 1,
-    //! Percentage.
+    /// Percentage.
     SUNITS_PERCENTAGE = 2
   };
 
-  //! System Type.
+  /// System Type.
   enum SystemType
   {
-    //! CCU.
+    /// CCU.
     SYSTEMTYPE_CCU = 0,
-    //! Human-portable Sensor.
+    /// Human-portable Sensor.
     SYSTEMTYPE_HUMANSENSOR = 1,
-    //! UUV.
+    /// UUV.
     SYSTEMTYPE_UUV = 2,
-    //! USV.
+    /// USV.
     SYSTEMTYPE_USV = 3,
-    //! UAV.
+    /// UAV.
     SYSTEMTYPE_UAV = 4,
-    //! UGV.
+    /// UGV.
     SYSTEMTYPE_UGV = 5,
-    //! Static sensor.
+    /// Static sensor.
     SYSTEMTYPE_STATICSENSOR = 6,
-    //! Mobile sensor.
+    /// Mobile sensor.
     SYSTEMTYPE_MOBILESENSOR = 7,
-    //! Wireless Sensor Network.
+    /// Wireless Sensor Network.
     SYSTEMTYPE_WSN = 8
   };
 
-  //! Z Units.
+  /// Z Units.
   enum ZUnits
   {
-    //! None.
+    /// None.
     Z_NONE = 0,
-    //! Depth.
+    /// Depth.
     Z_DEPTH = 1,
-    //! Altitude.
+    /// Altitude.
     Z_ALTITUDE = 2,
-    //! Height.
+    /// Height.
     Z_HEIGHT = 3
   };
 
-  //! RSSI Units.
+  /// RSSI Units.
   enum RSSIUnits
   {
-    //! Decibel.
+    /// Decibel.
     RSSIUNITS_dB = 0,
-    //! Percentage.
+    /// Percentage.
     RSSIUNITS_PERCENTAGE = 1
   };
 
-  //! UAV Type.
+  /// UAV Type.
   enum UAVType
   {
-    //! Fixed-Wing.
+    /// Fixed-Wing.
     UAVTYPE_FIXEDWING = 0,
-    //! Copter.
+    /// Copter.
     UAVTYPE_COPTER = 1,
-    //! Vtol.
+    /// Vtol.
     UAVTYPE_VTOL = 2
   };
 }
