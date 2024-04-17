@@ -127,7 +127,7 @@ struct thread* sched_pop(void)
 
 void sched_start(void)
 {
-	NVIC_SetPriority(SysTick_IRQn, 0x00);
+	NVIC_SetPriority(SysTick_IRQn, 0x0f);
 	NVIC_SetPriority(PendSV_IRQn, 0xff);
 	NVIC_SetPriority(TIM2_IRQn, 0x02); // To dispatch threads
 
@@ -184,9 +184,8 @@ void osSystickHandler(void)
 	trig_PendSV();
 }
 
-/* void yield(void)
+void yield(void)
 {
-	error("Use sched_yield instead of yield");
 	// Yield the current thread
 	if (!sched.running)
 		return;
@@ -212,7 +211,7 @@ void osSystickHandler(void)
 	__debug("[yield] %s to %s", sched.current->name, nxt->name);
 	trig_PendSV();
 	sched_unlock();
-} */
+}
 
 void sched_dispatch(struct thread* nxt, struct thread* cur)
 {
