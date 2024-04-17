@@ -244,13 +244,14 @@ void sched_dispatch(struct thread* nxt, struct thread* cur)
 }
 
 // Yield and do not add thread to scheduler
-void sched_yield(struct thread* th)
+void sched_yield(void)
 {
 	if (sched.lock)
 		error("Scheduler is locked");
 
 	sched_lock();
 
+	struct thread* th = sched_get_thr();
 	struct thread* nxt = sched_pop();
 	if (!nxt) {
 		__debug("[yield] from %s going idle", th->name);
@@ -261,9 +262,6 @@ void sched_yield(struct thread* th)
 	}
 
 	__debug("[yield] pop %s", nxt->name);
-
-	if (th != sched.current)
-		error("Thread is not the current thread");
 
 	if (th == nxt) { //! THIS NEEDS TO BE REVIEWED //TODO
 		error("[yield] Thread %s is the same as the next thread", th->name);

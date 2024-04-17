@@ -49,7 +49,8 @@ void sched_push_thr_safe(struct thread* th);
 /// @note This function does not queue current thread
 void sched_dispatch(struct thread* nxt, struct thread* cur);
 
-void sched_yield(struct thread* th);
+/// @brief Yield the current thread indefinitely
+void sched_yield(void);
 
 bool sched_running(void);
 
