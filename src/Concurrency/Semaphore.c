@@ -49,12 +49,12 @@ static inline bool block_thread(struct sem* sem)
 {
 	while (sem->count <= 0) {
 		struct thread* thr = sched_get_thr();
-		debug("Thread %s is blocked", thr->name);
 		list_append(sem->wait_list, thr);
 		thr->state = THREAD_BLOCKED;
 
 		sched_yield();
 	}
+	sem->count--;
 
 	return true;
 }
@@ -66,7 +66,6 @@ static inline bool block_thread(struct sem* sem)
 bool sem_wait(struct sem* sem, u32 ms)
 {
 	// Protect the semaphore
-
 	if (ms == 0) // Wait indefinitely
 		return block_thread(sem);
 
@@ -79,7 +78,6 @@ bool sem_wait(struct sem* sem, u32 ms)
 	}
 
 	sem->count--;
-
 	// Release the semaphore
 	return true;
 }
