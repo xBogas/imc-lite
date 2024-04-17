@@ -10,12 +10,14 @@
 #define CONCURRENCY_SEMAPHORE_H_INCLUDED_
 
 #include "Defines.h"
+#include "Structures/List.h"
 
 _BEGIN_STD_C
 
 // Semaphore structure
 struct sem {
-	s16 count;
+	s16 count;				// Available resources
+	struct list* wait_list; // List of threads waiting for the semaphore
 };
 
 /// @brief Initialize a semaphore
