@@ -144,7 +144,7 @@ void sched_start(void)
 	printk("DebugMonitor priority: %d", prio);
 
 	struct thread* th = sched_pop();
-	ASSERT_ERR(th == NULL, "No threads registered in scheduler!");
+	ASSERT_ERR(th != NULL, "No threads registered in scheduler!");
 	th->in_queue = 0;
 
 	printk("Starting thread %s", th->name);

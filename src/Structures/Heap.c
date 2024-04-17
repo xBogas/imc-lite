@@ -12,14 +12,14 @@ _BEGIN_STD_C
 
 void heap_init(struct heap* hp, u16 cap, heap_fn get_val)
 {
-	ASSERT_ERR(hp == NULL, "Heap is NULL");
+	ASSERT_ERR(hp != NULL, "Heap is NULL");
 
 	hp->size = 0;
 	hp->capacity = cap;
 	hp->cmp = get_val;
 
 	hp->data = (void**)malloc(sizeof(void*) * cap);
-	ASSERT_ERR(hp->data == NULL, "Heap data is NULL");
+	ASSERT_ERR(hp->data != NULL, "Heap data is NULL");
 
 	for (u16 i = 0; i < cap; i++)
 		hp->data[i] = NULL;

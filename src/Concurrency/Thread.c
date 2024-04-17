@@ -38,10 +38,10 @@ struct stack_fr {
 static void thr_stack_init(struct thread* th, u32 stack_size,
 						   thr_fn entry_point)
 {
-	ASSERT_ERR(entry_point == NULL, "Thread entry point is NULL");
+	ASSERT_ERR(entry_point != NULL, "Thread entry point is NULL");
 
 	th->stack_bottom = (u32)malloc(stack_size);
-    ASSERT_ERR(th->stack_bottom == 0, "Failed to allocate stack for thread %s", th->name);
+    ASSERT_ERR(th->stack_bottom != 0, "Failed to allocate stack for thread %s", th->name);
 
 	th->stack_ptr = th->stack_bottom + stack_size - sizeof(struct stack_fr);
 	struct stack_fr* sf = (struct stack_fr*)th->stack_ptr;
@@ -67,9 +67,9 @@ static void thr_stack_init(struct thread* th, u32 stack_size,
 
 void thread_init(struct thread* th, u32 stack_size, const char* name, thr_fn fp)
 {
-	ASSERT_ERR(th == NULL, "Thread is NULL");
-	ASSERT_ERR(stack_size < MIN_STACK, "Stack size is invalid");
-	ASSERT_ERR(stack_size % 4 != 0, "Stack size must be a multiple of 4");
+	ASSERT_ERR(th != NULL, "Thread is NULL");
+	ASSERT_ERR(stack_size >= MIN_STACK, "Stack size is invalid");
+	ASSERT_ERR(stack_size % 4 == 0, "Stack size must be a multiple of 4");
 
 	th->stack_ptr = 0;
 	th->stack_bottom = 0;
