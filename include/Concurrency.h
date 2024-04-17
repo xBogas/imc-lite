@@ -11,6 +11,7 @@
 
 #include "Concurrency/Mutex.h"
 #include "Concurrency/Scheduler.h"
+#include "Concurrency/Semaphore.h"
 #include "Concurrency/Thread.h"
 
 #endif
