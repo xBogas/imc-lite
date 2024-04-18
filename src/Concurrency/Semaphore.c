@@ -95,7 +95,7 @@ static inline void wake_up(struct list* lst)
 		struct thread* thr = (struct thread*)list_pop(lst);
 		thr->state = THREAD_READY;
 
-		if (thr->priority > max->priority) {
+		if (thr->priority < max->priority) {
 			sched_push_thr(max);
 			max = thr;
 		} else
