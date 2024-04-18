@@ -200,8 +200,7 @@ void yield(void)
 	}
 	__debug("[yield] pop %s", nxt->name);
 
-	if (sched.current->state == THREAD_RUNNING &&
-		sched.current->in_queue == 0) {
+	if (sched.current->in_queue == 0) {
 		sched_push_thr(sched.current);
 		__debug("[yield] push %s", sched.current->name);
 	}
@@ -262,18 +261,8 @@ void sched_yield(void)
 
 	__debug("[yield] pop %s", nxt->name);
 
-	if (th == nxt) { //! THIS NEEDS TO BE REVIEWED //TODO
-		error("[yield] Thread %s is the same as the next thread", th->name);
-		/* nxt = sched_pop();
-		if (!nxt) {
-			__debug("[yield] from %s going idle", th->name);
-			sched.next = &idle_th;
-			trig_PendSV();
-			sched_unlock();
-			return;
-		}
-		__debug("[yield] pop %s", nxt->name); */
-	}
+	if (th->in_queue) // If thread in queue yield will fail
+		error("[yield] Thread %s in queue", th->name);
 
 	sched.next = nxt;
 
