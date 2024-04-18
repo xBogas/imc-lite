@@ -9,6 +9,8 @@
 #ifndef CONCURRENCY_H_INCLUDED_
 #define CONCURRENCY_H_INCLUDED_
 
+#include "Concurrency/Cond.h"
+#include "Concurrency/MessageQueue.h"
 #include "Concurrency/Mutex.h"
 #include "Concurrency/Scheduler.h"
 #include "Concurrency/Semaphore.h"
