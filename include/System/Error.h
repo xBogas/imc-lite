@@ -13,6 +13,7 @@
 
 _BEGIN_STD_C
 
+/// @brief Initialize the debug system
 void debug_init(void) __attribute__((constructor));
 
 /// @brief Print an error message and exit the program

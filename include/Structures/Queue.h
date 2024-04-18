@@ -43,6 +43,9 @@ struct queue* queue_create(queue_size_t capacity);
 void queue_destroy(struct queue* list);
 
 /// @brief Push an element to the queue
+/// @param list Queue to push the element to
+/// @param data Element to push
+/// @return Error code of the operation
 queue_err_t queue_push(struct queue* list, void* data);
 
 /// @brief Pop an element from the queue

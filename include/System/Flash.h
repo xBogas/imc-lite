@@ -14,7 +14,7 @@
 _BEGIN_STD_C
 
 /// @brief Write to flash
-/// @param addr Address to write to     
+/// @param addr Address to write to
 /// @param data Data to write
 /// @param bytes Number of bytes to write
 /// @return Address of the last byte written
