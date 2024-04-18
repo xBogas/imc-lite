@@ -9,9 +9,14 @@
 #ifndef CORE_CONSUMERS_H_INCLUDED_
 #define CORE_CONSUMERS_H_INCLUDED_
 
-#include <unordered_map>
+#include "Defines.h"
 
 #include "IMC.h"
+
+struct MessageWrapper {
+	const IMC::Message* msg;
+	u32 readers;
+};
 
 class AbstractConsumer {
 public:
@@ -37,30 +42,5 @@ private:
 	Class& obj;
 	Callable func;
 };
-
-// IMC Bus to dispatch messages to consumers
-class Bus {
-public:
-	Bus(void)
-	{ }
-
-	~Bus(void)
-	{ }
-
-	// Register a consumer for a specific message id
-	void registerConsumer(uint16_t id, AbstractConsumer* consumer);
-
-	// send message to all consumers
-	void dispatch(const IMC::Message* msg);
-
-private:
-	std::unordered_map<uint16_t, std::vector<AbstractConsumer*>> consumers;
-
-	//! Non-copyable
-	Bus(Bus&) = delete;
-	Bus& operator=(Bus&) = delete;
-};
-
-extern class Bus Core;
 
 #endif

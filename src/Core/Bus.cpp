@@ -6,23 +6,29 @@
 // Author: João Bogas                                             *
 // ****************************************************************
 
-#include "Core/Consumers.h"
+#include "Core/Bus.h"
 
 class Bus Core;
 
 void Bus::dispatch(const IMC::Message* msg)
 {
-	auto it = consumers.find(msg->getId());
-	if (it == consumers.end())
+	MessageWrapper* wrapper = new MessageWrapper();
+	ASSERT_ERR(wrapper != nullptr, "Failed to allocate message wrapper");
+
+	auto it = recipients.find(msg->getId());
+	if (it == recipients.end())
 		return;
 
+	wrapper->msg = msg;
+	wrapper->readers = it->second.size();
+
 	for (size_t i = 0; i < it->second.size(); i++) {
-		AbstractConsumer* consumer = it->second[i];
-		consumer->consume(msg);
+		MailBox* receiver = it->second[i];
+		receiver->receive(wrapper);
 	}
 }
 
-void Bus::registerConsumer(uint16_t id, AbstractConsumer* consumer)
+void Bus::registerMailBox(uint16_t id, MailBox* receiver)
 {
-	consumers[id].push_back(consumer);
+	recipients[id].push_back(receiver);
 }
