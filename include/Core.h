@@ -10,8 +10,10 @@
 #define CORE_H_INCLUDED_
 
 #include "Core/AbstractTask.h"
+#include "Core/Bus.h"
 #include "Core/Consumers.h"
 #include "Core/Interface.h"
+#include "Core/Mailbox.h"
 #include "Core/Manager.h"
 #include "Core/Parameters.h"
 #include "Core/Task.h"
