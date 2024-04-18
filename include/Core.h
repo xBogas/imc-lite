@@ -13,6 +13,7 @@
 #include "Core/Consumers.h"
 #include "Core/Interface.h"
 #include "Core/Manager.h"
+#include "Core/Parameters.h"
 #include "Core/Task.h"
 
 #endif
