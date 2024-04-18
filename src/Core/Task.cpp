@@ -9,6 +9,7 @@
 #include "Core/Task.h"
 #include "Core/Consumers.h"
 #include "Core/Interface.h"
+#include "Core/Mailbox.h"
 #include "Core/Manager.h"
 
 #include "System/Time.h"
@@ -17,6 +18,9 @@
 Task::Task(const char* name, uint16_t _prio)
   : AbstractTask(name, _prio)
 {
+	m_mail = new MailBox(10, this);
+	ASSERT_ERR(m_mail != NULL, "Failed to create mailbox");
+
 	m_params.param = NULL;
 	m_params.next = NULL;
 
@@ -51,5 +55,16 @@ void Task::consume(const IMC::SetEntityParameters* msg)
 
 void Task::registerConsumer(uint16_t id, AbstractConsumer* consumer)
 {
-	Core.registerConsumer(id, consumer);
+	if (m_mail == NULL)
+		error("Mailbox not initialized");
+
+	m_mail->registerConsumer(id, consumer);
+}
+
+void Task::waitForMessages(u32 ms)
+{
+	if (m_mail == NULL)
+		error("Mailbox not initialized");
+
+	m_mail->waitForMessages(ms);
 }

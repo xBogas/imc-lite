@@ -13,9 +13,12 @@
 
 #include <IMC.h>
 
-#include "AbstractTask.h"
-#include "Consumers.h"
-#include "Parameters.h"
+#include "Core/AbstractTask.h"
+#include "Core/Consumers.h"
+#include "Core/Parameters.h"
+
+// Forward declaration
+class MailBox;
 
 class Task : public AbstractTask {
 public:
@@ -112,7 +115,10 @@ protected:
 
 	virtual void loop(void) = 0;
 
+	void waitForMessages(u32 ms);
+
 private:
+	MailBox* m_mail;
 	// Task Parameters
 	struct ParamList m_params;
 };
