@@ -66,7 +66,9 @@ void* mq_pop(struct mq* mq);
 /// @brief Try to pop a message from the message queue.
 /// @param mq Message queue to pop the message from.
 /// @param ms Timeout in milliseconds.
-/// @return The message popped from the message queue or NULL if the timeout
+/// @return The message popped from the message queue or NULL if the timeout is
+/// reached.
+/// @note If the timeout is 0, it will block until there is a message available.
 void* mq_pop_timeout(struct mq* mq, u32 ms);
 
 /// @brief Try to pop a message from the message queue.
