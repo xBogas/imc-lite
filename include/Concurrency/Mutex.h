@@ -20,6 +20,10 @@ struct mutex {
 	struct queue* blocked;
 };
 
+/// @brief Initialize the mutex
+/// @param mtx Mutex object to initialize
+void mutex_init(struct mutex* mtx);
+
 /// @brief Create a new mutex
 /// @return A pointer to the new mutex
 struct mutex* mutex_create(void);

@@ -11,12 +11,16 @@
 
 _BEGIN_STD_C
 
+void mutex_init(struct mutex* mtx)
+{
+	mtx->owner = NULL;
+	mtx->blocked = queue_create(MAX_MUTEX_QUEUE);
+}
+
 struct mutex* mutex_create(void)
 {
 	struct mutex* mtx = (struct mutex*)malloc(sizeof(struct mutex));
-	mtx->owner = NULL;
-
-	mtx->blocked = queue_create(MAX_MUTEX_QUEUE);
+	mutex_init(mtx);
 
 	return mtx;
 }
@@ -45,9 +49,6 @@ static void sleep(struct mutex* mtx, struct thread* run)
 
 void mutex_lock(struct mutex* mtx)
 {
-	if (sched_running() == false)
-		return;
-
 	struct thread* thr = sched_get_thr();
 	if (thr == NULL)
 		return;
@@ -73,9 +74,6 @@ void mutex_lock(struct mutex* mtx)
 
 void mutex_unlock(struct mutex* mtx)
 {
-	if (sched_running() == false)
-		return;
-
 	struct thread* curr = mtx->owner;
 	if (curr == NULL)
 		error("Mutex is not locked");
