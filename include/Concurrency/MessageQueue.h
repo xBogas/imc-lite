@@ -23,10 +23,6 @@ enum mq_err {
 	MQ_ERR_EMPTY,
 };
 
-struct msg {
-	void* data;
-};
-
 /// @brief Message queue structure.
 struct mq {
 	struct queue* msg_q;
