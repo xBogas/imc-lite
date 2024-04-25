@@ -104,7 +104,7 @@ public:
 		Type* p_msg = (Type*)msg.clone();
 
 		if (m_parent != NULL)
-			synchronizeHeader();
+			synchronizeHeader(p_msg);
 
 		m_list.push_back(p_msg);
 	}
