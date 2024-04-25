@@ -32,7 +32,7 @@ static void sched_stop(void)
 	// TODO:
 }
 
-/// @brief Get the running thread struture
+/// @brief Get the running thread
 struct thread* sched_get_thr(void);
 
 /// @brief Add a thread to the scheduler
@@ -52,12 +52,20 @@ void sched_dispatch(struct thread* nxt, struct thread* cur);
 /// @brief Yield the current thread indefinitely
 void sched_yield(void);
 
+/// @brief Check if the scheduler is running
+/// @return True if the scheduler is running, false otherwise 
 bool sched_running(void);
 
+/// @brief Check if the scheduler is locked
+/// @return True if the scheduler is locked, false otherwise
 bool sched_is_locked(void);
 
+/// @brief Lock the scheduler.
+/// @note This will disable interrupts
 void sched_lock(void);
 
+/// @brief Unlock the scheduler
+/// @note This will enable interrupts
 void sched_unlock(void);
 
 _END_STD_C
