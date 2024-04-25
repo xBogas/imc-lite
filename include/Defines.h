@@ -62,6 +62,8 @@ typedef int64_t s64;
 #define likely(x)		__builtin_expect(x, 1)
 #define unlikely(x)		__builtin_expect(x, 0)
 
+#define ALIGN_UP(x, n)	(((x) + (n)-1) & ~((n)-1))
+
 // System configuration
 
 #define MAX_THREADS		10
