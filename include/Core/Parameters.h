@@ -14,15 +14,23 @@
 
 #include <sstream>
 
+/// @brief Basic parameter class
 class BasicParam {
 public:
+	/// @brief Label of the parameter
 	std::string label;
+	/// @brief String value of the parameter
 	std::string value;
 
 	/// @brief Set the value of the variable
 	/// @param variable string with the value to set
 	/// @return true if successful, false otherwise
 	virtual bool set(const std::string& variable) = 0;
+
+	/// @brief Check if address is the param variable
+	/// @param ptr Address to check
+	/// @return true if the address is the variable, false otherwise
+	virtual bool isVar(void* ptr) = 0;
 
 	/// @brief Serialize the variable
 	/// @param bfr Buffer to serialize the variable
@@ -75,18 +83,29 @@ public:
 	}
 };
 
+/// @brief Parameter class
 template <typename T>
 class Param : public BasicParam {
 public:
+	/// @brief Reference to the variable
 	T& var;
+	/// @brief Flag to check if the parameter has changed
+	bool changed;
 
+	/// @brief Constructor
+	/// @param str Label of the parameter
+	/// @param variable Reference to the variable
 	Param(const char* str, T& variable)
 	  : var(variable)
 	{
 		label = str;
 		var = {};
+		changed = false;
 	}
 
+	/// @brief Set the value of the variable
+	/// @param variable string with the value to set
+	/// @return true if successful, false otherwise
 	bool set(const std::string& variable) override
 	{
 		value = variable;
@@ -94,9 +113,34 @@ public:
 		std::stringstream ss(variable);
 		ss >> var;
 
+		if (!ss.fail())
+			changed = true;
+
 		return !ss.fail();
 	}
 
+	/// @brief Check if address is the param variable
+	/// @param ptr Address to check
+	/// @return true if the address is the variable, false otherwise
+	bool isVar(void* ptr) override
+	{
+		return ptr == &var;
+	}
+
+	/// @brief Check if the parameter has changed
+	/// @return true if the parameter has changed, false otherwise
+	bool hasChanged(void)
+	{
+		if (changed) {
+			changed = false;
+			return true;
+		}
+
+		return false;
+	}
+
+	/// @brief Set the default value of the parameter
+	/// @param str Default value
 	void defaultValue(const std::string& str)
 	{
 		value = str;
@@ -109,16 +153,24 @@ public:
 		}
 	}
 
+	/// @brief Serialize the variable
+	/// @param bfr Buffer to serialize the variable
+	/// @return Size of the serialized variable
 	u16 serializeVar(u8* bfr) override
 	{
 		return IMC::serialize(var, bfr);
 	}
 
+	/// @brief Deserialize the variable
+	/// @param bfr Buffer to deserialize the variable
+	/// @param bfr_len Length of the buffer
 	u16 deserializeVar(u8* bfr, u16& bfr_len) override
 	{
 		return IMC::deserialize(var, bfr, bfr_len);
 	}
 
+	/// @brief Get the size of the serialization
+	/// @return Number of bytes required to serialize the parameters
 	u16 getSerilizationSizeVar(void) override
 	{
 		if constexpr (std::is_same<T, std::string>::value)
@@ -128,10 +180,13 @@ public:
 	}
 };
 
+/// @brief Parameter List
 struct ParamList {
 	struct BasicParam* param;
 	struct ParamList* next;
 
+	/// @brief Push a new parameter to the list
+	/// @param _param Pointer to the parameter
 	void push_back(BasicParam* _param)
 	{
 		if (!_param) {
@@ -151,10 +206,13 @@ struct ParamList {
 			ptr = ptr->next;
 
 		ptr->next = new ParamList();
-		ptr->next->param = param;
+		ptr->next->param = _param;
 		ptr->next->next = NULL;
 	}
 
+	/// @brief Set the value of a parameter
+	/// @param label Label of the parameter
+	/// @param value Value to set in string format
 	void setParam(const char* label, const std::string& value)
 	{
 		struct ParamList* ptr = this;
@@ -167,6 +225,19 @@ struct ParamList {
 
 			ptr = ptr->next;
 		}
+	}
+
+	BasicParam* findParam(void* ptr)
+	{
+		struct ParamList* iter = this;
+		while (iter) {
+			if (iter->param->isVar(ptr))
+				return iter->param;
+
+			iter = iter->next;
+		}
+
+		return NULL;
 	}
 };
 
