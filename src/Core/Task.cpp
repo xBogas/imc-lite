@@ -41,6 +41,8 @@ void Task::consume(const IMC::QueryEntityParameters* msg)
 
 		ptr = ptr->next;
 	}
+
+	onQueryEntityParameters(msg);
 }
 
 void Task::consume(const IMC::SetEntityParameters* msg)
@@ -51,6 +53,8 @@ void Task::consume(const IMC::SetEntityParameters* msg)
 	// iterate through the parameters and set them
 	for (auto& i : msg->params)
 		m_params.setParam(i->name.c_str(), i->value);
+
+	onUpdateParameters();
 }
 
 void Task::registerConsumer(uint16_t id, AbstractConsumer* consumer)

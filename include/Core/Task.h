@@ -37,14 +37,25 @@ public:
 		return *ptr;
 	}
 
+	template <typename T>
+	bool paramChanged(T& variable)
+	{
+		BasicParam* ptr = m_params.findParam(&variable);
+		if (ptr == NULL)
+			return false;
+
+		Param<T>* p = static_cast<Param<T>*>(ptr);
+		return p->hasChanged();
+	}
+
 	void consume(const IMC::QueryEntityParameters* msg);
 
-	void onQueryEntityParameters(const IMC::QueryEntityParameters* msg)
+	virtual void onQueryEntityParameters(const IMC::QueryEntityParameters* msg)
 	{ }
 
 	void consume(const IMC::SetEntityParameters* msg);
 
-	void onSetEntityParameters(const IMC::SetEntityParameters* msg)
+	virtual void onUpdateParameters(void)
 	{ }
 
 	template <typename Msg, typename Obj>
