@@ -130,7 +130,6 @@ public:
 			if (rv != ptr->getSerilizationSize())
 				return false;
 
-			debug("Read %s", ptr->label.c_str());
 			bfr += rv;
 			iter = iter->next;
 		}
@@ -144,7 +143,6 @@ public:
 	/// @return Number of bytes
 	uint16_t saveParams(u8* bfr, u16 bfr_len)
 	{
-		debug("Saving task %s parameters", getName());
 		ParamList* iter = &m_params;
 		u16 bytes = 0;
 		while (iter) {
@@ -152,7 +150,6 @@ public:
 			if (ptr == NULL)
 				return bytes;
 
-			debug("Saving %s param", ptr->label.c_str());
 			bytes += ptr->serialize(bfr + bytes);
 			iter = iter->next;
 		}
