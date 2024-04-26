@@ -22,12 +22,20 @@ class MailBox;
 
 class Task : public AbstractTask {
 public:
+	/// @brief Constructor
+	/// @param name Task name
+	/// @param _prio Task priority
 	Task(const char* name, uint16_t _prio = 1);
 
+	/// @brief Destructor
 	virtual ~Task(void)
 	{ }
 
-	// Add a parameter to the task
+	/// @brief Add a parameter to the task
+	/// @tparam T Variable type
+	/// @param label Parameter label
+	/// @param variable Reference to the variable
+	/// @return Param object
 	template <typename T>
 	Param<T>& param(const char* label, T& variable)
 	{
@@ -37,6 +45,10 @@ public:
 		return *ptr;
 	}
 
+	/// @brief Check if a parameter has changed since the last update
+	/// @tparam T Variable type
+	/// @param variable Parameter variable reference
+	/// @return True if the parameter has changed, false otherwise
 	template <typename T>
 	bool paramChanged(T& variable)
 	{
@@ -48,16 +60,32 @@ public:
 		return p->hasChanged();
 	}
 
+	/// @brief Default consumer for QueryEntityParameters message
+	/// @param msg QueryEntityParameters message
 	void consume(const IMC::QueryEntityParameters* msg);
 
+	/// @brief Consumer extension for QueryEntityParameters
+	/// @param msg QueryEntityParameters message
+	/// @note Derived classes that need to execute additional code when
+	/// receiving a QueryEntityParameters message should override this method
 	virtual void onQueryEntityParameters(const IMC::QueryEntityParameters* msg)
 	{ }
 
+	/// @brief Default consumer for SetEntityParameters message
+	/// @param msg SetEntityParameters message
 	void consume(const IMC::SetEntityParameters* msg);
 
+	/// @brief Consumer extension for SetEntityParameters
+	/// @note Derived classes that need to execute additional code when
+	/// receiving a SetEntityParameters message should override this method
 	virtual void onUpdateParameters(void)
 	{ }
 
+	/// @brief Subscribe to an IMC message
+	/// @tparam Msg IMC message type
+	/// @tparam Obj Task object type
+	/// @param task Reference to the task object
+	/// @param consumer Consumer method
 	template <typename Msg, typename Obj>
 	void subscribe(Obj& task, void (Obj::*consumer)(const Msg*) = &Obj::consume)
 	{
@@ -67,12 +95,15 @@ public:
 		registerConsumer(Msg::getIdStatic(), callable);
 	}
 
-	// Register a consumer for message id
+	/// @brief Register a consumer for a specific message id
+	/// @param id Message id
+	/// @param consumer Consumer to register
 	void registerConsumer(uint16_t id, AbstractConsumer* consumer);
 
 	// void setPeriod(uint32_t period);
 	// void setDeadline(uint32_t deadline);
 
+	/// @brief Start the task
 	void run(void)
 	{
 		setup();
@@ -81,6 +112,10 @@ public:
 			loop();
 	}
 
+	/// @brief Load task parameters
+	/// @param bfr Buffer with the parameters
+	/// @param len Length of the buffer
+	/// @return True if the parameters were loaded successfully, false otherwise
 	bool loadParams(u8* bfr, uint16_t len)
 	{
 		// Read parameters from flash
@@ -103,6 +138,10 @@ public:
 		return true;
 	}
 
+	/// @brief Save task parameters
+	/// @param bfr Buffer to save the parameters
+	/// @param bfr_len Length of the buffer
+	/// @return Number of bytes
 	uint16_t saveParams(u8* bfr, u16 bfr_len)
 	{
 		debug("Saving task %s parameters", getName());
@@ -122,15 +161,20 @@ public:
 	}
 
 protected:
+	/// @brief Task setup
 	virtual void setup(void) = 0;
 
+	/// @brief Task loop
 	virtual void loop(void) = 0;
 
+	/// @brief Wait for messages and consume them for ms milliseconds
+	/// @param ms Time in milliseconds
 	void waitForMessages(u32 ms);
 
 private:
+	/// @brief Task Mailbox object to receive messages
 	MailBox* m_mail;
-	// Task Parameters
+	/// @brief Task parameters
 	struct ParamList m_params;
 };
 
