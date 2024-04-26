@@ -12,22 +12,27 @@
 #include <unordered_map>
 #include <vector>
 
-#include "IMC.h"
 #include "Core/Mailbox.h"
+#include "IMC.h"
 
-// IMC Bus to dispatch messages to consumers
+// IMC Bus to dispatch messages to Task mailboxes
 class Bus {
 public:
+	/// @brief Constructor
 	Bus(void)
 	{ }
 
+	/// @brief Destructor
 	~Bus(void)
 	{ }
 
-	// Register a consumer for a specific message id
+	/// @brief Register mailbox for a specific message id
+	/// @param id Message id
+	/// @param receiver Mailbox to register
 	void registerMailBox(uint16_t id, MailBox* receiver);
 
-	// send message to all consumers
+	/// @brief Distach message to available mailboxes
+	/// @param msg Message to dispatch
 	void dispatch(const IMC::Message* msg);
 
 private:

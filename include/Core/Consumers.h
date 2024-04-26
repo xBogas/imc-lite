@@ -13,16 +13,21 @@
 
 #include "IMC.h"
 
+/// @brief Wrapper for a message
+/// @note This struct is used to keep track of the number of consumers for a
+/// message. When all consumers have consumed the message, it is deleted.
 struct MessageWrapper {
 	const IMC::Message* msg;
 	u32 readers;
 };
 
+/// @brief Abstract consumer callback
 class AbstractConsumer {
 public:
 	virtual void consume(const IMC::Message* msg) = 0;
 };
 
+/// @brief Consumer callback wrapper
 template <typename Class, typename Topic>
 class ConsumerWrapper : public AbstractConsumer {
 public:
