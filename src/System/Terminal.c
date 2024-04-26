@@ -87,7 +87,8 @@ void term_print(const char* str)
 	if (panic)
 		return;
 
-	mutex_lock(term_mutex);
+	if (sched_running())
+		mutex_lock(term_mutex);
 
 	// if (HAL_UART_Transmit_DMA(&uart, (uint8_t*)str, strlen(str)) != HAL_OK)
 	// 	error("Failed to transmit data");
@@ -105,7 +106,8 @@ void term_print(const char* str)
 	}
 	// HAL_Delay(2);
 
-	mutex_unlock(term_mutex);
+	if (sched_running())
+		mutex_unlock(term_mutex);
 }
 
 void term_panic(const char* str)

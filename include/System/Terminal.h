@@ -22,6 +22,7 @@ void terminal_init(void) __attribute__((constructor));
 void printk(const char* fmt, ...);
 
 /// @brief Print a string to the terminal
+/// @param str String to print
 void term_print(const char* str);
 
 /// @brief Panic terminal message
