@@ -15,7 +15,7 @@
 
 #include <time.h>
 
-static Clock* imc_rtc /*  = Clock::getInstance() */;
+static Clock* imc_rtc;
 
 static RTC_HandleTypeDef rtc_handle = {0};
 

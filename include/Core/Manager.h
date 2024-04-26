@@ -183,7 +183,6 @@ private:
 	/// @return Number of bytes written
 	u32 saveTaskParams(Task* tsk, u32 _ptr)
 	{
-		// debug("Saving task %s at %d", tsk->getName(), _ptr);
 		u32 start = _ptr;
 		u8 symbol = 11;
 		_ptr = flash_write(_ptr, &symbol, 1);
@@ -197,22 +196,20 @@ private:
 		u8 bfr[1024];
 		len = tsk->saveParams(bfr, 1024);
 
-		// debug("Task parameters length: %d", len);
 		_ptr = flash_write(_ptr, &len, sizeof(len));
 		_ptr = flash_write(_ptr, bfr, len);
 
 		u16 crc = IMC::compute_CRC16((u8*)start, _ptr - start);
 		_ptr = flash_write(_ptr, &crc, sizeof(crc));
 
-		// debug("Task crc %d saved", crc);
 		return _ptr - start;
 	}
 
-	// Current Flash memory address
+	/// @brief Current Flash memory address
 	u32 flash_addr;
-	// Base Flash memory address
+	/// @brief Base Flash memory address
 	const u32 flash_base;
-	// Task list
+	/// @brief Task list
 	struct list* tsk_list;
 };
 

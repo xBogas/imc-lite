@@ -15,25 +15,29 @@
 
 class Clock {
 public:
-	// Get instance of Clock
+	/// @brief Get instance of Clock
 	static Clock* getInstance(void);
 
-	// Set current time
-	// @param epoch number of seconds since UNIX epoch
+	/// @brief Set current time
+	/// @param epoch number of seconds since UNIX epoch
 	static void setEpoch(float epoch);
 
-	// Print current time in format "ddd yyyy-mm-dd hh:mm:ss"
+	/// @brief Print current time in format "ddd yyyy-mm-dd hh:mm:ss"
 	static void printTime(void);
 
-	// Get number of seconds since UNIX epoch
+	/// @brief Get number of seconds since UNIX epoch
 	static float getEpoch(void);
 
-	// Get number of milliseconds since system start
+	/// @brief Get number of milliseconds since system start
 	static uint32_t getMs(void);
 
-	// Busy wait for ms milliseconds
+	/// @brief Busy wait for ms milliseconds
 	static void busyWait(uint32_t ms);
 
+	/// @brief Add an alarm to be triggered in ms milliseconds
+	/// @param ms Number of milliseconds to wait
+	/// @param callback Function to call when alarm triggers
+	/// @param args Arguments to pass to callback
 	static void add_alarm(uint32_t ms, void (*callback)(void*), void* args);
 
 	//! Non-copyable
@@ -41,25 +45,28 @@ public:
 	Clock& operator=(Clock&) = delete;
 
 private:
+	/// @brief Constructor
 	Clock(void);
 
+	/// @brief Destructor
 	~Clock(void);
 
-	// Update internal date
+	/// @brief Update internal date
 	void updateDate(void);
 
-	// Update internal time
+	/// @brief Update internal time
 	void updateTime(void);
 
-	// Get current time
+	/// @brief Get current time
 	struct tm getTime(void);
 
-	// Save date to internal variables
+	/// @brief Save date to internal variables
 	void saveDate(uint8_t year, uint8_t month, uint8_t day, uint8_t weekday);
 
-	// Save time to internal variables
+	/// @brief Save time to internal variables
 	void saveTime(uint8_t hours, uint8_t minutes, uint8_t seconds);
 
+	/// @brief Internal date representation
 	struct Date {
 		uint8_t year;
 		uint8_t month;
@@ -67,13 +74,16 @@ private:
 		uint8_t weekday;
 	};
 
+	/// @brief Internal time representation
 	struct Time {
 		uint8_t hours;
 		uint8_t minutes;
 		uint8_t seconds;
 	};
 
+	/// @brief Internal date
 	struct Date _date;
+	/// @brief Internal time
 	struct Time _time;
 };
 
