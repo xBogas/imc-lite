@@ -18,6 +18,7 @@ _BEGIN_STD_C
 struct mutex {
 	struct thread* owner;
 	struct queue* blocked;
+	u8 count;
 };
 
 /// @brief Initialize the mutex

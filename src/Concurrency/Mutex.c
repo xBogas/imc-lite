@@ -15,6 +15,7 @@ void mutex_init(struct mutex* mtx)
 {
 	mtx->owner = NULL;
 	mtx->blocked = queue_create(MAX_MUTEX_QUEUE);
+	mtx->count = 0;
 }
 
 struct mutex* mutex_create(void)
@@ -35,10 +36,14 @@ void mutex_destroy(struct mutex* mtx)
 	free(mtx);
 }
 
+//! Mutex queue needs a lock - when multiple pushes are ocorring it may trigger an error!
+
 static void sleep(struct mutex* mtx, struct thread* run)
 {
 	run->state = THREAD_BLOCKED;
-	queue_push(mtx->blocked, run);
+	u8 rv = queue_push(mtx->blocked, run);
+	if (rv != QUEUE_ERR_NONE)
+		error("Mutex queue is full");
 
 	// dispatch will unlock the IRQ
 	sched_dispatch(mtx->owner, NULL);
@@ -53,13 +58,11 @@ void mutex_lock(struct mutex* mtx)
 	if (thr == NULL)
 		return;
 
-	while (mtx->owner != NULL)
+	while (mtx->owner != NULL && mtx->owner != thr)
 		sleep(mtx, thr);
 
-	if (mtx->owner != NULL)
-		error("Mutex is still locked");
-
 	mtx->owner = thr;
+	mtx->count++;
 }
 
 /**
@@ -80,6 +83,10 @@ void mutex_unlock(struct mutex* mtx)
 
 	if (curr != sched_get_thr())
 		error("Mutex is not locked by current thread");
+
+	mtx->count--;
+	if ( mtx->count > 0)
+		return;
 
 	mtx->owner = NULL;
 
