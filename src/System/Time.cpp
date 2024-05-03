@@ -8,10 +8,10 @@
 
 #include "System/Time.h"
 #include "System/Error.h"
+#include "System/Terminal.h"
 
 #include "backup.h"
 #include "clock.h"
-#include "stm32_def.h"
 
 #include <time.h>
 
@@ -26,34 +26,12 @@ static RTC_HandleTypeDef rtc_handle = {0};
 #define PREDIV_SYNC_MAX	 RTC_PRER_PREDIV_S >> RTC_PRER_PREDIV_S_Pos
 
 // FIXME Add these macros with compile time script
-#define CURRENT_YEAR	 (__DATE__[9] - '0') * 10 + (__DATE__[10] - '0')
-#define CURRENT_MONTH                                                          \
-	(__DATE__[0] == 'J'                                                        \
-		 ? (__DATE__[1] == 'a' ? 1 : (__DATE__[2] == 'n' ? 6 : 7))             \
-		 : (__DATE__[0] == 'F'                                                 \
-				? 2                                                            \
-				: (__DATE__[0] == 'M'                                          \
-					   ? (__DATE__[2] == 'r' ? 3 : 5)                          \
-					   : (__DATE__[0] == 'A'                                   \
-							  ? (__DATE__[1] == 'p' ? 4 : 8)                   \
-							  : (__DATE__[0] == 'S'                            \
-									 ? 9                                       \
-									 : (__DATE__[0] == 'O'                     \
-											? 10                               \
-											: (__DATE__[0] == 'N' ? 11         \
-																  : 12)))))))
-
-#define CURRENT_DAY                                                            \
-	(uint8_t)((__DATE__[4] == ' ')                                             \
-				  ? (__DATE__[5] - '0')                                        \
-				  : ((__DATE__[4] - '0') * 10 + (__DATE__[5] - '0')))
-
-#define CURRENT_HOUR   ((__TIME__[0] - '0') * 10 + (__TIME__[1] - '0'))
-#define CURRENT_MINUTE ((__TIME__[3] - '0') * 10 + (__TIME__[4] - '0'))
-#define CURRENT_SECOND ((__TIME__[6] - '0') * 10 + (__TIME__[7] - '0'))
-
-#pragma message("Compile date " __DATE__)
-#pragma message("Compile time " __TIME__)
+#define CURRENT_YEAR	 24
+#define CURRENT_MONTH	 11
+#define CURRENT_DAY		 11
+#define CURRENT_HOUR	 12
+#define CURRENT_MINUTE	 00
+#define CURRENT_SECOND	 00
 
 Clock::Clock(void)
 {
@@ -92,25 +70,27 @@ Clock::Clock(void)
 	HAL_RTC_Init(&rtc_handle);
 
 	// Set time and date
-	RTC_DateTypeDef date = {0};
-	date.Year = CURRENT_YEAR + 100;
-	date.Month = CURRENT_MONTH - 1;
-	date.Date = CURRENT_DAY;
+	// RTC_DateTypeDef date = {0};
+	// date.Year = CURRENT_YEAR + 100;
+	// date.Month = CURRENT_MONTH - 1;
+	// date.Date = CURRENT_DAY;
 
-	HAL_RTC_SetDate(&rtc_handle, &date, RTC_FORMAT_BIN);
+	// HAL_RTC_SetDate(&rtc_handle, &date, RTC_FORMAT_BIN);
 
-	RTC_TimeTypeDef time = {0};
-	time.Hours = CURRENT_HOUR;
-	time.Minutes = CURRENT_MINUTE;
-	time.Seconds = CURRENT_SECOND; // Compile time offset (not accurate)
-	HAL_RTC_SetTime(&rtc_handle, &time, RTC_FORMAT_BIN);
+	// RTC_TimeTypeDef time = {0};
+	// time.Hours = CURRENT_HOUR;
+	// time.Minutes = CURRENT_MINUTE;
+	// time.Seconds = CURRENT_SECOND; // Compile time offset (not accurate)
+	// HAL_RTC_SetTime(&rtc_handle, &time, RTC_FORMAT_BIN);
 
-	// FIXME Without this rtc registers are not being updated
-	// Configuration issue with APB bus
-	HAL_RTCEx_EnableBypassShadow(&rtc_handle);
+	// // FIXME Without this rtc registers are not being updated
+	// // Configuration issue with APB bus
+	// HAL_RTCEx_EnableBypassShadow(&rtc_handle);
 
-	debug("Set date: %d/%d/%d", CURRENT_DAY, CURRENT_MONTH, CURRENT_YEAR);
-	debug("Set time: %d:%d:%d", CURRENT_HOUR, CURRENT_MINUTE, CURRENT_SECOND);
+	// printk("Set date: %d/%d/%d", CURRENT_DAY, CURRENT_MONTH, CURRENT_YEAR);
+	// printk("Set time: %d:%d:%d", CURRENT_HOUR, CURRENT_MINUTE, CURRENT_SECOND);
+
+	printTime();
 }
 
 Clock::~Clock(void)
