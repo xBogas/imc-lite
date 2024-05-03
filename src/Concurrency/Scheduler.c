@@ -79,17 +79,20 @@ struct thread idle_th;
 void sched_init(void)
 {
 	// Initialize the scheduler
-	sched.queue = heap_create(MAX_THREADS, (heap_fn)thr_get_priority);
-	sched.queue->data = (void**)DEBUG_ARR__________;
-	sched.current = NULL;
+	sched.current = &idle_th;
 	sched.next = NULL;
 	sched.lock = false;
 	sched.running = false;
+	
+	sched.queue = heap_create(MAX_THREADS, (heap_fn)thr_get_priority);
+	// sched.queue->data = (void**)DEBUG_ARR__________;
+	
 
 	idle_th.name = "idle";
 	idle_th.stack_ptr = (u32)&idle_frame;
 	idle_th.state = THREAD_WAITING;
 	idle_th.priority = ~(0); // Lowest priority
+	idle_th.fpu_flag = (u8)(EXC_RETURN_THREAD_PSP & 0x0FF);
 	idle_th.in_queue = 1;
 }
 
@@ -131,18 +134,6 @@ void sched_start(void)
 	NVIC_SetPriority(PendSV_IRQn, 0xff);
 	NVIC_SetPriority(TIM2_IRQn, 0x02); // To dispatch threads
 
-	u32 prio = NVIC_GetPriority(SysTick_IRQn);
-	printk("SysTick priority: %d", prio);
-
-	prio = NVIC_GetPriority(PendSV_IRQn);
-	printk("SVCall priority: %d", prio);
-
-	prio = NVIC_GetPriority(TIM2_IRQn);
-	printk("TIM2 priority: %d", prio);
-
-	prio = NVIC_GetPriority(DebugMonitor_IRQn);
-	printk("DebugMonitor priority: %d", prio);
-
 	struct thread* th = sched_pop();
 	ASSERT_ERR(th != NULL, "No threads registered in scheduler!");
 	th->in_queue = 0;
@@ -151,6 +142,11 @@ void sched_start(void)
 	sched.current = th;
 	sched.running = true;
 	sched_jump(th->stack_ptr);
+}
+
+void sched_stop(void)
+{
+	sched.running = false;
 }
 
 void osSystickHandler(void)
@@ -200,11 +196,7 @@ void yield(void)
 	}
 	__debug("[yield] pop %s", nxt->name);
 
-	if (sched.current->in_queue == 0) {
-		sched_push_thr(sched.current);
-		__debug("[yield] push %s", sched.current->name);
-	}
-
+	sched_push_thr(sched.current);
 	sched.next = nxt;
 
 	__debug("[yield] %s to %s", sched.current->name, nxt->name);
@@ -221,18 +213,20 @@ void sched_dispatch(struct thread* nxt, struct thread* cur)
 		return;
 	}
 
+	if (SCB->ICSR & SCB_ICSR_PENDSVSET_Msk)
+		sched_push_thr(sched.next);
+
 	// If nxt is in queue and set to run
 	// It will create a dual entry in the queue
 	sched.next = nxt;
 	if (cur) {
 		// Add the current thread to the queue
-		if (cur->in_queue == 0) {
-			sched_push_thr(cur);
-			__debug("[dispatch] push %s", cur->name);
-		}
+		sched_push_thr(cur);
 
+#ifdef DEBUG_SCHED
 		if (sched.current != cur) // This can't happen - can probably be removed
 			error("Current thread is not the same as the one dispatched");
+#endif	
 	}
 
 	// Trigger PendSV

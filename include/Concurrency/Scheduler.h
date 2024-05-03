@@ -20,17 +20,13 @@ _BEGIN_STD_C
 void yield(void);
 
 /// @brief Initialize the scheduler
-void sched_init(void) __attribute__((constructor));
+void sched_init(void);
 
 /// @brief Start the scheduler
 void sched_start(void);
 
 /// @brief Stop the scheduler
-static void sched_stop(void)
-{
-	// Stop the scheduler
-	// TODO:
-}
+void sched_stop(void);
 
 /// @brief Get the running thread
 struct thread* sched_get_thr(void);
@@ -69,5 +65,16 @@ void sched_lock(void);
 void sched_unlock(void);
 
 _END_STD_C
+
+/**
+ * Notes:
+ * - The scheduler is running a Basic Priority Scheduling algorithm,
+ * when threads are contesting shared resources.
+ * TODO: Verify this is correct algorithm running
+ *
+ * Implement other methods of handling priority inversion ?
+ * - Priority Ceiling Protocol
+ * - Highest Locker Priority
+ */
 
 #endif // CONCURRENCY_SCHEDULER_H_INCLUDED_
