@@ -41,7 +41,8 @@ typedef void (*thr_fn)(void*);
 struct thread {
 	u32 stack_ptr;
 	u32 stack_bottom;
-	u16 priority;
+	u8 fpu_flag;
+	u8 priority;
 	u8 state;
 	u8 in_queue;
 	const char* name;
@@ -52,16 +53,18 @@ struct thread {
 /// @param stack_size Size of the stack in bytes
 /// @param name Name of the thread
 /// @param fp Entry point of the thread
-void thread_init(struct thread* th, u32 stack_size, const char* name,
-				 thr_fn fp);
+/// @param arg Argument to pass to the thread
+void thread_init(struct thread* th, u32 stack_size, const char* name, thr_fn fp,
+				 void* arg);
 
 /// @brief Create a new thread
 /// @param stack_size Size of the stack in bytes
 /// @param name Name of the thread
-/// @param run Entry point of the thread where
-/// the argument is the thread struture itself
+/// @param run Entry point of the thread
+/// @param arg Argument to pass to the thread if null, pass the thread itself
 /// @return Pointer to the thread
-struct thread* thread_create(u32 stack_size, const char* name, thr_fn run);
+struct thread* thread_create(u32 stack_size, const char* name, thr_fn run,
+							 void* arg);
 
 /// @brief Destroy a thread
 /// @param th Pointer to the thread

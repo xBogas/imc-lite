@@ -36,16 +36,17 @@ struct stack_fr {
 };
 
 static void thr_stack_init(struct thread* th, u32 stack_size,
-						   thr_fn entry_point)
+						   thr_fn entry_point, void* arg)
 {
 	ASSERT_ERR(entry_point != NULL, "Thread entry point is NULL");
 
 	th->stack_bottom = (u32)malloc(stack_size);
-    ASSERT_ERR(th->stack_bottom != 0, "Failed to allocate stack for thread %s", th->name);
+	ASSERT_ERR(th->stack_bottom != 0, "Failed to allocate stack for thread %s",
+			   th->name);
 
 	th->stack_ptr = th->stack_bottom + stack_size - sizeof(struct stack_fr);
 	struct stack_fr* sf = (struct stack_fr*)th->stack_ptr;
-	sf->r0 = (u32)th;
+	sf->r0 = (u32)arg;
 	sf->r1 = 1;
 	sf->r2 = 2;
 	sf->r3 = 3;
@@ -65,7 +66,8 @@ static void thr_stack_init(struct thread* th, u32 stack_size,
 	sf->psr = 0x01000000;
 }
 
-void thread_init(struct thread* th, u32 stack_size, const char* name, thr_fn fp)
+void thread_init(struct thread* th, u32 stack_size, const char* name, thr_fn fp,
+				 void* arg)
 {
 	ASSERT_ERR(th != NULL, "Thread is NULL");
 	ASSERT_ERR(stack_size >= MIN_STACK, "Stack size is invalid");
@@ -73,19 +75,22 @@ void thread_init(struct thread* th, u32 stack_size, const char* name, thr_fn fp)
 
 	th->stack_ptr = 0;
 	th->stack_bottom = 0;
+	th->fpu_flag = (u8)(EXC_RETURN_THREAD_PSP & 0x0FF);
 	th->priority = 126;
 	th->state = THREAD_READY;
 	th->name = name;
 	th->in_queue = 0;
 
-	thr_stack_init(th, stack_size, fp);
+	thr_stack_init(th, stack_size, fp, arg);
 }
 
-struct thread* thread_create(u32 stack_size, const char* name, thr_fn run)
+struct thread* thread_create(u32 stack_size, const char* name, thr_fn run,
+							 void* arg)
 {
 	struct thread* th = (struct thread*)malloc(sizeof(struct thread));
-	thread_init(th, stack_size, name, run);
-	thr_stack_init(th, stack_size, run);
+	if (arg == NULL)
+		arg = th;
+	thread_init(th, stack_size, name, run, arg);
 
 	return th;
 }
