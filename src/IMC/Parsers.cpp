@@ -46,11 +46,16 @@ static const uint16_t crc16_ibm_table[256] = {
 	0x4540, 0x8701, 0x47C0, 0x4680, 0x8641, 0x8201, 0x42C0, 0x4380, 0x8341,
 	0x4100, 0x81C1, 0x8081, 0x4040};
 
-#define MESSAGE(id, type) {id, []() -> Message* { return new type; }},
-
 typedef Message* (*Constructor)(void);
 
+template <typename T>
+static Message* create(void)
+{
+	return new T();
+}
+
 static std::unordered_map<uint16_t, Constructor> constructors_by_id = {
+#define MESSAGE(id, type) {id, &create<type>},
 #include "IMC/Factory.def"
 };
 
@@ -65,11 +70,10 @@ uint16_t compute_CRC16(const uint8_t* bfr, uint16_t bfr_len)
 
 static void parserHeader(Header& hdr, const uint8_t* msg)
 {
-	uint64_t data;
 	memcpy(&hdr.sync, msg, 2);
 	memcpy(&hdr.mgid, msg + 2, 2);
 	memcpy(&hdr.size, msg + 4, 2);
-	memcpy(&data, msg + 6, 8);
+	memcpy(&hdr.timestamp, msg + 6, 8);
 	memcpy(&hdr.src, msg + 14, 2);
 	memcpy(&hdr.src_ent, msg + 16, 1);
 	memcpy(&hdr.dst, msg + 17, 2);
@@ -139,8 +143,10 @@ Message* parser(const uint8_t* bfr, uint16_t bfr_len)
 uint16_t serialize(const Message* msg, uint8_t* bfr, uint16_t bfr_len)
 {
 	uint16_t size = msg->getSerializationSize();
-	if (size > IMC_CONST_MAX_SIZE)
-		return -1;
+	if (size > IMC_CONST_MAX_SIZE) {
+		debug("Message size exceeds maximum allowed size");
+		return 0;
+	}
 
 	uint8_t* ptr = bfr;
 	ptr += serializeHeader(msg, bfr);
