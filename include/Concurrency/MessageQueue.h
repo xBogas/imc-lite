@@ -52,7 +52,7 @@ void mq_push(struct mq* mq, void* data);
 /// @brief Try to push a message to the message queue. If the queue is full,
 /// the function will return false.
 /// @param mq Message queue to push the message to.
-mq_err_t mq_try_push(struct mq* mq, void* data);
+bool mq_try_push(struct mq* mq, void* data);
 
 /// @brief Pop a message from the message queue. If the queue is empty, the
 /// function will block until there is a message available.

@@ -50,15 +50,17 @@ void mq_push(struct mq* mq, void* data)
 	cond_signal_all(mq->cv);
 }
 
-mq_err_t mq_try_push(struct mq* mq, void* data)
+bool mq_try_push(struct mq* mq, void* data)
 {
 	ASSERT_ERR(mq != NULL, "Message queue is NULL");
 
 	queue_err_t err = queue_push(mq->msg_q, data);
-	if (err == QUEUE_ERR_NONE)
+	if (err == QUEUE_ERR_NONE) {
 		cond_signal_all(mq->cv);
+		return true;
+	}
 
-	return err;
+	return false;
 }
 
 void* mq_pop(struct mq* mq)
