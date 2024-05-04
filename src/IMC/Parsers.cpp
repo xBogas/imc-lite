@@ -78,7 +78,6 @@ static void parserHeader(Header& hdr, const uint8_t* msg)
 	memcpy(&hdr.src_ent, msg + 16, 1);
 	memcpy(&hdr.dst, msg + 17, 2);
 	memcpy(&hdr.dst_ent, msg + 19, 2);
-	hdr.timestamp = to_float(data);
 }
 
 static Message* parserPayload(const Header& hdr, const uint8_t* bfr)
@@ -113,9 +112,7 @@ static uint16_t serializeHeader(const Message* msg, uint8_t* bfr)
 	ptr += IMC::serialize((uint16_t)IMC_CONST_SYNC, ptr);
 	ptr += IMC::serialize(msg->getId(), ptr);
 	ptr += IMC::serialize((uint16_t)msg->getPayloadSerializationSize(), ptr);
-	fconv_t time;
-	time.data = msg->getTimeStamp();
-	ptr += IMC::serialize(to_fp64(time.bits), ptr);
+	ptr += IMC::serialize(msg->getTimeStamp(), ptr);
 	ptr += IMC::serialize((uint16_t)msg->getSource(), ptr);
 	ptr += IMC::serialize(msg->getSourceEntity(), ptr);
 	ptr += IMC::serialize((uint16_t)msg->getDestination(), ptr);
