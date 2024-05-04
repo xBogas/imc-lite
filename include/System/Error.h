@@ -14,7 +14,7 @@
 _BEGIN_STD_C
 
 /// @brief Initialize the debug system
-void debug_init(void) __attribute__((constructor));
+void debug_init(void);
 
 /// @brief Print an error message and exit the program
 /// @param format The format string

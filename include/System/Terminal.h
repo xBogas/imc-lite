@@ -14,7 +14,7 @@
 _BEGIN_STD_C
 
 /// @brief Initialize the terminal
-void terminal_init(void) __attribute__((constructor));
+void terminal_init(void);
 
 /// @brief Print a string to the terminal
 /// @param fmt Format string

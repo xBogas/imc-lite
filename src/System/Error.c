@@ -129,4 +129,19 @@ void HardFault_Handler(void)
 	error("HardFault_Handler");
 }
 
+void MemManage_Handler(void)
+{
+	error("MemManage_Handler");
+}
+
+void BusFault_Handler(void)
+{
+	error("BusFault_Handler");
+}
+
+void UsageFault_Handler(void)
+{
+	error("UsageFault_Handler");
+}
+
 _END_STD_C

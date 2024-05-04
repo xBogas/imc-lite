@@ -8,6 +8,7 @@
 
 #include "System/Terminal.h"
 #include "Concurrency/Mutex.h"
+#include "Concurrency/Scheduler.h"
 
 #include <Arduino.h>
 
@@ -20,7 +21,7 @@ static bool panic = false;
 static UART_HandleTypeDef uart;
 static DMA_HandleTypeDef hdma_usart_tx;
 
-static struct mutex* term_mutex;
+static struct mutex term_mutex;
 static const uint8_t* endl = "\r\n";
 static const uint16_t endl_len = 2;
 
@@ -76,9 +77,9 @@ static void _dma_init(void)
 
 void terminal_init(void)
 {
+	mutex_init(&term_mutex);
 	_uart_init();
 	// _dma_init();
-	term_mutex = mutex_create();
 }
 
 // TODO Implement with dma
@@ -87,8 +88,7 @@ void term_print(const char* str)
 	if (panic)
 		return;
 
-	if (sched_running())
-		mutex_lock(term_mutex);
+	mutex_lock(&term_mutex);
 
 	// if (HAL_UART_Transmit_DMA(&uart, (uint8_t*)str, strlen(str)) != HAL_OK)
 	// 	error("Failed to transmit data");
@@ -106,16 +106,17 @@ void term_print(const char* str)
 	}
 	// HAL_Delay(2);
 
-	if (sched_running())
-		mutex_unlock(term_mutex);
+	mutex_unlock(&term_mutex);
 }
 
 void term_panic(const char* str)
 {
-	// mutex_lock(term_mutex);
+	sched_lock();
+	sched_stop();
+
+	term_print("PANIC: ");
 	term_print(str);
 	panic = true;
-	// mutex_unlock(term_mutex);
 
 	while (1)
 		;
