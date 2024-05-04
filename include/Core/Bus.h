@@ -19,8 +19,7 @@
 class Bus {
 public:
 	/// @brief Constructor
-	Bus(void)
-	{ }
+	Bus(void);
 
 	/// @brief Destructor
 	~Bus(void)

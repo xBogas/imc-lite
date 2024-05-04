@@ -10,14 +10,28 @@
 
 class Bus Core;
 
+struct mutex mtx;
+
+Bus::Bus(void)
+{
+	mutex_init(&mtx);
+}
+
 void Bus::dispatch(const IMC::Message* msg)
 {
-	MessageWrapper* wrapper = new MessageWrapper();
-	ASSERT_ERR(wrapper != nullptr, "Failed to allocate message wrapper");
+	mutex_lock(&mtx);
 
 	auto it = recipients.find(msg->getId());
-	if (it == recipients.end())
+	if (it == recipients.end()) {
+		// printk("No recipients for message %d", msg->getId());
+		delete msg;
+		// printk("Message deleted");
+		mutex_unlock(&mtx);
 		return;
+	}
+
+	MessageWrapper* wrapper = new MessageWrapper();
+	ASSERT_ERR(wrapper != nullptr, "Failed to allocate message wrapper");
 
 	wrapper->msg = msg;
 	wrapper->readers = it->second.size();
@@ -26,6 +40,8 @@ void Bus::dispatch(const IMC::Message* msg)
 		MailBox* receiver = it->second[i];
 		receiver->receive(wrapper);
 	}
+
+	mutex_unlock(&mtx);
 }
 
 void Bus::registerMailBox(uint16_t id, MailBox* receiver)
