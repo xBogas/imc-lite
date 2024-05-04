@@ -13,6 +13,7 @@
 #include <cstdint>
 
 #include "IMC.h"
+#include "IO.h"
 
 namespace IMC {
 
@@ -25,9 +26,6 @@ public:
 	};
 
 	CommsInterface(void)
-	  : reader(nullptr),
-		writer(nullptr),
-		dbg(nullptr)
 	{
 		registerEntity("BoardName");
 	}
@@ -35,35 +33,13 @@ public:
 	~CommsInterface(void)
 	{ }
 
-	// Interface is ready to start running
-	bool ready(void)
-	{
-		return (reader != nullptr) && (writer != nullptr);
-	}
-
-	// Set input function
-	// func must return number of bytes read
-	// or <0 on error
-	void setInput(int (*func)(uint8_t*, size_t))
-	{
-		if (func != nullptr)
-			reader = func;
-	}
-
-	// Set output function
-	void setOutput(int (*func)(uint8_t*, size_t))
-	{
-		if (func != nullptr)
-			writer = func;
-	}
-
 	/**
 	 * Start IMC interface - PTP mode *blocking*
 	 * Wait for EntityList query
 	 * Send EntityList response with labels to reserve
 	 * Wait for reserved entity IDs
 	 */
-	void start(void);
+	void start(IO::Device* dev);
 
 	// Register entity
 	void registerEntity(const char* label);
@@ -88,21 +64,13 @@ private:
 	// with reserved entity IDs
 	void waitResponse(void);
 
-	// reader callback
-	int (*reader)(uint8_t*, size_t);
-
-	// writer callback
-	int (*writer)(uint8_t*, size_t);
-
-	// debug callback
-	int (*dbg)(const char*);
-
 	// Entities
 	std::vector<EntityInfo> entities;
+
+	// Device
+	IO::Device* device;
 };
 
 } // namespace IMC
-
-extern IMC::CommsInterface Interface;
 
 #endif // IMC_CORE_INTERFACE_H_INCLUDED_

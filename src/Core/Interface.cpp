@@ -18,7 +18,7 @@
 #define MAX_BFR_SIZE 512
 #define IMC_TIMEOUT	 60000 // 60 seconds
 
-class IMC::CommsInterface Interface;
+// class IMC::CommsInterface Interface;
 
 namespace IMC {
 
@@ -39,10 +39,10 @@ static bool parseQuery(IMC::Message* msg)
 	return true;
 }
 
-void CommsInterface::start(void)
+void CommsInterface::start(IO::Device* dev)
 {
-	if (!ready())
-		error("Interface not ready to start!");
+	ASSERT_ERR(dev != nullptr, "Invalid device");
+	device = dev;
 
 	waitQuery();	   // Wait for EntityList query
 	reserveEntities(); // Send EntityList response
@@ -90,7 +90,7 @@ Message* CommsInterface::waitMessage(void)
 	uint32_t start = Clock::getMs();
 	uint8_t bfr[MAX_BFR_SIZE];
 	while (Clock::getMs() - start < IMC_TIMEOUT) {
-		int rv = reader(bfr, MAX_BFR_SIZE);
+		int rv = device->read(bfr, MAX_BFR_SIZE);
 		if (rv <= 0)
 			continue;
 
@@ -111,7 +111,7 @@ void CommsInterface::sendMessage(Message* msg)
 	if (size == (uint16_t)-1)
 		error("Error serializing message!");
 
-	writer(bfr, size);
+	device->write(bfr, size);
 }
 
 bool CommsInterface::parseEntityList(IMC::Message* msg)

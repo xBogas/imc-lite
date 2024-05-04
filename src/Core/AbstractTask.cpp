@@ -18,6 +18,8 @@
 void task_entry_point(void* arg)
 {
 	struct thread* thr = (struct thread*)arg;
+	// Use a static cast due to the virtual table offset
+	// Instead of a C type cast
 	AbstractTask* task = static_cast<AbstractTask*>(thr);
 	task->state = TaskState::Running;
 	task->run();
@@ -28,7 +30,6 @@ void task_entry_point(void* arg)
 
 void task_wake_up(void* arg)
 {
-	// TODO: Check if this can dispatch the thread
 	AbstractTask* tsk = (AbstractTask*)arg;
 	tsk->setState(TaskState::Running);
 
@@ -44,9 +45,12 @@ void task_wake_up(void* arg)
 AbstractTask::AbstractTask(const char* name, uint32_t _prio)
   : thread()
 {
-	thread_init(this, THREAD_STACK_SIZE, name, task_entry_point);
+	// Use a static cast due to the virtual table offset
+	// Instead of a C type cast
+	struct thread* this_thr = static_cast<struct thread*>(this);
+	thread_init(this_thr, THREAD_STACK_SIZE, name, task_entry_point, this_thr);
 	setPriority(_prio);
-	sched_push_thr(this);
+	sched_push_thr(this_thr);
 }
 
 AbstractTask::~AbstractTask(void)

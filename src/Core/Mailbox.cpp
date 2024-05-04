@@ -20,12 +20,12 @@ MailBox::~MailBox(void)
 
 void MailBox::receive(const MessageWrapper* msg)
 {
-	mq_err_t err = mq_try_push(mq, (void*)msg);
-	if (err != MQ_ERR_NONE) {
+	bool fail = mq_try_push(mq, (void*)msg);
+	if (fail == false) {
 		// Message queue is full
 		// Task must consume messages
         // TODO: Implement this
-		debug("Mailbox is full, task must consume messages");
+		debug("[%s] - Mailbox is full, task must consume messages", owner->getName());
 	}
 }
 

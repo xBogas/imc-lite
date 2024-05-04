@@ -6,18 +6,11 @@
 // Author: João Bogas                                             *
 // ****************************************************************
 
-#ifndef CORE_H_INCLUDED_
-#define CORE_H_INCLUDED_
+#define TASK_CREATE_DECL(name) Task* create##name##Task(void);
 
-#include "Core/AbstractTask.h"
-#include "Core/Background.h"
-#include "Core/Bus.h"
-#include "Core/Consumers.h"
-#include "Core/Interface.h"
-#include "Core/Launcher.h"
-#include "Core/Mailbox.h"
-#include "Core/Manager.h"
-#include "Core/Parameters.h"
-#include "Core/Task.h"
 
-#endif
+#undef TASK_CREATE_DECL
+
+void createAllTasks(Launcher& daemon)
+{
+}
