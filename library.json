@@ -1,6 +1,6 @@
 {
 	"name" : "IMC",
-	"version" : "0.0",
+	"version" : "0.1",
 	"description" : "IMC interface for micro controllers",
 	"repository" :
 	{
@@ -12,5 +12,8 @@
 	"exclude" : [
 		"dev/*",
 		"user/*"
-	]
+	],
+	"scripts" : {
+		"postinstall" : "scripts/install.py"
+	}
 }
