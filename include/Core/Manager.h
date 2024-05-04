@@ -9,8 +9,6 @@
 #ifndef CORE_MANAGER_H_INCLUDED_
 #define CORE_MANAGER_H_INCLUDED_
 
-#include "Concurrency/Thread.h"
-#include "Core/Consumers.h"
 #include "Core/Task.h"
 #include "Structures/List.h"
 #include "System/Flash.h"
@@ -47,8 +45,8 @@ public:
 		debug("Task %s registered", tsk->getName());
 	}
 
-	/// @brief Setup tasks from flash memory
-	void setupTasks(void)
+	/// @brief Configurate tasks from flash memory
+	void configTasks(void)
 	{
 		// Key -> [task label, MemParam]
 		MemParamMap mem_params;
@@ -212,7 +210,5 @@ private:
 	/// @brief Task list
 	struct list* tsk_list;
 };
-
-extern TaskManager Manager;
 
 #endif // CORE_MANAGER_H_INCLUDED_
