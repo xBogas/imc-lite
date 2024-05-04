@@ -7,6 +7,7 @@
 // ****************************************************************
 
 #include "Core/Task.h"
+#include "Core/Bus.h"
 #include "Core/Consumers.h"
 #include "Core/Interface.h"
 #include "Core/Mailbox.h"
@@ -16,22 +17,35 @@
 #include "System/Timers.h"
 
 Task::Task(const char* name, uint16_t _prio)
-  : AbstractTask(name, _prio)
+  : AbstractTask(name, _prio),
+	m_mail(nullptr),
+	m_label(name)
 {
 	m_mail = new MailBox(10, this);
-	ASSERT_ERR(m_mail != NULL, "Failed to create mailbox");
+	ASSERT_ERR(m_mail != nullptr, "Failed to create mailbox");
 
-	m_params.param = NULL;
-	m_params.next = NULL;
+	m_params.param = nullptr;
+	m_params.next = nullptr;
 
-	Interface.registerEntity(name);
-	Manager.registerTask(this);
+	param("Entity label", m_label)
+		.defaultValue(name);
+
+	subscribe<IMC::QueryEntityParameters>(*this);
+	subscribe<IMC::SetEntityParameters>(*this);
+}
+
+void Task::dispatch(const IMC::Message* msg)
+{
+	Core.dispatch(msg);
 }
 
 void Task::consume(const IMC::QueryEntityParameters* msg)
 {
-	IMC::EntityParameters params;
-	params.name = getName();
+	if (msg->name != m_label && msg->name != "all")
+		return;
+
+	IMC::EntityParameters* params = new IMC::EntityParameters();
+	params->name = m_label;
 
 	struct ParamList* ptr = &m_params;
 	while (ptr) {
@@ -39,15 +53,18 @@ void Task::consume(const IMC::QueryEntityParameters* msg)
 		p.name = ptr->param->label;
 		p.value = ptr->param->value;
 
+		params->params.push_back(p);
+
 		ptr = ptr->next;
 	}
 
+	dispatch(params);
 	onQueryEntityParameters(msg);
 }
 
 void Task::consume(const IMC::SetEntityParameters* msg)
 {
-	if (msg->name != getName())
+	if (msg->name != m_label)
 		return;
 
 	// iterate through the parameters and set them
@@ -59,16 +76,15 @@ void Task::consume(const IMC::SetEntityParameters* msg)
 
 void Task::registerConsumer(uint16_t id, AbstractConsumer* consumer)
 {
-	if (m_mail == NULL)
-		error("Mailbox not initialized");
-
 	m_mail->registerConsumer(id, consumer);
 }
 
 void Task::waitForMessages(u32 ms)
 {
-	if (m_mail == NULL)
-		error("Mailbox not initialized");
-
 	m_mail->waitForMessages(ms);
+}
+
+void Task::consumeMessages(void)
+{
+	m_mail->consumeMessages();
 }

@@ -17,6 +17,12 @@
 #include "Core/Consumers.h"
 #include "Core/Parameters.h"
 
+#define TASK_EXPORT(name)                                                      \
+	Task* create##name##Task(void)                                             \
+	{                                                                          \
+		return new name();                                                     \
+	}
+
 // Forward declaration
 class MailBox;
 
@@ -59,6 +65,12 @@ public:
 		Param<T>* p = static_cast<Param<T>*>(ptr);
 		return p->hasChanged();
 	}
+
+	/// @brief Dispatch a message to bus
+	/// @param msg IMC message to send to bus
+	/// @note Must send a pointer to the message
+	/// and task gives up ownership of the message
+	void dispatch(const IMC::Message* msg);
 
 	/// @brief Default consumer for QueryEntityParameters message
 	/// @param msg QueryEntityParameters message
@@ -168,7 +180,12 @@ protected:
 	/// @param ms Time in milliseconds
 	void waitForMessages(u32 ms);
 
+	/// @brief Consume all messages in mailbox
+	void consumeMessages(void);
+
 private:
+	///@brief Entity label name
+	std::string m_label;
 	/// @brief Task Mailbox object to receive messages
 	MailBox* m_mail;
 	/// @brief Task parameters
