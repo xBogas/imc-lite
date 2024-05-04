@@ -41,7 +41,9 @@ void Launcher::createTasks(void)
 void Launcher::start(void)
 {
 	// Communicate with Master to reserve entities
-	comms.start(sys_handle);
+	// comms.start(sys_handle);
 
 	// Update task with reserved entities
+
+	sched_start();
 }
