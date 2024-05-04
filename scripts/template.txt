@@ -1,0 +1,27 @@
+// Core includes
+#include <Core.h>
+#include <System.h>
+
+class _param_task_name_ : public Task {
+public:
+	_param_task_name_(void)
+	  : Task("_param_task_name_")
+	{ }
+
+	~_param_task_name_()
+	{ }
+
+	/// Task parameters updated
+	void onUpdateParameters(void) override
+	{ }
+
+	/// Task setup
+	void setup(void)
+	{ }
+
+	/// Main loop
+	void loop()
+	{ }
+};
+
+TASK_EXPORT(_param_task_name_)
