@@ -13,6 +13,23 @@
 		"dev/*",
 		"user/*"
 	],
+	"build" : {
+		"flags" : [
+			"-I include/",
+			"-I libs/lan8742/",
+			"-I libs/lwip-port/lwIP/src/include/",
+			"-I libs/lwip-port/arch/",
+			"-I libs/lwip-port/"
+		],
+		"srcFilter" : [
+			"+<**>",
+			"+<../libs/lan8742/*.c>",
+			"+<../libs/lwip-port/lwIP/src/api/**>",
+			"+<../libs/lwip-port/lwIP/src/core/**>",
+			"+<../libs/lwip-port/lwIP/src/netif/**>",
+			"+<../libs/lwip-port/src/**>"
+		]
+	},
 	"scripts" : {
 		"postinstall" : "scripts/install.py"
 	}
