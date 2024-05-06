@@ -17,12 +17,6 @@
 #include "Core/Consumers.h"
 #include "Core/Parameters.h"
 
-#define TASK_EXPORT(name)                                                      \
-	Task* create##name##Task(void)                                             \
-	{                                                                          \
-		return new name();                                                     \
-	}
-
 // Forward declaration
 class MailBox;
 

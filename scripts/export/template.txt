@@ -23,5 +23,3 @@ public:
 	void loop()
 	{ }
 };
-
-TASK_EXPORT(_param_task_name_)
